@@ -16,20 +16,19 @@ public class Player {
 
 		System.out.print("Player " + s + " with " + Money + " added.");
 	}
-<<<<<<< HEAD
-	
-	public void move(int roll){
-		Location+=roll;
-		if(Location>Properties.TotalSquares){
+
+	public void move(int roll) {
+		Location += roll;
+		if (Location > Properties.TotalSquares) {
 			addMoney(Properties.PASSING_MONEY);
-			Location = Location%Properties.TotalSquares;
+			Location = Location % Properties.TotalSquares;
 		}
 	}
-	
-	public void addMoney(int amount){
+
+	public void addMoney(int amount) {
 		Money += amount;
 	}
-	
+
 	public void reduceMoney(int amount){
 		if(Money>=amount)
 			Money -= amount;
@@ -37,11 +36,9 @@ public class Player {
 			Location = Properties.Heaven;
 			System.out.println(Name + " is bankrupt.");
 		}
-=======
 
 	public String toString() {
 		return "Player " + Name + " has " + Money + "\n" + "Square: " + Location;
 
->>>>>>> Mustafa
 	}
 }
