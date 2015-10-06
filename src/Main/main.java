@@ -27,6 +27,7 @@ public class main {
 	
 	private static void initializeGameSquares() {
 		GameSquare[] gameSquares = new GameSquare[Properties.TotalSquares];
+		
 		gameSquares[1] = new Land("Oriental Ave", color.blue, 100);
 		gameSquares[3] = new Land("Vermont Ave", color.blue, 100);
 		gameSquares[4] = new Land("Connecticut", color.blue, 120);
