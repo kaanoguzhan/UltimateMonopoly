@@ -20,8 +20,21 @@ public class Player {
 	public void move(int roll){
 		Location+=roll;
 		if(Location>Properties.TotalSquares){
-			Money += Properties.PASSING_MONEY;
+			addMoney(Properties.PASSING_MONEY);
 			Location = Location%Properties.TotalSquares;
+		}
+	}
+	
+	public void addMoney(int amount){
+		Money += amount;
+	}
+	
+	public void reduceMoney(int amount){
+		if(Money>=amount)
+			Money -= amount;
+		else{
+			Location = Properties.Heaven;
+			System.out.println(Name + " is bankrupt.");
 		}
 	}
 }

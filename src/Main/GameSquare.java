@@ -2,10 +2,12 @@ package Main;
 
 public abstract class GameSquare {
 
-	int id;
-	Player owner;
 	int xCoord;
 	int yCoord;
-	
-	
+
+	int id;
+	Player owner;
+
+	public void onArrive() {
+	}
 }
