@@ -22,8 +22,7 @@ public class Land extends GameSquare {
 
 	@Override
 	public void onArrive() {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 }

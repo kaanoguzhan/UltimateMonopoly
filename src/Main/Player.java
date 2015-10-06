@@ -8,13 +8,10 @@ public class Player {
 	private int Money = 0;
 	private int Location = 0;
 
-	public Player() {
+	public Player(String name) {
 		Money = Properties.StartGold;
-
-		Scanner scan = new Scanner(System.in);
-		String s = scan.next();
-		scan.close();
-		System.out.print("Player " + s + " with " + Money + " added.");
+		Name = name;
+		System.out.println("Player " + Name + " with " + Money + " added.");
 	}
 
 	public void move(int roll) {
