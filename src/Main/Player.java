@@ -16,4 +16,12 @@ public class Player {
 
 		System.out.print("Player " + s + " with " + Money + " added.");
 	}
+	
+	public void move(int roll){
+		Location+=roll;
+		if(Location>Properties.TotalSquares){
+			Money += Properties.PASSING_MONEY;
+			Location = Location%Properties.TotalSquares;
+		}
+	}
 }
