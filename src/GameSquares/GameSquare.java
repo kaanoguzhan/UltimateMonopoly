@@ -4,11 +4,11 @@ import Main.Player;
 
 public abstract class GameSquare {
 
-	int xCoord;
-	int yCoord;
+	public int xCoord;
+	public int yCoord;
 
-	int id;
-	Player owner;
+	public int id;
+	public Player owner;
 
 	public abstract void onArrive();
 }
