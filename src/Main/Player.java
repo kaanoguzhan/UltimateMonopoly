@@ -29,13 +29,14 @@ public class Player {
 		Money += amount;
 	}
 
-	public void reduceMoney(int amount){
-		if(Money>=amount)
+	public void reduceMoney(int amount) {
+		if (Money >= amount)
 			Money -= amount;
-		else{
+		else {
 			Location = Properties.Heaven;
 			System.out.println(Name + " is bankrupt.");
 		}
+	}
 
 	public String toString() {
 		return "Player " + Name + " has " + Money + "\n" + "Square: " + Location;

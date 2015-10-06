@@ -10,7 +10,7 @@ public class main {
 		initializePlayers();
 		initializeGameSquares();
 
-	}
+	}	
 
 	private static void initializePlayers() {
 		System.out.print("How many players?");
