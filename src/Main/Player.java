@@ -16,6 +16,7 @@ public class Player {
 
 		System.out.print("Player " + s + " with " + Money + " added.");
 	}
+<<<<<<< HEAD
 	
 	public void move(int roll){
 		Location+=roll;
@@ -36,5 +37,11 @@ public class Player {
 			Location = Properties.Heaven;
 			System.out.println(Name + " is bankrupt.");
 		}
+=======
+
+	public String toString() {
+		return "Player " + Name + " has " + Money + "\n" + "Square: " + Location;
+
+>>>>>>> Mustafa
 	}
 }
