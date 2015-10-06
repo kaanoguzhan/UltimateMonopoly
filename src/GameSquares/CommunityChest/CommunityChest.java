@@ -4,14 +4,19 @@ import GameSquares.GameSquare;
 
 public class CommunityChest extends GameSquare {
 	
-	public CommunityChest() {
-		// TODO Auto-generated constructor stub
+	private boolean			isCreated		= false;
+	private CommunityDeck	CommunityDeck	= null;
+	
+	public CommunityChest(int id) {
+		this.id = id;
+		if (!isCreated)
+			CommunityDeck = new CommunityDeck();
 	}
 	
 	@Override
 	public void onArrive() {
-		Deck deck = new Deck();
-		deck.draw();
+		
+		CommunityDeck.draw();
 		
 	}
 	
@@ -20,7 +25,4 @@ public class CommunityChest extends GameSquare {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 }
-
-
