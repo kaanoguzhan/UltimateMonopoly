@@ -12,4 +12,10 @@ public class Chance extends GameSquare {
 
 	}
 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

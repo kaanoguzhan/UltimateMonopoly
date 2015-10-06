@@ -12,4 +12,10 @@ public class SqueezePlay extends GameSquare {
 
 	}
 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
