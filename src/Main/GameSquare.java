@@ -8,6 +8,5 @@ public abstract class GameSquare {
 	int id;
 	Player owner;
 
-	public void onArrive() {
-	}
+	public abstract void onArrive();
 }
