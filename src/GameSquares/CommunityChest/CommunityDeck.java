@@ -1,18 +1,18 @@
 package GameSquares.CommunityChest;
 
 import java.util.Random;
-import GameSquares.CommunityChest.Card.CommunityCardType;
+import GameSquares.CommunityChest.CommunityCard.CommunityCardType;
 
 public class CommunityDeck {
 	
 	private int		positionCounter	= 0;												// Remembers the next card on
 																						// queue.
-	public Card[]	cards			= { new Card(CommunityCardType.BargainBusiness),
-									new Card(CommunityCardType.BargainBusiness),
-									new Card(CommunityCardType.RecieveConsultancyFee),
-									new Card(CommunityCardType.RecieveConsultancyFee),
-									new Card(CommunityCardType.RenovationSuccess),
-									new Card(CommunityCardType.RenovationSuccess), };
+	public CommunityCard[]	cards			= { new CommunityCard(CommunityCardType.BargainBusiness),
+									new CommunityCard(CommunityCardType.BargainBusiness),
+									new CommunityCard(CommunityCardType.RecieveConsultancyFee),
+									new CommunityCard(CommunityCardType.RecieveConsultancyFee),
+									new CommunityCard(CommunityCardType.RenovationSuccess),
+									new CommunityCard(CommunityCardType.RenovationSuccess), };
 	
 	public CommunityDeck() {
 		shuffle();
@@ -24,13 +24,13 @@ public class CommunityDeck {
 		{
 			int index = rnd.nextInt(i + 1);
 			// Swap
-			Card a = cards[index];
+			CommunityCard a = cards[index];
 			cards[index] = cards[i];
 			cards[i] = a;
 		}
 	}
 	
-	public Card draw() {
+	public CommunityCard draw() {
 		return cards[positionCounter++];
 	}
 }

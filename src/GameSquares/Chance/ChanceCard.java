@@ -1,12 +1,12 @@
 package GameSquares.Chance;
 
-public class Card {
+public class ChanceCard {
 	
 	public enum chanceCardType {
 		AdvanceToStCharlesPlace, AdvanceToSqueezePlay, ElectedAsChairPerson, AdvanceToStart
 	}
 	
-	public Card(chanceCardType type) {
+	public ChanceCard(chanceCardType type) {
 		
 	}
 	

@@ -1,12 +1,12 @@
 package GameSquares.CommunityChest;
 
-public class Card {
+public class CommunityCard {
 	
 	public enum CommunityCardType {
 		RecieveConsultancyFee, BargainBusiness, RenovationSuccess
 	}
 	
-	public Card(CommunityCardType type) {
+	public CommunityCard(CommunityCardType type) {
 		
 	}
 	
