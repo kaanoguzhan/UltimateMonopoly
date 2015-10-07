@@ -6,6 +6,7 @@ import GameSquares.FreePark;
 import GameSquares.GameSquare;
 import GameSquares.Land;
 import GameSquares.Land.color;
+import GameSquares.RollOnce;
 import GameSquares.Chance.Chance;
 import GameSquares.CommunityChest.CommunityChest;
 
@@ -36,6 +37,7 @@ public class main {
 		gameSquares[2] = new CommunityChest(2);
 		gameSquares[3] = new Land("Vermont Ave", color.blue, 100);
 		gameSquares[4] = new Land("Connecticut", color.blue, 120);
+		gameSquares[5] = new RollOnce(5);
 		gameSquares[6] = new Land("St. Charles Place", color.pink, 140);
 		gameSquares[7] = new Chance(7);
 		gameSquares[8] = new Land("States Ave", color.pink, 140);
