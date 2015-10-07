@@ -16,4 +16,9 @@ public class Player {
 
 		System.out.print("Player " + s + " with " + Money + " added.");
 	}
+
+	public String toString() {
+		return "Player " + Name + " has " + Money + "\n" + "Square: " + Location;
+
+	}
 }
