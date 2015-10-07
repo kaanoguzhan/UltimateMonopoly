@@ -13,7 +13,7 @@ public class Player {
 
 		Scanner scan = new Scanner(System.in);
 		String s = scan.next();
-
+		scan.close();
 		System.out.print("Player " + s + " with " + Money + " added.");
 	}
 
