@@ -1,4 +1,6 @@
-package Main;
+package GameSquares;
+
+import Main.Player;
 
 public abstract class GameSquare {
 
