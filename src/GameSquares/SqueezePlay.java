@@ -1,15 +1,24 @@
 package GameSquares;
 
+import Main.Dice;
+
 public class SqueezePlay extends GameSquare {
 
-	public SqueezePlay() {
-		// TODO Auto-generated constructor stub
+	public SqueezePlay(int id) {
+		this.id = id;
 	}
 
 	@Override
 	public void onArrive() {
-		// TODO Auto-generated method stub
+		Dice dice = new Dice();
 
+		System.out.println("Please roll a die and get $200 from everyone if the number is even.");
+
+		int roll = dice.roll();
+		System.out.println("You rolled: " + roll); // GUI rolling die
+		if ((roll % 2) == 0) {
+			// Player gets $200 from everyone
+		}
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 package GameSquares;
 
-import java.util.Random;
+import Main.Dice;
 
 public class RollOnce extends GameSquare {
 
@@ -10,18 +10,17 @@ public class RollOnce extends GameSquare {
 
 	@Override
 	public void onArrive() {
+		Dice dice = new Dice();
+
 		System.out.println("Please roll a die and get a roll once card. If the numbers match, you will get $100.");
-		int roll = roll();
+
+		int roll = dice.roll();
 		System.out.println("You rolled: " + roll); // GUI rolling die
-		int card = roll();
+		int card = dice.roll();
 		System.out.println("Card shows: " + card); // GUI showing card
 		if (roll == card) {
 			// Player gets $100
 		}
-	}
-
-	private int roll() {
-		return new Random().nextInt(6) + 1;
 	}
 
 	@Override
