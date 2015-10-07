@@ -1,6 +1,8 @@
 package Main;
 
 import java.util.Scanner;
+
+import GameSquares.FreePark;
 import GameSquares.GameSquare;
 import GameSquares.Land;
 import GameSquares.Land.color;
@@ -8,12 +10,12 @@ import GameSquares.Chance.Chance;
 import GameSquares.CommunityChest.CommunityChest;
 
 public class main {
-	
+
 	public static void main(String[] args) {
 		initializePlayers();
 		initializeGameSquares();
 	}
-	
+
 	private static void initializePlayers() {
 		System.out.println("How many players?");
 		Scanner scn = new Scanner(System.in);
@@ -26,10 +28,10 @@ public class main {
 		}
 		scn.close();
 	}
-	
+
 	private static void initializeGameSquares() {
 		GameSquare[] gameSquares = new GameSquare[Properties.TotalSquares];
-		
+
 		gameSquares[1] = new Land("Oriental Ave", color.blue, 100);
 		gameSquares[2] = new CommunityChest(2);
 		gameSquares[3] = new Land("Vermont Ave", color.blue, 100);
@@ -38,6 +40,7 @@ public class main {
 		gameSquares[7] = new Chance(7);
 		gameSquares[8] = new Land("States Ave", color.pink, 140);
 		gameSquares[9] = new Land("Virginia", color.pink, 160);
+		gameSquares[10] = new FreePark(10);
 		gameSquares[11] = new Land("St. James Place", color.orange, 180);
 		gameSquares[12] = new CommunityChest(12);
 		gameSquares[13] = new Land("Tennessee", color.orange, 180);

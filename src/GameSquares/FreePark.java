@@ -1,10 +1,9 @@
 package GameSquares;
 
-
 public class FreePark extends GameSquare {
 
-	public FreePark() {
-		// TODO Auto-generated constructor stub
+	public FreePark(int id) {
+		this.id = id;
 	}
 
 	@Override
