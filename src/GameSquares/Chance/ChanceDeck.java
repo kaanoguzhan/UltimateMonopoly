@@ -31,6 +31,8 @@ public class ChanceDeck {
 	}
 	
 	public ChanceCard draw() {
-		return cards[positionCounter++];
+		if (positionCounter < cards.length)
+			return cards[positionCounter++];
+		return new EmptyCard();
 	}
 }

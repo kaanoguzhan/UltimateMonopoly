@@ -66,7 +66,9 @@ public class Player {
 	}
 	
 	public String toString() {
-		return "Player " + name + " has " + money + "\n" + "Square: " + location;
+		return "Player " + name + " has " + money +
+			"\n" + "Square: " + location +
+			"\n" + "Has:" + Inventory;
 		
 	}
 }

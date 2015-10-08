@@ -1,7 +1,6 @@
 package Main;
 
 import java.util.Scanner;
-
 import GameSquares.FreePark;
 import GameSquares.GameSquare;
 import GameSquares.Land;
@@ -15,22 +14,25 @@ import GameSquares.CommunityChest.CommunityChest;
 import GameSquares.CommunityChest.CommunityChestDeck;
 
 public class Main {
-
-	static ChanceDeck chanceDeck = null;
-	static CommunityChestDeck communityDeck = null;
-	static GameSquare[] gameSquares = null;
-	static Player[] players = null;
-	static Scanner scanner;
-
+	
+	static ChanceDeck			chanceDeck		= null;
+	static CommunityChestDeck	communityDeck	= null;
+	static GameSquare[]			gameSquares		= null;
+	static Player[]				players			= null;
+	static Scanner				scanner;
+	
 	public static void main(String[] args) {
 		initializePlayers();
 		initializeDecks();
 		initializeGameSquares();
 		initializePlayerNames();
-
+		
+		Test test = new Test(players);
+		test.playForRound(100);
+		
 		// Just for test
 		// players[0].moveBy(15);
-
+		
 		// players[0].moveBy(1);
 		// System.out.println(players[0].toString());
 		// players[0].moveBy(2);
@@ -61,27 +63,27 @@ public class Main {
 		// System.out.println(players[0].toString());
 		
 		
-
+		
 	}
-
+	
 	private static void initializePlayers() {
 		System.out.println("How many players?");
 		scanner = new Scanner(System.in);
 		int numOfPlayers = Integer.parseInt(scanner.next());
 		players = new Player[numOfPlayers];
-
+		
 		System.out.println("Player initialization is complete...");
 	}
-
+	
 	private static void initializeDecks() {
 		chanceDeck = new ChanceDeck(players);
 		communityDeck = new CommunityChestDeck();
 		System.out.println("Deck initialization is complete...");
 	}
-
+	
 	private static void initializeGameSquares() {
 		gameSquares = new GameSquare[Properties.TotalSquares];
-
+		
 		gameSquares[0] = new StartSquare(0);
 		gameSquares[1] = new Land(1, "Oriental Ave", color.blue, 100);
 		gameSquares[2] = new CommunityChest(2, communityDeck);
@@ -105,7 +107,7 @@ public class Main {
 		
 		System.out.println("Game Square initialization is complete...");
 	}
-
+	
 	private static void initializePlayerNames() {
 		System.out.println("Write names seperated with spaces.");
 		scanner = new Scanner(System.in);
@@ -114,7 +116,7 @@ public class Main {
 			players[i] = new Player(name, gameSquares);
 		}
 		scanner.close();
-
+		
 		System.out.println("Player Name initialization is complete...");
 	}
 }

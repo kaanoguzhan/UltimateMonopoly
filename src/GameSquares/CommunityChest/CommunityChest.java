@@ -13,6 +13,7 @@ public class CommunityChest extends GameSquare {
 	
 	public CommunityChest(int id, CommunityChestDeck CommunityDeck) {
 		super(id);
+		this.CommunityDeck= CommunityDeck;
 	}
 	
 	@Override
