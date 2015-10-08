@@ -2,13 +2,14 @@ package Main;
 
 import java.util.ArrayList;
 import GameSquares.GameSquare;
+import GameSquares.CommunityChest.CommunityChest.CommunityChestCardType;
 
 public class Player {
 	
-	private String				name;
-	private int					money, location;
-	private GameSquare[]		gameSquares;
-	private ArrayList<String>	Inventory	= new ArrayList<String>();
+	private String								name;
+	private int									money, location;
+	private GameSquare[]						gameSquares;
+	private ArrayList<CommunityChestCardType>	Inventory	= new ArrayList<CommunityChestCardType>();
 	
 	public Player(String name, GameSquare[] gameSquares) {
 		this.location = 0;
@@ -49,16 +50,16 @@ public class Player {
 		}
 	}
 	
-	public void addToInventory(String cardName) {
-		Inventory.add(cardName);
+	public void addToInventory(CommunityChestCardType cardType) {
+		Inventory.add(cardType);
 	}
 	
-	public boolean haveCard(String cardName) {
-		return Inventory.contains(cardName);
+	public boolean haveCard(CommunityChestCardType cardType) {
+		return Inventory.contains(cardType);
 	}
 	
-	public void removeCard(String cardName) {
-		Inventory.remove(cardName);
+	public void removeCard(CommunityChestCardType cardType) {
+		Inventory.remove(cardType);
 	}
 	
 	public String toString() {

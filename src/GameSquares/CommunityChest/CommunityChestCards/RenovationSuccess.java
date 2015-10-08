@@ -1,5 +1,6 @@
 package GameSquares.CommunityChest.CommunityChestCards;
 
+import GameSquares.CommunityChest.CommunityChest.CommunityChestCardType;
 import GameSquares.CommunityChest.CommunityChestCard;
 import Main.Player;
 
@@ -11,6 +12,6 @@ public class RenovationSuccess extends CommunityChestCard {
 	
 	@Override
 	public void onDraw(Player pl) {
-		pl.addToInventory("RenovationSuccess");
+		pl.addToInventory(CommunityChestCardType.RenovationSuccess);
 	}
 }
