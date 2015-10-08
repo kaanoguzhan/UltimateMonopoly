@@ -1,6 +1,5 @@
 package GameSquares;
 
-import GameSquares.Land.color;
 import Main.Player;
 
 public abstract class GameSquare {
@@ -18,4 +17,13 @@ public abstract class GameSquare {
 	public abstract void onArrive(Player pl);
 	
 	public abstract String toString();
+	
+	public void setCoordinates(int X, int Y) {
+		xCoord = X;
+		yCoord = Y;
+	}
+	
+	public void setOwner(Player pl) {
+		owner = pl;
+	}
 }

@@ -14,7 +14,7 @@ import GameSquares.Chance.ChanceDeck;
 import GameSquares.CommunityChest.CommunityChest;
 import GameSquares.CommunityChest.CommunityChestDeck;
 
-public class main {
+public class Main {
 
 	static ChanceDeck chanceDeck = null;
 	static CommunityChestDeck communityDeck = null;
@@ -59,6 +59,8 @@ public class main {
 		// System.out.println(players[0].toString());
 		// players[0].moveBy(1);
 		// System.out.println(players[0].toString());
+		
+		
 
 	}
 
@@ -100,7 +102,7 @@ public class main {
 		gameSquares[17] = new Land(17, "North Carolina", color.green, 300);
 		gameSquares[18] = new Chance(18, chanceDeck, players);
 		gameSquares[19] = new Land(19, "Pennsylvania", color.green, 320);
-
+		
 		System.out.println("Game Square initialization is complete...");
 	}
 
