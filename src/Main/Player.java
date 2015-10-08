@@ -27,23 +27,23 @@ public class Player {
 	}
 
 	public void moveTo(int id) {
+		System.out.println(name + " is at " + gameSquares[id].toString());
 		if (location > id) {
 			addMoney(Properties.PASSING_MONEY);
 		}
 		location = id;
-		System.out.println(name + " is at " + gameSquares[location].toString());
 		gameSquares[location].onArrive(this);
 	}
 
 	public void addMoney(int amount) {
 		money += amount;
-		System.out.println(name + "'s money increased by " + money);
+		System.out.println(name + "'s money increased to " + money);
 	}
 
 	public void reduceMoney(int amount) {
 		if (money >= amount) {
 			money -= amount;
-			System.out.println(name + "'s money decreased by " + money);
+			System.out.println(name + "'s money decreased to " + money);
 		} else {
 			location = Properties.Heaven;
 			System.out.println(name + " is bankrupt.");

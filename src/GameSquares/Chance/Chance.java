@@ -7,8 +7,9 @@ public class Chance extends GameSquare {
 
 	private ChanceDeck ChanceDeck = null;
 
-	public Chance(int id, ChanceDeck ChanceDeck) {
+	public Chance(int id, ChanceDeck ChanceDeck, Player[] players) {
 		super(id);
+		this.ChanceDeck = ChanceDeck;
 	}
 
 	@Override

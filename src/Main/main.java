@@ -1,6 +1,7 @@
 package Main;
 
 import java.util.Scanner;
+
 import GameSquares.FreePark;
 import GameSquares.GameSquare;
 import GameSquares.Land;
@@ -26,8 +27,7 @@ public class main {
 		initializeDecks();
 		initializeGameSquares();
 		initializePlayerNames();
-		 players[0].moveBy(7);
-		
+
 		// Just for test
 		// players[0].moveBy(15);
 
@@ -72,7 +72,7 @@ public class main {
 	}
 
 	private static void initializeDecks() {
-		chanceDeck = new ChanceDeck();
+		chanceDeck = new ChanceDeck(players);
 		communityDeck = new CommunityChestDeck();
 		System.out.println("Deck initialization is complete...");
 	}
@@ -87,7 +87,7 @@ public class main {
 		gameSquares[4] = new Land(4, "Connecticut", color.blue, 120);
 		gameSquares[5] = new RollOnce(5);
 		gameSquares[6] = new Land(6, "St. Charles Place", color.pink, 140);
-		gameSquares[7] = new Chance(7, chanceDeck);
+		gameSquares[7] = new Chance(7, chanceDeck, players);
 		gameSquares[8] = new Land(8, "States Ave", color.pink, 140);
 		gameSquares[9] = new Land(9, "Virginia", color.pink, 160);
 		gameSquares[10] = new FreePark(10);
@@ -98,7 +98,7 @@ public class main {
 		gameSquares[15] = new SqueezePlay(15, players);
 		gameSquares[16] = new Land(16, "Pacific", color.green, 300);
 		gameSquares[17] = new Land(17, "North Carolina", color.green, 300);
-		gameSquares[18] = new Chance(18, chanceDeck);
+		gameSquares[18] = new Chance(18, chanceDeck, players);
 		gameSquares[19] = new Land(19, "Pennsylvania", color.green, 320);
 
 		System.out.println("Game Square initialization is complete...");
