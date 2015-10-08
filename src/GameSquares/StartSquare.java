@@ -5,7 +5,7 @@ import Main.Player;
 public class StartSquare extends GameSquare {
 
 	public StartSquare(int id) {
-		this.id = id;
+		super(id);
 	}
 
 	@Override

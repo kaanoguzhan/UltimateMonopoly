@@ -8,7 +8,7 @@ public class Chance extends GameSquare {
 	private ChanceDeck ChanceDeck = null;
 
 	public Chance(int id, ChanceDeck ChanceDeck) {
-		this.id = id;
+		super(id);
 	}
 
 	@Override

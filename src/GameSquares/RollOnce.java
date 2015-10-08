@@ -6,7 +6,7 @@ import Main.Player;
 public class RollOnce extends GameSquare {
 
 	public RollOnce(int id) {
-		this.id = id;
+		super(id);
 	}
 
 	@Override
@@ -20,7 +20,7 @@ public class RollOnce extends GameSquare {
 		int card = dice.roll();
 		System.out.println("Card shows: " + card); // GUI showing card
 		if (roll == card) {
-			// Player gets $100
+			pl.addMoney(100);
 		}
 	}
 

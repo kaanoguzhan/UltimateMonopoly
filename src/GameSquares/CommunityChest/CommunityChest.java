@@ -9,7 +9,7 @@ public class CommunityChest extends GameSquare {
 	private CommunityChestDeck	CommunityDeck	= null;
 	
 	public CommunityChest(int id, CommunityChestDeck CommunityDeck) {
-		this.id = id;
+		super(id);
 	}
 	
 	@Override

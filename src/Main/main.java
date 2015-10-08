@@ -26,6 +26,39 @@ public class main {
 		initializeDecks();
 		initializeGameSquares();
 		initializePlayerNames();
+
+		// Just for test
+		// players[0].moveBy(15);
+
+		// players[0].moveBy(1);
+		// System.out.println(players[0].toString());
+		// players[0].moveBy(2);
+		// System.out.println(players[0].toString());
+		// players[0].moveBy(2);
+		// System.out.println(players[0].toString());
+		// players[0].moveBy(1);
+		// System.out.println(players[0].toString());
+		// players[0].moveBy(2);
+		// System.out.println(players[0].toString());
+		// players[0].moveBy(1);
+		// System.out.println(players[0].toString());
+		// players[0].moveBy(1);
+		// System.out.println(players[0].toString());
+		// players[0].moveBy(1);
+		// System.out.println(players[0].toString());
+		// players[0].moveBy(2);
+		// System.out.println(players[0].toString());
+		// players[0].moveBy(1);
+		// System.out.println(players[0].toString());
+		// players[0].moveBy(2);
+		// System.out.println(players[0].toString());
+		// players[0].moveBy(1);
+		// System.out.println(players[0].toString());
+		// players[0].moveBy(2);
+		// System.out.println(players[0].toString());
+		// players[0].moveBy(1);
+		// System.out.println(players[0].toString());
+
 	}
 
 	private static void initializePlayers() {
@@ -44,7 +77,7 @@ public class main {
 	}
 
 	private static void initializeGameSquares() {
-		GameSquare[] gameSquares = new GameSquare[Properties.TotalSquares];
+		gameSquares = new GameSquare[Properties.TotalSquares];
 
 		gameSquares[0] = new StartSquare(0);
 		gameSquares[1] = new Land(1, "Oriental Ave", color.blue, 100);

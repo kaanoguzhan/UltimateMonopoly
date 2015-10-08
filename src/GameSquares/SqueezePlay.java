@@ -8,7 +8,8 @@ public class SqueezePlay extends GameSquare {
 	private Player[] players = null;
 
 	public SqueezePlay(int id, Player[] players) {
-		this.id = id;
+		super(id);
+		this.players = players;
 	}
 
 	@Override
@@ -20,8 +21,12 @@ public class SqueezePlay extends GameSquare {
 		int roll = dice.roll();
 		System.out.println("You rolled: " + roll); // GUI rolling die
 		if ((roll % 2) == 0) {
-
-			// Player gets $200 from everyone
+			for (int i = 0; i < players.length; i++) {
+				if (pl == players[i])
+					pl.addMoney((players.length - 1) * 200);
+				else
+					players[i].reduceMoney(200);
+			}
 		}
 	}
 
