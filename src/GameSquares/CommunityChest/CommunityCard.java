@@ -6,8 +6,10 @@ public class CommunityCard {
 		RecieveConsultancyFee, BargainBusiness, RenovationSuccess
 	}
 	
+	CommunityCardType	type;
+	
 	public CommunityCard(CommunityCardType type) {
-		
+		this.type = type;
 	}
 	
 	

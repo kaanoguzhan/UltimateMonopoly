@@ -1,20 +1,21 @@
 package GameSquares.Chance;
 
 import java.util.Random;
-import GameSquares.Chance.ChanceCard.chanceCardType;
+import GameSquares.Chance.ChanceCard.ChanceCardType;
 
 public class ChanceDeck {
 	
-	private int		positionCounter	= 0;												// Remembers the next card on
-																						// queue.
-	public ChanceCard[]	cards			= { new ChanceCard(chanceCardType.AdvanceToSqueezePlay),
-									new ChanceCard(chanceCardType.AdvanceToSqueezePlay),
-									new ChanceCard(chanceCardType.AdvanceToStart),
-									new ChanceCard(chanceCardType.AdvanceToStart),
-									new ChanceCard(chanceCardType.AdvanceToStCharlesPlace),
-									new ChanceCard(chanceCardType.AdvanceToStCharlesPlace),
-									new ChanceCard(chanceCardType.ElectedAsChairPerson),
-									new ChanceCard(chanceCardType.ElectedAsChairPerson), };
+	private int			positionCounter	= 0;													// Remembers the next
+																								// card on
+																								// queue.
+	public ChanceCard[]	cards			= { new ChanceCard(ChanceCardType.AdvanceToSqueezePlay),
+										new ChanceCard(ChanceCardType.AdvanceToSqueezePlay),
+										new ChanceCard(ChanceCardType.AdvanceToStart),
+										new ChanceCard(ChanceCardType.AdvanceToStart),
+										new ChanceCard(ChanceCardType.AdvanceToStCharlesPlace),
+										new ChanceCard(ChanceCardType.AdvanceToStCharlesPlace),
+										new ChanceCard(ChanceCardType.ElectedAsChairPerson),
+										new ChanceCard(ChanceCardType.ElectedAsChairPerson), };
 	
 	public ChanceDeck() {
 		shuffle();

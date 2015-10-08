@@ -5,19 +5,16 @@ import Main.Player;
 
 public class Chance extends GameSquare {
 	
-	private boolean		isCreated	= false;
 	private ChanceDeck	ChanceDeck	= null;
 	
-	public Chance(int id) {
+	public Chance(int id, ChanceDeck ChanceDeck) {
 		this.id = id;
-		if (!isCreated)
-			ChanceDeck = new ChanceDeck();
 	}
 	
 	@Override
 	public void onArrive(Player pl) {
 		
-		ChanceDeck.draw();		
+		ChanceDeck.draw();
 	}
 	
 	@Override
