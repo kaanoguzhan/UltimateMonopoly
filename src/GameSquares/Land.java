@@ -15,8 +15,9 @@ public class Land extends GameSquare {
 		blue, pink, orange, green
 	}
 	
-	public Land(String name, color color, int price) {
+	public Land(int id, String name, color color, int price) {
 		Details = "If a player owns ALL the Lots of any Color-Group the rent is Doubled on Unimproved Lots in that group.";
+		this.id = id;
 		this.name = name;
 	}
 	
