@@ -11,6 +11,6 @@ public class BargainBusiness extends CommunityChestCard {
 	
 	@Override
 	public void onDraw(Player pl) {
-		
+		pl.addToInventory("BargainBusiness");
 	}
 }

@@ -11,6 +11,6 @@ public class RenovationSuccess extends CommunityChestCard {
 	
 	@Override
 	public void onDraw(Player pl) {
-		pl.addMoney(25);
+		pl.addToInventory("RenovationSuccess");
 	}
 }
