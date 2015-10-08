@@ -16,10 +16,9 @@ public class CommunityChest extends GameSquare {
 	public void onArrive(Player pl) {
 		
 		CommunityChestCard card = CommunityDeck.draw();
-		card.onDraw();
+		card.onDraw(pl);
 		
 	}
-	
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub

@@ -15,7 +15,7 @@ public class Chance extends GameSquare {
 	public void onArrive(Player pl) {
 		
 		ChanceCard card = ChanceDeck.draw();
-		card.onDraw();
+		card.onDraw(pl);
 		
 	}
 	

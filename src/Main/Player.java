@@ -22,6 +22,10 @@ public class Player {
 		}
 	}
 	
+	public void moveTo(int id) {
+		Location = id;
+	}
+	
 	public void addMoney(int amount) {
 		Money += amount;
 	}

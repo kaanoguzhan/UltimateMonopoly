@@ -1,6 +1,7 @@
 package GameSquares.Chance.ChanceCards;
 
 import GameSquares.Chance.ChanceCard;
+import Main.Player;
 
 public class AdvanceToStCharlesPlace extends ChanceCard {
 	
@@ -9,7 +10,7 @@ public class AdvanceToStCharlesPlace extends ChanceCard {
 	}
 	
 	@Override
-	public void onDraw() {
+	public void onDraw(Player pl) {
 		
 	}
 }

@@ -21,8 +21,9 @@ public class main {
 		initializeGameSquares();
 	}
 	
-	static ChanceDeck		ChanceDeck		= null;
+	static ChanceDeck			ChanceDeck		= null;
 	static CommunityChestDeck	CommunityDeck	= null;
+	static GameSquare[]			gameSquares		= null;
 	
 	private static void initializePlayers() {
 		System.out.println("How many players?");

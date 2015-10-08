@@ -1,6 +1,7 @@
 package GameSquares.Chance.ChanceCards;
 
 import GameSquares.Chance.ChanceCard;
+import Main.Player;
 
 public class ElectedAsChairPerson extends ChanceCard {
 	
@@ -9,7 +10,7 @@ public class ElectedAsChairPerson extends ChanceCard {
 	}
 	
 	@Override
-	public void onDraw() {
+	public void onDraw(Player pl) {
 		
 	}
 }
