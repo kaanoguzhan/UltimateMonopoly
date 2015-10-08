@@ -3,17 +3,17 @@ package GameSquares;
 import Main.Player;
 
 public class Land extends GameSquare {
-
-	private String name, details;
-	private color color;
-	private int price, rent;
-	private boolean doubleRent;
-	private boolean buy;
-
+	
+	private String	name, details;
+	private color	color;
+	private int		price, rent;
+	private boolean	doubleRent;
+	private boolean	buy;
+	
 	public enum color {
 		blue, pink, orange, green
 	}
-
+	
 	public Land(int id, String name, color color, int price) {
 		super(id);
 		this.name = name;
@@ -21,41 +21,53 @@ public class Land extends GameSquare {
 		this.price = price;
 		details = "If a player owns ALL the Lots of any Color-Group the rent is Doubled on Unimproved Lots in that group.";
 	}
-
+	
 	public Land(int id, String name, color color, int price, String details) {
 		super(id);
 		this.name = name;
 	}
-
+	
 	@Override
 	public void onArrive(Player pl) {
 		if (this.owner == null) {
-			if (buy) { // (GUI) If player want to play ==> buy = true
+			if (true) { // (GUI) If player want to play ==> buy = true
 				if (pl.getMoney() >= price) {
 					pl.reduceMoney(price);
 					owner = pl;
+					pl.getOwnership(this);
+					System.out.println("Player bought " + this.name + ". Player has "
+						+ pl.getNumberOfOwnedByColor(this.color) + " of this color");
+					if (pl.getNumberOfOwnedByColor(this.color) == 3)
+						System.out.println("Now player will get double rents!!!");
 				} else
 					System.out.println("You don't have enough money!");
 			}
 		} else {
-			if (doubleRent) {
-				pl.reduceMoney(2 * rent);
-				owner.addMoney(2 * rent);
-			} else {
-				pl.reduceMoney(rent);
-				owner.addMoney(rent);
-			}
+			if (this.owner != pl)
+				if (pl.getNumberOfOwnedByColor(this.color) == 3) {
+					pl.reduceMoney(2 * rent);
+					owner.addMoney(2 * rent);
+				} else {
+					pl.reduceMoney(rent);
+					owner.addMoney(rent);
+				}
+			else
+				System.out.println("Player already owns this land!");
 		}
 	}
-
+	
+	public color getColor() {
+		return color;
+	}
+	
 	@Override
 	public String toString() {
 		if (doubleRent)
 			return "Land. Location: " + id + "\n Name: " + name + "\n Color: " + color + "\n Price: " + price
-					+ "\n Rent: " + rent * 2 + " (Doubled since a player owns all three of these colour.)"
-					+ "\n Details: " + details;
+				+ "\n Rent: " + rent * 2 + " (Doubled since a player owns all three of these colour.)"
+				+ "\n Details: " + details;
 		else
 			return "Land. Location: " + id + "\n Name: " + name + "\n Color: " + color + "\n Price: " + price
-					+ "\n Rent: " + rent + "\n Details: " + details;
+				+ "\n Rent: " + rent + "\n Details: " + details;
 	}
 }

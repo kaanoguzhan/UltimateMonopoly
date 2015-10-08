@@ -30,40 +30,6 @@ public class Main {
 		Test test = new Test(players);
 		test.playForRound(100);
 		
-		// Just for test
-		// players[0].moveBy(15);
-		
-		// players[0].moveBy(1);
-		// System.out.println(players[0].toString());
-		// players[0].moveBy(2);
-		// System.out.println(players[0].toString());
-		// players[0].moveBy(2);
-		// System.out.println(players[0].toString());
-		// players[0].moveBy(1);
-		// System.out.println(players[0].toString());
-		// players[0].moveBy(2);
-		// System.out.println(players[0].toString());
-		// players[0].moveBy(1);
-		// System.out.println(players[0].toString());
-		// players[0].moveBy(1);
-		// System.out.println(players[0].toString());
-		// players[0].moveBy(1);
-		// System.out.println(players[0].toString());
-		// players[0].moveBy(2);
-		// System.out.println(players[0].toString());
-		// players[0].moveBy(1);
-		// System.out.println(players[0].toString());
-		// players[0].moveBy(2);
-		// System.out.println(players[0].toString());
-		// players[0].moveBy(1);
-		// System.out.println(players[0].toString());
-		// players[0].moveBy(2);
-		// System.out.println(players[0].toString());
-		// players[0].moveBy(1);
-		// System.out.println(players[0].toString());
-		
-		
-		
 	}
 	
 	private static void initializePlayers() {
