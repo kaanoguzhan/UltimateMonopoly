@@ -1,4 +1,16 @@
-package Main;
+package gui;
+
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.Insets;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextPane;
+
+import Main.Dice;
 
 public class frame extends javax.swing.JFrame {
 
@@ -15,6 +27,9 @@ public class frame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
+    	
+        
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dice");
 
@@ -24,11 +39,13 @@ public class frame extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        jLabel2.setText("jLabel2");
-
-        jLabel1.setText("player");
-
+        
+        jLabel2.setText("Result");
+        Image boardImage = new ImageIcon("dice.png").getImage();
+    	jLabel1 = new JLabel(new ImageIcon(boardImage));
+        jLabel1.setText("");
+        
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,27 +85,18 @@ public class frame extends javax.swing.JFrame {
     	int a = d.roll();
     	int b = d.roll();
         jLabel2.setText("" + a + " - " + b);
+        
+        Firstgui gui = new Firstgui();
+    	gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	gui.setSize(1000,1000);
+    	gui.setVisible(true);
+    	gui.setTitle("Learnin");
+        
+        jButton1.setEnabled(false);
     }                                       
 
     public static void main(String args[]) {
-       
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
+         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new frame().setVisible(true);
