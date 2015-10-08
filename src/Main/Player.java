@@ -27,6 +27,9 @@ public class Player {
 	}
 
 	public void moveTo(int id) {
+		if (location > id) {
+			addMoney(Properties.PASSING_MONEY);
+		}
 		location = id;
 		System.out.println(name + " is at " + gameSquares[location].toString());
 		gameSquares[location].onArrive(this);

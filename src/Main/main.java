@@ -26,7 +26,8 @@ public class main {
 		initializeDecks();
 		initializeGameSquares();
 		initializePlayerNames();
-
+		 players[0].moveBy(7);
+		
 		// Just for test
 		// players[0].moveBy(15);
 

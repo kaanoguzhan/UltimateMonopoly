@@ -11,6 +11,6 @@ public class AdvanceToStCharlesPlace extends ChanceCard {
 	
 	@Override
 	public void onDraw(Player pl) {
-		
+		pl.moveTo(6);
 	}
 }
