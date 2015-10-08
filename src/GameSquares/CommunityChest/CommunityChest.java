@@ -19,9 +19,9 @@ public class CommunityChest extends GameSquare {
 		card.onDraw(pl);
 		
 	}
+	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Community Chest. Location: " + id;
 	}
 }

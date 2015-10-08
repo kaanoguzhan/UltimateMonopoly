@@ -26,8 +26,7 @@ public class RollOnce extends GameSquare {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Roll Once. Location: " + id;
 	}
 
 }

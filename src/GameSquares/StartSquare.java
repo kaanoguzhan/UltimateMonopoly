@@ -16,8 +16,7 @@ public class StartSquare extends GameSquare {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Start Square. Location: " + id;
 	}
 
 }

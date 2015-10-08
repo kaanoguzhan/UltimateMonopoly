@@ -33,13 +33,15 @@ public class Land extends GameSquare {
 	@Override
 	public String toString() {
 		if (doubleRent)
-			return "Name: " + name +
+			return "Land." +
+				"\n Name: " + name +
 				"\n Color: " + color +
 				"\n Price: " + price +
 				"\n Rent: " + rent * 2 + " (Doubled since a player owns all three of these colour.)"
 				+ "\n Details: " + Details;
 		else
-			return "Name: " + name +
+			return "Land." +
+				"\n Name: " + name +
 				"\n Color: " + color +
 				"\n Price: " + price +
 				"\n Rent: " + rent +

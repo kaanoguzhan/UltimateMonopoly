@@ -1,46 +1,52 @@
 package Main;
 
-import java.util.Scanner;
+import GameSquares.GameSquare;
 
 public class Player {
-	
-	private String	Name		= "";
-	private int		Money		= 0;
-	private int		Location	= 0;
-	
-	public Player(String name) {
-		Money = Properties.StartGold;
-		Name = name;
-		System.out.println("Player " + Name + " with " + Money + " added.");
+
+	private String name;
+	private int money, location;
+	private GameSquare[] gameSquares;
+
+	public Player(String name, GameSquare[] gameSquares) {
+		this.location = 0;
+		this.money = Properties.StartGold;
+		this.name = name;
+		this.gameSquares = gameSquares;
+		System.out.println("Player " + name + " with " + money + " added.");
 	}
-	
-	public void move(int roll) {
-		Location += roll;
-		if (Location > Properties.TotalSquares) {
+
+	public void moveBy(int roll) {
+		location += roll;
+		if (location > Properties.TotalSquares) {
 			addMoney(Properties.PASSING_MONEY);
-			Location = Location % Properties.TotalSquares;
+			location = location % Properties.TotalSquares;
 		}
+		gameSquares[location].onArrive(this);
+		System.out.println(name + " is at " + gameSquares[location].toString());
 	}
-	
+
 	public void moveTo(int id) {
-		Location = id;
+		location = id;
+		gameSquares[location].onArrive(this);
+		System.out.println(name + " is at " + gameSquares[location].toString());
 	}
-	
+
 	public void addMoney(int amount) {
-		Money += amount;
+		money += amount;
 	}
-	
+
 	public void reduceMoney(int amount) {
-		if (Money >= amount)
-			Money -= amount;
+		if (money >= amount)
+			money -= amount;
 		else {
-			Location = Properties.Heaven;
-			System.out.println(Name + " is bankrupt.");
+			location = Properties.Heaven;
+			System.out.println(name + " is bankrupt.");
 		}
 	}
-	
+
 	public String toString() {
-		return "Player " + Name + " has " + Money + "\n" + "Square: " + Location;
-		
+		return "Player " + name + " has " + money + "\n" + "Square: " + location;
+
 	}
 }

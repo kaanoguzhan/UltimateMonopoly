@@ -16,6 +16,6 @@ public class FreePark extends GameSquare {
 	
 	@Override
 	public String toString() {
-		return "FreePark";
+		return "Free Park. Location: " + id;
 	}
 }
