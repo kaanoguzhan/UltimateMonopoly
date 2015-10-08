@@ -17,7 +17,7 @@ public class Firstgui extends JFrame {
 	public Firstgui(){
 		
 		setLayout(new FlowLayout());
-		image= new ImageIcon("1.jpg");
+		image= new ImageIcon("board.jpg");
 		labelForimage = new JLabel(image);
 		image2= new ImageIcon("dice.png");
 		labelForimage2 = new JLabel(image2);
