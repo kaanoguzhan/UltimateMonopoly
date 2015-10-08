@@ -1,7 +1,6 @@
 package Main;
 
 import java.util.Scanner;
-
 import GameSquares.FreePark;
 import GameSquares.GameSquare;
 import GameSquares.Land;
@@ -13,12 +12,12 @@ import GameSquares.Chance.Chance;
 import GameSquares.CommunityChest.CommunityChest;
 
 public class main {
-
+	
 	public static void main(String[] args) {
 		initializePlayers();
 		initializeGameSquares();
 	}
-
+	
 	private static void initializePlayers() {
 		System.out.println("How many players?");
 		Scanner scn = new Scanner(System.in);
@@ -31,10 +30,10 @@ public class main {
 		}
 		scn.close();
 	}
-
+	
 	private static void initializeGameSquares() {
 		GameSquare[] gameSquares = new GameSquare[Properties.TotalSquares];
-
+		
 		gameSquares[0] = new StartSquare(0);
 		gameSquares[1] = new Land("Oriental Ave", color.blue, 100);
 		gameSquares[2] = new CommunityChest(2);

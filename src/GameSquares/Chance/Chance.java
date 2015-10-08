@@ -1,7 +1,7 @@
 package GameSquares.Chance;
 
 import GameSquares.GameSquare;
-import GameSquares.CommunityChest.CommunityDeck;
+import Main.Player;
 
 public class Chance extends GameSquare {
 	
@@ -15,10 +15,9 @@ public class Chance extends GameSquare {
 	}
 	
 	@Override
-	public void onArrive() {
-		CommunityDeck deck = new CommunityDeck();
-		deck.draw();
+	public void onArrive(Player pl) {
 		
+		ChanceDeck.draw();		
 	}
 	
 	@Override

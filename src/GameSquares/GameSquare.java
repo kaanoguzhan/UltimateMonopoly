@@ -10,7 +10,7 @@ public abstract class GameSquare {
 	public int		id;
 	public Player	owner;
 	
-	public abstract void onArrive();
+	public abstract void onArrive(Player pl);
 	
 	public abstract String toString();
 }

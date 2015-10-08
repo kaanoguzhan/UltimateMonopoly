@@ -1,5 +1,7 @@
 package GameSquares;
 
+import Main.Player;
+
 public class Land extends GameSquare {
 	
 	private String	name;
@@ -23,7 +25,7 @@ public class Land extends GameSquare {
 	}
 	
 	@Override
-	public void onArrive() {
+	public void onArrive(Player pl) {
 		
 	}
 	
@@ -33,7 +35,7 @@ public class Land extends GameSquare {
 			return "Name: " + name +
 				"\n Color: " + color +
 				"\n Price: " + price +
-				"\n Rent: " + rent * 2
+				"\n Rent: " + rent * 2 + " (Doubled since a player owns all three of these colour.)"
 				+ "\n Details: " + Details;
 		else
 			return "Name: " + name +

@@ -1,6 +1,7 @@
 package GameSquares;
 
 import Main.Dice;
+import Main.Player;
 
 public class RollOnce extends GameSquare {
 
@@ -9,7 +10,7 @@ public class RollOnce extends GameSquare {
 	}
 
 	@Override
-	public void onArrive() {
+	public void onArrive(Player pl) {
 		Dice dice = new Dice();
 
 		System.out.println("Please roll a die and get a roll once card. If the numbers match, you will get $100.");

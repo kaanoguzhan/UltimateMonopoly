@@ -1,21 +1,21 @@
 package GameSquares;
 
-public class FreePark extends GameSquare {
+import Main.Player;
 
+public class FreePark extends GameSquare {
+	
 	public FreePark(int id) {
 		this.id = id;
 	}
-
+	
 	@Override
-	public void onArrive() {
-		// TODO Auto-generated method stub
-
+	public void onArrive(Player pl) {
+		// Do nothing, its FreePark and therefore is totally FREE!!!
+		
 	}
-
+	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return "FreePark";
 	}
-
 }

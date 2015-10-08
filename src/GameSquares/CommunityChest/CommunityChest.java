@@ -1,6 +1,7 @@
 package GameSquares.CommunityChest;
 
 import GameSquares.GameSquare;
+import Main.Player;
 
 public class CommunityChest extends GameSquare {
 	
@@ -14,7 +15,7 @@ public class CommunityChest extends GameSquare {
 	}
 	
 	@Override
-	public void onArrive() {
+	public void onArrive(Player pl) {
 		
 		CommunityDeck.draw();
 		

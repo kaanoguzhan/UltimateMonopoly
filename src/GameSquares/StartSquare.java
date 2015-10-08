@@ -1,5 +1,7 @@
 package GameSquares;
 
+import Main.Player;
+
 public class StartSquare extends GameSquare {
 
 	public StartSquare(int id) {
@@ -7,7 +9,7 @@ public class StartSquare extends GameSquare {
 	}
 
 	@Override
-	public void onArrive() {
+	public void onArrive(Player pl) {
 		// TODO Auto-generated method stub
 
 	}
