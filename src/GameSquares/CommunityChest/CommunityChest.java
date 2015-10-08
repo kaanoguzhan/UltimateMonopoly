@@ -1,10 +1,13 @@
 package GameSquares.CommunityChest;
 
 import GameSquares.GameSquare;
-import GameSquares.Chance.ChanceCard;
 import Main.Player;
 
 public class CommunityChest extends GameSquare {
+	
+	public enum CommunityChestCardType {
+		BargainBusiness, RecieveConsultancyFee, RenovationSuccess
+	}
 	
 	private CommunityChestDeck	CommunityDeck	= null;
 	

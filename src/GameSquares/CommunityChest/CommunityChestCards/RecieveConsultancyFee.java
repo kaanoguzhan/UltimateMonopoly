@@ -11,6 +11,6 @@ public class RecieveConsultancyFee extends CommunityChestCard {
 	
 	@Override
 	public void onDraw(Player pl) {
-		
+		pl.addMoney(25);
 	}
 }
