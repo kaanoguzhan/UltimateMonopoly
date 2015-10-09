@@ -13,14 +13,11 @@ public class ElectedAsChairPerson extends ChanceCard {
 	
 	@Override
 	public void onDraw(Player pl) {
-		System.out.println(pl.getName() + " picked ElectedAsChairPerson Card." +
-			"\n" + pl.getName() + " paid to everyone");
+		System.out.println(pl.getName() + " picked ElectedAsChairPerson Card. Now " + pl.getName()
+			+ " will pay everyone");
 		for (int i = 0; i < players.length; i++) {
-			if (pl == players[i])
-				pl.reduceMoney((players.length - 1) * 50);
-			else
-				players[i].addMoney(50);
-			
+			if (pl != players[i])
+				pl.pay(players[i], 50);
 		}
 	}
 }

@@ -27,10 +27,10 @@ public class Land extends GameSquare {
 	public void onArrive(Player pl) {
 		if (this.owner == null) {
 			// Just for testing will be removed with GUI
-			Scanner scan = new Scanner(System.in);
-			buy = scan.nextBoolean();
+			// Scanner scan = new Scanner(System.in);
+			// buy = scan.nextBoolean();
 			//
-			if (buy) { // (GUI) If player want to play ==> buy = true
+			if (true) { // (GUI) If player want to play ==> buy = true
 				if (pl.getMoney() >= price) {
 					pl.reduceMoney(price);
 					owner = pl;
@@ -43,21 +43,17 @@ public class Land extends GameSquare {
 					System.out.println("You don't have enough money!");
 			}
 		} else {
-			if (this.owner != pl)
-				if (pl.getNumberOfOwnedByColor(this.color) == 3) {
-					System.out.println(pl.getName() + " paid to " + owner.getName());
-					pl.reduceMoney(2 * rent);
-					owner.addMoney(2 * rent);
-				} else {
-					System.out.println(pl.getName() + " paid to " + owner.getName());
-					pl.reduceMoney(rent);
-					owner.addMoney(rent);
-				}
+			if (this.owner != pl) {
+				System.out.println("This land is owned by " + owner.getName());
+				if (pl.getNumberOfOwnedByColor(this.color) == 3)
+					pl.pay(owner, 2 * rent);
+				else
+					pl.pay(owner, rent);
+			}
 			else
 				System.out.println("Player already owns this land!");
 		}
 	}
-	
 	public color getColor() {
 		return color;
 	}

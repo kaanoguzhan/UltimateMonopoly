@@ -61,6 +61,12 @@ public class Player {
 		}
 	}
 	
+	public void pay(Player player, int amount) {
+		System.out.println(name + " paid to " + player.getName());
+		this.reduceMoney(amount);
+		player.addMoney(amount);
+	}
+	
 	public void addToInventory(CommunityChestCardType cardType) {
 		Inventory.add(cardType);
 	}
