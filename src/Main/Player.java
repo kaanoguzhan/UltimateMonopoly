@@ -26,16 +26,20 @@ public class Player {
 	public void moveBy(int roll) {
 		location += roll;
 		if (location >= Properties.TotalSquares) {
+			System.out.println(name + " passed Start Square.");
 			addMoney(Properties.PASSING_MONEY);
 			location = location % Properties.TotalSquares;
 		}
-		System.out.println(name + " moved " + roll + " squares and now is at " + gameSquares[location].toString());
+		System.out.println(name + " moved " + roll + " squares and now is at " + gameSquares[location].toString()
+			+ "\n You have: " + money);
+		
 		gameSquares[location].onArrive(this);
 	}
 	
 	public void moveTo(int id) {
 		System.out.println(name + " is at " + gameSquares[id].toString());
 		if (location > id) {
+			System.out.println(name + " passed Start Square.");
 			addMoney(Properties.PASSING_MONEY);
 		}
 		location = id;
@@ -44,13 +48,13 @@ public class Player {
 	
 	public void addMoney(int amount) {
 		money += amount;
-		System.out.println(name + "'s money increased to " + money);
+		System.out.println(name + "'s money increased by " + amount + " to " + money);
 	}
 	
 	public void reduceMoney(int amount) {
 		if (money >= amount) {
 			money -= amount;
-			System.out.println(name + "'s money decreased to " + money);
+			System.out.println(name + "'s money decreased by " + amount + " to " + money);
 		} else {
 			location = Properties.Heaven;
 			System.out.println(name + " is bankrupt.");
@@ -73,6 +77,10 @@ public class Player {
 		return money;
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
 	public void getOwnership(Land land) {
 		ownedLands.add(land);
 	}
@@ -86,7 +94,19 @@ public class Player {
 		return counter;
 	}
 	public String toString() {
-		return "Player " + name + " has " + money + "\n" + "Square: " + location + "\n" + "Has:" + Inventory;
+		String Lands = "[";
+		for (Land land : ownedLands) {
+			Lands += land.getName() + ", ";
+		}
+		if (Lands.length() > 2)
+			Lands = Lands.substring(0, Lands.length() - 2);
+		Lands += "]";
+		
+		
+		return "Player " + name + " has " + money +
+			"\n" + "Square: " + location +
+			"\n" + "Has Cards:" + Inventory +
+			"\n" + "Has Lands:" + Lands;
 		
 	}
 }

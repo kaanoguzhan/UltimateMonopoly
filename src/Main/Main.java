@@ -51,25 +51,25 @@ public class Main {
 		gameSquares = new GameSquare[Properties.TotalSquares];
 		
 		gameSquares[0] = new StartSquare(0);
-		gameSquares[1] = new Land(1, "Oriental Ave", color.blue, 100);
+		gameSquares[1] = new Land(1, "Oriental Ave", color.blue, 100, 6);
 		gameSquares[2] = new CommunityChest(2, communityDeck);
-		gameSquares[3] = new Land(3, "Vermont Ave", color.blue, 100);
-		gameSquares[4] = new Land(4, "Connecticut", color.blue, 120);
+		gameSquares[3] = new Land(3, "Vermont Ave", color.blue, 100, 6);
+		gameSquares[4] = new Land(4, "Connecticut", color.blue, 120, 8);
 		gameSquares[5] = new RollOnce(5);
-		gameSquares[6] = new Land(6, "St. Charles Place", color.pink, 140);
+		gameSquares[6] = new Land(6, "St. Charles Place", color.pink, 140, 10);
 		gameSquares[7] = new Chance(7, chanceDeck, players);
-		gameSquares[8] = new Land(8, "States Ave", color.pink, 140);
-		gameSquares[9] = new Land(9, "Virginia", color.pink, 160);
+		gameSquares[8] = new Land(8, "States Ave", color.pink, 140, 10);
+		gameSquares[9] = new Land(9, "Virginia", color.pink, 160, 12);
 		gameSquares[10] = new FreePark(10);
-		gameSquares[11] = new Land(11, "St. James Place", color.orange, 180);
+		gameSquares[11] = new Land(11, "St. James Place", color.orange, 180, 14);
 		gameSquares[12] = new CommunityChest(12, communityDeck);
-		gameSquares[13] = new Land(13, "Tennessee", color.orange, 180);
-		gameSquares[14] = new Land(14, "New York Ave", color.orange, 200);
+		gameSquares[13] = new Land(13, "Tennessee", color.orange, 180, 14);
+		gameSquares[14] = new Land(14, "New York Ave", color.orange, 200, 16);
 		gameSquares[15] = new SqueezePlay(15, players);
-		gameSquares[16] = new Land(16, "Pacific", color.green, 300);
-		gameSquares[17] = new Land(17, "North Carolina", color.green, 300);
+		gameSquares[16] = new Land(16, "Pacific", color.green, 300, 26);
+		gameSquares[17] = new Land(17, "North Carolina", color.green, 300, 26);
 		gameSquares[18] = new Chance(18, chanceDeck, players);
-		gameSquares[19] = new Land(19, "Pennsylvania", color.green, 320);
+		gameSquares[19] = new Land(19, "Pennsylvania", color.green, 320, 28);
 		
 		System.out.println("Game Square initialization is complete...");
 	}
@@ -81,7 +81,6 @@ public class Main {
 			String name = scanner.next();
 			players[i] = new Player(name, gameSquares);
 		}
-		scanner.close();
 		
 		System.out.println("Player Name initialization is complete...");
 	}

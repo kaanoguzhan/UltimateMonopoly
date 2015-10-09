@@ -12,6 +12,7 @@ public class BargainBusiness extends CommunityChestCard {
 	
 	@Override
 	public void onDraw(Player pl) {
+		System.out.println(pl.getName()+" picked BargainBusiness Card.");
 		pl.addToInventory(CommunityChestCardType.BargainBusiness);
 	}
 }

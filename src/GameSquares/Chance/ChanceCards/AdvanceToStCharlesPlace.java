@@ -11,6 +11,7 @@ public class AdvanceToStCharlesPlace extends ChanceCard {
 	
 	@Override
 	public void onDraw(Player pl) {
+		System.out.println(pl.getName()+" picked AdvanceToStCharlesPlace Card.");
 		pl.moveTo(6);
 	}
 }

@@ -11,6 +11,8 @@ public class AdvanceToStart extends ChanceCard {
 
 	@Override
 	public void onDraw(Player pl) {
+		System.out.println(pl.getName()+" picked AdvanceToStart Card.");
 		pl.moveTo(0);
+		
 	}
 }

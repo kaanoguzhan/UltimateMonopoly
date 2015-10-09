@@ -11,16 +11,18 @@ public class Test {
 	
 	public void playForRound(int round) {
 		for (int i = 1; i < round + 1; i++) {
-			System.out.println("Round " + i + " -----------------------------------------------------");
+			System.out.println("Round " + i + " ---------------------------------------------------------------------");
 			for (int j = 0; j < players.length; j++) {
 				int[] rolls = { dice.roll(), dice.roll() };
-				System.out.println("Player " + j + " ********** rolled:" + rolls[0] + "," + rolls[1]);
+				System.out.println(players[j].getName() + " rolled: " + rolls[0] + "," + rolls[1] + " *********** ");
 				players[j].moveBy(rolls[0] + rolls[1]);
+				System.out.println("->End of " + players[j].getName() + "'s turn.");
 			}
 		}
-		System.out.println("==============================================0");
+		System.out.println("==============================================");
 		for (int j = 0; j < players.length; j++) {
 			System.out.println(players[j]);
+			System.out.println();
 		}
 	}
 }

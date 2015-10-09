@@ -1,5 +1,6 @@
 package GameSquares;
 
+import java.util.Scanner;
 import Main.Player;
 
 public class Land extends GameSquare {
@@ -8,29 +9,28 @@ public class Land extends GameSquare {
 	private color	color;
 	private int		price, rent;
 	private boolean	doubleRent;
-	private boolean	buy;
+	public boolean	buy;
 	
 	public enum color {
 		blue, pink, orange, green
 	}
 	
-	public Land(int id, String name, color color, int price) {
+	public Land(int id, String name, color color, int price, int rent) {
 		super(id);
 		this.name = name;
 		this.color = color;
 		this.price = price;
-		details = "If a player owns ALL the Lots of any Color-Group the rent is Doubled on Unimproved Lots in that group.";
-	}
-	
-	public Land(int id, String name, color color, int price, String details) {
-		super(id);
-		this.name = name;
+		this.rent = rent;
 	}
 	
 	@Override
 	public void onArrive(Player pl) {
 		if (this.owner == null) {
-			if (true) { // (GUI) If player want to play ==> buy = true
+			// Just for testing will be removed with GUI
+			Scanner scan = new Scanner(System.in);
+			buy = scan.nextBoolean();
+			//
+			if (buy) { // (GUI) If player want to play ==> buy = true
 				if (pl.getMoney() >= price) {
 					pl.reduceMoney(price);
 					owner = pl;
@@ -45,9 +45,11 @@ public class Land extends GameSquare {
 		} else {
 			if (this.owner != pl)
 				if (pl.getNumberOfOwnedByColor(this.color) == 3) {
+					System.out.println(pl.getName() + " paid to " + owner.getName());
 					pl.reduceMoney(2 * rent);
 					owner.addMoney(2 * rent);
 				} else {
+					System.out.println(pl.getName() + " paid to " + owner.getName());
 					pl.reduceMoney(rent);
 					owner.addMoney(rent);
 				}
@@ -60,14 +62,18 @@ public class Land extends GameSquare {
 		return color;
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
 	@Override
 	public String toString() {
 		if (doubleRent)
-			return "Land. Location: " + id + "\n Name: " + name + "\n Color: " + color + "\n Price: " + price
+			return "Location: " + id + "\n Name: " + name + "\n Color: " + color + "\n Price: " + price
 				+ "\n Rent: " + rent * 2 + " (Doubled since a player owns all three of these colour.)"
 				+ "\n Details: " + details;
 		else
-			return "Land. Location: " + id + "\n Name: " + name + "\n Color: " + color + "\n Price: " + price
+			return "Location: " + id + "\n Name: " + name + "\n Color: " + color + "\n Price: " + price
 				+ "\n Rent: " + rent + "\n Details: " + details;
 	}
 }
