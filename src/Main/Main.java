@@ -28,8 +28,19 @@ public class Main {
 		initializePlayerNames();
 		
 		Test test = new Test(players);
-		test.playForRound(100);
+		test.playForRound(0);
 		
+		Admin admin = new Admin();
+		admin.movePlayerTo(players[0], 0);
+		admin.movePlayerToForced(players[0], 0);
+		admin.setMoney(players[0], 5000);
+		admin.increaseMoneyBy(players[0], 2000);
+		admin.decreaseMoneyBy(players[0], 1000);
+		admin.giveOwnership(players[0], gameSquares[1], gameSquares[3], gameSquares[4]);
+		
+		admin.movePlayerTo(players[1], 3);
+		
+		System.out.print(players[0]);
 	}
 	
 	private static void initializePlayers() {

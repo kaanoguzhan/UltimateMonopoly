@@ -4,11 +4,11 @@ import Main.Player;
 
 public abstract class GameSquare {
 	
-	public int		xCoord;
-	public int		yCoord;
+	protected int		xCoord;
+	protected int		yCoord;
 	
-	public int		id;
-	public Player	owner;
+	protected int		id;
+	protected Player	owner;
 	
 	public GameSquare(int id) {
 		this.id = id;

@@ -87,8 +87,13 @@ public class Player {
 		return name;
 	}
 	
+	public int getLocation() {
+		return location;
+	}
+	
 	public void getOwnership(Land land) {
 		ownedLands.add(land);
+		land.setOwner(this);
 	}
 	
 	public int getNumberOfOwnedByColor(color color) {
@@ -99,6 +104,17 @@ public class Player {
 		}
 		return counter;
 	}
+	
+	// ////////// DO NOT USE THESE METHODS - THESE ARE JUST FOR DEBUGGING ////////////
+	void setLocation(int id) {
+		this.location = id;
+	}
+	
+	void setMoney(int amount) {
+		this.money = amount;
+	}
+	// ///////////////////////////////////////////////////////////////////////////////
+	
 	public String toString() {
 		String Lands = "[";
 		for (Land land : ownedLands) {
@@ -110,9 +126,8 @@ public class Player {
 		
 		
 		return "Player " + name + " has " + money +
-			"\n" + "Square: " + location +
+			" is at " + gameSquares[location] +
 			"\n" + "Has Cards:" + Inventory +
 			"\n" + "Has Lands:" + Lands;
-		
 	}
 }

@@ -21,6 +21,7 @@ public class Land extends GameSquare {
 		this.color = color;
 		this.price = price;
 		this.rent = rent;
+		this.details = "No Detail";
 	}
 	
 	@Override
@@ -33,7 +34,7 @@ public class Land extends GameSquare {
 			if (true) { // (GUI) If player want to play ==> buy = true
 				if (pl.getMoney() >= price) {
 					pl.reduceMoney(price);
-					owner = pl;
+					// owner = pl;
 					pl.getOwnership(this);
 					System.out.println("Player bought " + this.name + ". Player has "
 						+ pl.getNumberOfOwnedByColor(this.color) + " of this color");
@@ -45,7 +46,7 @@ public class Land extends GameSquare {
 		} else {
 			if (this.owner != pl) {
 				System.out.println("This land is owned by " + owner.getName());
-				if (pl.getNumberOfOwnedByColor(this.color) == 3)
+				if (owner.getNumberOfOwnedByColor(this.color) == 3)
 					pl.pay(owner, 2 * rent);
 				else
 					pl.pay(owner, rent);
@@ -62,14 +63,18 @@ public class Land extends GameSquare {
 		return name;
 	}
 	
+	public void setOwner(Player player) {
+		this.owner = player;
+	}
+	
 	@Override
 	public String toString() {
 		if (doubleRent)
-			return "Location: " + id + "\n Name: " + name + "\n Color: " + color + "\n Price: " + price
+			return name + "\n Color: " + color + "\n Price: " + price
 				+ "\n Rent: " + rent * 2 + " (Doubled since a player owns all three of these colour.)"
 				+ "\n Details: " + details;
 		else
-			return "Location: " + id + "\n Name: " + name + "\n Color: " + color + "\n Price: " + price
+			return name + "\n Color: " + color + "\n Price: " + price
 				+ "\n Rent: " + rent + "\n Details: " + details;
 	}
 }
