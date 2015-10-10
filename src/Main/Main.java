@@ -39,8 +39,14 @@ public class Main {
 		admin.giveOwnership(players[0], gameSquares[1], gameSquares[3], gameSquares[4]);
 		
 		admin.movePlayerTo(players[1], 3);
-		
-		System.out.print(players[0]);
+
+		System.out.println(gameSquares[1]);
+		admin.setName(gameSquares[1], "DNEME");
+		System.out.println(gameSquares[1]);
+		admin.setColor(gameSquares[1], color.pink);
+		System.out.println(gameSquares[1]);
+		admin.setPrice(gameSquares[1], 5000);
+		System.out.println(gameSquares[1]);
 	}
 	
 	private static void initializePlayers() {

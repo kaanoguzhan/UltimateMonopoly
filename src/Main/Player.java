@@ -105,7 +105,7 @@ public class Player {
 		return counter;
 	}
 	
-	// ////////// DO NOT USE THESE METHODS - THESE ARE JUST FOR DEBUGGING ////////////
+	// ////////// DO NOT USE THESE METHODS - THESE ARE JUST FOR DEBUGGING ////////// //
 	void setLocation(int id) {
 		this.location = id;
 	}
@@ -113,7 +113,7 @@ public class Player {
 	void setMoney(int amount) {
 		this.money = amount;
 	}
-	// ///////////////////////////////////////////////////////////////////////////////
+	// ///////////////////////////////////////////////////////////////////////////// //
 	
 	public String toString() {
 		String Lands = "[";

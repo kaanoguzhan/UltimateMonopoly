@@ -67,7 +67,24 @@ public class Land extends GameSquare {
 		this.owner = player;
 	}
 	
-	@Override
+	// ////////// DO NOT USE THESE METHODS - THESE ARE JUST FOR DEBUGGING ////////// //
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public void setColor(color color) {
+		this.color = color;
+	}
+	
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	
+	public void setRent(int rent) {
+		this.rent = rent;
+	}
+	// ///////////////////////////////////////////////////////////////////////////// //
+	
 	public String toString() {
 		if (doubleRent)
 			return name + "\n Color: " + color + "\n Price: " + price
