@@ -4,14 +4,15 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class debug extends JFrame implements ActionListener {
+public class Debug extends JFrame implements ActionListener {
+	
 	private JTextField moneyField,locationField,cardField,moneyField2,locationField2,cardField2;
 	private JTextField moneyField3,locationField3,cardField3,moneyField4,locationField4,cardField4;
 	private JButton set,plus,minus,plus2,minus2,plus3,minus3,plus4,minus4;
 	private JLabel identifier,moneyLabel,locationLabel,cardLabel,identifier2,moneyLabel2,locationLabel2,cardLabel2;
 	private JLabel identifier3,moneyLabel3,locationLabel3,cardLabel3,identifier4,moneyLabel4,locationLabel4,cardLabel4;
 	
-	public debug(){	
+	public Debug(){	
 		setLayout(new GridBagLayout());
 		
 		GridBagConstraints c = new GridBagConstraints();

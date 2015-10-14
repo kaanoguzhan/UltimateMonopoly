@@ -6,10 +6,12 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class Main extends JFrame implements ActionListener{
+public class Board extends JFrame implements ActionListener{
+	
 	JLabel zero,one,two,three;
 	
-  public Main() {
+  public Board() {
+	  
     super("Monototype");  
     setLayout(null);
 
@@ -33,7 +35,7 @@ public class Main extends JFrame implements ActionListener{
     add(three);
     three.setBounds(50, 475, 50,40);
     
-    dice d = new dice(zero); // simdilik zero verdim, oynayana gore degis
+    RollingTheDice d = new RollingTheDice(zero); // simdilik zero verdim, oynayana gore degis
     d.setBounds(720, 0, 200, 200);
     add(d);
     
@@ -60,15 +62,12 @@ public class Main extends JFrame implements ActionListener{
   }
 
   public static void main(String[] args) {
-    new Main();
-    
-    
+    new Board();
     
   }
 
-
 public void actionPerformed(ActionEvent e) {
-	debug a = new debug();
+	Debug a = new Debug();
 	
 	a.setSize(420,420);
 	a.setVisible(true);

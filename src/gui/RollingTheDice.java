@@ -6,14 +6,14 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-public class dice extends JPanel implements ActionListener{
+public class RollingTheDice extends JPanel implements ActionListener{
 	
 	private JLabel result;
 	private JLabel dice;
 	private JButton button;
 	JLabel a;
 	
-    public dice(JLabel l) { 
+    public RollingTheDice(JLabel l) { 
     	setLayout(null);
     	a=l;
         button = new JButton();
