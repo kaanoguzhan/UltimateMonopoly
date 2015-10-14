@@ -1,20 +1,13 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.FlowLayout;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-
-public class Main extends JFrame {
+public class Main extends JFrame implements ActionListener{
   public Main() {
     super("JLayeredPane Demo");
-
+    
     setLayout(null);
 
     ImageIcon image0= new ImageIcon("0.gif");
@@ -37,6 +30,15 @@ public class Main extends JFrame {
     add(three);
     three.setBounds(50, 475, 50,40);
     
+    dice d = new dice();
+    d.setBounds(720, 0, 200, 200);
+    add(d);
+    
+    JButton debug = new JButton("Debug Window");
+    debug.setBounds(950,630,120,70);
+    add(debug);
+    debug.addActionListener(this);
+    
     ImageIcon image= new ImageIcon("board.jpg");
 	JLabel labelForimage = new JLabel(image);
 		
@@ -44,7 +46,8 @@ public class Main extends JFrame {
 	labelForimage.setBounds(0, 0, 700, 700);
 	
     super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setSize(750, 750);
+    this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//  this.setUndecorated(true);
     
     setVisible(true);
   }
@@ -52,4 +55,13 @@ public class Main extends JFrame {
   public static void main(String[] args) {
     new Main();
   }
+
+@Override
+public void actionPerformed(ActionEvent e) {
+	debug a = new debug();
+	
+	a.setSize(500,500);
+	a.setVisible(true);
+	a.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+}
 }
