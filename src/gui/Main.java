@@ -52,7 +52,8 @@ public class Main extends JFrame implements ActionListener{
 //  this.setUndecorated(true);
     
     SquareHolder sh = new SquareHolder();
-    sh.generateSquares();
+    ArrayList<Square> squares = sh.squares;
+//    System.out.println(squares.get(0).X);
     
     setVisible(true);
   }
