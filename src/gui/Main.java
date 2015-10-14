@@ -56,7 +56,7 @@ public class Main extends JFrame implements ActionListener{
     new Main();
   }
 
-@Override
+
 public void actionPerformed(ActionEvent e) {
 	debug a = new debug();
 	

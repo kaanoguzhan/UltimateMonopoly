@@ -42,7 +42,7 @@ public class dice extends JPanel implements ActionListener{
  	
     }
 
-	@Override
+	
 	public void actionPerformed(ActionEvent arg0) {
 		// DICE AT BURDA ABIZI
 		result.setText("dice rolled :");
