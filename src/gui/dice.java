@@ -2,6 +2,8 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
 public class dice extends JPanel implements ActionListener{
@@ -9,9 +11,11 @@ public class dice extends JPanel implements ActionListener{
 	private JLabel result;
 	private JLabel dice;
 	private JButton button;
-    public dice() { 
+	JLabel a;
+	
+    public dice(JLabel l) { 
     	setLayout(null);
-    	
+    	a=l;
         button = new JButton();
         dice = new JLabel();
         result = new JLabel();     
@@ -31,22 +35,25 @@ public class dice extends JPanel implements ActionListener{
         add(button);
     }  
 
-    public static void main(String args[]){
-    	JFrame b = new JFrame();
-    	dice a = new dice();
-    	
-    	b.setSize(200, 200);
-    	b.add(a);
-    	b.setVisible(true);
-    	b.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
- 	
-    }
 
 	
 	public void actionPerformed(ActionEvent arg0) {
-		// DICE AT BURDA ABIZI
+		// DICE AT BURDA ABIZI, dice attiktan sonra ne yapicalsa asagi
 		result.setText("dice rolled :");
 		result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result.getPreferredSize().getHeight()));
+		
+		movePlayer(16);
+		
+	}
+
+	private void movePlayer(int location) { // player parametresi de alincak
+	    SquareHolder sh = new SquareHolder();
+	    ArrayList<Square> squares = sh.squares;
+	    int x = squares.get(location).X;
+	    int y = squares.get(location).Y;
+	    
+		// zero for now, later it will be player.getID (zero,one,two,three).setBounds
+	    a.setBounds(x, y, 50, 40);
 		
 	}
     
