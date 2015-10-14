@@ -1,8 +1,10 @@
 package gui;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class Main extends JFrame implements ActionListener{
   public Main() {
@@ -48,6 +50,9 @@ public class Main extends JFrame implements ActionListener{
     super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 //  this.setUndecorated(true);
+    
+    SquareHolder sh = new SquareHolder();
+    sh.generateSquares();
     
     setVisible(true);
   }
