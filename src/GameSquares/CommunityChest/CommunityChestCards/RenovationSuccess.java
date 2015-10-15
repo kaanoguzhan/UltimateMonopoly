@@ -1,5 +1,6 @@
 package GameSquares.CommunityChest.CommunityChestCards;
 
+import gui.CardShower;
 import GameSquares.CommunityChest.CommunityChest.CommunityChestCardType;
 import GameSquares.CommunityChest.CommunityChestCard;
 import Main.Player;
@@ -12,7 +13,12 @@ public class RenovationSuccess extends CommunityChestCard {
 	
 	@Override
 	public void onDraw(Player pl) {
-		System.out.println(pl.getName() + " picked RenovationSuccess Card.");
+		new CardShower(this);
 		pl.addToInventory(CommunityChestCardType.RenovationSuccess);
+	}
+
+	@Override
+	public String toString() {
+		return "You picked RenovationSuccess Card.";
 	}
 }

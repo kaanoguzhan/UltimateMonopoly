@@ -1,5 +1,6 @@
 package GameSquares.Chance.ChanceCards;
 
+import gui.CardShower;
 import GameSquares.Chance.ChanceCard;
 import Main.Player;
 
@@ -11,7 +12,12 @@ public class AdvanceToStCharlesPlace extends ChanceCard {
 	
 	@Override
 	public void onDraw(Player pl) {
-		System.out.println(pl.getName()+" picked AdvanceToStCharlesPlace Card.");
+		new CardShower(this);
 		pl.moveTo(6);
+	}
+
+	@Override
+	public String toString() {
+		return "You picked AdvanceToStCharlesPlace Card.";
 	}
 }
