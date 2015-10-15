@@ -1,7 +1,7 @@
 package Main;
 
 import gui.Board;
-import gui.AdditionalWindows.GetTextInput;
+import gui.AdditionalWindows.InputReaders.GetTextInput;
 import GameSquares.FreePark;
 import GameSquares.GameSquare;
 import GameSquares.Land;

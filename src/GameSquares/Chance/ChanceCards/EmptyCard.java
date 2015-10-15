@@ -1,6 +1,5 @@
 package GameSquares.Chance.ChanceCards;
 
-import gui.CardShower;
 import gui.AdditionalWindows.MessageDisplayer;
 import GameSquares.Chance.ChanceCard;
 import Main.Player;

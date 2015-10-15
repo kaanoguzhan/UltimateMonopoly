@@ -1,4 +1,4 @@
-package gui.AdditionalWindows;
+package gui.AdditionalWindows.InputReaders;
 
 import javax.swing.JOptionPane;
 

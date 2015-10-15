@@ -1,4 +1,4 @@
-package gui;
+package gui.AdditionalWindows;
 
 
 import java.awt.Image;

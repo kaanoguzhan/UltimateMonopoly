@@ -18,7 +18,7 @@ public class RollOnce extends GameSquare {
 	@Override
 	public void onArrive(Player pl) {
 		
-		gui.RollOnce r = new gui.RollOnce(pl);
+		gui.AdditionalWindows.RollOnce r = new gui.AdditionalWindows.RollOnce(pl);
 		r.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		r.setSize(350, 200);
 		r.setVisible(true);

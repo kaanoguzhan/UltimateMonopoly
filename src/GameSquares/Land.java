@@ -1,6 +1,6 @@
 package GameSquares;
 
-import gui.AdditionalWindows.GetYesNoInput;
+import gui.AdditionalWindows.InputReaders.GetYesNoInput;
 import Main.Player;
 
 public class Land extends GameSquare {
