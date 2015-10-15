@@ -24,28 +24,28 @@ public class Admin {
 	/** Player admin methods **/
 	/**************************/
 	// Move PLAYER by AMOUNT and CALL onArrive()
-	public void movePlayerBy(Player player, int amount) {
+	public static void movePlayerBy(Player player, int amount) {
 		System.out.println("ADMIN -> Player:" + player.getName() +
 			" is moved by " + amount);
 		player.moveBy(amount);
 	}
 	
 	// Move PLAYER to given LOCATION and CALL onArrive()
-	public void movePlayerTo(Player player, int location) {
+	public static void movePlayerTo(Player player, int location) {
 		System.out.println("ADMIN -> Player:" + player.getName() +
 			" is moved to location with id " + location);
 		player.moveTo(location);
 	}
 	
 	// Move PLAYER to given LOCATION but WONT CALL location's onArrive()
-	public void movePlayerToForced(Player player, int location) {
+	public static void movePlayerToForced(Player player, int location) {
 		System.out.println("ADMIN -> Player:" + player.getName() +
 			"'s Location is set to location with id " + location);
 		player.setLocation(location);
 	}
 	
 	// Sets PLAYER's MONEY to given AMOUNT
-	public void setMoney(Player player, int amount) {
+	public static void setMoney(Player player, int amount) {
 		System.out.println("ADMIN -> Player:" + player.getName() +
 			"'s money is set to " + amount);
 		player.setMoney(amount);
@@ -68,7 +68,7 @@ public class Admin {
 	}
 	
 	// Give PLAYER the ownership of LAND
-	public void giveOwnership(Player player, GameSquare... land) {
+	public static void giveOwnership(Player player, GameSquare... land) {
 		for (GameSquare currentLand : land) {
 			System.out.println("ADMIN -> Player:" + player.getName() +
 				" is given the ownership of " + ((Land) currentLand).getName());

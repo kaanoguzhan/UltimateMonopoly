@@ -2,7 +2,10 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
+
+import Main.Admin;
 import Main.Main;
 import Main.Player;
 
@@ -312,16 +315,46 @@ public class Debug extends JFrame implements ActionListener {
 		}
 	}
 	
-	private void setAction() {
+	private void setAction() {  ///move player tolarý deðiþtir
 		players[0].setMoney(Integer.parseInt(moneyField1.getText()));
 		players[1].setMoney(Integer.parseInt(moneyField2.getText()));
 		players[2].setMoney(Integer.parseInt(moneyField3.getText()));
 		players[3].setMoney(Integer.parseInt(moneyField4.getText()));
 		
-		players[0].setLocation(Integer.parseInt(locationField1.getText()));
-		players[1].setLocation(Integer.parseInt(locationField2.getText()));
-		players[2].setLocation(Integer.parseInt(locationField3.getText()));
-		players[3].setLocation(Integer.parseInt(locationField4.getText()));
+		int x,y,location;
+		
+		
+		location = Integer.parseInt(locationField1.getText());
+		x = Board.squareHolder.getSquare(location).getX() - (players[0].getID() * 25);
+		y = Board.squareHolder.getSquare(location).getY();
+		Admin.movePlayerTo(players[0], location); //change me to movePlayerToforced
+		Board.zero.setBounds(x, y, 50, 40);
+		
+		location = Integer.parseInt(locationField2.getText());
+		x = Board.squareHolder.getSquare(location).getX() - (players[1].getID() * 25);
+		y = Board.squareHolder.getSquare(location).getY();
+		Admin.movePlayerTo(players[1], location); //change me to movePlayerToforced
+		Board.one.setBounds(x, y, 50, 40);
+		
+		location = Integer.parseInt(locationField3.getText());
+		x = Board.squareHolder.getSquare(location).getX() - (players[2].getID() * 25);
+		y = Board.squareHolder.getSquare(location).getY();
+		Admin.movePlayerTo(players[2], location); //change me to movePlayerToforced
+		Board.two.setBounds(x, y, 50, 40);
+		
+		location = Integer.parseInt(locationField4.getText());
+		x = Board.squareHolder.getSquare(location).getX() - (players[3].getID() * 25);
+		y = Board.squareHolder.getSquare(location).getY();
+		Admin.movePlayerTo(players[3], location); //change me to movePlayerToforced
+		Board.three.setBounds(x, y, 50, 40);
+		
+		
+//		System.out.println();
+//		String[] properties = cardeField1.getText().split(" ,-");
+//		if(properties != null){
+//			for(int i=0; i<properties.length;i++)
+//				Admin.giveOwnership(players[0],squares[Integer.parseInt(properties[i])]);
+//		}
 		
 		Board.p.refreshData();
 	}

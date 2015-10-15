@@ -15,7 +15,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
 	private static final long	serialVersionUID	= 1L;
 	private Player				player;
 	
-	private SquareHolder		squareHolder		= new SquareHolder();
 	private JLabel				playerName, result, dice;
 	private JButton				button, end;
 	
@@ -70,8 +69,8 @@ public class RollingTheDice extends JPanel implements ActionListener {
 		int location = player.getLocation();
 		location = (location + amount) % 20;
 		
-		int x = squareHolder.getSquare(location).getX() - (player.getID() * 25);
-		int y = squareHolder.getSquare(location).getY();
+		int x = Board.squareHolder.getSquare(location).getX() - (player.getID() * 25);
+		int y = Board.squareHolder.getSquare(location).getY();
 		
 		playerName.setBounds(x, y, 50, 40);
 		player.moveBy(amount);
