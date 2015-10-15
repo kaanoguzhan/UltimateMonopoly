@@ -112,7 +112,7 @@ public class Main {
 	
 	private static void runGame() {
 		while (play) {
-			for (int playerID = 0; playerID < 4; playerID++) {
+			for (int playerID = 0; playerID < players.length; playerID++) {
 				board.setCurrentPlayer(playerID);
 				while (!roundEnded);
 				roundEnded = false;
