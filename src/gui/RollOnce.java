@@ -9,19 +9,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import Main.Dice;
 import Main.Player;
 
 public class RollOnce extends JFrame implements ActionListener {
 	
 	private static final long	serialVersionUID	= 1L;
-	private boolean				rolledSame;
 	private JLabel				picked, picked2, result, dice;
 	private JButton				button;
 	private int					rolled;
 	private Player player;
 	public RollOnce(Player pl) {
+		super("RollOnce");
 		setLayout(null);
 		this.player = pl;
 		
@@ -61,23 +59,21 @@ public class RollOnce extends JFrame implements ActionListener {
 	
 	public void actionPerformed(ActionEvent arg0) {
 		// Create the Dice and roll
-        GameSquares.RollOnce.isRolledSame(player);
+		button.setEnabled(false);
+        GameSquares.RollOnce.isRolledSame(player,rolled);
 		boolean a = GameSquares.RollOnce.rolledSame;
 		int b = GameSquares.RollOnce.rolled;
           
 		if (a == true) {		
-			result.setText("dice rolled : " + b + "   YOU WIN !!!");
+			result.setText("You rolled : " + b + "   YOU WIN !!!");
 			result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result.getPreferredSize()
 				.getHeight()));
 		} else {
 			
-			result.setText("dice rolled : " + b + "   Better luck next time");
+			result.setText("You rolled : " + b + "   Better luck next time");
 			result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result.getPreferredSize()
 				.getHeight()));
 		}
 	}
 	
-	public boolean isRolledSame() {
-		return rolledSame;
-	}
 }

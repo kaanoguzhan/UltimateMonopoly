@@ -64,6 +64,7 @@ public class Board extends JFrame implements ActionListener {
 		add(labelForimage);
 		labelForimage.setBounds(0, 0, 700, 700);
 		
+		this.setSize(1300, 750);
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		// this.setUndecorated(true);
