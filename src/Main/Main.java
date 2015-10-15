@@ -22,7 +22,7 @@ public class Main {
 	static Player[] players = null;
 	static Board board;
 	static Boolean play = true;
-	public static Boolean pause = false;
+	volatile static Boolean roundEnded = false;
 
 	public static void main(String[] args) {
 		initializePlayers();
@@ -112,19 +112,17 @@ public class Main {
 	}
 
 	private static void runGame() {
-		int playerID = 0;
 		while (play) {
-			pause = true;
-			board.setCurrentPlayer(playerID);
-			if (pause) {
-				playerID = playerID++ % players.length;
-				System.out.println(playerID);
+			for (int playerID = 0; playerID < 4; playerID++) {
+				roundEnded = false;
+				board.setCurrentPlayer(playerID);
+				while (!roundEnded);
 			}
 		}
 	}
 
-	public static void unPause() {
-		pause = false;
+	public static void endRound() {
+		roundEnded = true;
 	}
 
 	public static void endGame() {
