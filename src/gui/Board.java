@@ -47,7 +47,7 @@ public class Board extends JFrame implements ActionListener {
 		add(three);
 		three.setBounds(575, 660, 50, 40);
 		
-		round.setBounds(720, 0, 300, 200);
+		round.setBounds(720, 0, 500, 200);
 		add(round);
 		
 		JButton debug = new JButton("Debug Window");
