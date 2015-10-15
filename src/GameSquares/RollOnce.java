@@ -1,27 +1,33 @@
 package GameSquares;
 
+import javax.swing.JFrame;
+
 import Main.Dice;
 import Main.Player;
 
 public class RollOnce extends GameSquare {
-
+	boolean rolledSame;
+	int     winningPrize = 100;
+	
 	public RollOnce(int id) {
 		super(id);
 	}
 
 	@Override
 	public void onArrive(Player pl) {
-		Dice dice = new Dice();
-
-		System.out.println("Please roll a die and get a roll once card. If the numbers match, you will get $100.");
-
-		int roll = dice.roll();
-		System.out.println("You rolled: " + roll); // GUI rolling die
-		int card = dice.roll();
-		System.out.println("Card shows: " + card); // GUI showing card
-		if (roll == card) {
-			pl.addMoney(100);
-		}
+		
+		gui.RollOnce r = new gui.RollOnce();
+		r.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		r.setSize(350,200);
+		r.setVisible(true);
+		
+		rolledSame = r.isRolledSame();
+		
+		if(rolledSame){
+			pl.addMoney(winningPrize);
+		} 
+		
+		
 	}
 
 	@Override
