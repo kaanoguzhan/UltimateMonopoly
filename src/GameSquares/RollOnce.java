@@ -32,7 +32,7 @@ public class RollOnce extends GameSquare {
 		if (rolled == randomRoll) {
 			rolledSame = true;
 			pl.addMoney(winningPrize);
-		} 
+		} else rolledSame = false;
 		
 	}
 	
