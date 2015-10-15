@@ -2,7 +2,11 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.StringTokenizer;
+
 import javax.swing.*;
+
+import Main.Admin;
 import Main.Main;
 import Main.Player;
 
@@ -43,7 +47,7 @@ public class Debug extends JFrame implements ActionListener {
 		c.gridwidth = 3;
 		add(moneyField1, c);
 		
-		locationField1 = new JTextField("0", 10);
+		locationField1 = new JTextField(Integer.toString(players[0].getLocation()), 10);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
 		c.gridy = 2;
@@ -62,19 +66,19 @@ public class Debug extends JFrame implements ActionListener {
 		c.gridy = 0;
 		add(identifier, c);
 		
-		moneyLabel = new JLabel("money: ");
+		moneyLabel = new JLabel("Money: ");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 1;
 		add(moneyLabel, c);
 		
-		locationLabel = new JLabel("location: ");
+		locationLabel = new JLabel("Location: ");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 2;
 		add(locationLabel, c);
 		
-		cardLabel = new JLabel("cards: ");
+		cardLabel = new JLabel("Give Ownership: ");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 3;
@@ -101,7 +105,7 @@ public class Debug extends JFrame implements ActionListener {
 		c.gridwidth = 3;
 		add(moneyField2, c);
 		
-		locationField2 = new JTextField("0", 10);
+		locationField2 = new JTextField(Integer.toString(players[1].getLocation()), 10);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
 		c.gridy = 6;
@@ -120,19 +124,19 @@ public class Debug extends JFrame implements ActionListener {
 		c.gridy = 4;
 		add(identifier2, c);
 		
-		moneyLabel2 = new JLabel("money: ");
+		moneyLabel2 = new JLabel("Money: ");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 5;
 		add(moneyLabel2, c);
 		
-		locationLabel2 = new JLabel("location: ");
+		locationLabel2 = new JLabel("Location: ");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 6;
 		add(locationLabel2, c);
 		
-		cardLabel2 = new JLabel("cards: ");
+		cardLabel2 = new JLabel("Give Ownership: ");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 7;
@@ -159,7 +163,7 @@ public class Debug extends JFrame implements ActionListener {
 		c.gridwidth = 3;
 		add(moneyField3, c);
 		
-		locationField3 = new JTextField("0", 10);
+		locationField3 = new JTextField(Integer.toString(players[2].getLocation()), 10);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
 		c.gridy = 10;
@@ -178,19 +182,19 @@ public class Debug extends JFrame implements ActionListener {
 		c.gridy = 8;
 		add(identifier3, c);
 		
-		moneyLabel3 = new JLabel("money: ");
+		moneyLabel3 = new JLabel("Money: ");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 9;
 		add(moneyLabel3, c);
 		
-		locationLabel3 = new JLabel("location: ");
+		locationLabel3 = new JLabel("Location: ");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 10;
 		add(locationLabel3, c);
 		
-		cardLabel3 = new JLabel("cards: ");
+		cardLabel3 = new JLabel("Give Ownership: ");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 11;
@@ -217,7 +221,7 @@ public class Debug extends JFrame implements ActionListener {
 		c.gridwidth = 3;
 		add(moneyField4, c);
 		
-		locationField4 = new JTextField("0", 10);
+		locationField4 = new JTextField(Integer.toString(players[3].getLocation()), 10);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
 		c.gridy = 14;
@@ -236,19 +240,19 @@ public class Debug extends JFrame implements ActionListener {
 		c.gridy = 12;
 		add(identifier4, c);
 		
-		moneyLabel4 = new JLabel("money: ");
+		moneyLabel4 = new JLabel("Money: ");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 13;
 		add(moneyLabel4, c);
 		
-		locationLabel4 = new JLabel("location: ");
+		locationLabel4 = new JLabel("Location: ");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 14;
 		add(locationLabel4, c);
 		
-		cardLabel4 = new JLabel("cards: ");
+		cardLabel4 = new JLabel("Give Ownership: ");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 15;
@@ -312,16 +316,61 @@ public class Debug extends JFrame implements ActionListener {
 		}
 	}
 	
-	private void setAction() {
+	private void setAction() {  ///move player tolarý deðiþtir
 		players[0].setMoney(Integer.parseInt(moneyField1.getText()));
 		players[1].setMoney(Integer.parseInt(moneyField2.getText()));
 		players[2].setMoney(Integer.parseInt(moneyField3.getText()));
 		players[3].setMoney(Integer.parseInt(moneyField4.getText()));
 		
-		players[0].setLocation(Integer.parseInt(locationField1.getText()));
-		players[1].setLocation(Integer.parseInt(locationField2.getText()));
-		players[2].setLocation(Integer.parseInt(locationField3.getText()));
-		players[3].setLocation(Integer.parseInt(locationField4.getText()));
+		int x,y,location;
+		
+		location = Integer.parseInt(locationField1.getText());
+		x = Board.squareHolder.getSquare(location).getX() - (players[0].getID() * 25);
+		y = Board.squareHolder.getSquare(location).getY();
+		Admin.movePlayerTo(players[0], location); //change me to movePlayerToforced
+		Board.zero.setBounds(x, y, 50, 40);
+		
+		location = Integer.parseInt(locationField2.getText());
+		x = Board.squareHolder.getSquare(location).getX() - (players[1].getID() * 25);
+		y = Board.squareHolder.getSquare(location).getY();
+		Admin.movePlayerTo(players[1], location); //change me to movePlayerToforced
+		Board.one.setBounds(x, y, 50, 40);
+		
+		location = Integer.parseInt(locationField3.getText());
+		x = Board.squareHolder.getSquare(location).getX() - (players[2].getID() * 25);
+		y = Board.squareHolder.getSquare(location).getY();
+		Admin.movePlayerTo(players[2], location); //change me to movePlayerToforced
+		Board.two.setBounds(x, y, 50, 40);
+		
+		location = Integer.parseInt(locationField4.getText());
+		x = Board.squareHolder.getSquare(location).getX() - (players[3].getID() * 25);
+		y = Board.squareHolder.getSquare(location).getY();
+		Admin.movePlayerTo(players[3], location); //change me to movePlayerToforced
+		Board.three.setBounds(x, y, 50, 40);
+		
+		StringTokenizer st = new StringTokenizer(cardField1.getText()," ,-");
+		while(st.hasMoreTokens()){
+			int currentLand = Integer.parseInt((String) st.nextToken());
+			Admin.giveOwnership(players[0], currentLand);
+		}
+		
+		st = new StringTokenizer(cardField2.getText()," ,-");
+		while(st.hasMoreTokens()){
+			int currentLand = Integer.parseInt((String) st.nextToken());
+			Admin.giveOwnership(players[1], currentLand);
+		}
+		
+		st = new StringTokenizer(cardField3.getText()," ,-");
+		while(st.hasMoreTokens()){
+			int currentLand = Integer.parseInt((String) st.nextToken());
+			Admin.giveOwnership(players[2], currentLand);
+		}
+		
+		st = new StringTokenizer(cardField4.getText()," ,-");
+		while(st.hasMoreTokens()){
+			int currentLand = Integer.parseInt((String) st.nextToken());
+			Admin.giveOwnership(players[3], currentLand);
+		}
 		
 		Board.p.refreshData();
 	}
