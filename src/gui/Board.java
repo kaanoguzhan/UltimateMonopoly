@@ -15,7 +15,8 @@ public class Board extends JFrame implements ActionListener {
 	Player[]					players				= null;
 	GameSquare[]				gameSquares			= null;
 	static JLabel				zero, one, two, three;
-	
+	RollingTheDice				round				= new RollingTheDice(); // simdilik zero verdim, oynayana gore degis
+																			
 	public Board(Player[] players, GameSquare[] gameSquares) {
 		
 		super("Monototype");
@@ -27,28 +28,25 @@ public class Board extends JFrame implements ActionListener {
 		ImageIcon image0 = new ImageIcon("0.gif");
 		zero = new JLabel(image0);
 		add(zero);
-		zero.setBounds(650 - 115, 663, 50, 40);
+		zero.setBounds(650, 660, 50, 40);
 		
 		ImageIcon image1 = new ImageIcon("1.gif");
 		one = new JLabel(image1);
 		add(one);
-		one.setBounds(625 - 115, 660, 50, 40);
+		one.setBounds(625, 660, 50, 40);
 		
 		ImageIcon image2 = new ImageIcon("2.gif");
 		two = new JLabel(image2);
-		two.setName("two");
 		add(two);
-		two.setBounds(606 - 115, 660, 50, 40);
+		two.setBounds(600, 660, 50, 40);
 		
 		ImageIcon image3 = new ImageIcon("3.gif");
 		three = new JLabel(image3);
 		add(three);
-		three.setBounds(50, 475, 50, 40);
+		three.setBounds(575, 660, 50, 40);
 		
-		RollingTheDice d = new RollingTheDice(); // simdilik zero verdim, oynayana gore degis
-		d.setBounds(720, 0, 200, 200);
-		add(d);
-		d.setCurrentPlayer(this.players[0]);
+		round.setBounds(720, 0, 200, 200);
+		add(round);
 		
 		JButton debug = new JButton("Debug Window");
 		debug.setBounds(950, 630, 120, 70);
@@ -77,5 +75,9 @@ public class Board extends JFrame implements ActionListener {
 		a.setSize(420, 420);
 		a.setVisible(true);
 		a.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+	}
+	
+	public void setCurrentPlayer(int id) {
+		round.setCurrentPlayer(this.players[id]);
 	}
 }

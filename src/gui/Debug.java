@@ -11,9 +11,9 @@ public class Debug extends JFrame implements ActionListener {
 	private JTextField			moneyField3, locationField3, cardField3, moneyField4, locationField4, cardField4;
 	private JButton				set, plus, minus, plus2, minus2, plus3, minus3, plus4, minus4;
 	private JLabel				identifier, moneyLabel, locationLabel, cardLabel, identifier2, moneyLabel2,
-		locationLabel2, cardLabel2;
+								locationLabel2, cardLabel2;
 	private JLabel				identifier3, moneyLabel3, locationLabel3, cardLabel3, identifier4, moneyLabel4,
-		locationLabel4, cardLabel4;
+								locationLabel4, cardLabel4;
 	
 	public Debug() {
 		setLayout(new GridBagLayout());

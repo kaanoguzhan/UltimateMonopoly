@@ -10,7 +10,7 @@ public class GetSimpleInput {
 		getAnswer = JOptionPane.showInputDialog(null, question);
 	}
 	
-	public String value() {
+	public String getValue() {
 		return getAnswer;
 	}
 }

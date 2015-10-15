@@ -58,13 +58,13 @@ public class RollingTheDice extends JPanel implements ActionListener {
 		int location = player.getLocation();
 		location = (location + amount) % 20;
 		
-		int x = squareHolder.getSquare(location).getX();
+		int x = squareHolder.getSquare(location).getX() - (player.getID() * 25);
 		int y = squareHolder.getSquare(location).getY();
 		
 		// (player.getLocation() + roll[0] + roll[1]) % 20
-		player.moveBy(amount);
 		// zero for now, later it will be player.getID (zero,one,two,three).setBounds
 		playerName.setBounds(x, y, 50, 40);
+		player.moveBy(amount);
 	}
 	public void setCurrentPlayer(Player player) {
 		this.player = player;

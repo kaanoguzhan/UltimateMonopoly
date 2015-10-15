@@ -22,6 +22,8 @@ public class Main {
 	static GameSquare[]			gameSquares		= null;
 	static Player[]				players			= null;
 	static Scanner				scanner;
+	static Board				board;
+	static Boolean				play, pause;
 	
 	public static void main(String[] args) {
 		initializePlayers();
@@ -30,6 +32,7 @@ public class Main {
 		initializePlayerNames();
 		initializeBoard();
 		
+		runGame();
 		// Test test = new Test(players);
 		// test.playForRound(0);
 		//
@@ -53,7 +56,7 @@ public class Main {
 	}
 	
 	private static void initializePlayers() {
-		int numOfPlayers = Integer.parseInt(new GetSimpleInput("How many players?").value());
+		int numOfPlayers = Integer.parseInt(new GetSimpleInput("How many players?").getValue());
 		players = new Player[numOfPlayers];
 		
 		System.out.println("Player initialization is complete...");
@@ -96,13 +99,38 @@ public class Main {
 		for (int i = 0; i < players.length; i++) {
 			String name = null;
 			while (name == null || name.length() < 1)
-				name = new GetSimpleInput("Name of player " + (i + 1) + " : ").value();
+				name = new GetSimpleInput("Name of player " + (i + 1) + " : ").getValue();
 			players[i] = new Player(i, name, gameSquares);
 		}
 		
 		System.out.println("Player Name initialization is complete...");
 	}
+	
 	private static void initializeBoard() {
-		new Board(players, gameSquares);
+		board = new Board(players, gameSquares);
+	}
+	
+	private static void runGame() {
+		int playerID = 0;
+		while (play) {
+			pause = true;
+			board.setCurrentPlayer(playerID);
+			
+			while (pause) {
+				for (int i = 0; i < 1000000; i++) {
+					
+				}
+			}
+			
+			playerID = playerID++ % players.length;
+		}
+	}
+	
+	public static void unPause() {
+		pause = false;
+	}
+	
+	public static void endGame() {
+		play = false;
 	}
 }

@@ -37,9 +37,9 @@ public class Player {
 		gameSquares[location].onArrive(this);
 	}
 	
-//	public void moveBy(int[] amounts) {
-//		moveBy(amounts[0] + amounts[1]);
-//	}
+	// public void moveBy(int[] amounts) {
+	// moveBy(amounts[0] + amounts[1]);
+	// }
 	
 	public void moveTo(int id) {
 		System.out.println(name + " is at " + gameSquares[id].toString());
