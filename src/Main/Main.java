@@ -2,7 +2,6 @@ package Main;
 
 import gui.Board;
 import gui.GetSimpleInput;
-import java.util.Scanner;
 import GameSquares.FreePark;
 import GameSquares.GameSquare;
 import GameSquares.Land;
@@ -21,7 +20,6 @@ public class Main {
 	static CommunityChestDeck	communityDeck	= null;
 	static GameSquare[]			gameSquares		= null;
 	static Player[]				players			= null;
-	static Scanner				scanner;
 	static Board				board;
 	static Boolean				play			= true;
 	static Boolean				pause			= true;
