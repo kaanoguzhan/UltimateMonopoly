@@ -62,6 +62,8 @@ public class RollingTheDice extends JPanel implements ActionListener {
 		} else if (arg0.getSource() == end) {
 			Main.Main.endRound();
 		}
+		
+		Board.p.refreshData();
 	}
 	
 	private void movePlayer(int amount) {
@@ -71,11 +73,10 @@ public class RollingTheDice extends JPanel implements ActionListener {
 		int x = squareHolder.getSquare(location).getX() - (player.getID() * 25);
 		int y = squareHolder.getSquare(location).getY();
 		
-		// (player.getLocation() + roll[0] + roll[1]) % 20
-		// zero for now, later it will be player.getID
-		// (zero,one,two,three).setBounds
 		playerName.setBounds(x, y, 50, 40);
 		player.moveBy(amount);
+		
+		Board.p.refreshData();
 	}
 	
 	public void setCurrentPlayer(Player player) {
@@ -96,6 +97,8 @@ public class RollingTheDice extends JPanel implements ActionListener {
 				this.playerName = Board.three;
 				break;
 		}
+		
+		Board.p.refreshData();
 	}
 	
 }
