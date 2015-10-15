@@ -81,15 +81,16 @@ public class RollingTheDice extends JPanel implements ActionListener {
 		switch (player.getID()) {
 		case 0:
 			this.playerName = Board.zero;
-
+			break;
 		case 1:
 			this.playerName = Board.one;
-
+			break;
 		case 2:
 			this.playerName = Board.two;
-
+			break;
 		case 3:
 			this.playerName = Board.three;
+			break;
 		}
 	}
 
