@@ -1,33 +1,42 @@
 package GameSquares;
 
+import javax.swing.JFrame;
+
 import Main.Dice;
 import Main.Player;
 
 public class SqueezePlay extends GameSquare {
 	
-	private Player[]	players	= null;
+	private static Player[]	players;
+	public static int rolled;
+	public static volatile boolean	rolledEven = false;
 	
 	public SqueezePlay(int id, Player[] players) {
 		super(id);
-		this.players = players;
+		SqueezePlay.players = players;
 	}
 	
 	@Override
 	public void onArrive(Player pl) {
-		Dice dice = new Dice();
 		
-		System.out.println("Please roll a die and get $200 from everyone if the number is even.");
+		gui.SqueezePlay r = new gui.SqueezePlay(pl);
+		r.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		r.setSize(350, 200);
+		r.setVisible(true);		
 		
-		int roll = dice.roll();
-		System.out.println("You rolled: " + roll); // GUI rolling die
-		if ((roll % 2) == 0) {
-			System.out.println(pl.getName() + " rolled even number, now " +
-				pl.getName() + " will get money from everyone");
-			for (int i = 0; i < players.length; i++) {
-				if (pl != players[i])
-					players[i].pay(pl, 200);
 			}
+	
+	public static void isRolledEven(Player pl){
+	rolled = new Dice().roll();
+	
+	if ((rolled % 2) == 0) {
+		rolledEven = true;
+		for (int i = 0; i < players.length; i++) {
+			if (pl != players[i])
+				players[i].pay(pl, 200);
+	
 		}
+	} else rolledEven = false;
 	}
 	
 	@Override
