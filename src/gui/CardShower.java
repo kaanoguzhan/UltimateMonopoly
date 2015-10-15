@@ -1,17 +1,16 @@
 package gui;
 
-import javax.swing.JOptionPane;
-
+import gui.AdditionalWindows.MessageDisplayer;
 import GameSquares.Chance.ChanceCard;
 import GameSquares.CommunityChest.CommunityChestCard;
 
 public class CardShower {
-
+	
 	public CardShower(ChanceCard Card) {
-		JOptionPane.showMessageDialog(null, Card.toString());
+		new MessageDisplayer(Card.toString());
 	}
-
+	
 	public CardShower(CommunityChestCard Card) {
-		JOptionPane.showMessageDialog(null, Card.toString());
+		new MessageDisplayer(Card.toString());
 	}
 }

@@ -1,11 +1,11 @@
-package gui;
+package gui.AdditionalWindows;
 
 import javax.swing.JOptionPane;
 
-public class BuyLocation {
+public class GetYesNoInput {
 	Boolean	getAnswer;
 	
-	public BuyLocation(String LandName, int LandCost) {
+	public GetYesNoInput(String LandName, int LandCost) {
 		int reply = JOptionPane.showConfirmDialog(null, "For " + LandCost + " dollars",
 			("Would you like to buy " + LandName + " ?"),
 			JOptionPane.YES_NO_OPTION);

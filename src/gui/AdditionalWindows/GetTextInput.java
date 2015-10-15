@@ -1,12 +1,12 @@
-package gui;
+package gui.AdditionalWindows;
 
 import javax.swing.JOptionPane;
 
-public class GetSimpleInput {
+public class GetTextInput {
 	JOptionPane	pane;
 	String		getAnswer;
 	
-	public GetSimpleInput(String question) {
+	public GetTextInput(String question) {
 		getAnswer = JOptionPane.showInputDialog(null, question);
 	}
 	

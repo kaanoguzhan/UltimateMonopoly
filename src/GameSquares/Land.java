@@ -1,6 +1,6 @@
 package GameSquares;
 
-import gui.BuyLocation;
+import gui.AdditionalWindows.GetYesNoInput;
 import Main.Player;
 
 public class Land extends GameSquare {
@@ -31,7 +31,7 @@ public class Land extends GameSquare {
 			// Scanner scan = new Scanner(System.in);
 			// buy = scan.nextBoolean();
 			//
-			boolean buy = new BuyLocation(name, price).getValue();
+			boolean buy = new GetYesNoInput(name, price).getValue();
 			
 			if (buy) { // (GUI) If player want to play ==> buy = true
 				if (pl.getMoney() >= price) {

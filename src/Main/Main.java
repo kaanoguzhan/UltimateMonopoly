@@ -1,7 +1,7 @@
 package Main;
 
 import gui.Board;
-import gui.GetSimpleInput;
+import gui.AdditionalWindows.GetTextInput;
 import GameSquares.FreePark;
 import GameSquares.GameSquare;
 import GameSquares.Land;
@@ -55,7 +55,7 @@ public class Main {
 	}
 	
 	private static void initializePlayers() {
-		int numOfPlayers = Integer.parseInt(new GetSimpleInput("How many players?").getValue());
+		int numOfPlayers = Integer.parseInt(new GetTextInput("How many players?").getValue());
 		players = new Player[numOfPlayers];
 		
 		System.out.println("Player initialization is complete...");
@@ -99,7 +99,7 @@ public class Main {
 		for (int i = 0; i < players.length; i++) {
 			String name = null;
 			while (name == null || name.length() < 1)
-				name = new GetSimpleInput("Name of player " + (i + 1) + " : ").getValue();
+				name = new GetTextInput("Name of player " + (i + 1) + " : ").getValue();
 			players[i] = new Player(i, name, gameSquares);
 		}
 		
