@@ -7,6 +7,7 @@ import javax.swing.table.TableColumnModel;
 
 public class PlayerInfo extends JPanel{
 
+	private static final long serialVersionUID = 1L; 
 	JTable table;
 	JScrollPane pane;
 	String a = "yoyo";

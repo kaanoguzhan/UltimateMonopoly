@@ -1,6 +1,5 @@
 package GameSquares;
 
-import java.util.Scanner;
 import Main.Player;
 
 public class Land extends GameSquare {

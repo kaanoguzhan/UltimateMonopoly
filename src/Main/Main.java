@@ -1,5 +1,6 @@
 package Main;
 
+import gui.Board;
 import java.util.Scanner;
 import GameSquares.FreePark;
 import GameSquares.GameSquare;
@@ -22,31 +23,32 @@ public class Main {
 	static Scanner				scanner;
 	
 	public static void main(String[] args) {
+		initializeBoard();
 		initializePlayers();
 		initializeDecks();
 		initializeGameSquares();
 		initializePlayerNames();
 		
-		Test test = new Test(players);
-		test.playForRound(0);
-		
-		Admin admin = new Admin();
-		admin.movePlayerTo(players[0], 0);
-		admin.movePlayerToForced(players[0], 0);
-		admin.setMoney(players[0], 5000);
-		admin.increaseMoneyBy(players[0], 2000);
-		admin.decreaseMoneyBy(players[0], 1000);
-		admin.giveOwnership(players[0], gameSquares[1], gameSquares[3], gameSquares[4]);
-		
-		admin.movePlayerTo(players[1], 3);
-
-		System.out.println(gameSquares[1]);
-		admin.setName(gameSquares[1], "DNEME");
-		System.out.println(gameSquares[1]);
-		admin.setColor(gameSquares[1], color.pink);
-		System.out.println(gameSquares[1]);
-		admin.setPrice(gameSquares[1], 5000);
-		System.out.println(gameSquares[1]);
+		// Test test = new Test(players);
+		// test.playForRound(0);
+		//
+		// Admin admin = new Admin();
+		// admin.movePlayerTo(players[0], 0);
+		// admin.movePlayerToForced(players[0], 0);
+		// admin.setMoney(players[0], 5000);
+		// admin.increaseMoneyBy(players[0], 2000);
+		// admin.decreaseMoneyBy(players[0], 1000);
+		// admin.giveOwnership(players[0], gameSquares[1], gameSquares[3], gameSquares[4]);
+		//
+		// admin.movePlayerTo(players[1], 3);
+		//
+		// System.out.println(gameSquares[1]);
+		// admin.setName(gameSquares[1], "DNEME");
+		// System.out.println(gameSquares[1]);
+		// admin.setColor(gameSquares[1], color.pink);
+		// System.out.println(gameSquares[1]);
+		// admin.setPrice(gameSquares[1], 5000);
+		// System.out.println(gameSquares[1]);
 	}
 	
 	private static void initializePlayers() {
@@ -100,5 +102,9 @@ public class Main {
 		}
 		
 		System.out.println("Player Name initialization is complete...");
+	}
+	
+	private static void initializeBoard() {
+		new Board(players,gameSquares);
 	}
 }
