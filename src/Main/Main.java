@@ -23,7 +23,8 @@ public class Main {
 	static Player[]				players			= null;
 	static Scanner				scanner;
 	static Board				board;
-	static Boolean				play, pause;
+	static Boolean				play			= true;
+	static Boolean				pause			= true;
 	
 	public static void main(String[] args) {
 		initializePlayers();
