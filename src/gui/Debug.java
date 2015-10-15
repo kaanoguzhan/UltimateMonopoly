@@ -46,7 +46,7 @@ public class Debug extends JFrame implements ActionListener {
 		c.gridwidth = 3;
 		add(moneyField1, c);
 		
-		locationField1 = new JTextField("0", 10);
+		locationField1 = new JTextField(Integer.toString(players[0].getLocation()), 10);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
 		c.gridy = 2;
@@ -104,7 +104,7 @@ public class Debug extends JFrame implements ActionListener {
 		c.gridwidth = 3;
 		add(moneyField2, c);
 		
-		locationField2 = new JTextField("0", 10);
+		locationField2 = new JTextField(Integer.toString(players[1].getLocation()), 10);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
 		c.gridy = 6;
@@ -162,7 +162,7 @@ public class Debug extends JFrame implements ActionListener {
 		c.gridwidth = 3;
 		add(moneyField3, c);
 		
-		locationField3 = new JTextField("0", 10);
+		locationField3 = new JTextField(Integer.toString(players[2].getLocation()), 10);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
 		c.gridy = 10;
@@ -213,7 +213,7 @@ public class Debug extends JFrame implements ActionListener {
 		c.gridy = 13;
 		add(minus4, c);
 		
-		moneyField4 = new JTextField(Integer.toString(players[3].getMoney()), 10); // instead of 123- player.getMoney();
+		moneyField4 = new JTextField(Integer.toString(players[3].getLocation()), 10); // instead of 123- player.getMoney();
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
 		c.gridy = 13;
