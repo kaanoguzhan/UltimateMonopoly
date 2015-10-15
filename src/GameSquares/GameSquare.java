@@ -26,4 +26,8 @@ public abstract class GameSquare {
 	public void setOwner(Player pl) {
 		owner = pl;
 	}
+	
+	public int getID(){
+		return id;
+	}
 }

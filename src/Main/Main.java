@@ -20,7 +20,7 @@ public class Main {
 	static ChanceDeck			chanceDeck		= null;
 	static CommunityChestDeck	communityDeck	= null;
 	static GameSquare[]			gameSquares		= null;
-	static Player[]				players			= null;
+	public static Player[]		players			= null;
 	static Scanner				scanner;
 	static Board				board;
 	static Boolean				play, pause;
@@ -112,6 +112,7 @@ public class Main {
 	
 	private static void runGame() {
 		int playerID = 0;
+		play = true;
 		while (play) {
 			pause = true;
 			board.setCurrentPlayer(playerID);
