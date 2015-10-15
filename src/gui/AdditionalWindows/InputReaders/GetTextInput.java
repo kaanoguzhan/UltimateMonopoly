@@ -4,13 +4,17 @@ import javax.swing.JOptionPane;
 
 public class GetTextInput {
 	JOptionPane	pane;
-	String		getAnswer;
+	String		Answer;
 	
 	public GetTextInput(String question) {
-		getAnswer = JOptionPane.showInputDialog(null, question);
+		Answer = JOptionPane.showInputDialog(null, question);
 	}
 	
-	public String getValue() {
-		return getAnswer;
+	public String getString() {
+		return Answer;
+	}
+	
+	public int getInt() {
+		return Integer.parseInt(Answer);
 	}
 }

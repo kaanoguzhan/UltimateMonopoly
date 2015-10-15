@@ -55,7 +55,7 @@ public class Main {
 	}
 	
 	private static void initializePlayers() {
-		int numOfPlayers = Integer.parseInt(new GetTextInput("How many players?").getValue());
+		int numOfPlayers = new GetTextInput("How many players?").getInt();
 		players = new Player[numOfPlayers];
 		
 		System.out.println("Player initialization is complete...");
@@ -99,7 +99,7 @@ public class Main {
 		for (int i = 0; i < players.length; i++) {
 			String name = null;
 			while (name == null || name.length() < 1)
-				name = new GetTextInput("Name of player " + (i + 1) + " : ").getValue();
+				name = new GetTextInput("Name of player " + (i + 1) + " : ").getString();
 			players[i] = new Player(i, name, gameSquares);
 		}
 		
