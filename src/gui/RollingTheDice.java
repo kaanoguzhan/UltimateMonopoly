@@ -14,9 +14,10 @@ public class RollingTheDice extends JPanel implements ActionListener {
 	
 	private static final long	serialVersionUID	= 1L;
 	private Player				player;
+	
 	private SquareHolder		squareHolder		= new SquareHolder();
 	private JLabel				playerName, result, dice;
-	private JButton				button;
+	private JButton				button,end;
 	
 	public RollingTheDice() {
 		setLayout(null);
@@ -34,6 +35,11 @@ public class RollingTheDice extends JPanel implements ActionListener {
 			.getHeight()));
 		add(result);
 		
+		end = new JButton("End Round");
+		end.setBounds(70, 75, ((int)end.getPreferredSize().getWidth()), ((int)end.getPreferredSize().getHeight()));
+		add(end);
+		end.addActionListener(this);
+		
 		button.addActionListener(this);
 		button.setText("Roll");
 		button.setBounds(7, 75, ((int) button.getPreferredSize().getWidth()), ((int) button.getPreferredSize()
@@ -45,6 +51,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 	
 	public void actionPerformed(ActionEvent arg0) {
 		// Create the Dice and roll
+		if(arg0.getSource() == button){
 		int[] roll = new Dice().roll2();
 		
 		result.setText("dice rolled : " + roll[0] + "," + roll[1]);
@@ -52,6 +59,9 @@ public class RollingTheDice extends JPanel implements ActionListener {
 			.getHeight()));
 		
 		movePlayer(roll[0] + roll[1]);
+		} else if (arg0.getSource() == end){
+			Main.Main.unPause();
+		}
 	}
 	
 	private void movePlayer(int amount) {
@@ -81,12 +91,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
 			case 3:
 				this.playerName = Board.three;
 		}
-	}
-	
-	public void remove() {
-		remove(dice);
-		remove(button);
-		remove(result);
 	}
 	
 }
