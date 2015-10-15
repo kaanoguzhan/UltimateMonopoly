@@ -31,7 +31,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 		add(dice);
 		
 		whichPlayer = new JLabel();		
-		whichPlayer.setBounds(150, 0, 100, 100);
+		whichPlayer.setBounds(140, 35, ((int)whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer.getPreferredSize().getHeight()));
 		add(whichPlayer);
 		
 		result.setText("result is: ");
@@ -58,7 +58,8 @@ public class RollingTheDice extends JPanel implements ActionListener {
 		} else playerNAME = "..";
 		
 		whichPlayer.setText((playerNAME + " is playing"));
-			
+		whichPlayer.setBounds(140, 35, ((int)whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer.getPreferredSize().getHeight()));
+		
 		button.setEnabled(false);
 		if (arg0.getSource() == button) {
 			int[] roll = new Dice().roll2();
