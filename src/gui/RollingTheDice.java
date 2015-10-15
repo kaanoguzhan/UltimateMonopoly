@@ -7,22 +7,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import Main.Dice;
+import Main.Player;
 
 public class RollingTheDice extends JPanel implements ActionListener {
 	
 	private static final long	serialVersionUID	= 1L;
+	private Player				player;
 	private SquareHolder		squareHolder		= new SquareHolder();
-	private JLabel				player;
-	private JLabel				dice;
+	private JLabel				playerName, result, dice;
 	private JButton				button;
-	private JLabel				result;
 	
-	int							i					= 0;
-	
-	
-	public RollingTheDice(JLabel player) {
+	public RollingTheDice() {
 		setLayout(null);
-		this.player = player;
 		button = new JButton();
 		dice = new JLabel();
 		result = new JLabel();
@@ -47,20 +44,43 @@ public class RollingTheDice extends JPanel implements ActionListener {
 	
 	
 	public void actionPerformed(ActionEvent arg0) {
-		// DICE AT BURDA ABIZI, dice attiktan sonra ne yapicalsa asagi
-		result.setText("dice rolled :");
+		// Create the Dice and roll
+		int[] roll = new Dice().roll2();
+		
+		result.setText("dice rolled : " + roll[0] + "," + roll[1]);
 		result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result.getPreferredSize()
 			.getHeight()));
 		
-		movePlayer(i++%20);
+		movePlayer(roll[0] + roll[1]);
 	}
 	
-	private void movePlayer(int location) { // player parametresi de alincak
+	private void movePlayer(int amount) {
+		int location = player.getLocation();
+		location = (location + amount) % 20;
+		
 		int x = squareHolder.getSquare(location).getX();
 		int y = squareHolder.getSquare(location).getY();
 		
+		// (player.getLocation() + roll[0] + roll[1]) % 20
+		player.moveBy(amount);
 		// zero for now, later it will be player.getID (zero,one,two,three).setBounds
-		player.setBounds(x, y, 50, 40);
+		playerName.setBounds(x, y, 50, 40);
+	}
+	public void setCurrentPlayer(Player player) {
+		this.player = player;
+		switch (player.getID()) {
+			case 0:
+				this.playerName = Board.zero;
+				
+			case 1:
+				this.playerName = Board.one;
+				
+			case 2:
+				this.playerName = Board.two;
+				
+			case 3:
+				this.playerName = Board.three;
+		}
 	}
 	
 	public void remove() {

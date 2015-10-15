@@ -14,8 +14,7 @@ public class Board extends JFrame implements ActionListener {
 	private static final long	serialVersionUID	= 1L;
 	Player[]					players				= null;
 	GameSquare[]				gameSquares			= null;
-	// SquareHolder squares = new SquareHolder();
-	JLabel						zero, one, two, three;
+	static JLabel				zero, one, two, three;
 	
 	public Board(Player[] players, GameSquare[] gameSquares) {
 		
@@ -37,6 +36,7 @@ public class Board extends JFrame implements ActionListener {
 		
 		ImageIcon image2 = new ImageIcon("2.gif");
 		two = new JLabel(image2);
+		two.setName("two");
 		add(two);
 		two.setBounds(606 - 115, 660, 50, 40);
 		
@@ -45,13 +45,10 @@ public class Board extends JFrame implements ActionListener {
 		add(three);
 		three.setBounds(50, 475, 50, 40);
 		
-		RollingTheDice d = new RollingTheDice(zero); // simdilik zero verdim, oynayana gore degis
+		RollingTheDice d = new RollingTheDice(); // simdilik zero verdim, oynayana gore degis
 		d.setBounds(720, 0, 200, 200);
 		add(d);
-		
-		// RollingTheDice d1 = new RollingTheDice(one);
-		// d1.setBounds(750, 0, 200, 200);
-		// add(d1);
+		d.setCurrentPlayer(this.players[0]);
 		
 		JButton debug = new JButton("Debug Window");
 		debug.setBounds(950, 630, 120, 70);
@@ -74,7 +71,6 @@ public class Board extends JFrame implements ActionListener {
 		
 		setVisible(true);
 	}
-	
 	public void actionPerformed(ActionEvent e) {
 		Debug a = new Debug();
 		

@@ -1,6 +1,7 @@
 package Main;
 
 import gui.Board;
+import gui.GetSimpleInput;
 import java.util.Scanner;
 import GameSquares.FreePark;
 import GameSquares.GameSquare;
@@ -23,11 +24,11 @@ public class Main {
 	static Scanner				scanner;
 	
 	public static void main(String[] args) {
-		initializeBoard();
 		initializePlayers();
 		initializeDecks();
 		initializeGameSquares();
 		initializePlayerNames();
+		initializeBoard();
 		
 		// Test test = new Test(players);
 		// test.playForRound(0);
@@ -52,14 +53,11 @@ public class Main {
 	}
 	
 	private static void initializePlayers() {
-		System.out.println("How many players?");
-		scanner = new Scanner(System.in);
-		int numOfPlayers = Integer.parseInt(scanner.next());
+		int numOfPlayers = Integer.parseInt(new GetSimpleInput("How many players?").value());
 		players = new Player[numOfPlayers];
 		
 		System.out.println("Player initialization is complete...");
 	}
-	
 	private static void initializeDecks() {
 		chanceDeck = new ChanceDeck(players);
 		communityDeck = new CommunityChestDeck();
@@ -95,16 +93,16 @@ public class Main {
 	
 	private static void initializePlayerNames() {
 		System.out.println("Write names seperated with spaces.");
-		scanner = new Scanner(System.in);
 		for (int i = 0; i < players.length; i++) {
-			String name = scanner.next();
-			players[i] = new Player(name, gameSquares);
+			String name = null;
+			while (name == null || name.length() < 1)
+				name = new GetSimpleInput("Name of player " + (i + 1) + " : ").value();
+			players[i] = new Player(i, name, gameSquares);
 		}
 		
 		System.out.println("Player Name initialization is complete...");
 	}
-	
 	private static void initializeBoard() {
-		new Board(players,gameSquares);
+		new Board(players, gameSquares);
 	}
 }

@@ -8,10 +8,9 @@ public class GetSimpleInput {
 	
 	public GetSimpleInput(String question) {
 		getAnswer = JOptionPane.showInputDialog(null, question);
-		JOptionPane.showMessageDialog(null, ("bla bla " + getAnswer));
 	}
 	
-	public static void main(String args[]) {
-		new GetSimpleInput("what upp");
+	public String value() {
+		return getAnswer;
 	}
 }

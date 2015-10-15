@@ -9,13 +9,14 @@ import GameSquares.Land.color;
 public class Player {
 	
 	private String								name;
-	private int									money, location;
+	private int									id, money, location;
 	private GameSquare[]						gameSquares;
 	private ArrayList<CommunityChestCardType>	Inventory	= new ArrayList<CommunityChestCardType>();
 	private ArrayList<Land>						ownedLands	= new ArrayList<Land>();
 	
 	
-	public Player(String name, GameSquare[] gameSquares) {
+	public Player(int id, String name, GameSquare[] gameSquares) {
+		this.id = id;
 		this.location = 0;
 		this.money = Properties.StartGold;
 		this.name = name;
@@ -23,18 +24,22 @@ public class Player {
 		System.out.println("Player " + name + " with " + money + " added.");
 	}
 	
-	public void moveBy(int roll) {
-		location += roll;
+	public void moveBy(int amount) {
+		location += amount;
 		if (location >= Properties.TotalSquares) {
 			System.out.println(name + " passed Start Square.");
 			addMoney(Properties.PASSING_MONEY);
 			location = location % Properties.TotalSquares;
 		}
-		System.out.println(name + " moved " + roll + " squares and now is at " + gameSquares[location].toString()
+		System.out.println(name + " moved " + amount + " squares and now is at " + gameSquares[location].toString()
 			+ "\n You have: " + money);
 		
 		gameSquares[location].onArrive(this);
 	}
+	
+//	public void moveBy(int[] amounts) {
+//		moveBy(amounts[0] + amounts[1]);
+//	}
 	
 	public void moveTo(int id) {
 		System.out.println(name + " is at " + gameSquares[id].toString());
@@ -94,6 +99,10 @@ public class Player {
 	public void getOwnership(Land land) {
 		ownedLands.add(land);
 		land.setOwner(this);
+	}
+	
+	public int getID() {
+		return id;
 	}
 	
 	public int getNumberOfOwnedByColor(color color) {
