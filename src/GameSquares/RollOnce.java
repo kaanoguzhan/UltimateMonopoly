@@ -1,7 +1,5 @@
 package GameSquares;
 
-import java.util.Random;
-
 import javax.swing.JFrame;
 
 import Main.Dice;

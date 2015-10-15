@@ -14,7 +14,6 @@ package gui;
 		private static final long	serialVersionUID	= 1L;
 		private JLabel				picked, result, dice;
 		private JButton				button;
-		private int					rolled;
 		private Player player;
 		public SqueezePlay(Player pl) {
 			super("SqueezePlay");

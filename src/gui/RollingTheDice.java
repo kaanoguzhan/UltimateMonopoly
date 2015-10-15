@@ -14,8 +14,9 @@ public class RollingTheDice extends JPanel implements ActionListener {
 	
 	private static final long	serialVersionUID	= 1L;
 	private Player				player;
+	private String				playerNAME;
 	
-	private JLabel				playerName, result, dice;
+	private JLabel				playerName, result, dice,whichPlayer;
 	private JButton				button, end;
 	
 	public RollingTheDice() {
@@ -28,6 +29,10 @@ public class RollingTheDice extends JPanel implements ActionListener {
 		dice = new JLabel(new ImageIcon(boardImage));
 		dice.setBounds(7, 10, ((int) dice.getPreferredSize().getWidth()), ((int) dice.getPreferredSize().getHeight()));
 		add(dice);
+		
+		whichPlayer = new JLabel();		
+		whichPlayer.setBounds(150, 0, 100, 100);
+		add(whichPlayer);
 		
 		result.setText("result is: ");
 		result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result.getPreferredSize()
@@ -48,6 +53,12 @@ public class RollingTheDice extends JPanel implements ActionListener {
 	
 	public void actionPerformed(ActionEvent arg0) {
 		// Create the Dice and roll
+		if (player != null) {
+			playerNAME = player.getName();
+		} else playerNAME = "..";
+		
+		whichPlayer.setText((playerNAME + " is playing"));
+			
 		button.setEnabled(false);
 		if (arg0.getSource() == button) {
 			int[] roll = new Dice().roll2();

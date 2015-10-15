@@ -1,8 +1,6 @@
 package GameSquares.Chance.ChanceCards;
 
-import gui.Board;
 import gui.CardShower;
-import gui.RollingTheDice;
 import GameSquares.Chance.ChanceCard;
 import Main.Player;
 
