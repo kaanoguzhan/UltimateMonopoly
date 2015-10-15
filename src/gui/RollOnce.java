@@ -20,9 +20,10 @@ public class RollOnce extends JFrame implements ActionListener {
 	private JLabel				picked, picked2, result, dice;
 	private JButton				button;
 	private int					rolled;
-	
-	public RollOnce() {
+	private Player player;
+	public RollOnce(Player pl) {
 		setLayout(null);
+		this.player = pl;
 		
 		rolled = new Random().nextInt(6) + 1;
 		
@@ -60,16 +61,17 @@ public class RollOnce extends JFrame implements ActionListener {
 	
 	public void actionPerformed(ActionEvent arg0) {
 		// Create the Dice and roll
-		button.setEnabled(false);
-		int roll = new Dice().roll();
-		if (rolled == roll) {
-			rolledSame = true;
-			result.setText("dice rolled : " + roll + "   YOU WIN !!!");
+        GameSquares.RollOnce.isRolledSame(player);
+		boolean a = GameSquares.RollOnce.rolledSame;
+		int b = GameSquares.RollOnce.rolled;
+          
+		if (a == true) {		
+			result.setText("dice rolled : " + b + "   YOU WIN !!!");
 			result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result.getPreferredSize()
 				.getHeight()));
 		} else {
-			rolledSame = false;
-			result.setText("dice rolled : " + roll + "   Better luck next time");
+			
+			result.setText("dice rolled : " + b + "   Better luck next time");
 			result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result.getPreferredSize()
 				.getHeight()));
 		}
