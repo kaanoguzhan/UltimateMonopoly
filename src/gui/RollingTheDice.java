@@ -78,6 +78,33 @@ public class RollingTheDice extends JPanel implements ActionListener {
 		Board.p.refreshData();
 	}
 	
+//	public static void moveTo(Player pl, int id) {
+//		int x = Board.squareHolder.getSquare(id).getX() - (pl.getID() * 25);
+//		int y = Board.squareHolder.getSquare(id).getY();
+//		
+//		
+//		
+//		switch (pl.getID()) {
+//			case 0:
+//				this.playerName = Board.zero;
+//				break;
+//			case 1:
+//				this.playerName = Board.one;
+//				break;
+//			case 2:
+//				this.playerName = Board.two;
+//				break;
+//			case 3:
+//				this.playerName = Board.three;
+//				break;
+//		}
+//		
+//		playerName.setBounds(x, y, 50, 40);
+//		pl.moveBy(amount);
+//		
+//		Board.p.refreshData();
+//	}
+	
 	public void setCurrentPlayer(Player player) {
 		this.player = player;
 		button.setEnabled(true);

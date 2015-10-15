@@ -2,12 +2,10 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
 import GameSquares.GameSquare;
 import Main.Player;
 
@@ -15,11 +13,11 @@ public class Board extends JFrame implements ActionListener {
 	
 	private static final long	serialVersionUID	= 1L;
 	Player[]					players				= null;
-	static GameSquare[]				gameSquares			= null;
+	GameSquare[]				gameSquares			= null;
 	static JLabel				zero, one, two, three;
-	RollingTheDice				round				= new RollingTheDice(); // simdilik zero verdim, oynayana gore degis
-	static PlayerInfo p = new PlayerInfo();
-	static SquareHolder		squareHolder		= new SquareHolder();
+	RollingTheDice				round				= new RollingTheDice();
+	static SquareHolder			squareHolder		= new SquareHolder();
+	static PlayerInfo			p					= new PlayerInfo();
 	
 	public Board(Player[] players, GameSquare[] gameSquares) {
 		

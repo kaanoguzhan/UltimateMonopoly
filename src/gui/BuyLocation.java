@@ -22,9 +22,4 @@ public class BuyLocation {
 	public boolean getValue() {
 		return getAnswer;
 	}
-	
-	public static void main(String args[]) {
-		new BuyLocation("asd", 2333);
-		
-	}
 }
