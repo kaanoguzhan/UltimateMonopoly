@@ -111,12 +111,11 @@ public class Main {
 	}
 	
 	private static void runGame() {
-		play = true;
 		while (play) {
 			for (int playerID = 0; playerID < 4; playerID++) {
-				roundEnded = false;
 				board.setCurrentPlayer(playerID);
 				while (!roundEnded);
+				roundEnded = false;
 			}
 		}
 	}
