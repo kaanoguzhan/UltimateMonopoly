@@ -16,7 +16,8 @@ public class Board extends JFrame implements ActionListener {
 	GameSquare[]				gameSquares			= null;
 	static JLabel				zero, one, two, three;
 	RollingTheDice				round				= new RollingTheDice(); // simdilik zero verdim, oynayana gore degis
-																			
+	static PlayerInfo p = new PlayerInfo();
+	
 	public Board(Player[] players, GameSquare[] gameSquares) {
 		
 		super("Monototype");
@@ -56,7 +57,6 @@ public class Board extends JFrame implements ActionListener {
 		ImageIcon image = new ImageIcon("board.jpg");
 		JLabel labelForimage = new JLabel(image);
 		
-		PlayerInfo p = new PlayerInfo();
 		p.setBounds(720, 200, 550, 350);
 		add(p);
 		

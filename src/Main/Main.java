@@ -15,22 +15,21 @@ import GameSquares.CommunityChest.CommunityChest;
 import GameSquares.CommunityChest.CommunityChestDeck;
 
 public class Main {
-
-	static ChanceDeck chanceDeck = null;
-	static CommunityChestDeck communityDeck = null;
-	static GameSquare[] gameSquares = null;
-	static Player[] players = null;
-	static Board board;
-	static Boolean play = true;
-	volatile static Boolean roundEnded = false;
-
+	static ChanceDeck			chanceDeck		= null;
+	static CommunityChestDeck	communityDeck	= null;
+	static GameSquare[]			gameSquares		= null;
+	public static Player[]		players			= null;
+	static Board				board;
+	static Boolean				play			= true;
+	volatile static Boolean		roundEnded		= false;
+	
 	public static void main(String[] args) {
 		initializePlayers();
 		initializeDecks();
 		initializeGameSquares();
 		initializePlayerNames();
 		initializeBoard();
-
+		
 		runGame();
 		// Test test = new Test(players);
 		// test.playForRound(0);
@@ -54,23 +53,23 @@ public class Main {
 		// admin.setPrice(gameSquares[1], 5000);
 		// System.out.println(gameSquares[1]);
 	}
-
+	
 	private static void initializePlayers() {
 		int numOfPlayers = Integer.parseInt(new GetSimpleInput("How many players?").getValue());
 		players = new Player[numOfPlayers];
-
+		
 		System.out.println("Player initialization is complete...");
 	}
-
+	
 	private static void initializeDecks() {
 		chanceDeck = new ChanceDeck(players);
 		communityDeck = new CommunityChestDeck();
 		System.out.println("Deck initialization is complete...");
 	}
-
+	
 	private static void initializeGameSquares() {
 		gameSquares = new GameSquare[Properties.TotalSquares];
-
+		
 		gameSquares[0] = new StartSquare(0);
 		gameSquares[1] = new Land(1, "Oriental Ave", color.blue, 100, 6);
 		gameSquares[2] = new CommunityChest(2, communityDeck);
@@ -91,10 +90,10 @@ public class Main {
 		gameSquares[17] = new Land(17, "North Carolina", color.green, 300, 26);
 		gameSquares[18] = new Chance(18, chanceDeck, players);
 		gameSquares[19] = new Land(19, "Pennsylvania", color.green, 320, 28);
-
+		
 		System.out.println("Game Square initialization is complete...");
 	}
-
+	
 	private static void initializePlayerNames() {
 		System.out.println("Write names seperated with spaces.");
 		for (int i = 0; i < players.length; i++) {
@@ -103,15 +102,16 @@ public class Main {
 				name = new GetSimpleInput("Name of player " + (i + 1) + " : ").getValue();
 			players[i] = new Player(i, name, gameSquares);
 		}
-
+		
 		System.out.println("Player Name initialization is complete...");
 	}
-
+	
 	private static void initializeBoard() {
 		board = new Board(players, gameSquares);
 	}
-
+	
 	private static void runGame() {
+		play = true;
 		while (play) {
 			for (int playerID = 0; playerID < 4; playerID++) {
 				roundEnded = false;
@@ -120,11 +120,11 @@ public class Main {
 			}
 		}
 	}
-
+	
 	public static void endRound() {
 		roundEnded = true;
 	}
-
+	
 	public static void endGame() {
 		play = false;
 	}

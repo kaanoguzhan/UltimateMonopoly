@@ -114,12 +114,16 @@ public class Player {
 		return counter;
 	}
 	
+	public ArrayList<Land> getOwnedLands() {
+		return ownedLands;
+	}
+
 	// ////////// DO NOT USE THESE METHODS - THESE ARE JUST FOR DEBUGGING ////////// //
-	void setLocation(int id) {
+	public void setLocation(int id) {
 		this.location = id;
 	}
 	
-	void setMoney(int amount) {
+	public void setMoney(int amount) {
 		this.money = amount;
 	}
 	// ///////////////////////////////////////////////////////////////////////////// //

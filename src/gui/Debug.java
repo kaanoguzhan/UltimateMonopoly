@@ -3,17 +3,21 @@ package gui;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import Main.Main;
+import Main.Player;
 
 public class Debug extends JFrame implements ActionListener {
 	
 	private static final long	serialVersionUID	= 1L;
-	private JTextField			moneyField, locationField, cardField, moneyField2, locationField2, cardField2;
+	private JTextField			moneyField1, locationField1, cardField1, moneyField2, locationField2, cardField2;
 	private JTextField			moneyField3, locationField3, cardField3, moneyField4, locationField4, cardField4;
 	private JButton				set, plus, minus, plus2, minus2, plus3, minus3, plus4, minus4;
 	private JLabel				identifier, moneyLabel, locationLabel, cardLabel, identifier2, moneyLabel2,
 								locationLabel2, cardLabel2;
 	private JLabel				identifier3, moneyLabel3, locationLabel3, cardLabel3, identifier4, moneyLabel4,
 								locationLabel4, cardLabel4;
+	
+	private Player[]			players				= Main.players;
 	
 	public Debug() {
 		setLayout(new GridBagLayout());
@@ -32,24 +36,24 @@ public class Debug extends JFrame implements ActionListener {
 		c.gridy = 1;
 		add(minus, c);
 		
-		moneyField = new JTextField("123", 10); // instead of 123- player.getMoney();
+		moneyField1 = new JTextField(Integer.toString(players[0].getMoney()), 10); // instead of 123- player.getMoney();
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
 		c.gridy = 1;
 		c.gridwidth = 3;
-		add(moneyField, c);
+		add(moneyField1, c);
 		
-		locationField = new JTextField(10);
+		locationField1 = new JTextField("0", 10);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
 		c.gridy = 2;
-		add(locationField, c);
+		add(locationField1, c);
 		
-		cardField = new JTextField(10);
+		cardField1 = new JTextField(10);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
 		c.gridy = 3;
-		add(cardField, c);
+		add(cardField1, c);
 		
 		identifier = new JLabel("   	-1st player-  ");
 		c.fill = GridBagConstraints.VERTICAL;
@@ -90,14 +94,14 @@ public class Debug extends JFrame implements ActionListener {
 		c.gridy = 5;
 		add(minus2, c);
 		
-		moneyField2 = new JTextField("123", 10); // instead of 123- player.getMoney();
+		moneyField2 = new JTextField(Integer.toString(players[1].getMoney()), 10); // instead of 123- player.getMoney();
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
 		c.gridy = 5;
 		c.gridwidth = 3;
 		add(moneyField2, c);
 		
-		locationField2 = new JTextField(10);
+		locationField2 = new JTextField("0", 10);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
 		c.gridy = 6;
@@ -148,14 +152,14 @@ public class Debug extends JFrame implements ActionListener {
 		c.gridy = 9;
 		add(minus3, c);
 		
-		moneyField3 = new JTextField("123", 10); // instead of 123- player.getMoney();
+		moneyField3 = new JTextField(Integer.toString(players[2].getMoney()), 10); // instead of 123- player.getMoney();
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
 		c.gridy = 9;
 		c.gridwidth = 3;
 		add(moneyField3, c);
 		
-		locationField3 = new JTextField(10);
+		locationField3 = new JTextField("0", 10);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
 		c.gridy = 10;
@@ -206,14 +210,14 @@ public class Debug extends JFrame implements ActionListener {
 		c.gridy = 13;
 		add(minus4, c);
 		
-		moneyField4 = new JTextField("123", 10); // instead of 123- player.getMoney();
+		moneyField4 = new JTextField(Integer.toString(players[3].getMoney()), 10); // instead of 123- player.getMoney();
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
 		c.gridy = 13;
 		c.gridwidth = 3;
 		add(moneyField4, c);
 		
-		locationField4 = new JTextField(10);
+		locationField4 = new JTextField("0", 10);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
 		c.gridy = 14;
@@ -271,17 +275,16 @@ public class Debug extends JFrame implements ActionListener {
 		set.addActionListener(this);
 	}
 	
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		int money, money2, money3, money4;
-		money = Integer.parseInt(moneyField.getText());
+		money = Integer.parseInt(moneyField1.getText());
 		money2 = Integer.parseInt(moneyField2.getText());
 		money3 = Integer.parseInt(moneyField3.getText());
 		money4 = Integer.parseInt(moneyField4.getText());
 		
 		if (e.getSource() == plus) {
 			money += 5000;
-			moneyField.setText("" + money);
+			moneyField1.setText("" + money);
 		} else if (e.getSource() == plus2) {
 			money2 += 5000;
 			moneyField2.setText("" + money2);
@@ -293,7 +296,7 @@ public class Debug extends JFrame implements ActionListener {
 			moneyField4.setText("" + money4);
 		} else if (e.getSource() == minus) {
 			if (money > 5000) money -= 5000;
-			moneyField.setText("" + money);
+			moneyField1.setText("" + money);
 		} else if (e.getSource() == minus2) {
 			if (money2 > 5000) money2 -= 5000;
 			moneyField2.setText("" + money2);
@@ -303,13 +306,24 @@ public class Debug extends JFrame implements ActionListener {
 		} else if (e.getSource() == minus4) {
 			if (money4 > 5000) money4 -= 5000;
 			moneyField4.setText("" + money4);
-		} else {
-			// SET is pressed do everything.
-			
+		} else if (e.getSource() == set) {
+			setAction();
+			this.dispose();
 		}
-		
-		
 	}
 	
+	private void setAction() {
+		players[0].setMoney(Integer.parseInt(moneyField1.getText()));
+		players[1].setMoney(Integer.parseInt(moneyField2.getText()));
+		players[2].setMoney(Integer.parseInt(moneyField3.getText()));
+		players[3].setMoney(Integer.parseInt(moneyField4.getText()));
+		
+		players[0].setLocation(Integer.parseInt(locationField1.getText()));
+		players[1].setLocation(Integer.parseInt(locationField2.getText()));
+		players[2].setLocation(Integer.parseInt(locationField3.getText()));
+		players[3].setLocation(Integer.parseInt(locationField4.getText()));
+		
+		Board.p.refreshData();
+	}
 	
 }
