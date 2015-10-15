@@ -1,6 +1,7 @@
 package GameSquares.CommunityChest.CommunityChestCards;
 
 import gui.CardShower;
+import gui.AdditionalWindows.MessageDisplayer;
 import GameSquares.CommunityChest.CommunityChestCard;
 import Main.Player;
 
@@ -12,7 +13,7 @@ public class RecieveConsultancyFee extends CommunityChestCard {
 
 	@Override
 	public void onDraw(Player pl) {
-		new CardShower(this);
+		new MessageDisplayer(toString());
 		pl.addMoney(25);
 	}
 

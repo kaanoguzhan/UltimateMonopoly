@@ -1,6 +1,7 @@
 package GameSquares.Chance.ChanceCards;
 
 import gui.CardShower;
+import gui.AdditionalWindows.MessageDisplayer;
 import GameSquares.Chance.ChanceCard;
 import Main.Player;
 
@@ -14,7 +15,7 @@ public class ElectedAsChairPerson extends ChanceCard {
 	
 	@Override
 	public void onDraw(Player pl) {
-		new CardShower(this);
+		new MessageDisplayer(toString());
 		for (int i = 0; i < players.length; i++) {
 			if (pl != players[i])
 				pl.pay(players[i], 50);

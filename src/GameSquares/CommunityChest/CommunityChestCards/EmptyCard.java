@@ -1,6 +1,7 @@
 package GameSquares.CommunityChest.CommunityChestCards;
 
 import gui.CardShower;
+import gui.AdditionalWindows.MessageDisplayer;
 import GameSquares.CommunityChest.CommunityChestCard;
 import Main.Player;
 
@@ -8,7 +9,7 @@ public class EmptyCard extends CommunityChestCard {
 
 	@Override
 	public void onDraw(Player pl) {
-		new CardShower(this);
+		new MessageDisplayer(toString());
 	}
 
 	@Override

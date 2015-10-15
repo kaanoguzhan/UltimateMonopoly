@@ -1,6 +1,7 @@
 package GameSquares.Chance.ChanceCards;
 
 import gui.CardShower;
+import gui.AdditionalWindows.MessageDisplayer;
 import GameSquares.Chance.ChanceCard;
 import Main.Player;
 
@@ -8,7 +9,7 @@ public class EmptyCard extends ChanceCard {
 
 	@Override
 	public void onDraw(Player pl) {
-		new CardShower(this);
+		new MessageDisplayer(toString());
 	}
 
 	@Override
