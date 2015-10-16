@@ -177,7 +177,7 @@ public class Debug extends JFrame implements ActionListener {
 		y = Board.squareHolder.getSquare(location).getY();
 		Admin.movePlayerTo(players[3], location); //change me to movePlayerToforced
 		Board.three.setBounds(x, y, 50, 40);
-		
+
 		Board.informationTable.refreshData();
 		Board.informationTable.revalidate();;
 	}
