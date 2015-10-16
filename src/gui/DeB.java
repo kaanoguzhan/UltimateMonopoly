@@ -153,6 +153,7 @@ public class DeB extends JFrame {
 		btnRemoveLnd0.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Admin.removeOwnership(0, choiceOwnLan0.getSelectedItem());
+				refreshLands();
 			}
 		});
 		btnRemoveLnd0.setBounds(329, 55, 140, 41);
@@ -286,6 +287,7 @@ public class DeB extends JFrame {
 		btnRemoveLnd1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Admin.removeOwnership(1, choiceOwnLan1.getSelectedItem());
+				refreshLands();
 			}
 		});
 		btnRemoveLnd1.setBounds(329, 55, 140, 41);
@@ -418,6 +420,7 @@ public class DeB extends JFrame {
 		btnRemoveLnd2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Admin.removeOwnership(2, choiceOwnLan2.getSelectedItem());
+				refreshLands();
 			}
 		});
 		btnRemoveLnd2.setBounds(329, 55, 140, 41);
@@ -550,6 +553,7 @@ public class DeB extends JFrame {
 		btnRemoveLnd3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Admin.removeOwnership(3, choiceOwnLan3.getSelectedItem());
+				refreshLands();
 			}
 		});
 		btnRemoveLnd3.setBounds(329, 55, 140, 41);
