@@ -88,12 +88,15 @@ public class Land extends GameSquare {
 	// ///////////////////////////////////////////////////////////////////////////// //
 	
 	public String toString() {
+			return name;
+	}
+	
+	public String toString2() {
 		if (doubleRent)
 			return name + "\n Color: " + color + "\n Price: " + price
-				+ "\n Rent: " + rent * 2 + " (Doubled since a player owns all three of these colour.)"
-				+ "\n Details: " + details;
+				+ "\n Rent: " + rent * 2 + " (Doubled since a player owns all three of these colour.)";				
 		else
 			return name + "\n Color: " + color + "\n Price: " + price
-				+ "\n Rent: " + rent + "\n Details: " + details;
+				+ "\n Rent: " + rent;
 	}
 }

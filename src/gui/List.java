@@ -16,7 +16,7 @@ public class List extends JPanel implements ListSelectionListener {
 	private JList<Land> list;
 	private DefaultListModel<Land> listModel;
 	private JButton sellButton;
-	private ArrayList<Land> lands;
+	ArrayList<Land> lands;
 	private JLabel label;
 	
 	public List(ArrayList<Land> lands) {
@@ -30,26 +30,30 @@ public class List extends JPanel implements ListSelectionListener {
 		for(Land a : lands){
 			listModel.addElement(a);		
 		}
-		label = new JLabel("yeaha ++ :: " + lands.get(0).toString());
+		label = new JLabel(lands.get(0).toString2());
 		// Create the list and put it in a scroll pane.
 		list = new JList<Land>(listModel);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setSelectedIndex(0);
 		list.addListSelectionListener(this);
-		list.setVisibleRowCount(5);
+		list.setVisibleRowCount(12);
 		JScrollPane listScrollPane = new JScrollPane(list);
-		listScrollPane.setPreferredSize(new Dimension(100,50));
+		listScrollPane.setPreferredSize(new Dimension( ((int)listScrollPane.getPreferredSize().getWidth()) , ((int)listScrollPane.getPreferredSize().getHeight())));
 		
 		sellButton = new JButton("SELL");
 		sellButton.setActionCommand("SELL");
-		sellButton.addActionListener(new FireListener());
+		sellButton.addActionListener(new SellListener());
 
 		add(listScrollPane,BorderLayout.WEST);
+		label.setPreferredSize(new Dimension( ((int)label.getPreferredSize().getWidth()) + 10 , ((int) label.getPreferredSize().getHeight())  ));
 		add(label);
 		add(sellButton,BorderLayout.AFTER_LAST_LINE);
 	}
 
-	class FireListener implements ActionListener {
+	class SellListener implements ActionListener {
+		
+		// BURDA SELL ISLERINI HALLET
+		
 		public void actionPerformed(ActionEvent e) {
 			int index = list.getSelectedIndex();
 			listModel.remove(index);
@@ -58,6 +62,8 @@ public class List extends JPanel implements ListSelectionListener {
 
 			if (size == 0) { // Nobody's left, disable firing.
 				sellButton.setEnabled(false);
+				label.setText(""); // kimse kalmadi bos don veya
+				// this.dispose(); ekrani kapatir
 
 			} else { // Select an index.
 				if (index == listModel.getSize()) {
@@ -72,14 +78,18 @@ public class List extends JPanel implements ListSelectionListener {
 	}
 
 	public void valueChanged(ListSelectionEvent e) {
-			Land a = list.getSelectedValue();	
-			label.setText(a.toString());
+		
+		// BURAYA DOKUNMA LABEL DEGISIYR SADECE
+		
+			Land a = list.getSelectedValue();
+			if(  !(a == null) )
+			label.setText(a.toString2());
 			if (list.getSelectedIndex() == -1) {
-				// No selection, disable fire button.
+				// No selection, disable sell button.
 				sellButton.setEnabled(false);
 				
 			} else {				
-				// Selection, enable the fire button.
+				// Selection, enable the sell button.
 				sellButton.setEnabled(true);
 			}
 		}
@@ -87,12 +97,11 @@ public class List extends JPanel implements ListSelectionListener {
 
 	public static void createAndShowGUI(ArrayList<Land> lands) {
 		// Create and set up the window.
-		List a = new List(lands); // finna get lands
+		List a = new List(lands); 
 		JFrame frame = new JFrame("Lands to Sell");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		frame.add(a);
-		// Display the window.
-		frame.setSize(400,400);
+		frame.pack();
 		frame.setVisible(true);
 	}
 
