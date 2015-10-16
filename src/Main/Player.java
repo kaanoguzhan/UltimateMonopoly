@@ -104,6 +104,11 @@ public class Player {
 		land.setOwner(this);
 	}
 	
+	public void sellLand(Land land) {
+		if(ownedLands.contains(land)) ownedLands.remove(land);
+		land.setOwner(null);		
+	}
+	
 	public int getID() {
 		return id;
 	}
@@ -146,4 +151,6 @@ public class Player {
 			"\n" + "Has Cards:" + Inventory +
 			"\n" + "Has Lands:" + Lands;
 	}
+
+
 }

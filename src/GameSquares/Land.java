@@ -5,7 +5,7 @@ import Main.Player;
 
 public class Land extends GameSquare {
 	
-	private String	name, details;
+	private String	name;
 	private color	color;
 	private int		price, rent;
 	private boolean	doubleRent;
@@ -21,7 +21,6 @@ public class Land extends GameSquare {
 		this.color = color;
 		this.price = price;
 		this.rent = rent;
-		this.details = "No Detail";
 	}
 	
 	@Override
@@ -67,6 +66,10 @@ public class Land extends GameSquare {
 	
 	public void setOwner(Player player) {
 		this.owner = player;
+	}
+	
+	public void sell(){
+		this.owner.sellLand(this);
 	}
 	
 	// ////////// DO NOT USE THESE METHODS - THESE ARE JUST FOR DEBUGGING ////////// //

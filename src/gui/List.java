@@ -56,6 +56,8 @@ public class List extends JPanel implements ListSelectionListener {
 		
 		public void actionPerformed(ActionEvent e) {
 			int index = list.getSelectedIndex();
+			Land a = list.getSelectedValue();
+			if(  !(a == null) )	a.sell();			
 			listModel.remove(index);
 
 			int size = listModel.getSize();
@@ -82,8 +84,10 @@ public class List extends JPanel implements ListSelectionListener {
 		// BURAYA DOKUNMA LABEL DEGISIYR SADECE
 		
 			Land a = list.getSelectedValue();
+			
 			if(  !(a == null) )
 			label.setText(a.toString2());
+			
 			if (list.getSelectedIndex() == -1) {
 				// No selection, disable sell button.
 				sellButton.setEnabled(false);

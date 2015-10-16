@@ -27,6 +27,10 @@ public abstract class GameSquare {
 		owner = pl;
 	}
 	
+	public Player getOwner() {
+		return owner;
+	}
+	
 	public int getID(){
 		return id;
 	}
