@@ -134,9 +134,10 @@ public class RollingTheDice extends JPanel implements ActionListener {
 					new gui.AdditionalWindows.MessageDisplayer("You rolled triples, you can go everywhere you can!");
 					// Nereye gitmek istersin? gitme kodu
 					end.setEnabled(true);
+				} else {
+					new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
+					button.setEnabled(true);
 				}
-				new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
-				button.setEnabled(true);
 			} else {
 				end.setEnabled(true);
 			}
