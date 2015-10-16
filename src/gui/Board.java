@@ -78,15 +78,15 @@ public class Board extends JFrame implements ActionListener {
 		Debug a = new Debug();
 		
 		// New Debug Code + Windows Style
-		try {
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-			| UnsupportedLookAndFeelException e1) {
-			e1.printStackTrace();
-		}
+//		try {
+//			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+//		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+//			| UnsupportedLookAndFeelException e1) {
+//			e1.printStackTrace();
+//		}
 		DeB frame = new DeB();
 		frame.setVisible(true);
-		SwingUtilities.updateComponentTreeUI(frame);
+//		SwingUtilities.updateComponentTreeUI(frame);
 		
 		
 		a.setSize(420, 420);

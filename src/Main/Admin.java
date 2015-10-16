@@ -195,6 +195,28 @@ public class Admin {
 		}
 		refreshUI();
 	}
+	
+	// Return PLAYER's ID
+	public static int getPlayerLocation(int playerID) {
+		return Main.players[playerID].getLocation();
+	}
+	
+	// Return PLAYER's ID
+	public static int getPlayerLocation(Player player) {
+		return player.getLocation();
+	}
+	
+	// Return PLAYER's MONEY
+	public static int getPlayerMoney(int playerID) {
+		return Main.players[playerID].getMoney();
+	}
+	
+	// Return PLAYER's MONEY
+	public static int getPlayerMoney(Player player) {
+		return player.getMoney();
+	}
+	
+	
 	/************************/
 	/** Land admin methods **/
 	/************************/

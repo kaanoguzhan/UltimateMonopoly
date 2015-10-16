@@ -3,7 +3,6 @@ package gui;
 import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,9 +14,6 @@ import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import GameSquares.GameSquare;
@@ -37,27 +33,7 @@ public class DeB extends JFrame {
 	private Choice				choiceOwnLan2, choiceNeuLand2;
 	private Choice				choiceOwnLan3, choiceNeuLand3;
 	
-	// Launch the application.
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-					| UnsupportedLookAndFeelException e1) {
-					e1.printStackTrace();
-				}
-				DeB frame = new DeB();
-				frame.setVisible(true);
-				SwingUtilities.updateComponentTreeUI(frame);
-				
-			}
-		});
-	}
-	
-	// Create the frame.
 	public DeB() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 643, 663);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -85,33 +61,53 @@ public class DeB extends JFrame {
 		lblLocation0.setBounds(167, 13, 56, 16);
 		Player0.add(lblLocation0);
 		
+		JLabel lblMoney0 = new JLabel("Money: " + Admin.getPlayerMoney(0));
+		lblMoney0.setBounds(10, 13, 118, 16);
+		Player0.add(lblMoney0);
+		
 		JButton btnSetMon0 = new JButton("Set");
+		btnSetMon0.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Admin.setMoney(0, getInt(txtMoney0));
+				lblMoney0.setText("Money: " + Admin.getPlayerMoney(0));
+			}
+		});
 		btnSetMon0.setBounds(55, 55, 81, 42);
 		Player0.add(btnSetMon0);
 		
 		JButton btnMin0 = new JButton("-");
+		btnMin0.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Admin.decreaseMoneyBy(0, getInt(txtMoney0));
+				lblMoney0.setText("Money: " + Admin.getPlayerMoney(0));
+			}
+		});
 		btnMin0.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnMin0.setAlignmentY(Component.TOP_ALIGNMENT);
 		btnMin0.setBounds(12, 76, 43, 21);
 		Player0.add(btnMin0);
 		
 		JButton btnPls0 = new JButton("+");
+		btnPls0.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Admin.increaseMoneyBy(0, getInt(txtMoney0));
+				lblMoney0.setText("Money: " + Admin.getPlayerMoney(0));
+			}
+		});
 		btnPls0.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnPls0.setAlignmentY(Component.TOP_ALIGNMENT);
 		btnPls0.setBounds(12, 55, 43, 21);
 		Player0.add(btnPls0);
 		
 		txtMoney0 = new JTextField();
-		txtMoney0.setBounds(12, 31, 125, 22);
-		Player0.add(txtMoney0);
 		txtMoney0.setColumns(10);
-		
-		JLabel lblMoney0 = new JLabel("Money: ");
-		lblMoney0.setBounds(10, 13, 118, 16);
-		Player0.add(lblMoney0);
+		txtMoney0.setBounds(12, 31, 125, 22);
+		txtMoney0.setToolTipText("" + Admin.getPlayerMoney(0));
+		Player0.add(txtMoney0);
 		
 		Choice choiceLoc0 = new Choice();
 		fillAllSquares(choiceLoc0);
+		choiceLoc0.select(Admin.getPlayerLocation(0));
 		choiceLoc0.setBounds(167, 31, 140, 22);
 		Player0.add(choiceLoc0);
 		
@@ -198,19 +194,26 @@ public class DeB extends JFrame {
 		label.setBounds(167, 13, 56, 16);
 		Player1.add(label);
 		
+		JLabel label_1 = new JLabel("Money: " + Admin.getPlayerMoney(1));
+		label_1.setBounds(10, 13, 118, 16);
+		Player1.add(label_1);
+		
 		JButton btnSetMon1 = new JButton("Set");
 		btnSetMon1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Admin.setMoney(1, getInt(txtMoney0));
+				Admin.setMoney(1, getInt(txtMoney1));
+				label_1.setText("Money: " + Admin.getPlayerMoney(1));
 			}
 		});
+		
 		btnSetMon1.setBounds(55, 55, 81, 42);
 		Player1.add(btnSetMon1);
 		
 		JButton btnMin1 = new JButton("-");
 		btnMin1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Admin.decreaseMoneyBy(1, getInt(txtMoney0));
+				Admin.decreaseMoneyBy(1, getInt(txtMoney1));
+				label_1.setText("Money: " + Admin.getPlayerMoney(1));
 			}
 		});
 		btnMin1.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -221,7 +224,8 @@ public class DeB extends JFrame {
 		JButton btnPls1 = new JButton("+");
 		btnPls1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Admin.increaseMoneyBy(1, getInt(txtMoney0));
+				Admin.increaseMoneyBy(1, getInt(txtMoney1));
+				label_1.setText("Money: " + Admin.getPlayerMoney(1));
 			}
 		});
 		btnPls1.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -234,12 +238,9 @@ public class DeB extends JFrame {
 		txtMoney1.setBounds(12, 31, 125, 22);
 		Player1.add(txtMoney1);
 		
-		JLabel label_1 = new JLabel("Money: ");
-		label_1.setBounds(10, 13, 118, 16);
-		Player1.add(label_1);
-		
 		Choice choiceLoc1 = new Choice();
 		fillAllSquares(choiceLoc1);
+		choiceLoc1.select(Admin.getPlayerLocation(1));
 		choiceLoc1.setBounds(167, 31, 140, 22);
 		Player1.add(choiceLoc1);
 		
@@ -326,10 +327,15 @@ public class DeB extends JFrame {
 		label_5.setBounds(167, 13, 56, 16);
 		Player2.add(label_5);
 		
+		JLabel label_6 = new JLabel("Money: " + Admin.getPlayerMoney(2));
+		label_6.setBounds(10, 13, 118, 16);
+		Player2.add(label_6);
+		
 		JButton btnSetMon2 = new JButton("Set");
 		btnSetMon2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Admin.setMoney(2, getInt(txtMoney0));
+				Admin.setMoney(2, getInt(txtMoney2));
+				label_6.setText("Money: " + Admin.getPlayerMoney(2));
 			}
 		});
 		btnSetMon2.setBounds(55, 55, 81, 42);
@@ -338,7 +344,8 @@ public class DeB extends JFrame {
 		JButton btnMin2 = new JButton("-");
 		btnMin2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Admin.decreaseMoneyBy(2, getInt(txtMoney0));
+				Admin.decreaseMoneyBy(2, getInt(txtMoney2));
+				label_6.setText("Money: " + Admin.getPlayerMoney(2));
 			}
 		});
 		btnMin2.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -349,7 +356,8 @@ public class DeB extends JFrame {
 		JButton btnPls2 = new JButton("+");
 		btnPls2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Admin.increaseMoneyBy(2, getInt(txtMoney0));
+				Admin.increaseMoneyBy(2, getInt(txtMoney2));
+				label_6.setText("Money: " + Admin.getPlayerMoney(2));
 			}
 		});
 		btnPls2.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -362,12 +370,9 @@ public class DeB extends JFrame {
 		txtMoney2.setBounds(12, 31, 125, 22);
 		Player2.add(txtMoney2);
 		
-		JLabel label_6 = new JLabel("Money: ");
-		label_6.setBounds(10, 13, 118, 16);
-		Player2.add(label_6);
-		
 		Choice choiceLoc2 = new Choice();
 		fillAllSquares(choiceLoc2);
+		choiceLoc2.select(Admin.getPlayerLocation(2));
 		choiceLoc2.setBounds(167, 31, 140, 22);
 		Player2.add(choiceLoc2);
 		
@@ -454,10 +459,15 @@ public class DeB extends JFrame {
 		label_10.setBounds(167, 13, 56, 16);
 		Player3.add(label_10);
 		
+		JLabel label_11 = new JLabel("Money: " + Admin.getPlayerMoney(3));
+		label_11.setBounds(10, 13, 118, 16);
+		Player3.add(label_11);
+		
 		JButton btnSetMon3 = new JButton("Set");
 		btnSetMon3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Admin.setMoney(3, getInt(txtMoney0));
+				Admin.setMoney(3, getInt(txtMoney3));
+				label_11.setText("Money: " + Admin.getPlayerMoney(3));
 			}
 		});
 		btnSetMon3.setBounds(55, 55, 81, 42);
@@ -466,7 +476,8 @@ public class DeB extends JFrame {
 		JButton btnMin3 = new JButton("-");
 		btnMin3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Admin.decreaseMoneyBy(3, getInt(txtMoney0));
+				Admin.decreaseMoneyBy(3, getInt(txtMoney3));
+				label_11.setText("Money: " + Admin.getPlayerMoney(3));
 			}
 		});
 		btnMin3.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -477,7 +488,8 @@ public class DeB extends JFrame {
 		JButton btnPls3 = new JButton("+");
 		btnPls3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Admin.increaseMoneyBy(3, getInt(txtMoney0));
+				Admin.increaseMoneyBy(3, getInt(txtMoney3));
+				label_11.setText("Money: " + Admin.getPlayerMoney(3));
 			}
 		});
 		btnPls3.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -490,12 +502,9 @@ public class DeB extends JFrame {
 		txtMoney3.setBounds(12, 31, 125, 22);
 		Player3.add(txtMoney3);
 		
-		JLabel label_11 = new JLabel("Money: ");
-		label_11.setBounds(10, 13, 118, 16);
-		Player3.add(label_11);
-		
 		Choice choiceLoc3 = new Choice();
 		fillAllSquares(choiceLoc3);
+		choiceLoc3.select(Admin.getPlayerLocation(3));
 		choiceLoc3.setBounds(167, 31, 140, 22);
 		Player3.add(choiceLoc3);
 		
@@ -573,24 +582,13 @@ public class DeB extends JFrame {
 		Players.add(lblPlayer_1);
 		
 		
-		btnPls0.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.increaseMoneyBy(0, getInt(txtMoney0));
-			}
-		});
-		btnMin0.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Admin.decreaseMoneyBy(0, getInt(txtMoney0));
-			}
-		});
-		btnSetMon0.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.setMoney(0, getInt(txtMoney0));
-			}
-		});
+		
+		
+		
+		
 	}
 	private int getInt(JTextField txtField) {
-		if (txtField.getText() != null)
+		if (txtField.getText() != null && txtField.getText().length() >= 1)
 			return Integer.parseInt(txtField.getText());
 		else
 			return 0;
