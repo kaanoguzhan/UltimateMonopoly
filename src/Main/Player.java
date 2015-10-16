@@ -60,7 +60,7 @@ public class Player {
 		if (money >= amount) {
 			money -= amount;
 			System.out.println(name + "'s money decreased by " + amount + " to " + money);
-		} else if(ownedLands.size()>0){
+		} else if (ownedLands.size() > 0) {
 			gui.List.createAndShowGUI(ownedLands);
 			reduceMoney(0);
 		} else {
@@ -98,19 +98,28 @@ public class Player {
 	public int getLocation() {
 		return location;
 	}
+	public void buyLand(Land land) {
+		reduceMoney(land.getPrice());
+		getOwnership(land);
+	}
+	
+	public void sellLand(Land land) {
+		if (ownedLands.contains(land)) {
+			addMoney(land.getPrice());
+			removeOwnership(land);
+			System.out.println(name + " sold " + land + " for " + land.getPrice());
+		}
+		land.setOwner(null);
+	}
 	
 	public void getOwnership(Land land) {
 		ownedLands.add(land);
 		land.setOwner(this);
 	}
 	
-	public void sellLand(Land land) {
-		if(ownedLands.contains(land)){
-			this.addMoney(land.getPrice());
-			ownedLands.remove(land);
-			System.out.println(name + " sold " + land + " for " + land.getPrice());
-		}
-		land.setOwner(null);		
+	public void removeOwnership(Land land) {
+		ownedLands.remove(land);
+		land.setOwner(null);
 	}
 	
 	public int getID() {
@@ -129,7 +138,7 @@ public class Player {
 	public ArrayList<Land> getOwnedLands() {
 		return ownedLands;
 	}
-
+	
 	// ////////// DO NOT USE THESE METHODS - THESE ARE JUST FOR DEBUGGING ////////// //
 	public void setLocation(int id) {
 		this.location = id;
@@ -155,6 +164,6 @@ public class Player {
 			"\n" + "Has Cards:" + Inventory +
 			"\n" + "Has Lands:" + Lands;
 	}
-
-
+	
+	
 }
