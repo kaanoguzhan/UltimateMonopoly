@@ -3,23 +3,28 @@ package gui;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import Main.Dice;
 import Main.Player;
 
 public class RollingTheDice extends JPanel implements ActionListener {
 
-	private static final long	serialVersionUID	= 1L;
-	private Player				player;
-	private String				playerNAME;	
-	private JLabel				playerName, result, dice,whichPlayer;
-	private JButton				button, end, sell;
-	private boolean				alreadyRolled = false;
+	private static final long serialVersionUID = 1L;
+	private Player player;
+	private String playerNAME;
+	private JLabel playerName, result, dice, whichPlayer;
+	private JButton button, end, sell, speed;
+	private boolean alreadyRolled = false;
+
 	public RollingTheDice() {
 		setLayout(null);
+		speed = new JButton();
 		sell = new JButton();
 		button = new JButton();
 		dice = new JLabel();
@@ -30,8 +35,9 @@ public class RollingTheDice extends JPanel implements ActionListener {
 		dice.setBounds(7, 10, ((int) dice.getPreferredSize().getWidth()), ((int) dice.getPreferredSize().getHeight()));
 		add(dice);
 
-		whichPlayer = new JLabel();		
-		whichPlayer.setBounds(140, 35, ((int)whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer.getPreferredSize().getHeight()));
+		whichPlayer = new JLabel();
+		whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
+				.getPreferredSize().getHeight()));
 		add(whichPlayer);
 
 		result.setText("result is: ");
@@ -46,68 +52,108 @@ public class RollingTheDice extends JPanel implements ActionListener {
 
 		button.addActionListener(this);
 		button.setText("Roll");
-		button.setBounds(7, 75, ((int) button.getPreferredSize().getWidth()), ((int) button.getPreferredSize().getHeight()));
+		button.setBounds(7, 75, ((int) button.getPreferredSize().getWidth()), ((int) button.getPreferredSize()
+				.getHeight()));
 		add(button);
 
 		sell = new JButton("Sell");
 		sell.addActionListener(this);
-		sell.setBounds(7, 140, ((int)sell.getPreferredSize().getWidth()), ((int) sell.getPreferredSize().getHeight()));
+		sell.setBounds(108, 140, ((int) sell.getPreferredSize().getWidth()),
+				((int) sell.getPreferredSize().getHeight()));
 		add(sell);
 
+		speed.addActionListener(this);
+		speed.setText("Speed Die");
+		speed.setBounds(7, 140, ((int) speed.getPreferredSize().getWidth()), ((int) speed.getPreferredSize()
+				.getHeight()));
+		add(speed);
 
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
 		// Create the Dice and roll
-		if (player != null) { 
+		if (player != null) {
 			playerNAME = player.getName();
-		} else playerNAME = "..";
+		} else
+			playerNAME = "..";
 
-		if(!(player.getOwnedLands().isEmpty())) 
+		if (!(player.getOwnedLands().isEmpty()))
 			sell.setEnabled(true);
 
 		whichPlayer.setText((playerNAME + " is playing, h/she has the icon number: " + player.getID()));
-		whichPlayer.setBounds(140, 35, ((int)whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer.getPreferredSize().getHeight()));
+		whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
+				.getPreferredSize().getHeight()));
 
 		button.setEnabled(false);
+		speed.setEnabled(false);
 		if (arg0.getSource() == button) {
 			int[] roll = new Dice().roll2();
 			int roll1 = roll[0];
 			int roll2 = roll[1];
 			alreadyRolled = true;
 			result.setText("dice rolled : " + roll1 + "," + roll2);
-			result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result.getPreferredSize().getHeight()));
+			result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result.getPreferredSize()
+					.getHeight()));
 			movePlayer(roll1 + roll2);
-			
-			if(roll1 == roll2){
+
+			if (roll1 == roll2) {
 				new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
-				button.setEnabled(true);			
+				button.setEnabled(true);
 			} else {
 				end.setEnabled(true);
-			}	
+			}
+		} else if (arg0.getSource() == speed) {
+			ArrayList<Integer> roll = new Dice().rollWithSpeedDie();
+			int roll1 = roll.get(0);
+			int roll2 = roll.get(1);
+			if (Dice.isMonopolyGuy()) {
+				new gui.AdditionalWindows.MessageDisplayer("You rolled MonopolyGuy !");
+				end.setEnabled(true);
+			} else if (Dice.isBus()) {
+				new gui.AdditionalWindows.MessageDisplayer("You rolled Bus !");
+				end.setEnabled(true);
+			} else {
+				int rollSpeed = roll.get(2);
+				alreadyRolled = true;
+				result.setText("dice rolled : " + roll1 + "," + roll2 + "," + rollSpeed);
+				result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result.getPreferredSize()
+						.getHeight()));
+				movePlayer(roll1 + roll2 + rollSpeed);
+
+				if (roll1 == roll2 || roll2 == rollSpeed) {
+					new gui.AdditionalWindows.MessageDisplayer("You rolled triples, you can go everywhere you can!");
+					// Nereye gitmek istersin? gitme kodu?
+					end.setEnabled(true);
+				} else {
+					end.setEnabled(true);
+				}
+			}
 		} else if (arg0.getSource() == end) {
 			Main.Main.endRound();
 			whichPlayer.setText(playerNAME + " has ended his/her turn");
-			whichPlayer.setBounds(140, 35, ((int)whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer.getPreferredSize().getHeight()));
-			alreadyRolled=false;
-		} else if (arg0.getSource() == sell){					
+			whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
+					.getPreferredSize().getHeight()));
+			alreadyRolled = false;
+			speed.setEnabled(true);
+		} else if (arg0.getSource() == sell) {
 			gui.List.createAndShowGUI(player.getOwnedLands());
 
-			if(alreadyRolled){
-				button.setEnabled(false);	
+			if (alreadyRolled) {
+				button.setEnabled(false);
+				speed.setEnabled(false);
 				end.setEnabled(true);
 			} else {
 				button.setEnabled(true);
+				speed.setEnabled(true);
 				end.setEnabled(false);
 			}
-			alreadyRolled=false;
-			sell.setEnabled(false);		
+			alreadyRolled = false;
+			sell.setEnabled(false);
 		}
 
 		Board.informationTable.refreshData();
 		Board.informationTable.validate();
 	}
-
 
 	private void movePlayer(int amount) {
 		int location = player.getLocation();
@@ -122,39 +168,40 @@ public class RollingTheDice extends JPanel implements ActionListener {
 		Board.informationTable.refreshData();
 	}
 
-	//	public static void moveTo(Player pl, int id) {
-	//		int x = Board.squareHolder.getSquare(id).getX() - (pl.getID() * 25);
-	//		int y = Board.squareHolder.getSquare(id).getY();
-	//		
-	//		
-	//		
-	//		switch (pl.getID()) {
-	//			case 0:
-	//				this.playerName = Board.zero;
-	//				break;
-	//			case 1:
-	//				this.playerName = Board.one;
-	//				break;
-	//			case 2:
-	//				this.playerName = Board.two;
-	//				break;
-	//			case 3:
-	//				this.playerName = Board.three;
-	//				break;
-	//		}
-	//		
-	//		playerName.setBounds(x, y, 50, 40);
-	//		pl.moveBy(amount);
-	//		
-	//		Board.p.refreshData();
-	//	}
+	// public static void moveTo(Player pl, int id) {
+	// int x = Board.squareHolder.getSquare(id).getX() - (pl.getID() * 25);
+	// int y = Board.squareHolder.getSquare(id).getY();
+	//
+	//
+	//
+	// switch (pl.getID()) {
+	// case 0:
+	// this.playerName = Board.zero;
+	// break;
+	// case 1:
+	// this.playerName = Board.one;
+	// break;
+	// case 2:
+	// this.playerName = Board.two;
+	// break;
+	// case 3:
+	// this.playerName = Board.three;
+	// break;
+	// }
+	//
+	// playerName.setBounds(x, y, 50, 40);
+	// pl.moveBy(amount);
+	//
+	// Board.p.refreshData();
+	// }
 
 	public void setCurrentPlayer(Player player) {
 		this.player = player;
 		button.setEnabled(true);
 		end.setEnabled(false);
 
-		if(!(alreadyRolled) || player.getOwnedLands().isEmpty()) sell.setEnabled(false);
+		if (!(alreadyRolled) || player.getOwnedLands().isEmpty())
+			sell.setEnabled(false);
 
 		switch (player.getID()) {
 		case 0:
