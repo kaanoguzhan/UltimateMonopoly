@@ -372,7 +372,7 @@ public class Debug extends JFrame implements ActionListener {
 			Admin.giveOwnership(players[3], currentLand);
 		}
 		
-		Board.p.refreshData();
+		Board.informationTable.refreshData();
 	}
 	
 }

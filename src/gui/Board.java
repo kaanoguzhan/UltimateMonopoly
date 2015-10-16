@@ -17,7 +17,7 @@ public class Board extends JFrame implements ActionListener {
 	static JLabel				zero, one, two, three;
 	RollingTheDice				round				= new RollingTheDice();
 	static SquareHolder			squareHolder		= new SquareHolder();
-	static PlayerInfo			p					= new PlayerInfo();
+	static PlayerInfo			informationTable	= new PlayerInfo();
 	
 	public Board(Player[] players, GameSquare[] gameSquares) {
 		
@@ -47,7 +47,7 @@ public class Board extends JFrame implements ActionListener {
 		add(three);
 		three.setBounds(575, 660, 50, 40);
 		
-		round.setBounds(720, 0, 500, 200);
+		round.setBounds(720, 0, 500, 250);
 		add(round);
 		
 		JButton debug = new JButton("Debug Window");
@@ -58,8 +58,8 @@ public class Board extends JFrame implements ActionListener {
 		ImageIcon image = new ImageIcon("board.jpg");
 		JLabel labelForimage = new JLabel(image);
 		
-		p.setBounds(720, 200, 550, 350);
-		add(p);
+		informationTable.setBounds(720, 260, 550, 350);
+		add(informationTable);
 		
 		add(labelForimage);
 		labelForimage.setBounds(0, 0, 700, 700);

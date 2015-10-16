@@ -100,7 +100,7 @@ public class List extends JPanel implements ListSelectionListener {
 	
 
 	public static void createAndShowGUI(ArrayList<Land> lands) {
-		// Create and set up the window.
+		// Create and set up the window.		
 		List a = new List(lands); 
 		JFrame frame = new JFrame("Lands to Sell");
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);

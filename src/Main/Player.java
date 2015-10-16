@@ -105,7 +105,11 @@ public class Player {
 	}
 	
 	public void sellLand(Land land) {
-		if(ownedLands.contains(land)) ownedLands.remove(land);
+		if(ownedLands.contains(land)){
+			this.addMoney(land.getPrice());
+			ownedLands.remove(land);
+			System.out.println(name + " sold " + land + " for " + land.getPrice());
+		}
 		land.setOwner(null);		
 	}
 	

@@ -85,6 +85,10 @@ public class Land extends GameSquare {
 		this.price = price;
 	}
 	
+	public int getPrice() {
+		return price;
+	}
+	
 	public void setRent(int rent) {
 		this.rent = rent;
 	}
