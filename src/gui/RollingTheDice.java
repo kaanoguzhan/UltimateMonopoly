@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 
 import Main.Dice;
 import Main.Player;
+import gui.AdditionalWindows.InputReaders.GetOneOption;
+import gui.AdditionalWindows.InputReaders.GetTextInput;
 
 public class RollingTheDice extends JPanel implements ActionListener {
 
@@ -19,6 +21,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 	private String playerNAME;
 	private JLabel playerName, result, dice, whichPlayer;
 	private JButton button, end, sell;
+	private int moveTo;
 	private boolean alreadyRolled = false;
 
 	public RollingTheDice() {
@@ -110,7 +113,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 					result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result
 							.getPreferredSize().getHeight()));
 					movePlayer(roll1 + roll2);
-					new gui.AdditionalWindows.MessageDisplayer("You rolled MonopolyGuy !");
+					new gui.AdditionalWindows.MessageDisplayer(" You rolled MonopolyGuy !");
 					// MonopolyGuy metodu
 					if (roll1 != roll2)
 						end.setEnabled(true);
@@ -118,8 +121,14 @@ public class RollingTheDice extends JPanel implements ActionListener {
 					result.setText("dice rolled : " + roll1 + "," + roll2 + "," + rollSpeed);
 					result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result
 							.getPreferredSize().getHeight()));
-					new gui.AdditionalWindows.MessageDisplayer("You rolled Bus !");
-					// Bus metodu ( roll1,roll2, roll1+rool2)'den biri kadar git
+					new gui.AdditionalWindows.MessageDisplayer(" You rolled Bus !");
+					
+					int option = new GetOneOption(roll1, roll2, roll1+roll2, "How many squares would you like to move?").getResponse();
+					
+					if(option == 0) movePlayer(roll1);
+					if(option == 1) movePlayer(roll2);
+					if(option == 2) movePlayer(roll1+roll2);
+					
 					if (roll1 != roll2)
 						end.setEnabled(true);
 				} else {
@@ -137,7 +146,14 @@ public class RollingTheDice extends JPanel implements ActionListener {
 					result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result
 							.getPreferredSize().getHeight()));
 					new gui.AdditionalWindows.MessageDisplayer("You rolled triples, you can go everywhere you can!");
-					// Nereye gitmek istersin? gitme kodu
+					
+					while (!(moveTo< 0) || (19 < moveTo))
+						moveTo = new GetTextInput("Enter the square you want to go, should be between 0 (GO) and 19(Pennysylvania)").getInt();
+						int current = player.getLocation();
+						
+						movePlayer((moveTo-current)%20);	  
+										
+					
 					end.setEnabled(true);
 				} else {
 					new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
