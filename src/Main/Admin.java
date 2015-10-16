@@ -163,7 +163,7 @@ public class Admin {
 				System.out.println("ADMIN -> Player:" + player.getName()
 					+ "'s ownership is removed from "
 					+ ((Land) currentLand).getName());
-				player.getOwnership((Land) currentLand);// TODO change to remove
+				player.removeOwnership((Land) currentLand);
 			}
 		}
 		refreshUI();
@@ -176,7 +176,7 @@ public class Admin {
 				System.out.println("ADMIN -> Player:" + player.getName()
 					+ "'s ownership is removed from "
 					+ ((Land) Main.gameSquares[currentLandID]).getName());
-				player.getOwnership((Land) Main.gameSquares[currentLandID]);// TODO change to remove
+				player.removeOwnership((Land) Main.gameSquares[currentLandID]);
 			}
 		}
 		refreshUI();
@@ -190,11 +190,33 @@ public class Admin {
 					if (((Land) gameSquare).getName().equals(currentLandName)) {
 						System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
 							+ "'s ownership is removed from " + currentLandName);
-						Main.players[playerID].getOwnership((Land) gameSquare);// TODO change to remove
-				}
+						Main.players[playerID].removeOwnership((Land) gameSquare);
+					}
 		}
 		refreshUI();
 	}
+	
+	// Return PLAYER's ID
+	public static int getPlayerLocation(int playerID) {
+		return Main.players[playerID].getLocation();
+	}
+	
+	// Return PLAYER's ID
+	public static int getPlayerLocation(Player player) {
+		return player.getLocation();
+	}
+	
+	// Return PLAYER's MONEY
+	public static int getPlayerMoney(int playerID) {
+		return Main.players[playerID].getMoney();
+	}
+	
+	// Return PLAYER's MONEY
+	public static int getPlayerMoney(Player player) {
+		return player.getMoney();
+	}
+	
+	
 	/************************/
 	/** Land admin methods **/
 	/************************/

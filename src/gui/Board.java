@@ -75,9 +75,6 @@ public class Board extends JFrame implements ActionListener {
 		setVisible(true);
 	}
 	public void actionPerformed(ActionEvent e) {
-		Debug a = new Debug();
-		
-		// New Debug Code + Windows Style
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
@@ -87,11 +84,6 @@ public class Board extends JFrame implements ActionListener {
 		DeB frame = new DeB();
 		frame.setVisible(true);
 		SwingUtilities.updateComponentTreeUI(frame);
-		
-		
-		a.setSize(420, 420);
-		a.setVisible(true);
-		a.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 	}
 	
 	public void setCurrentPlayer(int id) {

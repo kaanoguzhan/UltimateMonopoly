@@ -34,9 +34,7 @@ public class Land extends GameSquare {
 			
 			if (buy) { // (GUI) If player want to play ==> buy = true
 				if (pl.getMoney() >= price) {
-					pl.reduceMoney(price);
-					// owner = pl;
-					pl.getOwnership(this);
+					pl.buyLand(this);
 					System.out.println("Player bought " + this.name + ". Player has "
 						+ pl.getNumberOfOwnedByColor(this.color) + " of this color");
 					if (pl.getNumberOfOwnedByColor(this.color) == 3)
