@@ -1,6 +1,5 @@
 package Main;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Dice {
