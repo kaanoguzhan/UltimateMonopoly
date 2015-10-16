@@ -17,7 +17,7 @@ import GameSquares.CommunityChest.CommunityChestDeck;
 public class Main {
 	static ChanceDeck			chanceDeck		= null;
 	static CommunityChestDeck	communityDeck	= null;
-	static GameSquare[]			gameSquares		= null;
+	public static GameSquare[]			gameSquares		= null;
 	public static Player[]		players			= null;
 	static Board				board;
 	static Boolean				play			= true;

@@ -20,6 +20,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
+import GameSquares.GameSquare;
 import GameSquares.Land;
 import Main.Admin;
 import Main.Main;
@@ -31,6 +32,10 @@ public class DeB extends JFrame {
 	private JTextField			textField;
 	private JTextField			textField_1;
 	private JTextField			textField_2;
+	private Choice				choiceOwnLan0, choiceNeuLand0;
+	private Choice				choiceOwnLan1, choiceNeuLand1;
+	private Choice				choiceOwnLan2, choiceNeuLand2;
+	private Choice				choiceOwnLan3, choiceNeuLand3;
 	
 	// Launch the application.
 	public static void main(String[] args) {
@@ -113,7 +118,7 @@ public class DeB extends JFrame {
 		JButton btnSetLoc0 = new JButton("Set");
 		btnSetLoc0.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Admin.movePlayerToForced(1, choiceLoc0.getSelectedIndex());
+				Admin.movePlayerToForced(0, choiceLoc0.getSelectedIndex());
 			}
 		});
 		btnSetLoc0.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -123,7 +128,7 @@ public class DeB extends JFrame {
 		JButton btnMove0 = new JButton("Move");
 		btnMove0.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Admin.movePlayerTo(1, choiceLoc0.getSelectedIndex());
+				Admin.movePlayerTo(0, choiceLoc0.getSelectedIndex());
 			}
 		});
 		btnMove0.setAlignmentX(0.5f);
@@ -134,12 +139,12 @@ public class DeB extends JFrame {
 		lblOwnLands0.setBounds(329, 13, 140, 16);
 		Player0.add(lblOwnLands0);
 		
-		Choice choiceOwnLan0 = new Choice();
+		choiceOwnLan0 = new Choice();
 		fillOwnLands(choiceOwnLan0, 0);
 		choiceOwnLan0.setBounds(329, 31, 140, 22);
 		Player0.add(choiceOwnLan0);
 		
-		Choice choiceNeuLand0 = new Choice();
+		choiceNeuLand0 = new Choice();
 		fillNeuLands(choiceNeuLand0, 0);
 		choiceNeuLand0.setBounds(473, 31, 140, 22);
 		Player0.add(choiceNeuLand0);
@@ -149,6 +154,11 @@ public class DeB extends JFrame {
 		Player0.add(lblNeuLands0);
 		
 		JButton btnRemoveLnd0 = new JButton("Remove");
+		btnRemoveLnd0.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Admin
+			}
+		});
 		btnRemoveLnd0.setBounds(329, 55, 140, 41);
 		Player0.add(btnRemoveLnd0);
 		
@@ -156,7 +166,7 @@ public class DeB extends JFrame {
 		btnClaimLnd0.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Admin.giveOwnership(0, choiceNeuLand0.getSelectedItem());
-				refreshLands(0, choiceOwnLan0, choiceNeuLand0);
+				refreshLands();
 			}
 		});
 		btnClaimLnd0.setBounds(473, 55, 140, 41);
@@ -189,10 +199,20 @@ public class DeB extends JFrame {
 		Player1.add(label);
 		
 		JButton button = new JButton("Set");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Admin.setMoney(1, getInt(txtMoney0));
+			}
+		});
 		button.setBounds(55, 55, 81, 42);
 		Player1.add(button);
 		
 		JButton button_1 = new JButton("-");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Admin.decreaseMoneyBy(1, getInt(txtMoney0));
+			}
+		});
 		button_1.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		button_1.setAlignmentY(0.0f);
 		button_1.setBounds(12, 76, 43, 21);
@@ -201,7 +221,7 @@ public class DeB extends JFrame {
 		JButton button_2 = new JButton("+");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Admin.increaseMoneyBy(0, getInt(txtMoney0));
+				Admin.increaseMoneyBy(1, getInt(txtMoney0));
 			}
 		});
 		button_2.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -223,11 +243,21 @@ public class DeB extends JFrame {
 		Player1.add(choice);
 		
 		JButton button_3 = new JButton("Set");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Admin.movePlayerToForced(1, choiceLoc0.getSelectedIndex());
+			}
+		});
 		button_3.setAlignmentX(0.5f);
 		button_3.setBounds(167, 55, 70, 41);
 		Player1.add(button_3);
 		
 		JButton button_4 = new JButton("Move");
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Admin.movePlayerTo(1, choiceLoc0.getSelectedIndex());
+			}
+		});
 		button_4.setAlignmentX(0.5f);
 		button_4.setBounds(237, 55, 70, 41);
 		Player1.add(button_4);
@@ -236,13 +266,15 @@ public class DeB extends JFrame {
 		label_2.setBounds(329, 13, 140, 16);
 		Player1.add(label_2);
 		
-		Choice choice_1 = new Choice();
-		choice_1.setBounds(329, 31, 140, 22);
-		Player1.add(choice_1);
+		choiceOwnLan1 = new Choice();
+		fillOwnLands(choiceOwnLan1, 1);
+		choiceOwnLan1.setBounds(329, 31, 140, 22);
+		Player1.add(choiceOwnLan1);
 		
-		Choice choice_2 = new Choice();
-		choice_2.setBounds(473, 31, 140, 22);
-		Player1.add(choice_2);
+		choiceNeuLand1 = new Choice();
+		fillNeuLands(choiceNeuLand1, 1);
+		choiceNeuLand1.setBounds(473, 31, 140, 22);
+		Player1.add(choiceNeuLand1);
 		
 		JLabel label_3 = new JLabel("Neutral Lands");
 		label_3.setBounds(473, 13, 140, 16);
@@ -253,6 +285,12 @@ public class DeB extends JFrame {
 		Player1.add(button_5);
 		
 		JButton button_6 = new JButton("Claim");
+		button_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Admin.giveOwnership(1, choiceNeuLand1.getSelectedItem());
+				refreshLands();
+			}
+		});
 		button_6.setBounds(473, 55, 140, 41);
 		Player1.add(button_6);
 		
@@ -283,16 +321,31 @@ public class DeB extends JFrame {
 		panel.add(label_5);
 		
 		JButton button_7 = new JButton("Set");
+		button_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Admin.setMoney(2, getInt(txtMoney0));
+			}
+		});
 		button_7.setBounds(55, 55, 81, 42);
 		panel.add(button_7);
 		
 		JButton button_8 = new JButton("-");
+		button_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Admin.decreaseMoneyBy(2, getInt(txtMoney0));
+			}
+		});
 		button_8.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		button_8.setAlignmentY(0.0f);
 		button_8.setBounds(12, 76, 43, 21);
 		panel.add(button_8);
 		
 		JButton button_9 = new JButton("+");
+		button_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Admin.increaseMoneyBy(2, getInt(txtMoney0));
+			}
+		});
 		button_9.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		button_9.setAlignmentY(0.0f);
 		button_9.setBounds(12, 55, 43, 21);
@@ -312,11 +365,21 @@ public class DeB extends JFrame {
 		panel.add(choice_3);
 		
 		JButton button_10 = new JButton("Set");
+		button_10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Admin.movePlayerToForced(2, choiceLoc0.getSelectedIndex());
+			}
+		});
 		button_10.setAlignmentX(0.5f);
 		button_10.setBounds(167, 55, 70, 41);
 		panel.add(button_10);
 		
 		JButton button_11 = new JButton("Move");
+		button_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Admin.movePlayerTo(2, choiceLoc0.getSelectedIndex());
+			}
+		});
 		button_11.setAlignmentX(0.5f);
 		button_11.setBounds(237, 55, 70, 41);
 		panel.add(button_11);
@@ -325,13 +388,15 @@ public class DeB extends JFrame {
 		label_7.setBounds(329, 13, 140, 16);
 		panel.add(label_7);
 		
-		Choice choice_4 = new Choice();
-		choice_4.setBounds(329, 31, 140, 22);
-		panel.add(choice_4);
+		choiceOwnLan2 = new Choice();
+		fillOwnLands(choiceOwnLan2, 2);
+		choiceOwnLan2.setBounds(329, 31, 140, 22);
+		panel.add(choiceOwnLan2);
 		
-		Choice choice_5 = new Choice();
-		choice_5.setBounds(473, 31, 140, 22);
-		panel.add(choice_5);
+		choiceNeuLand2 = new Choice();
+		fillNeuLands(choiceNeuLand2, 2);
+		choiceNeuLand2.setBounds(473, 31, 140, 22);
+		panel.add(choiceNeuLand2);
 		
 		JLabel label_8 = new JLabel("Neutral Lands");
 		label_8.setBounds(473, 13, 140, 16);
@@ -342,6 +407,12 @@ public class DeB extends JFrame {
 		panel.add(button_12);
 		
 		JButton button_13 = new JButton("Claim");
+		button_13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Admin.giveOwnership(2, choiceNeuLand2.getSelectedItem());
+				refreshLands();
+			}
+		});
 		button_13.setBounds(473, 55, 140, 41);
 		panel.add(button_13);
 		
@@ -372,16 +443,31 @@ public class DeB extends JFrame {
 		panel_1.add(label_10);
 		
 		JButton button_14 = new JButton("Set");
+		button_14.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Admin.setMoney(3, getInt(txtMoney0));
+			}
+		});
 		button_14.setBounds(55, 55, 81, 42);
 		panel_1.add(button_14);
 		
 		JButton button_15 = new JButton("-");
+		button_15.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Admin.decreaseMoneyBy(3, getInt(txtMoney0));
+			}
+		});
 		button_15.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		button_15.setAlignmentY(0.0f);
 		button_15.setBounds(12, 76, 43, 21);
 		panel_1.add(button_15);
 		
 		JButton button_16 = new JButton("+");
+		button_16.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Admin.increaseMoneyBy(3, getInt(txtMoney0));
+			}
+		});
 		button_16.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		button_16.setAlignmentY(0.0f);
 		button_16.setBounds(12, 55, 43, 21);
@@ -401,11 +487,21 @@ public class DeB extends JFrame {
 		panel_1.add(choice_6);
 		
 		JButton button_17 = new JButton("Set");
+		button_17.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Admin.movePlayerToForced(3, choiceLoc0.getSelectedIndex());
+			}
+		});
 		button_17.setAlignmentX(0.5f);
 		button_17.setBounds(167, 55, 70, 41);
 		panel_1.add(button_17);
 		
 		JButton button_18 = new JButton("Move");
+		button_18.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Admin.movePlayerTo(3, choiceLoc0.getSelectedIndex());
+			}
+		});
 		button_18.setAlignmentX(0.5f);
 		button_18.setBounds(237, 55, 70, 41);
 		panel_1.add(button_18);
@@ -414,13 +510,15 @@ public class DeB extends JFrame {
 		label_12.setBounds(329, 13, 140, 16);
 		panel_1.add(label_12);
 		
-		Choice choice_7 = new Choice();
-		choice_7.setBounds(329, 31, 140, 22);
-		panel_1.add(choice_7);
+		choiceOwnLan3 = new Choice();
+		fillOwnLands(choiceOwnLan3, 3);
+		choiceOwnLan3.setBounds(329, 31, 140, 22);
+		panel_1.add(choiceOwnLan3);
 		
-		Choice choice_8 = new Choice();
-		choice_8.setBounds(473, 31, 140, 22);
-		panel_1.add(choice_8);
+		choiceNeuLand3 = new Choice();
+		fillNeuLands(choiceNeuLand3, 3);
+		choiceNeuLand3.setBounds(473, 31, 140, 22);
+		panel_1.add(choiceNeuLand3);
 		
 		JLabel label_13 = new JLabel("Neutral Lands");
 		label_13.setBounds(473, 13, 140, 16);
@@ -431,6 +529,12 @@ public class DeB extends JFrame {
 		panel_1.add(button_19);
 		
 		JButton button_20 = new JButton("Claim");
+		button_20.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Admin.giveOwnership(3, choiceNeuLand3.getSelectedItem());
+				refreshLands();
+			}
+		});
 		button_20.setBounds(473, 55, 140, 41);
 		panel_1.add(button_20);
 		
@@ -467,7 +571,6 @@ public class DeB extends JFrame {
 			}
 		});
 	}
-	
 	private int getInt(JTextField txtField) {
 		return Integer.parseInt(txtField.getText());
 	}
@@ -496,24 +599,9 @@ public class DeB extends JFrame {
 	}
 	
 	private void fillNeuLands(Choice choice, int playerID) {
-		choice.add("Oriental Ave");
-		choice.add("Vermont Ave");
-		choice.add("Connecticut");
-		choice.add("St. Charles Place");
-		choice.add("States Ave");
-		choice.add("Virginia");
-		choice.add("St. James Place");
-		choice.add("Tennessee");
-		choice.add("New York Ave");
-		choice.add("Pacific");
-		choice.add("North Carolina");
-		choice.add("Pennsylvania");
-		
-		try {
-			for (int i = 0; i < Main.players.length; i++)
-				for (Land land : Main.players[playerID].getOwnedLands())
-					choice.remove(land.getName());
-		} catch (Exception e) {}
+		for (GameSquare land : Main.gameSquares)
+			if (land instanceof Land && ((Land) land).getOwner() == null)
+				choice.add(((Land) land).getName());
 	}
 	
 	private void fillOwnLands(Choice choice, int playerID) {
@@ -522,12 +610,25 @@ public class DeB extends JFrame {
 		}
 	}
 	
-	private void refreshLands(int playerID, Choice... choice) {
-		if (choice.length == 2) {
-			choice[0].removeAll();
-			choice[1].removeAll();
-			fillOwnLands(choice[0], playerID);
-			fillNeuLands(choice[1], playerID);
-		}
+	private void refreshLands() {
+		choiceOwnLan0.removeAll();
+		choiceNeuLand0.removeAll();
+		fillOwnLands(choiceOwnLan0, 0);
+		fillNeuLands(choiceNeuLand0, 0);
+		
+		choiceOwnLan1.removeAll();
+		choiceNeuLand1.removeAll();
+		fillOwnLands(choiceOwnLan1, 1);
+		fillNeuLands(choiceNeuLand1, 1);
+		
+		choiceOwnLan2.removeAll();
+		choiceNeuLand2.removeAll();
+		fillOwnLands(choiceOwnLan2, 2);
+		fillNeuLands(choiceNeuLand2, 2);
+		
+		choiceOwnLan3.removeAll();
+		choiceNeuLand3.removeAll();
+		fillOwnLands(choiceOwnLan3, 3);
+		fillNeuLands(choiceNeuLand3, 3);
 	}
 }

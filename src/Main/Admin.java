@@ -147,11 +147,51 @@ public class Admin {
 		for (String currentLandName : landName) {
 			for (GameSquare gameSquare : Main.gameSquares)
 				if (gameSquare instanceof Land)
-					if (((Land)gameSquare).getName().equals(currentLandName)) {
+					if (((Land) gameSquare).getName().equals(currentLandName)) {
 						System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
-							+ " is given the ownership of "	+ currentLandName);
+							+ " is given the ownership of " + currentLandName);
 						Main.players[playerID].getOwnership((Land) gameSquare);
 					}
+		}
+		refreshUI();
+	}
+	
+	// Remove the ownership of LAND from PLAYER
+	public static void removeOwnership(Player player, GameSquare... land) {
+		for (GameSquare currentLand : land) {
+			if (currentLand instanceof Land) {
+				System.out.println("ADMIN -> Player:" + player.getName()
+					+ "'s ownership is removed from "
+					+ ((Land) currentLand).getName());
+				player.getOwnership((Land) currentLand);// TODO change to remove
+			}
+		}
+		refreshUI();
+	}
+	
+	// Remove the ownership of LAND from PLAYER
+	public static void removeOwnership(Player player, int... landID) {
+		for (int currentLandID : landID) {
+			if (Main.gameSquares[currentLandID] instanceof Land) {
+				System.out.println("ADMIN -> Player:" + player.getName()
+					+ "'s ownership is removed from "
+					+ ((Land) Main.gameSquares[currentLandID]).getName());
+				player.getOwnership((Land) Main.gameSquares[currentLandID]);// TODO change to remove
+			}
+		}
+		refreshUI();
+	}
+	
+	// Remove the ownership of LAND from PLAYER
+	public static void removeOwnership(int playerID, String... landName) {
+		for (String currentLandName : landName) {
+			for (GameSquare gameSquare : Main.gameSquares)
+				if (gameSquare instanceof Land)
+					if (((Land) gameSquare).getName().equals(currentLandName)) {
+						System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
+							+ "'s ownership is removed from " + currentLandName);
+						Main.players[playerID].getOwnership((Land) gameSquare);// TODO change to remove
+				}
 		}
 		refreshUI();
 	}
