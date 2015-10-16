@@ -316,7 +316,7 @@ public class Debug extends JFrame implements ActionListener {
 		}
 	}
 	
-	private void setAction() {  ///move player tolarý deðiþtir
+	private void setAction() {  
 		players[0].setMoney(Integer.parseInt(moneyField1.getText()));
 		players[1].setMoney(Integer.parseInt(moneyField2.getText()));
 		players[2].setMoney(Integer.parseInt(moneyField3.getText()));
@@ -373,6 +373,7 @@ public class Debug extends JFrame implements ActionListener {
 		}
 		
 		Board.informationTable.refreshData();
+		Board.informationTable.validate();
 	}
 	
 }
