@@ -38,14 +38,14 @@ public class List extends JPanel implements ListSelectionListener {
 		list.addListSelectionListener(this);
 		list.setVisibleRowCount(12);
 		JScrollPane listScrollPane = new JScrollPane(list);
-		listScrollPane.setPreferredSize(new Dimension( ((int)listScrollPane.getPreferredSize().getWidth()) , ((int)listScrollPane.getPreferredSize().getHeight())));
+		listScrollPane.setPreferredSize(new Dimension( ((int)listScrollPane.getPreferredSize().getWidth() + 20 ) , ((int)listScrollPane.getPreferredSize().getHeight())));
 		
 		sellButton = new JButton("SELL");
 		sellButton.setActionCommand("SELL");
 		sellButton.addActionListener(new SellListener());
 
 		add(listScrollPane,BorderLayout.WEST);
-		label.setPreferredSize(new Dimension( ((int)label.getPreferredSize().getWidth()) + 10 , ((int) label.getPreferredSize().getHeight())  ));
+		label.setPreferredSize(new Dimension( ((int)label.getPreferredSize().getWidth()) , ((int) label.getPreferredSize().getHeight())));
 		add(label);
 		add(sellButton,BorderLayout.AFTER_LAST_LINE);
 	}
@@ -85,8 +85,10 @@ public class List extends JPanel implements ListSelectionListener {
 		
 			Land a = list.getSelectedValue();
 			
-			if(  !(a == null) )
+			if(  !(a == null) ) {
 			label.setText(a.toString2());
+			label.setPreferredSize(new Dimension( ((int)label.getPreferredSize().getWidth()) + 10 , ((int) label.getPreferredSize().getHeight())));
+			}
 			
 			if (list.getSelectedIndex() == -1) {
 				// No selection, disable sell button.
@@ -105,7 +107,7 @@ public class List extends JPanel implements ListSelectionListener {
 		JFrame frame = new JFrame("Lands to Sell");
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		frame.add(a);
-		frame.pack();
+		frame.setSize(380, 280);
 		frame.setVisible(true);
 	}
 
