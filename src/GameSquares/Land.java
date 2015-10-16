@@ -72,6 +72,10 @@ public class Land extends GameSquare {
 		this.owner.sellLand(this);
 	}
 	
+	public Player getOwner() {
+		return this.owner;
+	}
+	
 	// ////////// DO NOT USE THESE METHODS - THESE ARE JUST FOR DEBUGGING ////////// //
 	public void setName(String name) {
 		this.name = name;
@@ -95,13 +99,13 @@ public class Land extends GameSquare {
 	// ///////////////////////////////////////////////////////////////////////////// //
 	
 	public String toString() {
-			return name;
+		return name;
 	}
 	
 	public String toString2() {
 		if (doubleRent)
 			return name + "\n Color: " + color + "\n Price: " + price
-				+ "\n Rent: " + rent * 2 + " (Doubled since a player owns all three of these colour.)";				
+				+ "\n Rent: " + rent * 2 + " (Doubled since a player owns all three of these colour.)";
 		else
 			return name + "\n Color: " + color + "\n Price: " + price
 				+ "\n Rent: " + rent;
