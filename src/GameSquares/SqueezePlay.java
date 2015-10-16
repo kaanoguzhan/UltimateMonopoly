@@ -19,7 +19,7 @@ public class SqueezePlay extends GameSquare {
 	@Override
 	public void onArrive(Player pl) {
 		
-		gui.SqueezePlay r = new gui.SqueezePlay(pl);
+		gui.AdditionalWindows.SqueezePlay r = new gui.AdditionalWindows.SqueezePlay(pl);
 		r.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		r.setSize(350, 200);
 		r.setVisible(true);		

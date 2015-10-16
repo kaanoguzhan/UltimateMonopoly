@@ -60,6 +60,9 @@ public class Player {
 		if (money >= amount) {
 			money -= amount;
 			System.out.println(name + "'s money decreased by " + amount + " to " + money);
+		} else if(ownedLands.size()>0){
+			//selectLandsToSell();
+			reduceMoney(0);
 		} else {
 			location = Properties.Heaven;
 			System.out.println(name + " is bankrupt.");
