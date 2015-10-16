@@ -15,16 +15,13 @@ public class Dice {
 		return roll;
 	}
 
-	public ArrayList<Integer> rollWithSpeedDie() {
-		ArrayList<Integer> roll = new ArrayList<Integer>();
-		roll.add(new Random().nextInt(6) + 1);
-		roll.add(new Random().nextInt(6) + 1);
-		int rollSpeed = (new Random().nextInt(6) + 1);
+	public int[] rollWithSpeedDie() {
+		int rollSpeed = new Random().nextInt(6) + 1;
+		int[] roll = { new Random().nextInt(6) + 1, new Random().nextInt(6) + 1, rollSpeed };
 		switch (rollSpeed) {
 		case 1:
 		case 2:
 		case 3:
-			roll.add(rollSpeed);
 			bus = false;
 			monopolyGuy = false;
 			break;

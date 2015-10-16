@@ -19,12 +19,11 @@ public class RollingTheDice extends JPanel implements ActionListener {
 	private Player player;
 	private String playerNAME;
 	private JLabel playerName, result, dice, whichPlayer;
-	private JButton button, end, sell, speed;
+	private JButton button, end, sell;
 	private boolean alreadyRolled = false;
 
 	public RollingTheDice() {
 		setLayout(null);
-		speed = new JButton();
 		sell = new JButton();
 		button = new JButton();
 		dice = new JLabel();
@@ -58,15 +57,8 @@ public class RollingTheDice extends JPanel implements ActionListener {
 
 		sell = new JButton("Sell");
 		sell.addActionListener(this);
-		sell.setBounds(108, 140, ((int) sell.getPreferredSize().getWidth()),
-				((int) sell.getPreferredSize().getHeight()));
+		sell.setBounds(7, 140, ((int) sell.getPreferredSize().getWidth()), ((int) sell.getPreferredSize().getHeight()));
 		add(sell);
-
-		speed.addActionListener(this);
-		speed.setText("Speed Die");
-		speed.setBounds(7, 140, ((int) speed.getPreferredSize().getWidth()), ((int) speed.getPreferredSize()
-				.getHeight()));
-		add(speed);
 
 	}
 
@@ -85,66 +77,84 @@ public class RollingTheDice extends JPanel implements ActionListener {
 				.getPreferredSize().getHeight()));
 
 		button.setEnabled(false);
-		speed.setEnabled(false);
+		// if (arg0.getSource() == button) {
+		// int[] roll = new Dice().roll2();
+		// int roll1 = roll[0];
+		// int roll2 = roll[1];
+		// alreadyRolled = true;
+		// result.setText("dice rolled : " + roll1 + "," + roll2);
+		// result.setBounds(7, 115, ((int)
+		// result.getPreferredSize().getWidth()), ((int)
+		// result.getPreferredSize()
+		// .getHeight()));
+		// movePlayer(roll1 + roll2);
+		//
+		// if (roll1 == roll2) {
+		// new
+		// gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
+		// button.setEnabled(true);
+		// } else {
+		// end.setEnabled(true);
+		// }
+		// }
 		if (arg0.getSource() == button) {
-			int[] roll = new Dice().roll2();
+			int[] roll = new Dice().rollWithSpeedDie();
 			int roll1 = roll[0];
 			int roll2 = roll[1];
+			int rollSpeed = roll[2];
 			alreadyRolled = true;
-			result.setText("dice rolled : " + roll1 + "," + roll2);
-			result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result.getPreferredSize()
-					.getHeight()));
-			movePlayer(roll1 + roll2);
 
+			if (Dice.isMonopolyGuy()) {
+				result.setText("dice rolled : " + roll1 + "," + roll2 + "," + rollSpeed);
+				result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result.getPreferredSize()
+						.getHeight()));
+				movePlayer(roll1 + roll2);
+				new gui.AdditionalWindows.MessageDisplayer("You rolled MonopolyGuy !");
+				// MonopolyGuy metodu
+				if (roll1 != roll2)
+					end.setEnabled(true);
+			} else if (Dice.isBus()) {
+				result.setText("dice rolled : " + roll1 + "," + roll2 + "," + rollSpeed);
+				result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result.getPreferredSize()
+						.getHeight()));
+				new gui.AdditionalWindows.MessageDisplayer("You rolled Bus !");
+				// Bus metodu ( roll1,roll2, roll1+rool2)'den biri kadar git
+				if (roll1 != roll2)
+					end.setEnabled(true);
+			} else {
+				result.setText("dice rolled : " + roll1 + "," + roll2 + "," + rollSpeed);
+				result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result.getPreferredSize()
+						.getHeight()));
+				movePlayer(roll1 + roll2 + rollSpeed);
+				if (roll1 != roll2)
+					end.setEnabled(true);
+			}
 			if (roll1 == roll2) {
+				if (roll1 == rollSpeed) {
+					new gui.AdditionalWindows.MessageDisplayer("You rolled triples, you can go everywhere you can!");
+					// Nereye gitmek istersin? gitme kodu
+					end.setEnabled(true);
+				}
 				new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
 				button.setEnabled(true);
 			} else {
 				end.setEnabled(true);
 			}
-		} else if (arg0.getSource() == speed) {
-			ArrayList<Integer> roll = new Dice().rollWithSpeedDie();
-			int roll1 = roll.get(0);
-			int roll2 = roll.get(1);
-			if (Dice.isMonopolyGuy()) {
-				new gui.AdditionalWindows.MessageDisplayer("You rolled MonopolyGuy !");
-				end.setEnabled(true);
-			} else if (Dice.isBus()) {
-				new gui.AdditionalWindows.MessageDisplayer("You rolled Bus !");
-				end.setEnabled(true);
-			} else {
-				int rollSpeed = roll.get(2);
-				alreadyRolled = true;
-				result.setText("dice rolled : " + roll1 + "," + roll2 + "," + rollSpeed);
-				result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result.getPreferredSize()
-						.getHeight()));
-				movePlayer(roll1 + roll2 + rollSpeed);
 
-				if (roll1 == roll2 || roll2 == rollSpeed) {
-					new gui.AdditionalWindows.MessageDisplayer("You rolled triples, you can go everywhere you can!");
-					// Nereye gitmek istersin? gitme kodu?
-					end.setEnabled(true);
-				} else {
-					end.setEnabled(true);
-				}
-			}
 		} else if (arg0.getSource() == end) {
 			Main.Main.endRound();
 			whichPlayer.setText(playerNAME + " has ended his/her turn");
 			whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
 					.getPreferredSize().getHeight()));
 			alreadyRolled = false;
-			speed.setEnabled(true);
 		} else if (arg0.getSource() == sell) {
 			gui.List.createAndShowGUI(player.getOwnedLands());
 
 			if (alreadyRolled) {
 				button.setEnabled(false);
-				speed.setEnabled(false);
 				end.setEnabled(true);
 			} else {
 				button.setEnabled(true);
-				speed.setEnabled(true);
 				end.setEnabled(false);
 			}
 			alreadyRolled = false;
