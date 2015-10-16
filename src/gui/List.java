@@ -85,7 +85,7 @@ public class List extends JPanel implements ListSelectionListener {
 		}
 	
 
-	private static void createAndShowGUI(ArrayList<Land> lands) {
+	public static void createAndShowGUI(ArrayList<Land> lands) {
 		// Create and set up the window.
 		List a = new List(lands); // finna get lands
 		JFrame frame = new JFrame("Lands to Sell");

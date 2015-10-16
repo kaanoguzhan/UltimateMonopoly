@@ -61,7 +61,7 @@ public class Player {
 			money -= amount;
 			System.out.println(name + "'s money decreased by " + amount + " to " + money);
 		} else if(ownedLands.size()>0){
-			//selectLandsToSell();
+			gui.List.createAndShowGUI(ownedLands);
 			reduceMoney(0);
 		} else {
 			location = Properties.Heaven;
