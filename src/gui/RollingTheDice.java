@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +18,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
 	
 	private static final long	serialVersionUID	= 1L;
 	private Player				player;
-	private String				playerNAME;
 	private JLabel				playerName, result, dice, whichPlayer;
 	private JButton				button, end, sell;
 	private int					moveTo;
@@ -36,6 +36,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 		add(dice);
 		
 		whichPlayer = new JLabel("It Player 1's turn");
+				whichPlayer.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
 			.getPreferredSize().getHeight()));
 		add(whichPlayer);
@@ -43,6 +44,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 		result.setText("result is: ");
 		result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result.getPreferredSize()
 			.getHeight()));
+		result.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		add(result);
 		
 		end = new JButton("End Round");
@@ -65,15 +67,11 @@ public class RollingTheDice extends JPanel implements ActionListener {
 	
 	public void actionPerformed(ActionEvent arg0) {
 		// Create the Dice and roll
-		if (player != null) {
-			playerNAME = player.getName();
-		} else
-			playerNAME = "..";
-		
 		if (!(player.getOwnedLands().isEmpty()))
 			sell.setEnabled(true);
 		
-		whichPlayer.setText((playerNAME + " is playing, h/she has the icon number: " + player.getID()));
+		whichPlayer
+			.setText((Admin.getPlayerName(player) + " is playing, h/she has the icon number: " + player.getID()));
 		whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
 			.getPreferredSize().getHeight()));
 		
@@ -146,11 +144,12 @@ public class RollingTheDice extends JPanel implements ActionListener {
 			
 		} else if (arg0.getSource() == end) {
 			Main.Main.endRound();
-			whichPlayer.setText(playerNAME + " has ended his/her turn. Now its "
+			whichPlayer.setText(Admin.getPlayerName(player) + " has ended his/her turn. Now its "
 				+ Admin.getNextPlayerName(player.getID()) + "'s turn.");
 			whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
 				.getPreferredSize().getHeight()));
 			alreadyRolled = false;
+			sell.setEnabled(false);
 		} else if (arg0.getSource() == sell) {
 			gui.List.createAndShowGUI(player.getOwnedLands());
 			
@@ -162,12 +161,12 @@ public class RollingTheDice extends JPanel implements ActionListener {
 				end.setEnabled(false);
 			}
 			alreadyRolled = false;
-			sell.setEnabled(false);
 		}
 		
 		Board.informationTable.refreshData();
 		Board.informationTable.validate();
 	}
+	
 	private void movePlayer(int amount) {
 		int location = player.getLocation();
 		location = (location + amount) % 20;
@@ -185,9 +184,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 		this.player = player;
 		button.setEnabled(true);
 		end.setEnabled(false);
-		
-		if (!(alreadyRolled) || player.getOwnedLands().isEmpty())
-			sell.setEnabled(false);
+		sell.setEnabled(!player.getOwnedLands().isEmpty());
 		
 		switch (player.getID()) {
 			case 0:

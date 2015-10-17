@@ -20,7 +20,7 @@ public class PlayerInfo extends JPanel {
 		setLayout(new BorderLayout());
 		
 		String[] column = { "Player Name", "Location", "Money", "Properties" };
-		data = new String[4][4];
+		data = new String[players.length][4];
 		
 		table = new JTable(data, column);
 		table.setFillsViewportHeight(true);

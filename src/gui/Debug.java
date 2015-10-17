@@ -21,7 +21,7 @@ import GameSquares.Land;
 import Main.Admin;
 import Main.Main;
 
-public class DeB extends JFrame {
+public class Debug extends JFrame {
 	private static final long	serialVersionUID	= 1L;
 	private JPanel				contentPane;
 	private JTextField			txtMoney0;
@@ -33,7 +33,7 @@ public class DeB extends JFrame {
 	private Choice				choiceOwnLan2, choiceNeuLand2;
 	private Choice				choiceOwnLan3, choiceNeuLand3;
 	
-	public DeB() {
+	public Debug() {
 		setBounds(100, 100, 643, 663);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -14,10 +14,8 @@ public class Chance extends GameSquare {
 	
 	@Override
 	public void onArrive(Player pl) {
-		
 		ChanceCard card = ChanceDeck.draw();
 		card.onDraw(pl);
-		
 	}
 	
 	@Override

@@ -18,10 +18,8 @@ public class CommunityChest extends GameSquare {
 	
 	@Override
 	public void onArrive(Player pl) {
-		
 		CommunityChestCard card = CommunityDeck.draw();
 		card.onDraw(pl);
-		
 	}
 	
 	@Override

@@ -46,7 +46,7 @@ public class Board extends JFrame implements ActionListener {
 		add(three);
 		three.setBounds(575, 660, 50, 40);
 		
-		round.setBounds(720, 0, 500, 250);
+		round.setBounds(720, 0, 1920, 250);
 		add(round);
 		
 		JButton debug = new JButton("Debug Window");
@@ -71,7 +71,7 @@ public class Board extends JFrame implements ActionListener {
 		setVisible(true);
 	}
 	public void actionPerformed(ActionEvent e) {
-		DeB frame = new DeB();
+		Debug frame = new Debug();
 		frame.setVisible(true);
 	}
 	
