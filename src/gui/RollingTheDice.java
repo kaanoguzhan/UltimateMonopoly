@@ -9,7 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import Main.Admin;
-import Main.Dice;
 import Main.Player;
 import gui.AdditionalWindows.InputReaders.GetOneOption;
 import gui.AdditionalWindows.InputReaders.GetTextInput;
@@ -60,7 +59,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 		
 		sell = new JButton("Sell");
 		sell.addActionListener(this);
-		sell.setBounds(7, 140, ((int) sell.getPreferredSize().getWidth()), ((int) sell.getPreferredSize().getHeight()));
+		sell.setBounds(7, 170, ((int) sell.getPreferredSize().getWidth()), ((int) sell.getPreferredSize().getHeight()));
 		add(sell);
 		
 	}
@@ -84,9 +83,10 @@ public class RollingTheDice extends JPanel implements ActionListener {
 			int rollSpeed = roll[2];
 			alreadyRolled = true;
 			
+			result.setText("<html>Dice:  " + roll1 + "," + roll2 + "<br>" + "SpeedDie:" + rollSpeed + "</html>");
 			if (!(roll1 == roll2 && roll2 == rollSpeed)) {
 				if (Dice.isMonopolyGuy()) {
-					result.setText("dice rolled : " + roll1 + "," + roll2 + "," + rollSpeed);
+					// result.setText("Dice: " + roll1 + "," + roll2 + " with SpeedDie:" + rollSpeed);
 					result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result
 						.getPreferredSize().getHeight()));
 					movePlayer(roll1 + roll2);
@@ -98,7 +98,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 					if (roll1 != roll2)
 						end.setEnabled(true);
 				} else if (Dice.isBus()) {
-					result.setText("dice rolled : " + roll1 + "," + roll2 + "," + rollSpeed);
+					// result.setText("Dice: " + roll1 + "," + roll2 + " with SpeedDie:" + rollSpeed);
 					result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result
 						.getPreferredSize().getHeight()));
 					new gui.AdditionalWindows.MessageDisplayer(" You rolled Bus !");
@@ -113,7 +113,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 					if (roll1 != roll2)
 						end.setEnabled(true);
 				} else {
-					result.setText("dice rolled : " + roll1 + "," + roll2 + "," + rollSpeed);
+					// result.setText("Dice: " + roll1 + "," + roll2 + " with SpeedDie:" + rollSpeed);
 					result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result
 						.getPreferredSize().getHeight()));
 					movePlayer(roll1 + roll2 + rollSpeed);
@@ -123,7 +123,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 			}
 			if (roll1 == roll2) {
 				if (roll1 == rollSpeed) {
-					result.setText("dice rolled : " + roll1 + "," + roll2 + "," + rollSpeed);
+					result.setText("Dice: " + roll1 + "," + roll2 + " with SpeedDie:" + rollSpeed);
 					result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result
 						.getPreferredSize().getHeight()));
 					new gui.AdditionalWindows.MessageDisplayer("You rolled triples, you can go everywhere you can!");

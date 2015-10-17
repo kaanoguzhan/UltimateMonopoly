@@ -1,7 +1,7 @@
 package GameSquares;
 
+import gui.Dice;
 import javax.swing.WindowConstants;
-import Main.Dice;
 import Main.Player;
 
 public class SqueezePlay extends GameSquare {

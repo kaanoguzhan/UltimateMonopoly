@@ -1,5 +1,7 @@
 package Main;
 
+import gui.Dice;
+
 public class Test {
 	
 	private Player[]	players;
