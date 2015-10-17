@@ -1,5 +1,7 @@
 package gui;
 
+import gui.AdditionalWindows.InputReaders.GetOneOption;
+import gui.AdditionalWindows.InputReaders.GetTextInput;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -9,17 +11,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import Main.Admin;
-import Main.Player;
-import gui.AdditionalWindows.InputReaders.GetOneOption;
-import gui.AdditionalWindows.InputReaders.GetTextInput;
+import Main.Properties;
 
 public class RollingTheDice extends JPanel implements ActionListener {
 	
 	private static final long	serialVersionUID	= 1L;
-	private Player				player;
+	private int					playerID;
 	private JLabel				playerName, result, dice, whichPlayer;
 	private JButton				button, end, sell;
-	private int					moveTo;
 	private boolean				alreadyRolled		= false;
 	
 	public RollingTheDice() {
@@ -65,11 +64,12 @@ public class RollingTheDice extends JPanel implements ActionListener {
 	
 	public void actionPerformed(ActionEvent arg0) {
 		// Create the Dice and roll
-		if (!(player.getOwnedLands().isEmpty()))
+		if (Admin.playerHasLand(playerID))
 			sell.setEnabled(true);
 		
 		whichPlayer
-			.setText((Admin.getPlayerName(player) + " is playing, h/she has the icon number: " + player.getID()));
+			.setText((Admin.getPlayerName(playerID) + " is playing, h/she has the icon number: " +
+			Admin.getPlayerID(playerID)));
 		whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
 			.getPreferredSize().getHeight()));
 		
@@ -92,7 +92,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 					new gui.AdditionalWindows.MessageDisplayer(" You rolled MonopolyGuy !");
 					
 					if (Admin.allLandsOwned())
-						Admin.movePlayerToNextNeutralLand(player);
+						Admin.movePlayerToNextNeutralLand(playerID);
 					
 					if (roll1 != roll2)
 						end.setEnabled(true);
@@ -127,12 +127,11 @@ public class RollingTheDice extends JPanel implements ActionListener {
 					// .getPreferredSize().getHeight()));
 					new gui.AdditionalWindows.MessageDisplayer("You rolled triples, you can go everywhere you can!");
 					
-					while (!(moveTo < 0) || (19 < moveTo))
+					int moveTo = Integer.MAX_VALUE;
+					while (!((0 <= moveTo) && (moveTo < Properties.TOTAL_SQUARES)))
 						moveTo = new GetTextInput(
 							"Enter the square you want to go, should be between 0 (GO) and 19(Pennysylvania)").getInt();
-					int current = player.getLocation();
-					
-					movePlayer((moveTo - current) % 20);
+					Admin.movePlayerBy(playerID, moveTo);
 					
 					
 					end.setEnabled(true);
@@ -146,14 +145,14 @@ public class RollingTheDice extends JPanel implements ActionListener {
 			
 		} else if (arg0.getSource() == end) {
 			Main.Main.endRound();
-			whichPlayer.setText(Admin.getPlayerName(player) + " has ended his/her turn. Now its "
-				+ Admin.getNextPlayerName(player.getID()) + "'s turn.");
+			whichPlayer.setText(Admin.getPlayerName(playerID) + " has ended his/her turn. Now its "
+				+ Admin.getNextPlayerName(playerID) + "'s turn.");
 			whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
 				.getPreferredSize().getHeight()));
 			alreadyRolled = false;
 			sell.setEnabled(false);
 		} else if (arg0.getSource() == sell) {
-			gui.AdditionalWindows.List.createAndShowGUI(player.getOwnedLands());
+			gui.AdditionalWindows.List.createAndShowGUI(Admin.getPlayerLands(playerID));
 			
 			if (alreadyRolled) {
 				button.setEnabled(false);
@@ -168,27 +167,26 @@ public class RollingTheDice extends JPanel implements ActionListener {
 		Board.informationTable.refreshData();
 		Board.informationTable.validate();
 	}
-	
 	private void movePlayer(int amount) {
-		int location = player.getLocation();
+		int location = Admin.getPlayerLocation(playerID);
 		location = (location + amount) % 20;
 		
-		int x = Board.squareHolder.getSquare(location).getX() - (player.getID() * 25);
+		int x = Board.squareHolder.getSquare(location).getX() - (Admin.getPlayerID(playerID) * 25);
 		int y = Board.squareHolder.getSquare(location).getY();
 		
 		playerName.setBounds(x, y, 50, 40);
-		player.moveBy(amount);
+		Admin.movePlayerBy(playerID, amount);
 		
 		Board.informationTable.refreshData();
 	}
 	
-	public void setCurrentPlayer(Player player) {
-		this.player = player;
+	public void setCurrentPlayer(int playerID) {
+		this.playerID = playerID;
 		button.setEnabled(true);
 		end.setEnabled(false);
-		sell.setEnabled(!player.getOwnedLands().isEmpty());
+		sell.setEnabled(Admin.playerHasLand(playerID));
 		
-		switch (player.getID()) {
+		switch (Admin.getPlayerID(playerID)) {
 			case 0:
 				this.playerName = Board.zero;
 				break;

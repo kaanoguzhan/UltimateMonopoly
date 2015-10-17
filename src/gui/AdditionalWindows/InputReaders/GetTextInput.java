@@ -15,6 +15,9 @@ public class GetTextInput {
 	}
 	
 	public int getInt() {
-		return Integer.parseInt(Answer);
+		if (Answer.length() > 0)
+			return Integer.parseInt(Answer);
+		else
+			return 0;
 	}
 }

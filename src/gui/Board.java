@@ -75,7 +75,11 @@ public class Board extends JFrame implements ActionListener {
 		frame.setVisible(true);
 	}
 	
+	// public void setCurrentPlayer(int id) {
+	// round.setCurrentPlayer(this.players[id]);
+	// }
+	
 	public void setCurrentPlayer(int id) {
-		round.setCurrentPlayer(this.players[id]);
+		round.setCurrentPlayer(id);
 	}
 }

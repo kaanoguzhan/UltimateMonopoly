@@ -1,5 +1,6 @@
 package Main;
 
+import java.util.ArrayList;
 import gui.Board;
 import GameSquares.GameSquare;
 import GameSquares.Land;
@@ -23,6 +24,14 @@ public class Admin extends Main {
 		System.out.println("ADMIN -> Player:" + player.getName()
 			+ " is moved by " + amount);
 		player.moveBy(amount);
+		refreshUI();
+	}
+	
+	// Move PLAYER by AMOUNT and CALL onArrive()
+	public static void movePlayerBy(int playerID, int amount) {
+		System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
+			+ " is moved by " + amount);
+		Main.players[playerID].moveBy(amount);
 		refreshUI();
 	}
 	
@@ -250,6 +259,56 @@ public class Admin extends Main {
 	public static String getNextPlayerName(Player player) {
 		return Main.players[(player.getID() + 1) % Main.players.length].getName();
 	}
+	
+	// Returns IF the PLAYER HAS any LAND
+	public static boolean playerHasLand(int playerID) {
+		return !Main.players[playerID].getOwnedLands().isEmpty();
+	}
+	
+	// Return NEXT PLAYER's ID
+	public static int getPlayerID(int playerID) {
+		return Main.players[playerID].getID();
+	}
+	
+	// Return NEXT PLAYER's ID
+	public static int getPlayerID(Player player) {
+		return player.getID();
+	}
+	
+	// Returns PLAYER's OWNED LANDS
+	public static ArrayList<Land> getPlayerLands(int playerID) {
+		return Main.players[playerID].getOwnedLands();
+	}
+	
+	// Returns PLAYER's OWNED LANDS
+	public static ArrayList<Land> getPlayerLands(Player player) {
+		return player.getOwnedLands();
+	}
+	
+	// Moves PLAYER to NEXT NOT OWNED LAND
+	public static void movePlayerToNextNeutralLand(Player player) {
+		for (int i = 0; i < Main.gameSquares.length; i++) {
+			GameSquare nextGS = Main.gameSquares[(player.getLocation() + i) % Main.gameSquares.length];
+			if (nextGS instanceof Land && !((Land) nextGS).isOwned()) {
+				movePlayerTo(player, nextGS);
+				refreshUI();
+				break;
+			}
+		}
+	}
+	
+	// Moves PLAYER to NEXT NOT OWNED LAND
+	public static void movePlayerToNextNeutralLand(int playerID) {
+		for (int i = 0; i < Main.gameSquares.length; i++) {
+			GameSquare nextGS = Main.gameSquares[(Main.players[playerID].getLocation() + i) % Main.gameSquares.length];
+			if (nextGS instanceof Land && !((Land) nextGS).isOwned()) {
+				movePlayerTo(Main.players[playerID], nextGS);
+				refreshUI();
+				break;
+			}
+		}
+	}
+	
 	/************************/
 	/** Land admin methods **/
 	/************************/
@@ -296,17 +355,5 @@ public class Admin extends Main {
 	/*********************/
 	private static void refreshUI() {
 		Board.informationTable.refreshData();
-	}
-	
-	
-	public static void movePlayerToNextNeutralLand(Player player) {
-		for (int i = 0; i < Main.gameSquares.length; i++) {
-			GameSquare nextGS = Main.gameSquares[(player.getLocation() + i) % Main.gameSquares.length];
-			if (nextGS instanceof Land && !((Land) nextGS).isOwned()) {
-				movePlayerTo(player, nextGS);
-				refreshUI();
-				break;
-			}
-		}
 	}
 }
