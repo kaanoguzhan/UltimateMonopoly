@@ -40,26 +40,25 @@ public class RollingTheDice extends JPanel implements ActionListener {
 			.getPreferredSize().getHeight()));
 		add(whichPlayer);
 		
-		result.setText("result is: ");
-		result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result.getPreferredSize()
-			.getHeight()));
+		result.setText("<html>Dice:<br>SpeedDie:</html>");
 		result.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		result.setBounds(12, 150, ((int) result.getPreferredSize().getWidth()) * 2, ((int) result.getPreferredSize()
+			.getHeight()));
 		add(result);
 		
 		end = new JButton("End Round");
-		end.setBounds(70, 75, ((int) end.getPreferredSize().getWidth()), ((int) end.getPreferredSize().getHeight()));
+		end.setBounds(140, 80, 116, 61);
 		add(end);
 		end.addActionListener(this);
 		
 		button.addActionListener(this);
 		button.setText("Roll");
-		button.setBounds(7, 75, ((int) button.getPreferredSize().getWidth()), ((int) button.getPreferredSize()
-			.getHeight()));
+		button.setBounds(7, 80, 116, 61);
 		add(button);
 		
 		sell = new JButton("Sell");
 		sell.addActionListener(this);
-		sell.setBounds(7, 170, ((int) sell.getPreferredSize().getWidth()), ((int) sell.getPreferredSize().getHeight()));
+		sell.setBounds(7, 200, 116, 40);
 		add(sell);
 		
 	}
@@ -83,12 +82,12 @@ public class RollingTheDice extends JPanel implements ActionListener {
 			int rollSpeed = roll[2];
 			alreadyRolled = true;
 			
-			result.setText("<html>Dice:  " + roll1 + "," + roll2 + "<br>" + "SpeedDie:" + rollSpeed + "</html>");
+			result.setText("<html>Dice: " + roll1 + "," + roll2 + "<br>" + "SpeedDie: " + rollSpeed + "</html>");
 			if (!(roll1 == roll2 && roll2 == rollSpeed)) {
 				if (Dice.isMonopolyGuy()) {
 					// result.setText("Dice: " + roll1 + "," + roll2 + " with SpeedDie:" + rollSpeed);
-					result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result
-						.getPreferredSize().getHeight()));
+					// result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result
+					// .getPreferredSize().getHeight()));
 					movePlayer(roll1 + roll2);
 					new gui.AdditionalWindows.MessageDisplayer(" You rolled MonopolyGuy !");
 					
@@ -99,8 +98,8 @@ public class RollingTheDice extends JPanel implements ActionListener {
 						end.setEnabled(true);
 				} else if (Dice.isBus()) {
 					// result.setText("Dice: " + roll1 + "," + roll2 + " with SpeedDie:" + rollSpeed);
-					result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result
-						.getPreferredSize().getHeight()));
+					// result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result
+					// .getPreferredSize().getHeight()));
 					new gui.AdditionalWindows.MessageDisplayer(" You rolled Bus !");
 					
 					int option = new GetOneOption(roll1, roll2, roll1 + roll2,
@@ -114,8 +113,8 @@ public class RollingTheDice extends JPanel implements ActionListener {
 						end.setEnabled(true);
 				} else {
 					// result.setText("Dice: " + roll1 + "," + roll2 + " with SpeedDie:" + rollSpeed);
-					result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result
-						.getPreferredSize().getHeight()));
+					// result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result
+					// .getPreferredSize().getHeight()));
 					movePlayer(roll1 + roll2 + rollSpeed);
 					if (roll1 != roll2)
 						end.setEnabled(true);
@@ -123,9 +122,9 @@ public class RollingTheDice extends JPanel implements ActionListener {
 			}
 			if (roll1 == roll2) {
 				if (roll1 == rollSpeed) {
-					result.setText("Dice: " + roll1 + "," + roll2 + " with SpeedDie:" + rollSpeed);
-					result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result
-						.getPreferredSize().getHeight()));
+					// result.setText("Dice: " + roll1 + "," + roll2 + " with SpeedDie:" + rollSpeed);
+					// result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result
+					// .getPreferredSize().getHeight()));
 					new gui.AdditionalWindows.MessageDisplayer("You rolled triples, you can go everywhere you can!");
 					
 					while (!(moveTo < 0) || (19 < moveTo))

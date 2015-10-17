@@ -26,22 +26,22 @@ public class Board extends JFrame implements ActionListener {
 		this.players = players;
 		this.gameSquares = gameSquares;
 		
-		ImageIcon image0 = new ImageIcon("0.gif");
+		ImageIcon image0 = new ImageIcon("playerIcon1.gif");
 		zero = new JLabel(image0);
 		add(zero);
 		zero.setBounds(650, 660, 50, 40);
 		
-		ImageIcon image1 = new ImageIcon("1.gif");
+		ImageIcon image1 = new ImageIcon("playerIcon2.gif");
 		one = new JLabel(image1);
 		add(one);
 		one.setBounds(625, 660, 50, 40);
 		
-		ImageIcon image2 = new ImageIcon("2.gif");
+		ImageIcon image2 = new ImageIcon("playerIcon3.gif");
 		two = new JLabel(image2);
 		add(two);
 		two.setBounds(600, 660, 50, 40);
 		
-		ImageIcon image3 = new ImageIcon("3.gif");
+		ImageIcon image3 = new ImageIcon("playerIcon4.gif");
 		three = new JLabel(image3);
 		add(three);
 		three.setBounds(575, 660, 50, 40);
@@ -50,7 +50,7 @@ public class Board extends JFrame implements ActionListener {
 		add(round);
 		
 		JButton debug = new JButton("Debug Window");
-		debug.setBounds(950, 630, 120, 70);
+		debug.setBounds(1150, 630, 120, 70);
 		add(debug);
 		debug.addActionListener(this);
 		
