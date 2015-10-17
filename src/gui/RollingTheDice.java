@@ -93,6 +93,8 @@ public class RollingTheDice extends JPanel implements ActionListener {
 					
 					if (Admin.allLandsOwned())
 						Admin.movePlayerToNextNeutralLand(playerID);
+					else 
+						Admin.movePlayerToNextLand(playerID);
 					
 					if (roll1 != roll2)
 						end.setEnabled(true);

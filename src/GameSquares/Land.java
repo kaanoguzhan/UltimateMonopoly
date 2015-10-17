@@ -37,11 +37,14 @@ public class Land extends GameSquare {
 			
 			if (buy) {
 				if (pl.getMoney() >= price) {
+					int tempPrice = this.price;
 					if (bargain) {
 						this.price = Properties.BARGAINBUSINESS_PRICE;
 						pl.removeBargainBusinessCard();
 					}
 					pl.buyLand(this);
+					this.price = tempPrice;
+					
 					System.out.println("Player bought " + this.name + ". Player has "
 						+ pl.getNumberOfOwnedByColor(this.color) + " of this color");
 					if (pl.getNumberOfOwnedByColor(this.color) == 3)

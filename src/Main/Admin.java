@@ -288,9 +288,9 @@ public class Admin extends Main {
 	// Moves PLAYER to NEXT NOT OWNED LAND
 	public static void movePlayerToNextNeutralLand(Player player) {
 		for (int i = 0; i < Main.gameSquares.length; i++) {
-			GameSquare nextGS = Main.gameSquares[(player.getLocation() + i) % Main.gameSquares.length];
-			if (nextGS instanceof Land && !((Land) nextGS).isOwned()) {
-				movePlayerTo(player, nextGS);
+			GameSquare nextGameSquare = Main.gameSquares[(player.getLocation() + i) % Main.gameSquares.length];
+			if (nextGameSquare instanceof Land && !((Land) nextGameSquare).isOwned()) {
+				movePlayerTo(player, nextGameSquare);
 				refreshUI();
 				break;
 			}
@@ -300,9 +300,35 @@ public class Admin extends Main {
 	// Moves PLAYER to NEXT NOT OWNED LAND
 	public static void movePlayerToNextNeutralLand(int playerID) {
 		for (int i = 0; i < Main.gameSquares.length; i++) {
-			GameSquare nextGS = Main.gameSquares[(Main.players[playerID].getLocation() + i) % Main.gameSquares.length];
-			if (nextGS instanceof Land && !((Land) nextGS).isOwned()) {
-				movePlayerTo(Main.players[playerID], nextGS);
+			GameSquare nextGameSquare = Main.gameSquares[(Main.players[playerID].getLocation() + i)
+				% Main.gameSquares.length];
+			if (nextGameSquare instanceof Land && !((Land) nextGameSquare).isOwned()) {
+				movePlayerTo(Main.players[playerID], nextGameSquare);
+				refreshUI();
+				break;
+			}
+		}
+	}
+	
+	// Moves PLAYER to NEXT LAND
+	public static void movePlayerToNextLand(Player player) {
+		for (int i = 0; i < Main.gameSquares.length; i++) {
+			GameSquare nextGameSquare = Main.gameSquares[(player.getLocation() + i) % Main.gameSquares.length];
+			if (nextGameSquare instanceof Land) {
+				movePlayerTo(player, nextGameSquare);
+				refreshUI();
+				break;
+			}
+		}
+	}
+	
+	// Moves PLAYER to NEXT LAND
+	public static void movePlayerToNextLand(int playerID) {
+		for (int i = 0; i < Main.gameSquares.length; i++) {
+			GameSquare nextGameSquare = Main.gameSquares[(Main.players[playerID].getLocation() + i)
+				% Main.gameSquares.length];
+			if (nextGameSquare instanceof Land) {
+				movePlayerTo(Main.players[playerID], nextGameSquare);
 				refreshUI();
 				break;
 			}
