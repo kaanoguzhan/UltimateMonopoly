@@ -82,9 +82,33 @@ public class PlayerInfo extends JPanel {
 					Player = Board.three;
 					break;
 			}
+			
 			int id = current.getLocation();
-			int x = Board.squareHolder.getSquare(id).getX() - (current.getID() * 25);
-			int y = Board.squareHolder.getSquare(id).getY();
+			int playerID = current.getID();
+			int x, y;
+			switch (playerID){
+				case 0:
+					x = Board.squareHolder.getSquare(id).getX() - 25;
+					y = Board.squareHolder.getSquare(id).getY() - 50;
+					break;
+				case 1:
+					x = Board.squareHolder.getSquare(id).getX() - 65;
+					y = Board.squareHolder.getSquare(id).getY() - 50;
+					break;
+				case 2:
+					x = Board.squareHolder.getSquare(id).getX() - 65;
+					y = Board.squareHolder.getSquare(id).getY() - 10;
+					break;
+				case 3:
+					x = Board.squareHolder.getSquare(id).getX() - 25;
+					y = Board.squareHolder.getSquare(id).getY() - 10;
+					break;
+				default:
+					x = Board.squareHolder.getSquare(id).getX() - (current.getID() * 30);
+					y = Board.squareHolder.getSquare(id).getY();
+					break;
+			}
+
 			
 			if (Player != null)
 				Player.setBounds(x, y, 50, 40);

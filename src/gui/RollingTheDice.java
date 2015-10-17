@@ -173,8 +173,29 @@ public class RollingTheDice extends JPanel implements ActionListener {
 		int location = Admin.getPlayerLocation(playerID);
 		location = (location + amount) % 20;
 		
-		int x = Board.squareHolder.getSquare(location).getX() - (Admin.getPlayerID(playerID) * 25);
-		int y = Board.squareHolder.getSquare(location).getY();
+		int x, y;
+		switch (playerID){
+			case 0:
+				x = Board.squareHolder.getSquare(location).getX() - 25;
+				y = Board.squareHolder.getSquare(location).getY() - 50;
+				break;
+			case 1:
+				x = Board.squareHolder.getSquare(location).getX() - 65;
+				y = Board.squareHolder.getSquare(location).getY() - 50;
+				break;
+			case 2:
+				x = Board.squareHolder.getSquare(location).getX() - 65;
+				y = Board.squareHolder.getSquare(location).getY() - 10;
+				break;
+			case 3:
+				x = Board.squareHolder.getSquare(location).getX() - 25;
+				y = Board.squareHolder.getSquare(location).getY() - 10;
+				break;
+			default:
+				x = Board.squareHolder.getSquare(location).getX() - (playerID * 30);
+				y = Board.squareHolder.getSquare(location).getY();
+				break;
+		}
 		
 		playerName.setBounds(x, y, 50, 40);
 		Admin.movePlayerBy(playerID, amount);
