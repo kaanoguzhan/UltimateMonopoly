@@ -18,7 +18,7 @@ public class Player {
 	public Player(int id, String name, GameSquare[] gameSquares) {
 		this.id = id;
 		this.location = 0;
-		this.money = Properties.StartGold;
+		this.money = Properties.START_GOLD;
 		this.name = name;
 		this.gameSquares = gameSquares;
 		System.out.println("Player " + name + " with " + money + " added.");
@@ -26,10 +26,10 @@ public class Player {
 	
 	public void moveBy(int amount) {
 		location += amount;
-		if (location >= Properties.TotalSquares) {
+		if (location >= Properties.TOTAL_SQUARES) {
 			System.out.println(name + " passed Start Square.");
-			addMoney(Properties.PASSING_MONEY);
-			location = location % Properties.TotalSquares;
+			addMoney(Properties.START_PASSING_MONEY);
+			location = location % Properties.TOTAL_SQUARES;
 		}
 		System.out.println(name + " moved " + amount + " squares and now is at " + gameSquares[location].toString()
 			+ "\n You have: " + money);
@@ -37,15 +37,11 @@ public class Player {
 		gameSquares[location].onArrive(this);
 	}
 	
-	// public void moveBy(int[] amounts) {
-	// moveBy(amounts[0] + amounts[1]);
-	// }
-	
 	public void moveTo(int id) {
 		System.out.println(name + " is at " + gameSquares[id].toString());
 		if (location > id) {
 			System.out.println(name + " passed Start Square.");
-			addMoney(Properties.PASSING_MONEY);
+			addMoney(Properties.START_PASSING_MONEY);
 		}
 		location = id;
 		gameSquares[location].onArrive(this);
@@ -61,10 +57,10 @@ public class Player {
 			money -= amount;
 			System.out.println(name + "'s money decreased by " + amount + " to " + money);
 		} else if (ownedLands.size() > 0) {
-			gui.List.createAndShowGUI(ownedLands);
+			gui.AdditionalWindows.List.createAndShowGUI(ownedLands);
 			reduceMoney(0);
 		} else {
-			location = Properties.Heaven;
+			location = Properties.HEAVEN_LOCATION;
 			System.out.println(name + " is bankrupt.");
 		}
 	}
@@ -83,9 +79,9 @@ public class Player {
 		return Inventory.contains(cardType);
 	}
 	
-	public void removeCard(CommunityChestCardType cardType) {
-		Inventory.remove(cardType);
-	}
+	// public void removeCard(CommunityChestCardType cardType) {
+	// Inventory.remove(cardType);
+	// }
 	
 	public int getMoney() {
 		return money;
@@ -149,6 +145,18 @@ public class Player {
 	}
 	// ///////////////////////////////////////////////////////////////////////////// //
 	
+	public boolean hasBargainBusiness() {
+		if (Inventory.contains(CommunityChestCardType.BargainBusiness))
+			return true;
+		else
+			return false;
+	}
+	
+	public void removeBargainBusinessCard() {
+		Inventory.remove(CommunityChestCardType.BargainBusiness);
+	}
+	
+	
 	public String toString() {
 		String Lands = "[";
 		for (Land land : ownedLands) {
@@ -164,6 +172,8 @@ public class Player {
 			"\n" + "Has Cards:" + Inventory +
 			"\n" + "Has Lands:" + Lands;
 	}
+	
+	
 	
 	
 }

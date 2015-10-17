@@ -36,7 +36,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 		add(dice);
 		
 		whichPlayer = new JLabel("It Player 1's turn");
-				whichPlayer.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		whichPlayer.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
 			.getPreferredSize().getHeight()));
 		add(whichPlayer);
@@ -91,7 +91,10 @@ public class RollingTheDice extends JPanel implements ActionListener {
 						.getPreferredSize().getHeight()));
 					movePlayer(roll1 + roll2);
 					new gui.AdditionalWindows.MessageDisplayer(" You rolled MonopolyGuy !");
-					// MonopolyGuy metodu
+					
+					if (Admin.allLandsOwned())
+						Admin.movePlayerToNextNeutralLand(player);
+					
 					if (roll1 != roll2)
 						end.setEnabled(true);
 				} else if (Dice.isBus()) {
@@ -151,7 +154,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 			alreadyRolled = false;
 			sell.setEnabled(false);
 		} else if (arg0.getSource() == sell) {
-			gui.List.createAndShowGUI(player.getOwnedLands());
+			gui.AdditionalWindows.List.createAndShowGUI(player.getOwnedLands());
 			
 			if (alreadyRolled) {
 				button.setEnabled(false);

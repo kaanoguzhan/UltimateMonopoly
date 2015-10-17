@@ -1,11 +1,10 @@
 package Main;
 
 public class Properties {
+	public static final int	START_GOLD				= 1500;
+	public static final int	START_PASSING_MONEY		= 200;
+	public static final int	TOTAL_SQUARES			= 20;
+	public static final int	HEAVEN_LOCATION			= -1;
 	
-	public static int		StartGold		= 1500;
-	public static int		TotalSquares	= 20;
-	public static int		Heaven			= -1;
-	
-	public static final int	PASSING_MONEY	= 200;
-	
+	public static final int	BARGAINBUSINESS_PRICE	= 100;
 }

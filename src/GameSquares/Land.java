@@ -2,6 +2,7 @@ package GameSquares;
 
 import gui.AdditionalWindows.InputReaders.GetYesNoInput;
 import Main.Player;
+import Main.Properties;
 
 public class Land extends GameSquare {
 	
@@ -26,10 +27,20 @@ public class Land extends GameSquare {
 	@Override
 	public void onArrive(Player pl) {
 		if (this.owner == null) {
-			boolean buy = new GetYesNoInput(name, price).getValue();
+			boolean buy = new GetYesNoInput("For " + price + " dollars", "Would you like to buy " + name + " ?")
+				.getValue();
+			
+			boolean bargain = false;
+			if (pl.hasBargainBusiness())
+				bargain = new GetYesNoInput("You can use BargainBusiness", "Do you want to use it ?")
+					.getValue();
 			
 			if (buy) {
 				if (pl.getMoney() >= price) {
+					if (bargain) {
+						this.price = Properties.BARGAINBUSINESS_PRICE;
+						pl.removeBargainBusinessCard();
+					}
 					pl.buyLand(this);
 					System.out.println("Player bought " + this.name + ". Player has "
 						+ pl.getNumberOfOwnedByColor(this.color) + " of this color");
@@ -70,6 +81,14 @@ public class Land extends GameSquare {
 	@Override
 	public Player getOwner() {
 		return this.owner;
+	}
+	
+	public boolean isOwned()
+	{
+		if (this.owner != null)
+			return true;
+		else
+			return false;
 	}
 	
 	// ////////// DO NOT USE THESE METHODS - THESE ARE JUST FOR DEBUGGING ////////// //

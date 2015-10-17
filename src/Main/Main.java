@@ -59,7 +59,7 @@ public class Main {
 	}
 	
 	private static void initializeGameSquares() {
-		gameSquares = new GameSquare[Properties.TotalSquares];
+		gameSquares = new GameSquare[Properties.TOTAL_SQUARES];
 		
 		gameSquares[0] = new StartSquare(0);
 		gameSquares[1] = new Land(1, "Oriental Ave", color.blue, 100, 6);
