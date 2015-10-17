@@ -16,6 +16,7 @@ public abstract class GameSquare {
 	
 	public abstract void onArrive(Player pl);
 	
+	@Override
 	public abstract String toString();
 	
 	public void setCoordinates(int X, int Y) {
@@ -31,7 +32,7 @@ public abstract class GameSquare {
 		return owner;
 	}
 	
-	public int getID(){
+	public int getID() {
 		return id;
 	}
 }

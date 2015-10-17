@@ -3,20 +3,19 @@ package GameSquares;
 import Main.Player;
 
 public class StartSquare extends GameSquare {
-
+	
 	public StartSquare(int id) {
 		super(id);
 	}
-
+	
 	@Override
 	public void onArrive(Player pl) {
-		// TODO Auto-generated method stub
-
+		// Start Square does nothing!
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Start Square. Location: " + id;
 	}
-
+	
 }

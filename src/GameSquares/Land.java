@@ -26,13 +26,9 @@ public class Land extends GameSquare {
 	@Override
 	public void onArrive(Player pl) {
 		if (this.owner == null) {
-			// Just for testing will be removed with GUI
-			// Scanner scan = new Scanner(System.in);
-			// buy = scan.nextBoolean();
-			//
 			boolean buy = new GetYesNoInput(name, price).getValue();
 			
-			if (buy) { // (GUI) If player want to play ==> buy = true
+			if (buy) {
 				if (pl.getMoney() >= price) {
 					pl.buyLand(this);
 					System.out.println("Player bought " + this.name + ". Player has "
@@ -62,14 +58,16 @@ public class Land extends GameSquare {
 		return name;
 	}
 	
+	@Override
 	public void setOwner(Player player) {
 		this.owner = player;
 	}
 	
-	public void sell(){
+	public void sell() {
 		this.owner.sellLand(this);
 	}
 	
+	@Override
 	public Player getOwner() {
 		return this.owner;
 	}
@@ -96,6 +94,7 @@ public class Land extends GameSquare {
 	}
 	// ///////////////////////////////////////////////////////////////////////////// //
 	
+	@Override
 	public String toString() {
 		return name;
 	}

@@ -15,7 +15,7 @@ public class AdvanceToStCharlesPlace extends ChanceCard {
 		new MessageDisplayer(toString());
 		pl.moveTo(6);
 	}
-
+	
 	@Override
 	public String toString() {
 		return "You picked AdvanceToStCharlesPlace Card.";

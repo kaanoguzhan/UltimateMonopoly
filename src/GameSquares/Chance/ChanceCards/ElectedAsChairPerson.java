@@ -20,7 +20,7 @@ public class ElectedAsChairPerson extends ChanceCard {
 				pl.pay(players[i], 50);
 		}
 	}
-
+	
 	@Override
 	public String toString() {
 		return "You picked ElectedAsChairPerson Card. Now you will pay everyone.";

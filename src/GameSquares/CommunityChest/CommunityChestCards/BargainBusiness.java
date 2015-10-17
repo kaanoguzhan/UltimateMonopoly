@@ -6,17 +6,17 @@ import GameSquares.CommunityChest.CommunityChestCard;
 import Main.Player;
 
 public class BargainBusiness extends CommunityChestCard {
-
+	
 	public BargainBusiness() {
 		super();
 	}
-
+	
 	@Override
 	public void onDraw(Player pl) {
 		new MessageDisplayer(toString());
 		pl.addToInventory(CommunityChestCardType.BargainBusiness);
 	}
-
+	
 	@Override
 	public String toString() {
 		return "You picked BargainBusiness Card.";

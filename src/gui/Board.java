@@ -6,9 +6,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import GameSquares.GameSquare;
 import Main.Player;
 
@@ -23,7 +20,6 @@ public class Board extends JFrame implements ActionListener {
 	public static PlayerInfo	informationTable	= new PlayerInfo();
 	
 	public Board(Player[] players, GameSquare[] gameSquares) {
-		
 		super("Monototype");
 		setLayout(null);
 		
@@ -75,15 +71,8 @@ public class Board extends JFrame implements ActionListener {
 		setVisible(true);
 	}
 	public void actionPerformed(ActionEvent e) {
-		try {
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-			| UnsupportedLookAndFeelException e1) {
-			e1.printStackTrace();
-		}
 		DeB frame = new DeB();
 		frame.setVisible(true);
-		SwingUtilities.updateComponentTreeUI(frame);
 	}
 	
 	public void setCurrentPlayer(int id) {

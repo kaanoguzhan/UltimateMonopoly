@@ -7,19 +7,13 @@ import GameSquares.Land.color;
 import GameSquares.Chance.ChanceDeck;
 import GameSquares.CommunityChest.CommunityChestDeck;
 
-public class Admin {
+public class Admin extends Main {
 	
 	ChanceDeck			chanceDeck		= null;
 	CommunityChestDeck	communityDeck	= null;
 	GameSquare[]		gameSquares		= null;
 	Player[]			players			= null;
 	
-	public Admin() {
-		this.players = Main.players;
-		this.gameSquares = Main.gameSquares;
-		this.chanceDeck = Main.chanceDeck;
-		this.communityDeck = Main.communityDeck;
-	}
 	
 	/**************************/
 	/** Player admin methods **/
@@ -216,7 +210,25 @@ public class Admin {
 		return player.getMoney();
 	}
 	
+	// Return PLAYER's NAME
+	public static String getPlayerName(int playerID) {
+		return Main.players[playerID].getName();
+	}
 	
+	// Return PLAYER's NAME
+	public static String getPlayerName(Player player) {
+		return player.getName();
+	}
+	
+	// Return NEXT PLAYER's NAME
+	public static String getNextPlayerName(int playerID) {
+		return Main.players[(playerID + 1) % Main.players.length].getName();
+	}
+	
+	// Return NEXT PLAYER's NAME
+	public static String getNextPlayerName(Player player) {
+		return Main.players[(player.getID() + 1) % Main.players.length].getName();
+	}
 	/************************/
 	/** Land admin methods **/
 	/************************/
@@ -254,5 +266,4 @@ public class Admin {
 	private static void refreshUI() {
 		Board.informationTable.refreshData();
 	}
-	
 }
