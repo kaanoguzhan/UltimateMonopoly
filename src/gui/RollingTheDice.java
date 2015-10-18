@@ -19,7 +19,8 @@ public class RollingTheDice extends JPanel implements ActionListener {
 	private int					playerID;
 	private JLabel				playerName, result, dice, whichPlayer;
 	private JButton				button, end, sell;
-	private boolean				rolledDouble = false;
+	private boolean				rolledDouble		= false;
+	
 	public RollingTheDice() {
 		setLayout(null);
 		sell = new JButton();
@@ -89,7 +90,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 					
 					if (Admin.allLandsOwned())
 						Admin.movePlayerToNextNeutralLand(playerID);
-					else 
+					else
 						Admin.movePlayerToNextLand(playerID);
 					
 					if (roll1 != roll2)
@@ -117,10 +118,11 @@ public class RollingTheDice extends JPanel implements ActionListener {
 					if (roll1 != roll2)
 						end.setEnabled(true);
 				}
-			} if (roll1 == roll2) {
+			}
+			if (roll1 == roll2) {
 				rolledDouble = true;
 				if (roll1 == rollSpeed) {
-					rolledDouble =false;
+					rolledDouble = false;
 					// result.setText("Dice: " + roll1 + "," + roll2 + " with SpeedDie:" + rollSpeed);
 					// result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result
 					// .getPreferredSize().getHeight()));
@@ -133,7 +135,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 					
 					
 					int current = Main.Main.players[playerID].getLocation();
-					Admin.movePlayerBy(playerID, ((moveTo-current)%20));					
+					Admin.movePlayerBy(playerID, ((moveTo - current) % 20));
 					
 					end.setEnabled(true);
 				} else {
@@ -141,7 +143,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 					button.setEnabled(true);
 				}
 			} else {
-				rolledDouble =false;
+				rolledDouble = false;
 				end.setEnabled(true);
 			}
 			
@@ -154,14 +156,14 @@ public class RollingTheDice extends JPanel implements ActionListener {
 			sell.setEnabled(false);
 		} else if (arg0.getSource() == sell) {
 			gui.AdditionalWindows.List.createAndShowGUI(Admin.getPlayerLands(playerID));
-
-			if(!rolledDouble){
+			
+			if (!rolledDouble) {
 				button.setEnabled(false);
 				end.setEnabled(true);
 			} else {
 				button.setEnabled(true);
 			}
-		
+			
 		}
 		
 		Board.informationTable.refreshData();
@@ -172,7 +174,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 		location = (location + amount) % 20;
 		
 		int x, y;
-		switch (playerID){
+		switch (playerID) {
 			case 0:
 				x = Board.squareHolder.getSquare(location).getX() - 25;
 				y = Board.squareHolder.getSquare(location).getY() - 50;
@@ -203,6 +205,9 @@ public class RollingTheDice extends JPanel implements ActionListener {
 	
 	public void setCurrentPlayer(int playerID) {
 		this.playerID = playerID;
+		if (-1 == Admin.getPlayerLocation(playerID))
+			end.doClick();
+		
 		button.setEnabled(true);
 		end.setEnabled(false);
 		sell.setEnabled(false);
