@@ -34,7 +34,7 @@ public class Debug extends JFrame {
 	private Choice				choiceOwnLan4, choiceNeuLand4;
 	
 	public Debug() {
-		setBounds(100, 100, 643, 663);
+		setBounds(25, 25, 643, 663);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -248,7 +248,7 @@ public class Debug extends JFrame {
 		JButton btnSetLoc2 = new JButton("Set");
 		btnSetLoc2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Admin.movePlayerToForced(1, choiceLoc1.getSelectedIndex());
+				Admin.movePlayerToForced(1, choiceLoc2.getSelectedIndex());
 			}
 		});
 		btnSetLoc2.setAlignmentX(0.5f);
@@ -258,7 +258,7 @@ public class Debug extends JFrame {
 		JButton btnMove2 = new JButton("Move");
 		btnMove2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Admin.movePlayerTo(1, choiceLoc1.getSelectedIndex());
+				Admin.movePlayerTo(1, choiceLoc2.getSelectedIndex());
 			}
 		});
 		btnMove2.setAlignmentX(0.5f);
@@ -381,7 +381,7 @@ public class Debug extends JFrame {
 		JButton btnSetLoc3 = new JButton("Set");
 		btnSetLoc3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Admin.movePlayerToForced(2, choiceLoc1.getSelectedIndex());
+				Admin.movePlayerToForced(2, choiceLoc3.getSelectedIndex());
 			}
 		});
 		btnSetLoc3.setAlignmentX(0.5f);
@@ -391,7 +391,7 @@ public class Debug extends JFrame {
 		JButton btnMove3 = new JButton("Move");
 		btnMove3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Admin.movePlayerTo(2, choiceLoc1.getSelectedIndex());
+				Admin.movePlayerTo(2, choiceLoc3.getSelectedIndex());
 			}
 		});
 		btnMove3.setAlignmentX(0.5f);
@@ -514,7 +514,7 @@ public class Debug extends JFrame {
 		JButton btnSetLoc4 = new JButton("Set");
 		btnSetLoc4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Admin.movePlayerToForced(3, choiceLoc1.getSelectedIndex());
+				Admin.movePlayerToForced(3, choiceLoc4.getSelectedIndex());
 			}
 		});
 		btnSetLoc4.setAlignmentX(0.5f);
@@ -524,7 +524,7 @@ public class Debug extends JFrame {
 		JButton btnMove4 = new JButton("Move");
 		btnMove4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Admin.movePlayerTo(3, choiceLoc1.getSelectedIndex());
+				Admin.movePlayerTo(3, choiceLoc4.getSelectedIndex());
 			}
 		});
 		btnMove4.setAlignmentX(0.5f);

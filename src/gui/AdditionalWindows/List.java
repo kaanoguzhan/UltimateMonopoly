@@ -28,7 +28,11 @@ public class List extends JPanel implements ListSelectionListener {
 		for (Land a : lands) {
 			listModel.addElement(a);
 		}
+		
+		if(!(lands.isEmpty()))	
 		label = new JLabel(lands.get(0).toString2());
+		else 
+			label = new JLabel();
 		// Create the list and put it in a scroll pane.
 		list = new JList<Land>(listModel);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -52,13 +56,12 @@ public class List extends JPanel implements ListSelectionListener {
 	
 	class SellListener implements ActionListener {
 		
-		// BURDA SELL ISLERINI HALLET
-		
 		public void actionPerformed(ActionEvent e) {
 			int index = list.getSelectedIndex();
 			Land a = list.getSelectedValue();
 			if (!(a == null)) a.sell();
-			listModel.remove(index);
+			
+			if(index != -1) listModel.remove(index);
 			
 			int size = listModel.getSize();
 			

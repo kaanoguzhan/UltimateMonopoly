@@ -64,12 +64,10 @@ public class RollingTheDice extends JPanel implements ActionListener {
 	
 	public void actionPerformed(ActionEvent arg0) {
 		// Create the Dice and roll
-		if (Admin.playerHasLand(playerID))
-			sell.setEnabled(true);
+		sell.setEnabled(Admin.playerHasLand(playerID));
 		
 		whichPlayer
-			.setText((Admin.getPlayerName(playerID) + " is playing, h/she has the icon number: " +
-			Admin.getPlayerID(playerID)));
+			.setText((Admin.getPlayerName(playerID) + " is playing"));
 		whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
 			.getPreferredSize().getHeight()));
 		
@@ -156,13 +154,9 @@ public class RollingTheDice extends JPanel implements ActionListener {
 		} else if (arg0.getSource() == sell) {
 			gui.AdditionalWindows.List.createAndShowGUI(Admin.getPlayerLands(playerID));
 			
-			if (alreadyRolled) {
 				button.setEnabled(false);
 				end.setEnabled(true);
-			} else {
-				button.setEnabled(true);
-				end.setEnabled(false);
-			}
+		
 			alreadyRolled = false;
 		}
 		
