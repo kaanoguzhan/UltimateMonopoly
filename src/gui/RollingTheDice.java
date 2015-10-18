@@ -150,8 +150,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 			sell.setEnabled(false);
 		} else if (arg0.getSource() == sell) {
 			gui.AdditionalWindows.List.createAndShowGUI(Admin.getPlayerLands(playerID));
-				
-			System.out.println(rolledDouble +"ŞWQELKQWŞLEKQWŞLEKQWŞLEKQWŞLEKŞQLKWE");
+
 			if(!rolledDouble){
 				button.setEnabled(false);
 				end.setEnabled(true);
