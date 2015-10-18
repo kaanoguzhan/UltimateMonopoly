@@ -86,12 +86,13 @@ public class RollingTheDice extends JPanel implements ActionListener {
 					// .getPreferredSize().getHeight()));
 					movePlayer(roll1 + roll2);
 					new gui.AdditionalWindows.MessageDisplayer(" You rolled MonopolyGuy !");
-					
-					if (Admin.allLandsOwned())
+
+					if (Admin.allLandsOwned()){
+						Admin.movePlayerToNextLand(playerID);	
+					}
+					else{ 
 						Admin.movePlayerToNextNeutralLand(playerID);
-					else 
-						Admin.movePlayerToNextLand(playerID);
-					
+					}
 					if (roll1 != roll2)
 						end.setEnabled(true);
 				} else if (Dice.isBus()) {

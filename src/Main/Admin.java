@@ -312,7 +312,7 @@ public class Admin extends Main {
 	
 	// Moves PLAYER to NEXT LAND
 	public static void movePlayerToNextLand(Player player) {
-		for (int i = 0; i < Main.gameSquares.length; i++) {
+		for (int i = 1; i < Main.gameSquares.length; i++) {
 			GameSquare nextGameSquare = Main.gameSquares[(player.getLocation() + i) % Main.gameSquares.length];
 			if (nextGameSquare instanceof Land) {
 				movePlayerTo(player, nextGameSquare);
@@ -324,7 +324,7 @@ public class Admin extends Main {
 	
 	// Moves PLAYER to NEXT LAND
 	public static void movePlayerToNextLand(int playerID) {
-		for (int i = 0; i < Main.gameSquares.length; i++) {
+		for (int i = 1; i < Main.gameSquares.length; i++) {
 			GameSquare nextGameSquare = Main.gameSquares[(Main.players[playerID].getLocation() + i)
 				% Main.gameSquares.length];
 			if (nextGameSquare instanceof Land) {
@@ -368,12 +368,15 @@ public class Admin extends Main {
 	
 	// Checks if all LAND's are OWNED
 	public static boolean allLandsOwned() {
+		int a = 0;
 		boolean exist = false;
 		for (GameSquare currentLand : Main.gameSquares) {
 			if (currentLand instanceof Land && ((Land) currentLand).isOwned()) {
-				exist = true;
-			}
+				a++;
+			} 
 		}
+		if (a==12) exist = true;
+		else exist = false;
 		return exist;
 	}
 	/*********************/
