@@ -120,6 +120,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 			} if (roll1 == roll2) {
 				rolledDouble = true;
 				if (roll1 == rollSpeed) {
+					rolledDouble =false;
 					// result.setText("Dice: " + roll1 + "," + roll2 + " with SpeedDie:" + rollSpeed);
 					// result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result
 					// .getPreferredSize().getHeight()));
@@ -140,6 +141,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 					button.setEnabled(true);
 				}
 			} else {
+				rolledDouble =false;
 				end.setEnabled(true);
 			}
 			
@@ -156,7 +158,9 @@ public class RollingTheDice extends JPanel implements ActionListener {
 			if(!rolledDouble){
 				button.setEnabled(false);
 				end.setEnabled(true);
-			} else button.setEnabled(true);
+			} else {
+				button.setEnabled(true);
+			}
 		
 		}
 		

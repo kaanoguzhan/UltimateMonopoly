@@ -156,6 +156,17 @@ public class Player {
 		Inventory.remove(CommunityChestCardType.BargainBusiness);
 	}
 	
+	public boolean hasRenovationSuccess() {
+		if (Inventory.contains(CommunityChestCardType.RenovationSuccess))
+			return true;
+		else
+			return false;
+	}
+	
+	public void removeRenovationSuccessCard() {
+		Inventory.remove(CommunityChestCardType.RenovationSuccess);
+	}
+	
 	
 	public String toString() {
 		String Lands = "[";

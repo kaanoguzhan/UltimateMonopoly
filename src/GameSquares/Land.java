@@ -1,5 +1,6 @@
 package GameSquares;
 
+import gui.AdditionalWindows.MessageDisplayer;
 import gui.AdditionalWindows.InputReaders.GetYesNoInput;
 import Main.Player;
 import Main.Properties;
@@ -55,10 +56,21 @@ public class Land extends GameSquare {
 		} else {
 			if (this.owner != pl) {
 				System.out.println("This land is owned by " + owner.getName());
+				
+				if (owner.hasRenovationSuccess()){
+				new MessageDisplayer("This land's owner has renovation success card, rent is now $50 more");
+				pl.pay(owner, rent+50);
+				owner.removeRenovationSuccessCard();
+				}
+				
 				if (owner.getNumberOfOwnedByColor(this.color) == 3)
 					pl.pay(owner, 2 * rent);
 				else
 					pl.pay(owner, rent);
+				//
+				
+				
+				
 			}
 			else
 				System.out.println("Player already owns this land!");
