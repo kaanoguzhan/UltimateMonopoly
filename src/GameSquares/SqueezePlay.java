@@ -22,6 +22,8 @@ public class SqueezePlay extends GameSquare {
 		r.setSize(350, 200);
 		r.setVisible(true);
 		r.setAlwaysOnTop(true);
+		r.isAutoRequestFocus();
+		r.requestFocusInWindow();
 	}
 	
 	public static void isRolledEven(Player pl) {

@@ -21,6 +21,8 @@ public class RollOnce extends GameSquare {
 		r.setSize(350, 200);
 		r.setVisible(true);
 		r.setAlwaysOnTop(true);
+		r.isAutoRequestFocus();
+		r.requestFocusInWindow();
 	}
 	
 	public static void isRolledSame(Player pl, int randomRoll) {
