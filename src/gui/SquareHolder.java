@@ -22,16 +22,17 @@ public class SquareHolder {
 			else
 				squares.add(new Square(boardLength - 5, squareLength - 35 + ((i - 15) * squareLength), i));
 		}
+		squares.add(new Square(360, 360, -1));
 	}
 	
-	
 	public void addSquare(int x, int y, int iD) {
-		squares.add(new Square(x, y, iD));
 	}
 	
 	public Square getSquare(int id) {
-		if (id < squares.size())
+		if (id < squares.size() && id >= 0)
 			return squares.get(id);
+		if (id == -1)
+			return new Square(360, 360, -1);
 		return null;
 	}
 }
