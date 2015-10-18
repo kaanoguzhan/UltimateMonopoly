@@ -19,8 +19,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 	private int					playerID;
 	private JLabel				playerName, result, dice, whichPlayer;
 	private JButton				button, end, sell;
-	private boolean				alreadyRolled		= false;
-	
+	private boolean				rolledDouble = false;
 	public RollingTheDice() {
 		setLayout(null);
 		sell = new JButton();
@@ -65,8 +64,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		// Create the Dice and roll
 		sell.setEnabled(Admin.playerHasLand(playerID));
-		System.out.println(Admin.playerHasLand(playerID));
-		System.out.println("action performeedd");
 		
 		whichPlayer
 			.setText((Admin.getPlayerName(playerID) + " is playing"));
@@ -80,7 +77,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
 			int roll1 = roll[0];
 			int roll2 = roll[1];
 			int rollSpeed = roll[2];
-			alreadyRolled = true;
 			
 			result.setText("<html>Dice: " + roll1 + "," + roll2 + "<br>" + "SpeedDie: " + rollSpeed + "</html>");
 			if (!(roll1 == roll2 && roll2 == rollSpeed)) {
@@ -121,8 +117,8 @@ public class RollingTheDice extends JPanel implements ActionListener {
 					if (roll1 != roll2)
 						end.setEnabled(true);
 				}
-			}
-			if (roll1 == roll2) {
+			} if (roll1 == roll2) {
+				rolledDouble = true;
 				if (roll1 == rollSpeed) {
 					// result.setText("Dice: " + roll1 + "," + roll2 + " with SpeedDie:" + rollSpeed);
 					// result.setBounds(7, 115, ((int) result.getPreferredSize().getWidth()), ((int) result
@@ -151,15 +147,16 @@ public class RollingTheDice extends JPanel implements ActionListener {
 				+ Admin.getNextPlayerName(playerID) + "'s turn.");
 			whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
 				.getPreferredSize().getHeight()));
-			alreadyRolled = false;
 			sell.setEnabled(false);
 		} else if (arg0.getSource() == sell) {
 			gui.AdditionalWindows.List.createAndShowGUI(Admin.getPlayerLands(playerID));
-			
+				
+			System.out.println(rolledDouble +"ŞWQELKQWŞLEKQWŞLEKQWŞLEKQWŞLEKŞQLKWE");
+			if(!rolledDouble){
 				button.setEnabled(false);
 				end.setEnabled(true);
+			} else button.setEnabled(true);
 		
-			alreadyRolled = false;
 		}
 		
 		Board.informationTable.refreshData();

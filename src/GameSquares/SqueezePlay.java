@@ -21,6 +21,7 @@ public class SqueezePlay extends GameSquare {
 		r.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		r.setSize(350, 200);
 		r.setVisible(true);
+		r.setAlwaysOnTop(true);
 	}
 	
 	public static void isRolledEven(Player pl) {

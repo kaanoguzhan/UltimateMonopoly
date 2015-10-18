@@ -20,6 +20,7 @@ public class RollOnce extends GameSquare {
 		r.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		r.setSize(350, 200);
 		r.setVisible(true);
+		r.setAlwaysOnTop(true);
 	}
 	
 	public static void isRolledSame(Player pl, int randomRoll) {
