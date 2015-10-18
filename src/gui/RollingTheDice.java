@@ -65,6 +65,8 @@ public class RollingTheDice extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		// Create the Dice and roll
 		sell.setEnabled(Admin.playerHasLand(playerID));
+		System.out.println(Admin.playerHasLand(playerID));
+		System.out.println("action performeedd");
 		
 		whichPlayer
 			.setText((Admin.getPlayerName(playerID) + " is playing"));
@@ -201,7 +203,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 		this.playerID = playerID;
 		button.setEnabled(true);
 		end.setEnabled(false);
-		sell.setEnabled(Admin.playerHasLand(playerID));
+		sell.setEnabled(false);
 		
 		switch (Admin.getPlayerID(playerID)) {
 			case 0:

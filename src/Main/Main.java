@@ -24,7 +24,7 @@ public class Main {
 	static Board						board;
 	static Boolean						play			= true;
 	volatile static Boolean				roundEnded		= false;
-	
+	public static GetTextInput					temp;
 	public static void main(String[] args) {
 		changeUITheme();
 		initializePlayers();
@@ -46,8 +46,21 @@ public class Main {
 	}
 	
 	private static void initializePlayers() {
-		int numOfPlayers = new GetTextInput("How many players?").getInt();
-		players = new Player[numOfPlayers];
+		int num0fPlayers = 0;
+		String numberOfPlayers ="";
+		try {
+			while (num0fPlayers == 0 || num0fPlayers < 0 || numberOfPlayers == null){
+				 temp = new GetTextInput("How many players?");
+				 num0fPlayers = temp.getInt();
+				 numberOfPlayers = temp.getString();
+			}
+				
+			players = new Player[num0fPlayers];
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
 		
 		System.out.println("Player initialization is complete...");
 	}

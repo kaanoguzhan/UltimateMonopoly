@@ -61,7 +61,7 @@ public class Player {
 			reduceMoney(0);
 		} else {
 			location = Properties.HEAVEN_LOCATION;
-			System.out.println(name + " is bankrupt.");
+			System.out.println(name + " is bankrupt."); // create a new additional window
 		}
 	}
 	
