@@ -129,8 +129,10 @@ public class RollingTheDice extends JPanel implements ActionListener {
 					while (!((0 <= moveTo) && (moveTo < Properties.TOTAL_SQUARES)))
 						moveTo = new GetTextInput(
 							"Enter the square you want to go, should be between 0 (GO) and 19(Pennysylvania)").getInt();
-					Admin.movePlayerBy(playerID, moveTo);
 					
+					
+					int current = Main.Main.players[playerID].getLocation();
+					Admin.movePlayerBy(playerID, ((moveTo-current)%20));					
 					
 					end.setEnabled(true);
 				} else {
