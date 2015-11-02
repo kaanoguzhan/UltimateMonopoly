@@ -21,4 +21,9 @@ public class BargainBusiness extends CommunityChestCard {
 	public String toString() {
 		return "You picked BargainBusiness Card.";
 	}
+
+	@Override
+	public String getName() {
+		return "BargainBusiness";
+	}
 }

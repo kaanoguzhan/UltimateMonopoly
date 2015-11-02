@@ -15,6 +15,7 @@ import GameSquares.Chance.Chance;
 import GameSquares.Chance.ChanceDeck;
 import GameSquares.CommunityChest.CommunityChest;
 import GameSquares.CommunityChest.CommunityChestDeck;
+import Main.SaveLoad.Save;
 
 public class Main {
 	protected static ChanceDeck			chanceDeck		= null;
@@ -32,6 +33,7 @@ public class Main {
 		initializeGameSquares();
 		initializePlayerNames();
 		initializeBoard();
+		Save.save();
 		
 		runGame();
 	}

@@ -1,11 +1,12 @@
 package Main;
 
-import java.util.ArrayList;
 import gui.Board;
+import java.util.ArrayList;
 import GameSquares.GameSquare;
 import GameSquares.Land;
 import GameSquares.Land.color;
 import GameSquares.Chance.ChanceDeck;
+import GameSquares.CommunityChest.CommunityChest.CommunityChestCardType;
 import GameSquares.CommunityChest.CommunityChestDeck;
 
 public class Admin extends Main {
@@ -373,10 +374,12 @@ public class Admin extends Main {
 		for (GameSquare currentLand : Main.gameSquares) {
 			if (currentLand instanceof Land && ((Land) currentLand).isOwned()) {
 				a++;
-			} 
+			}
 		}
-		if (a==12) exist = true;
-		else exist = false;
+		if (a == 12)
+			exist = true;
+		else
+			exist = false;
 		return exist;
 	}
 	/*********************/
@@ -384,5 +387,21 @@ public class Admin extends Main {
 	/*********************/
 	private static void refreshUI() {
 		Board.informationTable.refreshData();
+	}
+	
+	public static int getPlayerCount() {
+		return Main.players.length;
+	}
+	
+	public static int getGameSquareCount() {
+		return Main.gameSquares.length;
+	}
+	
+	public static ArrayList<CommunityChestCardType> getPlayerCommunityChestCards(int playerID) {
+		return Main.players[playerID].getCommunityChestCards();
+	}
+	
+	public static GameSquare[] getGameSquares(){
+		return Main.gameSquares;
 	}
 }

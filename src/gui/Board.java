@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import GameSquares.GameSquare;
 import Main.Player;
+import Main.SaveLoad.Save;
 
 public class Board extends JFrame implements ActionListener {
 	
@@ -71,13 +72,10 @@ public class Board extends JFrame implements ActionListener {
 		setVisible(true);
 	}
 	public void actionPerformed(ActionEvent e) {
+		Save.save();  ///SAVEE HERE
 		Debug frame = new Debug();
 		frame.setVisible(true);
 	}
-	
-	// public void setCurrentPlayer(int id) {
-	// round.setCurrentPlayer(this.players[id]);
-	// }
 	
 	public void setCurrentPlayer(int id) {
 		round.setCurrentPlayer(id);

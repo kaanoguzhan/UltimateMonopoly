@@ -15,5 +15,10 @@ public class EmptyCard extends CommunityChestCard {
 	public String toString() {
 		return "There are no more cards left";
 	}
+
+	@Override
+	public String getName() {
+		return "EmptyCard";
+	}
 	
 }

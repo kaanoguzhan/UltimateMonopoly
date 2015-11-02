@@ -21,4 +21,9 @@ public class RenovationSuccess extends CommunityChestCard {
 	public String toString() {
 		return "You picked RenovationSuccess Card.";
 	}
+
+	@Override
+	public String getName() {
+		return "RenovationSuccess";
+	}
 }

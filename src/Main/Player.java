@@ -3,8 +3,8 @@ package Main;
 import java.util.ArrayList;
 import GameSquares.GameSquare;
 import GameSquares.Land;
-import GameSquares.CommunityChest.CommunityChest.CommunityChestCardType;
 import GameSquares.Land.color;
+import GameSquares.CommunityChest.CommunityChest.CommunityChestCardType;
 
 public class Player {
 	
@@ -183,8 +183,8 @@ public class Player {
 			"\n" + "Has Cards:" + Inventory +
 			"\n" + "Has Lands:" + Lands;
 	}
-	
-	
-	
-	
+
+	public ArrayList<CommunityChestCardType> getCommunityChestCards() {
+		return Inventory;
+	}	
 }

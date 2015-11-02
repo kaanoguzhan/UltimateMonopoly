@@ -20,4 +20,9 @@ public class RecieveConsultancyFee extends CommunityChestCard {
 	public String toString() {
 		return "You picked RecieveConsultancyFee Card.";
 	}
+
+	@Override
+	public String getName() {
+		return "RecieveConsultancyFee";
+	}
 }
