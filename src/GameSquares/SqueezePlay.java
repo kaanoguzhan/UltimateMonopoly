@@ -11,7 +11,7 @@ public class SqueezePlay extends GameSquare {
 	public static volatile boolean	rolledEven	= false;
 	
 	public SqueezePlay(int id, Player[] players) {
-		super(id);
+		super(id,type.SqueezePlay);
 		SqueezePlay.players = players;
 	}
 	

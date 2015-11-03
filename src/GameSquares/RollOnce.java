@@ -11,7 +11,7 @@ public class RollOnce extends GameSquare {
 	
 	
 	public RollOnce(int id) {
-		super(id);
+		super(id,type.RollOnce);
 	}
 	
 	@Override

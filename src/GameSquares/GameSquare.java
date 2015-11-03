@@ -8,10 +8,17 @@ public abstract class GameSquare {
 	protected int		yCoord;
 	
 	protected int		id;
+	protected type		cardType;
 	protected Player	owner;
 	
-	public GameSquare(int id) {
+	
+	protected GameSquare(int id, type type) {
 		this.id = id;
+		this.cardType = type;
+	}
+	
+	public enum type {
+		Chance, CommunityChest, FreePark, Land, RollOnce, StartSquare, SqueezePlay
 	}
 	
 	public abstract void onArrive(Player pl);
@@ -30,6 +37,10 @@ public abstract class GameSquare {
 	
 	public Player getOwner() {
 		return owner;
+	}
+	
+	public String getType() {
+		return cardType.toString();
 	}
 	
 	public int getID() {

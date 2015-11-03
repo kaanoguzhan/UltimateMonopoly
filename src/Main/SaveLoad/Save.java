@@ -32,10 +32,9 @@ public class Save {
 			output += Admin.getPlayerName(i) + "," + Admin.getPlayerMoney(i) + "," + Admin.getPlayerLocation(i) + ",";
 			for (Land lnd : Admin.getPlayerLands(i))
 				output += lnd.getName() + "-";
-			output = output.substring(0, output.length()-1)+",";
+			output = output.substring(0, output.length() - 1) + ",";
 			for (CommunityChestCardType cccType : Admin.getPlayerCommunityChestCards(i))
 				output += cccType.name() + "-";
-			output = output.substring(0, output.length()-1)+",";
 		}
 		
 		return output;
@@ -43,9 +42,28 @@ public class Save {
 	private static String getGameSquareString() {
 		String output = "" + Admin.getGameSquareCount() + ",";
 		for (GameSquare gs : Admin.getGameSquares()) {
-			output+=gs.
+			output += gs.getType() + ",";
+			String isadw= gs.getType();
+			switch (gs.getType()) {
+				case "Chance":
+				case "CommunityChest":
+				case "FreePark":
+				case "RollOnce":
+				case "StartSquare":
+				case "SqueezePlay":
+					output += gs.getID()+",";
+					break;
+				case "Land":
+					Land lnd = (Land) gs;
+					output += lnd.getID() + "," + lnd.getName() + "," + lnd.getColor() + "," + lnd.getPrice() + ","
+						+ lnd.getRent()+",";
+					break;
+				default:
+					output += "Error:Unknown GameSquare Type";
+					break;
+			}
+			output = output.substring(0, output.length() - 1);
 		}
 		return output;
 	}
-	
 }

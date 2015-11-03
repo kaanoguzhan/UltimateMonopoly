@@ -16,9 +16,10 @@ public class Land extends GameSquare {
 	public enum color {
 		blue, pink, orange, green
 	}
-	
+
+
 	public Land(int id, String name, color color, int price, int rent) {
-		super(id);
+		super(id,type.Land);
 		this.name = name;
 		this.color = color;
 		this.price = price;
@@ -126,6 +127,11 @@ public class Land extends GameSquare {
 	public void setRent(int rent) {
 		this.rent = rent;
 	}
+	
+	public int getRent() {
+		return rent;
+	}
+	
 	// ///////////////////////////////////////////////////////////////////////////// //
 	
 	@Override

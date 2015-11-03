@@ -5,7 +5,7 @@ import Main.Player;
 public class FreePark extends GameSquare {
 	
 	public FreePark(int id) {
-		super(id);
+		super(id,type.FreePark);
 	}
 	
 	@Override

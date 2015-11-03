@@ -12,7 +12,7 @@ public class CommunityChest extends GameSquare {
 	private CommunityChestDeck	CommunityDeck	= null;
 	
 	public CommunityChest(int id, CommunityChestDeck CommunityDeck) {
-		super(id);
+		super(id,type.CommunityChest);
 		this.CommunityDeck = CommunityDeck;
 	}
 	
