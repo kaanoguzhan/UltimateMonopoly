@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -17,30 +18,29 @@ import GameSquares.Land;
 import Main.Admin;
 import Main.Main;
 
-public class PlayerDebug extends JLabel {
+public class PlayerTab extends JPanel {
 	private static final long	serialVersionUID	= 1L;
-	private int					playerID;
+	private int					playerID			= 0;
 	private JTextField			txtMoney1;
-	private Choice				choiceOwnLan1, choiceNeuLand1;
+	private Choice				choiceOwnLan, choiceNeuLand;
 	
-	public PlayerDebug(int x, int y, int height, int width, int playerID) {
+	public PlayerTab(int playerID) {
+		setLayout(null);
 		this.playerID = playerID;
 		setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.LIGHT_GRAY));
-		setBounds(x, y, height, width);
-		setLayout(null);
 		
 		JLabel lblLocation1 = new JLabel("Location: ");
 		lblLocation1.setBounds(167, 13, 56, 16);
 		add(lblLocation1);
 		
-		JLabel lblMoney1 = new JLabel("Money: " + Admin.getPlayerMoney(playerID));
+		JLabel lblMoney1 = new JLabel("Money: " + Admin.getPlayerMoney(this.playerID));
 		lblMoney1.setBounds(10, 13, 118, 16);
 		add(lblMoney1);
 		
 		JButton btnSetMon1 = new JButton("Set");
 		btnSetMon1.addActionListener(al -> {
 			Admin.setMoney(playerID, getInt(txtMoney1));
-			lblMoney1.setText("Money: " + Admin.getPlayerMoney(playerID));
+			lblMoney1.setText("Money: " + Admin.getPlayerMoney(this.playerID));
 		});
 		btnSetMon1.setBounds(55, 55, 81, 42);
 		add(btnSetMon1);
@@ -48,7 +48,7 @@ public class PlayerDebug extends JLabel {
 		JButton btnMin1 = new JButton("-");
 		btnMin1.addActionListener(al -> {
 			Admin.decreaseMoneyBy(playerID, getInt(txtMoney1));
-			lblMoney1.setText("Money: " + Admin.getPlayerMoney(playerID));
+			lblMoney1.setText("Money: " + Admin.getPlayerMoney(this.playerID));
 		});
 		btnMin1.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnMin1.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -58,7 +58,7 @@ public class PlayerDebug extends JLabel {
 		JButton btnPls1 = new JButton("+");
 		btnPls1.addActionListener(al -> {
 			Admin.increaseMoneyBy(playerID, getInt(txtMoney1));
-			lblMoney1.setText("Money: " + Admin.getPlayerMoney(playerID));
+			lblMoney1.setText("Money: " + Admin.getPlayerMoney(this.playerID));
 		});
 		btnPls1.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnPls1.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -68,12 +68,12 @@ public class PlayerDebug extends JLabel {
 		txtMoney1 = new JTextField();
 		txtMoney1.setColumns(10);
 		txtMoney1.setBounds(12, 31, 125, 22);
-		txtMoney1.setToolTipText("" + Admin.getPlayerMoney(playerID));
+		txtMoney1.setToolTipText("" + Admin.getPlayerMoney(this.playerID));
 		add(txtMoney1);
 		
 		Choice choiceLoc1 = new Choice();
 		fillAllSquares(choiceLoc1);
-		choiceLoc1.select(Admin.getPlayerLocation(playerID));
+		choiceLoc1.select(Admin.getPlayerLocation(this.playerID));
 		choiceLoc1.setBounds(167, 31, 140, 22);
 		add(choiceLoc1);
 		
@@ -99,12 +99,12 @@ public class PlayerDebug extends JLabel {
 		lblOwnLands1.setBounds(329, 13, 140, 16);
 		add(lblOwnLands1);
 		
-		choiceOwnLan1 = new Choice();
+		Choice choiceOwnLan1 = new Choice();
 		fillOwnLands(choiceOwnLan1, playerID);
 		choiceOwnLan1.setBounds(329, 31, 140, 22);
 		add(choiceOwnLan1);
 		
-		choiceNeuLand1 = new Choice();
+		Choice choiceNeuLand1 = new Choice();
 		fillNeuLands(choiceNeuLand1, playerID);
 		choiceNeuLand1.setBounds(473, 31, 140, 22);
 		add(choiceNeuLand1);
@@ -139,7 +139,7 @@ public class PlayerDebug extends JLabel {
 		separator01.setBounds(315, 0, 2, 109);
 		add(separator01);
 		
-
+		
 		
 	}
 	
@@ -174,23 +174,23 @@ public class PlayerDebug extends JLabel {
 	}
 	
 	private void fillNeuLands(Choice choice, int playerID) {
-		if (Main.players.length - 1 >= playerID)
+		if (Main.players != null && Main.players.length - 1 >= playerID)
 			for (GameSquare land : Main.gameSquares)
 				if (land instanceof Land && ((Land) land).getOwner() == null)
 					choice.add(((Land) land).getName());
 	}
 	
 	private void fillOwnLands(Choice choice, int playerID) {
-		if (Main.players.length - 1 >= playerID)
+		if (Main.players != null && Main.players.length - 1 >= playerID)
 			for (Land land : Main.players[playerID].getOwnedLands()) {
 				choice.add(land.getName());
 			}
 	}
 	
 	void refresh() {
-		choiceOwnLan1.removeAll();
-		choiceNeuLand1.removeAll();
-		fillOwnLands(choiceOwnLan1, playerID);
-		fillNeuLands(choiceNeuLand1, playerID);
+		choiceOwnLan.removeAll();
+		choiceNeuLand.removeAll();
+		fillOwnLands(choiceOwnLan, playerID);
+		fillNeuLands(choiceNeuLand, playerID);
 	}
 }

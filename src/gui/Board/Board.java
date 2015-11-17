@@ -50,7 +50,6 @@ public class Board extends JFrame {
 		debug.setBounds(1490, 630, 120, 70);
 		getContentPane().add(debug);
 		debug.addActionListener(al -> {
-			// SaveLoad.load(); // TODO Save remove
 			Debug frame = new Debug();
 			frame.setVisible(true);
 		});

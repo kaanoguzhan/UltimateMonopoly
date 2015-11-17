@@ -240,8 +240,9 @@ public class Admin extends Main {
 	
 	// Return PLAYER's ID
 	public static int getPlayerLocation(int playerID) {
-		
-		return Main.players.length - 1 >= playerID ? Main.players[playerID].getLocation() : 0;
+		if (Main.players != null)
+			return Main.players.length - 1 >= playerID ? Main.players[playerID].getLocation() : 0;
+		return 0;
 	}
 	// Return PLAYER's MONEY
 	public static int getPlayerMoney(Player player) {
@@ -250,7 +251,9 @@ public class Admin extends Main {
 	
 	// Return PLAYER's MONEY
 	public static int getPlayerMoney(int playerID) {
-		return Main.players.length - 1 >= playerID ? Main.players[playerID].getMoney() : 0;
+		if (Main.players != null)
+			return Main.players.length - 1 >= playerID ? Main.players[playerID].getMoney() : 0;
+		return 0;
 	}
 	
 	// Return PLAYER's NAME

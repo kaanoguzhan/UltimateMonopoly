@@ -1,12 +1,6 @@
 package gui.Debug;
 
-import gui.Board.Board;
-import java.awt.Choice;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,7 +12,7 @@ import Main.Main;
 public class Debug extends JFrame {
 	private static final long	serialVersionUID	= 1L;
 	private JPanel				contentPane;
-	static PlayerDebug			Player1, Player2, Player3, Player4;
+	static PlayerTab			Player1, Player2, Player3, Player4;
 	
 	public Debug() {
 		switch (Main.players.length) {
@@ -64,7 +58,8 @@ public class Debug extends JFrame {
 		lblPlayerName1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Players.add(lblPlayerName1);
 		
-		Player1 = new PlayerDebug(0, 22, 625, 109, 0);
+		Player1 = new PlayerTab(0);
+		Player1.setBounds(0, 22, 625, 109);
 		Players.add(Player1);
 		
 		
@@ -79,7 +74,8 @@ public class Debug extends JFrame {
 		lblPlayerName2.setBounds(0, 150, 625, 22);
 		Players.add(lblPlayerName2);
 		
-		Player2 = new PlayerDebug(0, 172, 625, 109, 1);
+		Player2 = new PlayerTab(1);
+		Player2.setBounds(0, 172, 625, 109);
 		Players.add(Player2);
 		
 		
@@ -94,7 +90,8 @@ public class Debug extends JFrame {
 		lblPlayerName3.setBounds(0, 300, 625, 22);
 		Players.add(lblPlayerName3);
 		
-		Player3 = new PlayerDebug(0, 322, 625, 109, 2);
+		Player3 = new PlayerTab(2);
+		Player3.setBounds(0, 322, 625, 109);
 		Players.add(Player3);
 		
 		
@@ -109,37 +106,20 @@ public class Debug extends JFrame {
 		lblPlayerName4.setBounds(0, 450, 625, 22);
 		Players.add(lblPlayerName4);
 		
-		Player3 = new PlayerDebug(0, 475, 625, 109, 2);
-		Players.add(Player3);
+		Player4 = new PlayerTab(3);
+		Player4.setBounds(0, 475, 625, 109);
+		Players.add(Player4);
 		
 		
 		
 		// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
-		JPanel panel = new JPanel();
+		BoardTab panel = new BoardTab();
 		tabbedPane.addTab("Board", null, panel, null);
-		panel.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Old Board");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Board.getLblBoard().setIcon(new ImageIcon("board720.jpg"));
-				Board.getLblBoard().setBounds(0, 0, 720, 720);
-			}
-		});
-		btnNewButton.setBounds(10, 11, 300, 113);
-		panel.add(btnNewButton);
-		
-		JButton btnNewBoard = new JButton("New Board");
-		btnNewBoard.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Board.getLblBoard().setIcon(new ImageIcon("board1050.jpg"));
-				Board.getLblBoard().setBounds(0, 0, 1050, 1050);
-			}
-		});
-		btnNewBoard.setBounds(310, 11, 300, 113);
-		panel.add(btnNewBoard);
+		SaveLoadTab slt = new SaveLoadTab();
+		tabbedPane.addTab("Save-Load", null, slt, null);
 	}
 	
 	static void refreshLands() {

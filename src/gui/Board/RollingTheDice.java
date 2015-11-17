@@ -15,7 +15,6 @@ import Main.Admin;
 import Main.Properties;
 
 public class RollingTheDice extends JPanel implements ActionListener {
-	
 	private static final long	serialVersionUID	= 1L;
 	private int					playerID;
 	private JLabel				playerName, result, dice, whichPlayer;
