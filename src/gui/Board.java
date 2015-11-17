@@ -72,7 +72,7 @@ public class Board extends JFrame implements ActionListener {
 		setVisible(true);
 	}
 	public void actionPerformed(ActionEvent e) {
-		SaveLoad.load();   // TODO Save remove
+		//SaveLoad.load();   // TODO Save remove
 		Debug frame = new Debug();
 		frame.setVisible(true);
 	}

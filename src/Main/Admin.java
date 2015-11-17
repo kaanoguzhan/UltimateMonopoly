@@ -37,14 +37,6 @@ public class Admin extends Main {
 	}
 	
 	// Move PLAYER to given LOCATION and CALL onArrive()
-	public static void movePlayerTo(Player player, int location) {
-		System.out.println("ADMIN -> Player:" + player.getName()
-			+ " is moved to location with id " + location);
-		player.moveTo(location);
-		refreshUI();
-	}
-	
-	// Move PLAYER to given LOCATION and CALL onArrive()
 	public static void movePlayerTo(Player player, GameSquare gameSquare) {
 		System.out.println("ADMIN -> Player:" + player.getName()
 			+ " is moved to location with id " + gameSquare.getID());
@@ -53,10 +45,22 @@ public class Admin extends Main {
 	}
 	
 	// Move PLAYER to given LOCATION and CALL onArrive()
+	public static void movePlayerTo(Player player, int location) {
+		if (Main.gameSquares.length - 1 >= location) {
+			System.out.println("ADMIN -> Player:" + player.getName()
+				+ " is moved to location with id " + location);
+			player.moveTo(location);
+		}
+		refreshUI();
+	}
+	
+	// Move PLAYER to given LOCATION and CALL onArrive()
 	public static void movePlayerTo(int playerID, int location) {
-		System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
-			+ " is moved to location with id " + location);
-		Main.players[playerID].moveTo(location);
+		if (Main.players.length - 1 >= playerID && Main.gameSquares.length - 1 >= location) {
+			System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
+				+ " is moved to location with id " + location);
+			Main.players[playerID].moveTo(location);
+		}
 		refreshUI();
 	}
 	
@@ -70,9 +74,11 @@ public class Admin extends Main {
 	
 	// Move PLAYER to given LOCATION but WONT CALL location's onArrive()
 	public static void movePlayerToForced(int playerID, int location) {
-		System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
-			+ "'s Location is set to location with id " + location);
-		Main.players[playerID].setLocation(location);
+		if (Main.players.length - 1 >= playerID) {
+			System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
+				+ "'s Location is set to location with id " + location);
+			Main.players[playerID].setLocation(location);
+		}
 		refreshUI();
 	}
 	
@@ -86,9 +92,11 @@ public class Admin extends Main {
 	
 	// Sets PLAYER's MONEY to given AMOUNT
 	public static void setMoney(int playerID, int amount) {
-		System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
-			+ "'s money is set to " + amount);
-		Main.players[playerID].setMoney(amount);
+		if (Main.players.length - 1 >= playerID) {
+			System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
+				+ "'s money is set to " + amount);
+			Main.players[playerID].setMoney(amount);
+		}
 		refreshUI();
 	}
 	
@@ -103,10 +111,12 @@ public class Admin extends Main {
 	
 	// Increase PLAYER's MONEY by AMOUNT
 	public static void increaseMoneyBy(int playerID, int amount) {
-		System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
-			+ "'s money is increased by " + amount + " and is now "
-			+ (Main.players[playerID].getMoney() + amount));
-		Main.players[playerID].addMoney(amount);
+		if (Main.players.length - 1 >= playerID) {
+			System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
+				+ "'s money is increased by " + amount + " and is now "
+				+ (Main.players[playerID].getMoney() + amount));
+			Main.players[playerID].addMoney(amount);
+		}
 		refreshUI();
 	}
 	
@@ -121,10 +131,12 @@ public class Admin extends Main {
 	
 	// Decrease PLAYER's MONEY by AMOUNT
 	public static void decreaseMoneyBy(int playerID, int amount) {
-		System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
-			+ "'s money is decreased by " + amount + " and is now "
-			+ (Main.players[playerID].getMoney() - amount));
-		Main.players[playerID].reduceMoney(amount);
+		if (Main.players.length - 1 >= playerID) {
+			System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
+				+ "'s money is decreased by " + amount + " and is now "
+				+ (Main.players[playerID].getMoney() - amount));
+			Main.players[playerID].reduceMoney(amount);
+		}
 		refreshUI();
 	}
 	
@@ -144,7 +156,7 @@ public class Admin extends Main {
 	// Give PLAYER the ownership of LAND
 	public static void giveOwnership(Player player, int... landID) {
 		for (int currentLandID : landID) {
-			if (Main.gameSquares[currentLandID] instanceof Land) {
+			if (Main.gameSquares[currentLandID] instanceof Land && Main.gameSquares.length - 1 >= currentLandID) {
 				System.out.println("ADMIN -> Player:" + player.getName()
 					+ " is given the ownership of "
 					+ ((Land) Main.gameSquares[currentLandID]).getName());
@@ -158,16 +170,15 @@ public class Admin extends Main {
 	public static void giveOwnership(int playerID, String... landName) {
 		for (String currentLandName : landName) {
 			for (GameSquare gameSquare : Main.gameSquares)
-				if (gameSquare instanceof Land)
-					if (((Land) gameSquare).getName().equals(currentLandName)) {
-						System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
-							+ " is given the ownership of " + currentLandName);
-						Main.players[playerID].getOwnership((Land) gameSquare);
-					}
+				if (gameSquare instanceof Land && Main.players.length - 1 >= playerID &&
+					((Land) gameSquare).getName().equals(currentLandName)) {
+					System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
+						+ " is given the ownership of " + currentLandName);
+					Main.players[playerID].getOwnership((Land) gameSquare);
+				}
 		}
 		refreshUI();
 	}
-	
 	// Remove the ownership of LAND from PLAYER
 	public static void removeOwnership(Player player, GameSquare... land) {
 		for (GameSquare currentLand : land) {
@@ -184,7 +195,7 @@ public class Admin extends Main {
 	// Remove the ownership of LAND from PLAYER
 	public static void removeOwnership(Player player, int... landID) {
 		for (int currentLandID : landID) {
-			if (Main.gameSquares[currentLandID] instanceof Land) {
+			if (Main.gameSquares[currentLandID] instanceof Land && Main.gameSquares.length - 1 >= currentLandID) {
 				System.out.println("ADMIN -> Player:" + player.getName()
 					+ "'s ownership is removed from "
 					+ ((Land) Main.gameSquares[currentLandID]).getName());
@@ -195,23 +206,10 @@ public class Admin extends Main {
 	}
 	
 	// Remove the ownership of LAND from PLAYER
-	public static void removeOwnership(int playerID, int... landID) {
-		for (int currentLandID : landID) {
-			if (Main.gameSquares[currentLandID] instanceof Land) {
-				System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
-					+ "'s ownership is removed from "
-					+ ((Land) Main.gameSquares[currentLandID]).getName());
-				Main.players[playerID].removeOwnership((Land) Main.gameSquares[currentLandID]);
-			}
-		}
-		refreshUI();
-	}
-	
-	// Remove the ownership of LAND from PLAYER
 	public static void removeOwnership(int playerID, String... landName) {
 		for (String currentLandName : landName) {
 			for (GameSquare gameSquare : Main.gameSquares)
-				if (gameSquare instanceof Land)
+				if (gameSquare instanceof Land && Main.players.length - 1 >= playerID)
 					if (((Land) gameSquare).getName().equals(currentLandName)) {
 						System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
 							+ "'s ownership is removed from " + currentLandName);
@@ -221,9 +219,18 @@ public class Admin extends Main {
 		refreshUI();
 	}
 	
-	// Return PLAYER's ID
-	public static int getPlayerLocation(int playerID) {
-		return Main.players[playerID].getLocation();
+	// Remove the ownership of LAND from PLAYER
+	public static void removeOwnership(int playerID, int... landID) {
+		for (int currentLandID : landID) {
+			if (Main.gameSquares[currentLandID] instanceof Land &&
+				Main.gameSquares.length - 1 >= currentLandID && Main.players.length - 1 >= playerID) {
+				System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
+					+ "'s ownership is removed from "
+					+ ((Land) Main.gameSquares[currentLandID]).getName());
+				Main.players[playerID].removeOwnership((Land) Main.gameSquares[currentLandID]);
+			}
+		}
+		refreshUI();
 	}
 	
 	// Return PLAYER's ID
@@ -231,14 +238,19 @@ public class Admin extends Main {
 		return player.getLocation();
 	}
 	
-	// Return PLAYER's MONEY
-	public static int getPlayerMoney(int playerID) {
-		return Main.players[playerID].getMoney();
+	// Return PLAYER's ID
+	public static int getPlayerLocation(int playerID) {
+		
+		return Main.players.length - 1 >= playerID ? Main.players[playerID].getLocation() : 0;
 	}
-	
 	// Return PLAYER's MONEY
 	public static int getPlayerMoney(Player player) {
 		return player.getMoney();
+	}
+	
+	// Return PLAYER's MONEY
+	public static int getPlayerMoney(int playerID) {
+		return Main.players.length - 1 >= playerID ? Main.players[playerID].getMoney() : 0;
 	}
 	
 	// Return PLAYER's NAME
@@ -401,7 +413,7 @@ public class Admin extends Main {
 		return Main.players[playerID].getCommunityChestCards();
 	}
 	
-	public static GameSquare[] getGameSquares(){
+	public static GameSquare[] getGameSquares() {
 		return Main.gameSquares;
 	}
 }
