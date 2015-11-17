@@ -1,23 +1,19 @@
 package gui.Board;
 
-import gui.Debug;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import gui.Debug.Debug;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import GameSquares.GameSquare;
 import Main.Player;
-import java.awt.Component;
-import javax.swing.Box;
 
 public class Board extends JFrame {
 	
 	private static final long	serialVersionUID	= 1L;
 	Player[]					players;
 	GameSquare[]				gameSquares;
-	RollingTheDice				round				= new RollingTheDice();
+	private RollingTheDice		round				= new RollingTheDice();
 	static SquareHolder			squareHolder		= new SquareHolder();
 	public static PlayerInfo	informationTable	= new PlayerInfo();
 	private static JLabel		lblBoard;
