@@ -4,7 +4,8 @@ import GameSquares.GameSquare;
 import Main.Player;
 
 public class CommunityChest extends GameSquare {
-	
+	private static final long	serialVersionUID	= 1L;
+
 	public enum CommunityChestCardType {
 		BargainBusiness, RecieveConsultancyFee, RenovationSuccess
 	}

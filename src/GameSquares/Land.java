@@ -6,7 +6,7 @@ import Main.Player;
 import Main.Properties;
 
 public class Land extends GameSquare {
-	
+	private static final long	serialVersionUID	= 1L;
 	private String	name;
 	private color	color;
 	private int		price, rent;

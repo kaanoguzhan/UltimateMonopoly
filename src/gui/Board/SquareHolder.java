@@ -1,4 +1,4 @@
-package gui;
+package gui.Board;
 
 import java.util.ArrayList;
 

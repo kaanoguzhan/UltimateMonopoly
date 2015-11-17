@@ -1,7 +1,7 @@
 package Main;
 
-import gui.Board;
 import gui.AdditionalWindows.InputReaders.GetTextInput;
+import gui.Board.Board;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import GameSquares.FreePark;

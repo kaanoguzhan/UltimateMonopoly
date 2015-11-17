@@ -1,5 +1,6 @@
 package gui;
 
+import gui.Board.Board;
 import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Component;
@@ -35,7 +36,21 @@ public class Debug extends JFrame {
 	private Choice				choiceOwnLan4, choiceNeuLand4;
 	
 	public Debug() {
-		setBounds(25, 25, 643, 663);
+		switch (Main.players.length) {
+			case 1:
+				setBounds(25, 25, 631, 192);
+				break;
+			case 2:
+				setBounds(25, 25, 631, 343);
+				break;
+			case 3:
+				setBounds(25, 25, 631, 492);
+				break;
+			default:
+				setBounds(25, 25, 631, 655);
+				break;
+		}
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -541,21 +556,21 @@ public class Debug extends JFrame {
 		JButton btnNewButton = new JButton("Old Board");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Board.lblBoard.setIcon(new ImageIcon("board720.jpg"));
-				Board.lblBoard.setBounds(0, 0, 720, 720);
+				Board.getLblBoard().setIcon(new ImageIcon("board720.jpg"));
+				Board.getLblBoard().setBounds(0, 0, 720, 720);
 			}
 		});
-		btnNewButton.setBounds(10, 11, 300, 171);
+		btnNewButton.setBounds(10, 11, 300, 113);
 		panel.add(btnNewButton);
 		
 		JButton btnNewBoard = new JButton("New Board");
 		btnNewBoard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Board.lblBoard.setIcon(new ImageIcon("board1050.jpg"));
-				Board.lblBoard.setBounds(0, 0, 1050, 1050);
+				Board.getLblBoard().setIcon(new ImageIcon("board1050.jpg"));
+				Board.getLblBoard().setBounds(0, 0, 1050, 1050);
 			}
 		});
-		btnNewBoard.setBounds(310, 11, 300, 171);
+		btnNewBoard.setBounds(310, 11, 300, 113);
 		panel.add(btnNewBoard);
 		
 		

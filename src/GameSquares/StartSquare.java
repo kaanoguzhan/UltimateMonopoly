@@ -3,7 +3,8 @@ package GameSquares;
 import Main.Player;
 
 public class StartSquare extends GameSquare {
-	
+	private static final long	serialVersionUID	= 1L;
+
 	public StartSquare(int id) {
 		super(id,type.StartSquare);
 	}

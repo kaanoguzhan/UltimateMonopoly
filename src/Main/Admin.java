@@ -1,6 +1,6 @@
 package Main;
 
-import gui.Board;
+import gui.Board.Board;
 import java.util.ArrayList;
 import GameSquares.GameSquare;
 import GameSquares.Land;

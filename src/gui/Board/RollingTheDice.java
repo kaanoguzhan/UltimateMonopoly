@@ -1,5 +1,6 @@
-package gui;
+package gui.Board;
 
+import gui.Dice;
 import gui.AdditionalWindows.InputReaders.GetOneOption;
 import gui.AdditionalWindows.InputReaders.GetTextInput;
 import java.awt.Font;

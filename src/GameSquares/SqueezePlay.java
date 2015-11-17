@@ -5,7 +5,7 @@ import javax.swing.WindowConstants;
 import Main.Player;
 
 public class SqueezePlay extends GameSquare {
-	
+	private static final long	serialVersionUID	= 1L;
 	private static Player[]			players;
 	public static int				rolled;
 	public static volatile boolean	rolledEven	= false;
