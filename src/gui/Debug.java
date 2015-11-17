@@ -6,6 +6,7 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -532,6 +533,30 @@ public class Debug extends JFrame {
 		lblPlayerName4.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblPlayerName4.setBounds(0, 450, 625, 22);
 		Players.add(lblPlayerName4);
+		
+		JPanel panel = new JPanel();
+		tabbedPane.addTab("Board", null, panel, null);
+		panel.setLayout(null);
+		
+		JButton btnNewButton = new JButton("Old Board");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Board.lblBoard.setIcon(new ImageIcon("board720.jpg"));
+				Board.lblBoard.setBounds(0, 0, 720, 720);
+			}
+		});
+		btnNewButton.setBounds(10, 11, 300, 171);
+		panel.add(btnNewButton);
+		
+		JButton btnNewBoard = new JButton("New Board");
+		btnNewBoard.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Board.lblBoard.setIcon(new ImageIcon("board1050.jpg"));
+				Board.lblBoard.setBounds(0, 0, 1050, 1050);
+			}
+		});
+		btnNewBoard.setBounds(310, 11, 300, 171);
+		panel.add(btnNewBoard);
 		
 		
 		

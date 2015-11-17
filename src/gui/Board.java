@@ -15,7 +15,7 @@ public class Board extends JFrame implements ActionListener {
 	private static final long	serialVersionUID	= 1L;
 	Player[]					players				= null;
 	GameSquare[]				gameSquares			= null;
-	static JLabel				zero, one, two, three;
+	static JLabel				lblBoard, zero, one, two, three;
 	RollingTheDice				round				= new RollingTheDice();
 	static SquareHolder			squareHolder		= new SquareHolder();
 	public static PlayerInfo	informationTable	= new PlayerInfo();
@@ -55,14 +55,13 @@ public class Board extends JFrame implements ActionListener {
 		add(debug);
 		debug.addActionListener(this);
 		
-		ImageIcon image = new ImageIcon("board.jpg");
-		JLabel labelForimage = new JLabel(image);
+		ImageIcon image = new ImageIcon("board1050.jpg");
+		lblBoard = new JLabel(image);
+		add(lblBoard);
+		lblBoard.setBounds(0, 0, 1050, 1050);
 		
 		informationTable.setBounds(720, 260, 550, 350);
 		add(informationTable);
-		
-		add(labelForimage);
-		labelForimage.setBounds(0, 0, 720, 720);
 		
 		this.setSize(1300, 750);
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,7 +71,7 @@ public class Board extends JFrame implements ActionListener {
 		setVisible(true);
 	}
 	public void actionPerformed(ActionEvent e) {
-		//SaveLoad.load();   // TODO Save remove
+		// SaveLoad.load(); // TODO Save remove
 		Debug frame = new Debug();
 		frame.setVisible(true);
 	}
