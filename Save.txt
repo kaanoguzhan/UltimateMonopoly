@@ -1,2 +1,0 @@
-1,1,1500,0,,
-20,StartSquare,0,Land,1,Oriental Ave,blue,100,6,CommunityChest,2,Land,3,Vermont Ave,blue,100,6,Land,4,Connecticut,blue,120,8,RollOnce,5,Land,6,St. Charles Place,pink,140,10,Chance,7,Land,8,States Ave,pink,140,10,Land,9,Virginia,pink,160,12,FreePark,10,Land,11,St. James Place,orange,180,14,CommunityChest,12,Land,13,Tennessee,orange,180,14,Land,14,New York Ave,orange,200,16,SqueezePlay,15,Land,16,Pacific,green,300,26,Land,17,North Carolina,green,300,26,Chance,18,Land,19,Pennsylvania,green,320,28

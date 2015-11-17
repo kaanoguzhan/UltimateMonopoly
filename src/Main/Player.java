@@ -1,18 +1,19 @@
 package Main;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import GameSquares.GameSquare;
 import GameSquares.Land;
 import GameSquares.Land.color;
 import GameSquares.CommunityChest.CommunityChest.CommunityChestCardType;
 
-public class Player {
-	
+public class Player implements Serializable {
+	private static final long					serialVersionUID	= 1L;
 	private String								name;
 	private int									id, money, location;
 	private GameSquare[]						gameSquares;
-	private ArrayList<CommunityChestCardType>	Inventory	= new ArrayList<CommunityChestCardType>();
-	private ArrayList<Land>						ownedLands	= new ArrayList<Land>();
+	private ArrayList<CommunityChestCardType>	Inventory			= new ArrayList<CommunityChestCardType>();
+	private ArrayList<Land>						ownedLands			= new ArrayList<Land>();
 	
 	
 	public Player(int id, String name, GameSquare[] gameSquares) {
@@ -183,8 +184,8 @@ public class Player {
 			"\n" + "Has Cards:" + Inventory +
 			"\n" + "Has Lands:" + Lands;
 	}
-
+	
 	public ArrayList<CommunityChestCardType> getCommunityChestCards() {
 		return Inventory;
-	}	
+	}
 }

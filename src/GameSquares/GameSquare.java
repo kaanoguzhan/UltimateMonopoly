@@ -1,15 +1,16 @@
 package GameSquares;
 
+import java.io.Serializable;
 import Main.Player;
 
-public abstract class GameSquare {
+public abstract class GameSquare implements Serializable {
+	private static final long	serialVersionUID	= 1L;
+	protected int				xCoord;
+	protected int				yCoord;
 	
-	protected int		xCoord;
-	protected int		yCoord;
-	
-	protected int		id;
-	protected type		cardType;
-	protected Player	owner;
+	protected int				id;
+	protected type				cardType;
+	protected Player			owner;
 	
 	
 	protected GameSquare(int id, type type) {

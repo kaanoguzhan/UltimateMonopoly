@@ -1,12 +1,16 @@
 package GameSquares.CommunityChest;
 
+import java.io.Serializable;
 import java.util.Random;
-import GameSquares.CommunityChest.CommunityChestCards.*;
+import GameSquares.CommunityChest.CommunityChestCards.BargainBusiness;
+import GameSquares.CommunityChest.CommunityChestCards.EmptyCard;
+import GameSquares.CommunityChest.CommunityChestCards.RecieveConsultancyFee;
+import GameSquares.CommunityChest.CommunityChestCards.RenovationSuccess;
 
-public class CommunityChestDeck {
-	
-	private int						positionCounter	= 0;	// Remembers the next card on queue.
-	private CommunityChestCard[]	cards			= null;
+public class CommunityChestDeck implements Serializable {
+	private static final long		serialVersionUID	= 1L;
+	private int						positionCounter		= 0;	// Remembers the next card on queue.
+	private CommunityChestCard[]	cards				= null;
 	
 	public CommunityChestDeck() {
 		CommunityChestCard[] cards = { new BargainBusiness(), new BargainBusiness(),

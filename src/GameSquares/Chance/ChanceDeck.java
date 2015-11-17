@@ -1,10 +1,12 @@
 package GameSquares.Chance;
 
+import java.io.Serializable;
 import java.util.Random;
 import GameSquares.Chance.ChanceCards.*;
 import Main.Player;
 
-public class ChanceDeck {
+public class ChanceDeck implements Serializable {
+	private static final long	serialVersionUID	= 1L;
 	
 	private int				positionCounter	= 0;	// Remembers the next card on queue.
 	private ChanceCard[]	cards			= null;

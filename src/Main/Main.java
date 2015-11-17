@@ -15,17 +15,18 @@ import GameSquares.Chance.Chance;
 import GameSquares.Chance.ChanceDeck;
 import GameSquares.CommunityChest.CommunityChest;
 import GameSquares.CommunityChest.CommunityChestDeck;
-import Main.SaveLoad.Save;
+import Main.SaveLoad.SaveLoad;
 
 public class Main {
 	protected static ChanceDeck			chanceDeck		= null;
 	protected static CommunityChestDeck	communityDeck	= null;
 	public static GameSquare[]			gameSquares		= null;
 	public static Player[]				players			= null;
-	static Board						board;
 	static Boolean						play			= true;
 	volatile static Boolean				roundEnded		= false;
-	public static GetTextInput					temp;
+	private static GetTextInput			temp;
+	static Board						board;
+	
 	public static void main(String[] args) {
 		changeUITheme();
 		initializePlayers();
@@ -33,7 +34,7 @@ public class Main {
 		initializeGameSquares();
 		initializePlayerNames();
 		initializeBoard();
-		Save.save();
+		SaveLoad.save();
 		
 		runGame();
 	}
@@ -49,18 +50,16 @@ public class Main {
 	
 	private static void initializePlayers() {
 		int num0fPlayers = 0;
-		String numberOfPlayers ="";
+		String numberOfPlayers = "";
 		try {
-			while (num0fPlayers == 0 || num0fPlayers < 0 || numberOfPlayers == null){
-				 temp = new GetTextInput("How many players?");
-				 num0fPlayers = temp.getInt();
-				 numberOfPlayers = temp.getString();
+			while (num0fPlayers == 0 || num0fPlayers < 0 || numberOfPlayers == null) {
+				temp = new GetTextInput("How many players?");
+				num0fPlayers = temp.getInt();
+				numberOfPlayers = temp.getString();
 			}
-				
+			
 			players = new Player[num0fPlayers];
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+		} catch (Exception e) {}
 		
 		
 		

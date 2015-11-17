@@ -1,11 +1,13 @@
 package GameSquares.CommunityChest.CommunityChestCards;
 
 import gui.AdditionalWindows.MessageDisplayer;
+import java.io.Serializable;
 import GameSquares.CommunityChest.CommunityChest.CommunityChestCardType;
 import GameSquares.CommunityChest.CommunityChestCard;
 import Main.Player;
 
-public class BargainBusiness extends CommunityChestCard {
+public class BargainBusiness extends CommunityChestCard implements Serializable {
+	private static final long	serialVersionUID	= 1L;
 	
 	public BargainBusiness() {
 		super();
@@ -21,7 +23,7 @@ public class BargainBusiness extends CommunityChestCard {
 	public String toString() {
 		return "You picked BargainBusiness Card.";
 	}
-
+	
 	@Override
 	public String getName() {
 		return "BargainBusiness";

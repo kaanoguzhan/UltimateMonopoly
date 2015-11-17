@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import GameSquares.GameSquare;
 import Main.Player;
-import Main.SaveLoad.Save;
+import Main.SaveLoad.SaveLoad;
 
 public class Board extends JFrame implements ActionListener {
 	
@@ -62,7 +62,7 @@ public class Board extends JFrame implements ActionListener {
 		add(informationTable);
 		
 		add(labelForimage);
-		labelForimage.setBounds(0, 0, 1050, 1050);
+		labelForimage.setBounds(0, 0, 720, 720);
 		
 		this.setSize(1300, 750);
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,7 +72,7 @@ public class Board extends JFrame implements ActionListener {
 		setVisible(true);
 	}
 	public void actionPerformed(ActionEvent e) {
-		Save.save();  ///SAVEE HERE
+		SaveLoad.load();   // TODO Save remove
 		Debug frame = new Debug();
 		frame.setVisible(true);
 	}
