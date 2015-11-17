@@ -62,7 +62,7 @@ public class Board extends JFrame implements ActionListener {
 		add(informationTable);
 		
 		add(labelForimage);
-		labelForimage.setBounds(0, 0, 700, 700);
+		labelForimage.setBounds(0, 0, 1050, 1050);
 		
 		this.setSize(1300, 750);
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

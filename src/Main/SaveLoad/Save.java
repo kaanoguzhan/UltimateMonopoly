@@ -11,7 +11,6 @@ import Main.Admin;
 public class Save {
 	
 	public Save() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public static void save() {
@@ -32,18 +31,19 @@ public class Save {
 			output += Admin.getPlayerName(i) + "," + Admin.getPlayerMoney(i) + "," + Admin.getPlayerLocation(i) + ",";
 			for (Land lnd : Admin.getPlayerLands(i))
 				output += lnd.getName() + "-";
-			output = output.substring(0, output.length() - 1) + ",";
+			output += output.substring(output.length() - 1, output.length()).equals(",") ?
+				"," : output.substring(0, output.length() - 1) + ",";
 			for (CommunityChestCardType cccType : Admin.getPlayerCommunityChestCards(i))
 				output += cccType.name() + "-";
+			output +=",";
 		}
-		
+		output = output.substring(0, output.length() - 1);
 		return output;
 	}
 	private static String getGameSquareString() {
 		String output = "" + Admin.getGameSquareCount() + ",";
 		for (GameSquare gs : Admin.getGameSquares()) {
 			output += gs.getType() + ",";
-			String isadw= gs.getType();
 			switch (gs.getType()) {
 				case "Chance":
 				case "CommunityChest":
@@ -51,19 +51,19 @@ public class Save {
 				case "RollOnce":
 				case "StartSquare":
 				case "SqueezePlay":
-					output += gs.getID()+",";
+					output += gs.getID() + ",";
 					break;
 				case "Land":
 					Land lnd = (Land) gs;
 					output += lnd.getID() + "," + lnd.getName() + "," + lnd.getColor() + "," + lnd.getPrice() + ","
-						+ lnd.getRent()+",";
+						+ lnd.getRent() + ",";
 					break;
 				default:
 					output += "Error:Unknown GameSquare Type";
 					break;
 			}
-			output = output.substring(0, output.length() - 1);
 		}
+		output = output.substring(0, output.length() - 1);
 		return output;
 	}
 }
