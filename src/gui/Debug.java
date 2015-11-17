@@ -66,21 +66,17 @@ public class Debug extends JFrame {
 		Player0.add(lblMoney1);
 		
 		JButton btnSetMon1 = new JButton("Set");
-		btnSetMon1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.setMoney(0, getInt(txtMoney1));
-				lblMoney1.setText("Money: " + Admin.getPlayerMoney(0));
-			}
+		btnSetMon1.addActionListener(al -> {
+			Admin.setMoney(0, getInt(txtMoney1));
+			lblMoney1.setText("Money: " + Admin.getPlayerMoney(0));
 		});
 		btnSetMon1.setBounds(55, 55, 81, 42);
 		Player0.add(btnSetMon1);
 		
 		JButton btnMin1 = new JButton("-");
-		btnMin1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Admin.decreaseMoneyBy(0, getInt(txtMoney1));
-				lblMoney1.setText("Money: " + Admin.getPlayerMoney(0));
-			}
+		btnMin1.addActionListener(al -> {
+			Admin.decreaseMoneyBy(0, getInt(txtMoney1));
+			lblMoney1.setText("Money: " + Admin.getPlayerMoney(0));
 		});
 		btnMin1.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnMin1.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -88,11 +84,9 @@ public class Debug extends JFrame {
 		Player0.add(btnMin1);
 		
 		JButton btnPls1 = new JButton("+");
-		btnPls1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.increaseMoneyBy(0, getInt(txtMoney1));
-				lblMoney1.setText("Money: " + Admin.getPlayerMoney(0));
-			}
+		btnPls1.addActionListener(al -> {
+			Admin.increaseMoneyBy(0, getInt(txtMoney1));
+			lblMoney1.setText("Money: " + Admin.getPlayerMoney(0));
 		});
 		btnPls1.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnPls1.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -122,10 +116,8 @@ public class Debug extends JFrame {
 		Player0.add(btnSetLoc1);
 		
 		JButton btnMove1 = new JButton("Move");
-		btnMove1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.movePlayerTo(0, choiceLoc1.getSelectedIndex());
-			}
+		btnMove1.addActionListener(al -> {
+			Admin.movePlayerTo(0, choiceLoc1.getSelectedIndex());
 		});
 		btnMove1.setAlignmentX(0.5f);
 		btnMove1.setBounds(237, 55, 70, 41);
@@ -150,21 +142,17 @@ public class Debug extends JFrame {
 		Player0.add(lblNeuLands1);
 		
 		JButton btnRemoveLnd1 = new JButton("Remove");
-		btnRemoveLnd1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.removeOwnership(0, choiceOwnLan1.getSelectedItem());
-				refreshLands();
-			}
+		btnRemoveLnd1.addActionListener(al -> {
+			Admin.removeOwnership(0, choiceOwnLan1.getSelectedItem());
+			refreshLands();
 		});
 		btnRemoveLnd1.setBounds(329, 55, 140, 41);
 		Player0.add(btnRemoveLnd1);
 		
 		JButton btnClaimLnd1 = new JButton("Claim");
-		btnClaimLnd1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.giveOwnership(0, choiceNeuLand1.getSelectedItem());
-				refreshLands();
-			}
+		btnClaimLnd1.addActionListener(al -> {
+			Admin.giveOwnership(0, choiceNeuLand1.getSelectedItem());
+			refreshLands();
 		});
 		btnClaimLnd1.setBounds(473, 55, 140, 41);
 		Player0.add(btnClaimLnd1);
@@ -200,22 +188,16 @@ public class Debug extends JFrame {
 		Player1.add(lblMoney2);
 		
 		JButton btnSetMon2 = new JButton("Set");
-		btnSetMon2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.setMoney(1, getInt(txtMoney2));
-				lblMoney2.setText("Money: " + Admin.getPlayerMoney(1));
-			}
+		btnSetMon2.addActionListener(ae -> {
+			Admin.setMoney(1, getInt(txtMoney2));
 		});
-		
 		btnSetMon2.setBounds(55, 55, 81, 42);
 		Player1.add(btnSetMon2);
 		
 		JButton btnMin2 = new JButton("-");
-		btnMin2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.decreaseMoneyBy(1, getInt(txtMoney2));
-				lblMoney2.setText("Money: " + Admin.getPlayerMoney(1));
-			}
+		btnMin2.addActionListener(al -> {
+			Admin.decreaseMoneyBy(1, getInt(txtMoney2));
+			lblMoney2.setText("Money: " + Admin.getPlayerMoney(1));
 		});
 		btnMin2.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnMin2.setAlignmentY(0.0f);
@@ -223,11 +205,9 @@ public class Debug extends JFrame {
 		Player1.add(btnMin2);
 		
 		JButton btnPls2 = new JButton("+");
-		btnPls2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Admin.increaseMoneyBy(1, getInt(txtMoney2));
-				lblMoney2.setText("Money: " + Admin.getPlayerMoney(1));
-			}
+		btnPls2.addActionListener(al -> {
+			Admin.increaseMoneyBy(1, getInt(txtMoney2));
+			lblMoney2.setText("Money: " + Admin.getPlayerMoney(1));
 		});
 		btnPls2.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnPls2.setAlignmentY(0.0f);
@@ -246,20 +226,16 @@ public class Debug extends JFrame {
 		Player1.add(choiceLoc2);
 		
 		JButton btnSetLoc2 = new JButton("Set");
-		btnSetLoc2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.movePlayerToForced(1, choiceLoc2.getSelectedIndex());
-			}
+		btnSetLoc2.addActionListener(ae -> {
+			Admin.movePlayerToForced(1, choiceLoc2.getSelectedIndex());
 		});
 		btnSetLoc2.setAlignmentX(0.5f);
 		btnSetLoc2.setBounds(167, 55, 70, 41);
 		Player1.add(btnSetLoc2);
 		
 		JButton btnMove2 = new JButton("Move");
-		btnMove2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.movePlayerTo(1, choiceLoc2.getSelectedIndex());
-			}
+		btnMove2.addActionListener(ae -> {
+			Admin.movePlayerTo(1, choiceLoc2.getSelectedIndex());
 		});
 		btnMove2.setAlignmentX(0.5f);
 		btnMove2.setBounds(237, 55, 70, 41);
@@ -284,22 +260,19 @@ public class Debug extends JFrame {
 		Player1.add(lblNeuLands2);
 		
 		JButton btnRemoveLnd2 = new JButton("Remove");
-		btnRemoveLnd2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Admin.removeOwnership(1, choiceOwnLan2.getSelectedItem());
-				refreshLands();
-			}
+		btnRemoveLnd2.addActionListener(ae -> {
+			Admin.removeOwnership(1, choiceOwnLan2.getSelectedItem());
+			refreshLands();
 		});
 		btnRemoveLnd2.setBounds(329, 55, 140, 41);
 		Player1.add(btnRemoveLnd2);
 		
 		JButton btnClaimLnd2 = new JButton("Claim");
-		btnClaimLnd2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnClaimLnd2.addActionListener(
+			ae -> {
 				Admin.giveOwnership(1, choiceNeuLand2.getSelectedItem());
 				refreshLands();
-			}
-		});
+			});
 		btnClaimLnd2.setBounds(473, 55, 140, 41);
 		Player1.add(btnClaimLnd2);
 		
@@ -334,11 +307,9 @@ public class Debug extends JFrame {
 		Player2.add(lblMoney3);
 		
 		JButton btnSetMon3 = new JButton("Set");
-		btnSetMon3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.setMoney(2, getInt(txtMoney3));
-				lblMoney3.setText("Money: " + Admin.getPlayerMoney(2));
-			}
+		btnSetMon3.addActionListener(al -> {
+			Admin.setMoney(2, getInt(txtMoney3));
+			lblMoney3.setText("Money: " + Admin.getPlayerMoney(2));
 		});
 		btnSetMon3.setBounds(55, 55, 81, 42);
 		Player2.add(btnSetMon3);
@@ -346,9 +317,11 @@ public class Debug extends JFrame {
 		JButton btnMin3 = new JButton("-");
 		btnMin3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Admin.decreaseMoneyBy(2, getInt(txtMoney3));
-				lblMoney3.setText("Money: " + Admin.getPlayerMoney(2));
 			}
+		});
+		btnMin3.addActionListener(al -> {
+			Admin.decreaseMoneyBy(2, getInt(txtMoney3));
+			lblMoney3.setText("Money: " + Admin.getPlayerMoney(2));
 		});
 		btnMin3.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnMin3.setAlignmentY(0.0f);
@@ -356,11 +329,9 @@ public class Debug extends JFrame {
 		Player2.add(btnMin3);
 		
 		JButton btnPls3 = new JButton("+");
-		btnPls3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.increaseMoneyBy(2, getInt(txtMoney3));
-				lblMoney3.setText("Money: " + Admin.getPlayerMoney(2));
-			}
+		btnPls3.addActionListener(ae -> {
+			Admin.increaseMoneyBy(2, getInt(txtMoney3));
+			lblMoney3.setText("Money: " + Admin.getPlayerMoney(2));
 		});
 		btnPls3.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnPls3.setAlignmentY(0.0f);
@@ -379,20 +350,16 @@ public class Debug extends JFrame {
 		Player2.add(choiceLoc3);
 		
 		JButton btnSetLoc3 = new JButton("Set");
-		btnSetLoc3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.movePlayerToForced(2, choiceLoc3.getSelectedIndex());
-			}
+		btnSetLoc3.addActionListener(ae -> {
+			Admin.movePlayerToForced(2, choiceLoc3.getSelectedIndex());
 		});
 		btnSetLoc3.setAlignmentX(0.5f);
 		btnSetLoc3.setBounds(167, 55, 70, 41);
 		Player2.add(btnSetLoc3);
 		
 		JButton btnMove3 = new JButton("Move");
-		btnMove3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.movePlayerTo(2, choiceLoc3.getSelectedIndex());
-			}
+		btnMove3.addActionListener(ae -> {
+			Admin.movePlayerTo(2, choiceLoc3.getSelectedIndex());
 		});
 		btnMove3.setAlignmentX(0.5f);
 		btnMove3.setBounds(237, 55, 70, 41);
@@ -417,21 +384,17 @@ public class Debug extends JFrame {
 		Player2.add(lblNeuLands3);
 		
 		JButton btnRemoveLnd3 = new JButton("Remove");
-		btnRemoveLnd3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.removeOwnership(2, choiceOwnLan3.getSelectedItem());
-				refreshLands();
-			}
+		btnRemoveLnd3.addActionListener(ae -> {
+			Admin.removeOwnership(2, choiceOwnLan3.getSelectedItem());
+			refreshLands();
 		});
 		btnRemoveLnd3.setBounds(329, 55, 140, 41);
 		Player2.add(btnRemoveLnd3);
 		
 		JButton btnClaimLnd3 = new JButton("Claim");
-		btnClaimLnd3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.giveOwnership(2, choiceNeuLand3.getSelectedItem());
-				refreshLands();
-			}
+		btnClaimLnd3.addActionListener(ae -> {
+			Admin.giveOwnership(2, choiceNeuLand3.getSelectedItem());
+			refreshLands();
 		});
 		btnClaimLnd3.setBounds(473, 55, 140, 41);
 		Player2.add(btnClaimLnd3);
@@ -467,21 +430,17 @@ public class Debug extends JFrame {
 		Player3.add(lblMoney4);
 		
 		JButton btnSetMon4 = new JButton("Set");
-		btnSetMon4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.setMoney(3, getInt(txtMoney4));
-				lblMoney4.setText("Money: " + Admin.getPlayerMoney(3));
-			}
+		btnSetMon4.addActionListener(al -> {
+			Admin.setMoney(3, getInt(txtMoney4));
+			lblMoney4.setText("Money: " + Admin.getPlayerMoney(3));
 		});
 		btnSetMon4.setBounds(55, 55, 81, 42);
 		Player3.add(btnSetMon4);
 		
 		JButton btnMin4 = new JButton("-");
-		btnMin4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.decreaseMoneyBy(3, getInt(txtMoney4));
-				lblMoney4.setText("Money: " + Admin.getPlayerMoney(3));
-			}
+		btnMin4.addActionListener(ae -> {
+			Admin.decreaseMoneyBy(3, getInt(txtMoney4));
+			lblMoney4.setText("Money: " + Admin.getPlayerMoney(3));
 		});
 		btnMin4.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnMin4.setAlignmentY(0.0f);
@@ -489,11 +448,9 @@ public class Debug extends JFrame {
 		Player3.add(btnMin4);
 		
 		JButton btnPls4 = new JButton("+");
-		btnPls4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.increaseMoneyBy(3, getInt(txtMoney4));
-				lblMoney4.setText("Money: " + Admin.getPlayerMoney(3));
-			}
+		btnPls4.addActionListener(ae -> {
+			Admin.increaseMoneyBy(3, getInt(txtMoney4));
+			lblMoney4.setText("Money: " + Admin.getPlayerMoney(3));
 		});
 		btnPls4.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnPls4.setAlignmentY(0.0f);
@@ -512,20 +469,16 @@ public class Debug extends JFrame {
 		Player3.add(choiceLoc4);
 		
 		JButton btnSetLoc4 = new JButton("Set");
-		btnSetLoc4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.movePlayerToForced(3, choiceLoc4.getSelectedIndex());
-			}
+		btnSetLoc4.addActionListener(ae -> {
+			Admin.movePlayerToForced(3, choiceLoc4.getSelectedIndex());
 		});
 		btnSetLoc4.setAlignmentX(0.5f);
 		btnSetLoc4.setBounds(167, 55, 70, 41);
 		Player3.add(btnSetLoc4);
 		
 		JButton btnMove4 = new JButton("Move");
-		btnMove4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.movePlayerTo(3, choiceLoc4.getSelectedIndex());
-			}
+		btnMove4.addActionListener(ae -> {
+			Admin.movePlayerTo(3, choiceLoc4.getSelectedIndex());
 		});
 		btnMove4.setAlignmentX(0.5f);
 		btnMove4.setBounds(237, 55, 70, 41);
@@ -550,21 +503,17 @@ public class Debug extends JFrame {
 		Player3.add(lblNeuLands4);
 		
 		JButton btnRemoveLnd4 = new JButton("Remove");
-		btnRemoveLnd4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.removeOwnership(3, choiceOwnLan4.getSelectedItem());
-				refreshLands();
-			}
+		btnRemoveLnd4.addActionListener(ae -> {
+			Admin.removeOwnership(3, choiceOwnLan4.getSelectedItem());
+			refreshLands();
 		});
 		btnRemoveLnd4.setBounds(329, 55, 140, 41);
 		Player3.add(btnRemoveLnd4);
 		
 		JButton btnClaimLnd4 = new JButton("Claim");
-		btnClaimLnd4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.giveOwnership(3, choiceNeuLand4.getSelectedItem());
-				refreshLands();
-			}
+		btnClaimLnd4.addActionListener(ae -> {
+			Admin.giveOwnership(3, choiceNeuLand4.getSelectedItem());
+			refreshLands();
 		});
 		btnClaimLnd4.setBounds(473, 55, 140, 41);
 		Player3.add(btnClaimLnd4);
@@ -584,9 +533,6 @@ public class Debug extends JFrame {
 		lblPlayerName4.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblPlayerName4.setBounds(0, 450, 625, 22);
 		Players.add(lblPlayerName4);
-		
-		
-		
 		
 		
 		
