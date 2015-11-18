@@ -1,10 +1,12 @@
 package GameSquares.CommunityChest.CommunityChestCards;
 
+import java.io.Serializable;
 import gui.AdditionalWindows.MessageDisplayer;
 import GameSquares.CommunityChest.CommunityChestCard;
 import Main.Player;
 
-public class RecieveConsultancyFee extends CommunityChestCard {
+public class RecieveConsultancyFee extends CommunityChestCard implements Serializable {
+	private static final long	serialVersionUID	= 1L;
 	
 	public RecieveConsultancyFee() {
 		super();
@@ -19,5 +21,10 @@ public class RecieveConsultancyFee extends CommunityChestCard {
 	@Override
 	public String toString() {
 		return "You picked RecieveConsultancyFee Card.";
+	}
+	
+	@Override
+	public String getName() {
+		return "RecieveConsultancyFee";
 	}
 }

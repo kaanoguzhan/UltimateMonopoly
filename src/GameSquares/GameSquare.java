@@ -1,17 +1,25 @@
 package GameSquares;
 
+import java.io.Serializable;
 import Main.Player;
 
-public abstract class GameSquare {
+public abstract class GameSquare implements Serializable {
+	private static final long	serialVersionUID	= 1L;
+	protected int				xCoord;
+	protected int				yCoord;
 	
-	protected int		xCoord;
-	protected int		yCoord;
+	protected int				id;
+	protected type				cardType;
+	protected Player			owner;
 	
-	protected int		id;
-	protected Player	owner;
 	
-	public GameSquare(int id) {
+	protected GameSquare(int id, type type) {
 		this.id = id;
+		this.cardType = type;
+	}
+	
+	public enum type {
+		Chance, CommunityChest, FreePark, Land, RollOnce, StartSquare, SqueezePlay
 	}
 	
 	public abstract void onArrive(Player pl);
@@ -30,6 +38,10 @@ public abstract class GameSquare {
 	
 	public Player getOwner() {
 		return owner;
+	}
+	
+	public String getType() {
+		return cardType.toString();
 	}
 	
 	public int getID() {

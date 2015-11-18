@@ -1,5 +1,6 @@
-package gui;
+package gui.Board;
 
+import gui.Dice;
 import gui.AdditionalWindows.InputReaders.GetOneOption;
 import gui.AdditionalWindows.InputReaders.GetTextInput;
 import java.awt.Font;
@@ -14,7 +15,6 @@ import Main.Admin;
 import Main.Properties;
 
 public class RollingTheDice extends JPanel implements ActionListener {
-	
 	private static final long	serialVersionUID	= 1L;
 	private int					playerID;
 	private JLabel				playerName, result, dice, whichPlayer;

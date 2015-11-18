@@ -6,7 +6,7 @@ import Main.Player;
 import Main.Properties;
 
 public class Land extends GameSquare {
-	
+	private static final long	serialVersionUID	= 1L;
 	private String	name;
 	private color	color;
 	private int		price, rent;
@@ -14,11 +14,14 @@ public class Land extends GameSquare {
 	public boolean	buy;
 	
 	public enum color {
-		blue, pink, orange, green
+		blue, pink, orange, green, puple, lightBlue, red, yellow, white, 
+		black, grey, brown, lightPink, lightGreen, lightYellow, oceanGreen,
+		magenta, gold, lightRed, darkRed
 	}
-	
+
+
 	public Land(int id, String name, color color, int price, int rent) {
-		super(id);
+		super(id,type.Land);
 		this.name = name;
 		this.color = color;
 		this.price = price;
@@ -126,6 +129,11 @@ public class Land extends GameSquare {
 	public void setRent(int rent) {
 		this.rent = rent;
 	}
+	
+	public int getRent() {
+		return rent;
+	}
+	
 	// ///////////////////////////////////////////////////////////////////////////// //
 	
 	@Override

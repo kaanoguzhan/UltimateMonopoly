@@ -4,7 +4,8 @@ import GameSquares.GameSquare;
 import Main.Player;
 
 public class CommunityChest extends GameSquare {
-	
+	private static final long	serialVersionUID	= 1L;
+
 	public enum CommunityChestCardType {
 		BargainBusiness, RecieveConsultancyFee, RenovationSuccess
 	}
@@ -12,7 +13,7 @@ public class CommunityChest extends GameSquare {
 	private CommunityChestDeck	CommunityDeck	= null;
 	
 	public CommunityChest(int id, CommunityChestDeck CommunityDeck) {
-		super(id);
+		super(id,type.CommunityChest);
 		this.CommunityDeck = CommunityDeck;
 	}
 	

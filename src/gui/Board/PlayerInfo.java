@@ -1,4 +1,4 @@
-package gui;
+package gui.Board;
 
 import java.awt.*;
 import javax.swing.*;
@@ -14,13 +14,11 @@ public class PlayerInfo extends JPanel {
 	JScrollPane					pane;
 	String[][]					data;
 	
-	private Player[]			players				= Main.players;
-	
 	public PlayerInfo() {
 		setLayout(new BorderLayout());
 		
 		String[] column = { "Player Name", "Location", "Money", "Properties" };
-		data = new String[players.length][4];
+		data = new String[Main.players.length][4];
 		
 		table = new JTable(data, column);
 		table.setFillsViewportHeight(true);
@@ -46,8 +44,8 @@ public class PlayerInfo extends JPanel {
 	}
 	
 	public void refreshData() {
-		for (int i = 0; i < players.length; i++) {
-			Player current = players[i];
+		for (int i = 0; i < Main.players.length; i++) {
+			Player current = Main.players[i];
 			String lands = "";
 			for (int j = 0; j < current.getOwnedLands().size(); j++)
 				if (j > 0)
@@ -65,8 +63,8 @@ public class PlayerInfo extends JPanel {
 	}
 	
 	private void refreshPlayerLocations() {
-		for (int i = 0; i < players.length; i++) {
-			Player current = players[i];
+		for (int i = 0; i < Main.players.length; i++) {
+			Player current = Main.players[i];
 			JLabel Player = null;
 			switch (current.getID()) {
 				case 0:

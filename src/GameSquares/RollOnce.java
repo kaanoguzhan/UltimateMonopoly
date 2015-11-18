@@ -9,6 +9,7 @@ import javax.swing.WindowConstants;
 import Main.Player;
 
 public class RollOnce extends GameSquare {
+	private static final long	serialVersionUID	= 1L;
 	public static volatile boolean	rolledSame		= false;
 	static int						winningPrize	= 100;
 	public static int				rolled, randomRoll;
