@@ -14,7 +14,9 @@ public class Land extends GameSquare {
 	public boolean	buy;
 	
 	public enum color {
-		blue, pink, orange, green
+		blue, pink, orange, green, puple, lightBlue, red, yellow, white, 
+		black, grey, brown, lightPink, lightGreen, lightYellow, oceanGreen,
+		magenta, gold, lightRed, darkRed
 	}
 
 
