@@ -7,9 +7,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import Main.Player;
 
-public class SqueezePlay extends JFrame implements ActionListener {
+public class SqueezePlay extends JPanel implements ActionListener {
 	
 	private static final long	serialVersionUID	= 1L;
 	private JLabel				picked, result, dice;
@@ -17,7 +19,7 @@ public class SqueezePlay extends JFrame implements ActionListener {
 	private Player				player;
 	
 	public SqueezePlay(Player pl) {
-		super("SqueezePlay");
+		
 		setLayout(null);
 		this.player = pl;
 		
@@ -65,5 +67,7 @@ public class SqueezePlay extends JFrame implements ActionListener {
 				.getHeight()));
 		}
 	}
+	
+	
 	
 }

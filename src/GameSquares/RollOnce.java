@@ -1,6 +1,10 @@
 package GameSquares;
 
 import gui.Dice;
+
+import java.awt.Dialog;
+
+import javax.swing.JDialog;
 import javax.swing.WindowConstants;
 import Main.Player;
 
@@ -11,18 +15,20 @@ public class RollOnce extends GameSquare {
 	
 	
 	public RollOnce(int id) {
-		super(id);
+		super(id,type.RollOnce);
 	}
 	
 	@Override
 	public void onArrive(Player pl) {
-		gui.AdditionalWindows.RollOnce r = new gui.AdditionalWindows.RollOnce(pl);
+		gui.AdditionalWindows.RollOnce a = new gui.AdditionalWindows.RollOnce(pl);
+		JDialog r = new JDialog(null,"Roll Once",Dialog.ModalityType.APPLICATION_MODAL);	
+		a.setBounds(0,0, 250, 250);
+		r.add(a);
 		r.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		r.setSize(350, 200);
-		r.setVisible(true);
 		r.setAlwaysOnTop(true);
-		r.isAutoRequestFocus();
-		r.requestFocusInWindow();
+		r.setVisible(true);
+
 	}
 	
 	public static void isRolledSame(Player pl, int randomRoll) {

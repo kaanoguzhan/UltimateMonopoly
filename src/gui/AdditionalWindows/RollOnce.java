@@ -9,9 +9,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import Main.Player;
 
-public class RollOnce extends JFrame implements ActionListener {
+public class RollOnce extends JPanel implements ActionListener {
 	
 	private static final long	serialVersionUID	= 1L;
 	private JLabel				picked, picked2, result, dice;
@@ -20,7 +22,6 @@ public class RollOnce extends JFrame implements ActionListener {
 	private Player				player;
 	
 	public RollOnce(Player pl) {
-		super("RollOnce");
 		setLayout(null);
 		this.player = pl;
 		

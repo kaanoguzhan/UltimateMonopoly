@@ -1,6 +1,10 @@
 package GameSquares;
 
 import gui.Dice;
+
+import java.awt.Dialog;
+
+import javax.swing.JDialog;
 import javax.swing.WindowConstants;
 import Main.Player;
 
@@ -11,14 +15,17 @@ public class SqueezePlay extends GameSquare {
 	public static volatile boolean	rolledEven	= false;
 	
 	public SqueezePlay(int id, Player[] players) {
-		super(id);
+		super(id,type.SqueezePlay);
 		SqueezePlay.players = players;
 	}
 	
 	@Override
 	public void onArrive(Player pl) {
-		gui.AdditionalWindows.SqueezePlay r = new gui.AdditionalWindows.SqueezePlay(pl);
+		gui.AdditionalWindows.SqueezePlay a = new gui.AdditionalWindows.SqueezePlay(pl);
+		JDialog r = new JDialog(null,"Squeeze Play",Dialog.ModalityType.APPLICATION_MODAL);
 		r.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+		a.setBounds(0,0, 250, 250);
+		r.add(a);
 		r.setSize(350, 200);
 		r.setVisible(true);
 		r.setAlwaysOnTop(true);
