@@ -34,7 +34,6 @@ public class Main {
 		initializeGameSquares();
 		initializePlayerNames();
 		initializeBoard();
-		SaveLoad.save();
 		
 		runGame();
 	}
