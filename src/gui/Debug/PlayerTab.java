@@ -29,12 +29,18 @@ public class PlayerTab extends JPanel {
 		this.playerID = playerID;
 		setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.LIGHT_GRAY));
 		
+		JLabel lblPlayerName1 = new JLabel("Player " + (playerID+1));
+		lblPlayerName1.setBounds(0, 0, 625, 22);
+		lblPlayerName1.setHorizontalAlignment(SwingConstants.LEFT);
+		lblPlayerName1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		add(lblPlayerName1);
+		
 		JLabel lblLocation1 = new JLabel("Location: ");
-		lblLocation1.setBounds(167, 13, 56, 16);
+		lblLocation1.setBounds(167, 35, 56, 16);
 		add(lblLocation1);
 		
 		JLabel lblMoney1 = new JLabel("Money: " + Admin.getPlayerMoney(this.playerID));
-		lblMoney1.setBounds(10, 13, 118, 16);
+		lblMoney1.setBounds(10, 35, 118, 16);
 		add(lblMoney1);
 		
 		JButton btnSetMon1 = new JButton("Set");
@@ -42,7 +48,7 @@ public class PlayerTab extends JPanel {
 			Admin.setMoney(playerID, getInt(txtMoney1));
 			lblMoney1.setText("Money: " + Admin.getPlayerMoney(this.playerID));
 		});
-		btnSetMon1.setBounds(55, 55, 81, 42);
+		btnSetMon1.setBounds(55, 77, 81, 42);
 		add(btnSetMon1);
 		
 		JButton btnMin1 = new JButton("-");
@@ -52,7 +58,7 @@ public class PlayerTab extends JPanel {
 		});
 		btnMin1.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnMin1.setAlignmentY(Component.TOP_ALIGNMENT);
-		btnMin1.setBounds(12, 76, 43, 21);
+		btnMin1.setBounds(12, 98, 43, 21);
 		add(btnMin1);
 		
 		JButton btnPls1 = new JButton("+");
@@ -62,19 +68,19 @@ public class PlayerTab extends JPanel {
 		});
 		btnPls1.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnPls1.setAlignmentY(Component.TOP_ALIGNMENT);
-		btnPls1.setBounds(12, 55, 43, 21);
+		btnPls1.setBounds(12, 77, 43, 21);
 		add(btnPls1);
 		
 		txtMoney1 = new JTextField();
 		txtMoney1.setColumns(10);
-		txtMoney1.setBounds(12, 31, 125, 22);
+		txtMoney1.setBounds(12, 53, 125, 22);
 		txtMoney1.setToolTipText("" + Admin.getPlayerMoney(this.playerID));
 		add(txtMoney1);
 		
 		Choice choiceLoc1 = new Choice();
 		fillAllSquares(choiceLoc1);
 		choiceLoc1.select(Admin.getPlayerLocation(this.playerID));
-		choiceLoc1.setBounds(167, 31, 140, 22);
+		choiceLoc1.setBounds(167, 53, 140, 22);
 		add(choiceLoc1);
 		
 		JButton btnSetLoc1 = new JButton("Set");
@@ -84,7 +90,7 @@ public class PlayerTab extends JPanel {
 			}
 		});
 		btnSetLoc1.setAlignmentX(Component.CENTER_ALIGNMENT);
-		btnSetLoc1.setBounds(167, 55, 70, 41);
+		btnSetLoc1.setBounds(167, 77, 70, 41);
 		add(btnSetLoc1);
 		
 		JButton btnMove1 = new JButton("Move");
@@ -92,25 +98,25 @@ public class PlayerTab extends JPanel {
 			Admin.movePlayerTo(playerID, choiceLoc1.getSelectedIndex());
 		});
 		btnMove1.setAlignmentX(0.5f);
-		btnMove1.setBounds(237, 55, 70, 41);
+		btnMove1.setBounds(237, 77, 70, 41);
 		add(btnMove1);
 		
 		JLabel lblOwnLands1 = new JLabel("Owned Lands");
-		lblOwnLands1.setBounds(329, 13, 140, 16);
+		lblOwnLands1.setBounds(329, 35, 140, 16);
 		add(lblOwnLands1);
 		
 		Choice choiceOwnLan1 = new Choice();
 		fillOwnLands(choiceOwnLan1, playerID);
-		choiceOwnLan1.setBounds(329, 31, 140, 22);
+		choiceOwnLan1.setBounds(329, 53, 140, 22);
 		add(choiceOwnLan1);
 		
 		Choice choiceNeuLand1 = new Choice();
 		fillNeuLands(choiceNeuLand1, playerID);
-		choiceNeuLand1.setBounds(473, 31, 140, 22);
+		choiceNeuLand1.setBounds(473, 53, 140, 22);
 		add(choiceNeuLand1);
 		
 		JLabel lblNeuLands1 = new JLabel("Neutral Lands");
-		lblNeuLands1.setBounds(473, 13, 140, 16);
+		lblNeuLands1.setBounds(473, 35, 140, 16);
 		add(lblNeuLands1);
 		
 		JButton btnRemoveLnd1 = new JButton("Remove");
@@ -118,7 +124,7 @@ public class PlayerTab extends JPanel {
 			Admin.removeOwnership(playerID, choiceOwnLan1.getSelectedItem());
 			Debug.refreshLands();
 		});
-		btnRemoveLnd1.setBounds(329, 55, 140, 41);
+		btnRemoveLnd1.setBounds(329, 77, 140, 41);
 		add(btnRemoveLnd1);
 		
 		JButton btnClaimLnd1 = new JButton("Claim");
@@ -126,20 +132,23 @@ public class PlayerTab extends JPanel {
 			Admin.giveOwnership(playerID, choiceNeuLand1.getSelectedItem());
 			Debug.refreshLands();
 		});
-		btnClaimLnd1.setBounds(473, 55, 140, 41);
+		btnClaimLnd1.setBounds(473, 77, 140, 41);
 		add(btnClaimLnd1);
 		
-		JSeparator separator10 = new JSeparator();
-		separator10.setOrientation(SwingConstants.VERTICAL);
-		separator10.setBounds(148, 0, 2, 109);
-		add(separator10);
+		JSeparator separatorH1 = new JSeparator();
+		separatorH1.setOrientation(SwingConstants.VERTICAL);
+		separatorH1.setBounds(148, 22, 2, 109);
+		add(separatorH1);
 		
-		JSeparator separator01 = new JSeparator();
-		separator01.setOrientation(SwingConstants.VERTICAL);
-		separator01.setBounds(315, 0, 2, 109);
-		add(separator01);
+		JSeparator separatorH2 = new JSeparator();
+		separatorH2.setOrientation(SwingConstants.VERTICAL);
+		separatorH2.setBounds(315, 22, 2, 109);
+		add(separatorH2);
 		
-		
+		JSeparator separatorV1 = new JSeparator();
+		separatorV1.setOrientation(SwingConstants.HORIZONTAL);
+		separatorV1.setBounds(0, 22, 625, 109);
+		add(separatorV1);
 		
 	}
 	
