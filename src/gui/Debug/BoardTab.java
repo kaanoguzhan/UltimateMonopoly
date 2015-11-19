@@ -13,7 +13,7 @@ public class BoardTab extends JPanel {
 		
 		JButton btnOldBoard = new JButton("Old Board");
 		btnOldBoard.addActionListener(al -> {
-			Board.getLblBoard().setIcon(new ImageIcon("board720.jpg"));
+			Board.getLblBoard().setIcon(new ImageIcon("board700.jpg"));
 			Board.getLblBoard().setBounds(0, 0, 720, 720);
 		});
 		btnOldBoard.setBounds(10, 5, 299, 109);
