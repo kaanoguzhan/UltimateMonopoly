@@ -42,7 +42,24 @@ public class SquareHolder {
 			
 			else if (i <= 68)
 				squares.add(new Square( (int) (squareLength*1.64), 
-						(boardLength - squareLength * (i-53)), i));
+						(boardLength - squareLength * (i-53)), i));		
+			
+			else if (i <= 82)
+				squares.add(new Square( (int) (squareLength*2 + ((i-67)* squareLength) - 10), 
+						squareLength, i));	
+			
+			else if (i <= 82)
+				squares.add(new Square( (int) (squareLength*2 + ((i-67)* squareLength) - 10), 
+						squareLength, i));	
+			
+			else if (i < 96)
+				squares.add(new Square( (int) (boardLength-(squareLength/3)), 
+						(int) (squareLength*2.3 + ((i-82)*squareLength)), i));
+			
+			else if (i <= 102)
+				squares.add(new Square( (int) ((boardLength-(4*squareLength))-(squareLength*(i-95))), 
+						(int) ((boardLength-(4*squareLength))), i));
+			
 			
 			
 		}
