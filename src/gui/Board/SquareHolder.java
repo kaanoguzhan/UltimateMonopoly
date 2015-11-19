@@ -23,7 +23,7 @@ public class SquareHolder {
 			if(i == 0)
 				squares.add(new Square(secondTrack,secondTrack,i));	
 			else if (i <= 10)
-				squares.add(new Square( (int) ((secondTrack-squareLength) - (i * squareLength)), secondTrack, i));
+				squares.add(new Square( (int) ((secondTrack-squareLength + 10) - (i * squareLength)), secondTrack, i));
 			
 			else if (i <= 20)
 				squares.add(new Square( (int) ((squareLength*2) + 10+(squareLength*1.4)),

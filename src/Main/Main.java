@@ -38,7 +38,7 @@ public class Main {
 		initializePlayerNames();
 		initializeBoard();
 		
-		Admin.movePlayerTo(0, 30);
+
 		runGame();
 		
 	}
