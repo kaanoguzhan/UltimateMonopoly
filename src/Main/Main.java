@@ -28,7 +28,7 @@ public class Main {
 	volatile static Boolean				roundEnded		= false;
 	private static GetTextInput			temp;
 	static Board						board;
-	public int	pool = 0;
+	public static int	pool = 0;
 	
 	public static void main(String[] args) {
 		changeUITheme();
