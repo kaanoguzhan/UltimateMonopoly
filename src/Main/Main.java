@@ -39,7 +39,6 @@ public class Main {
 		initializePlayerNames();
 		initializeBoard();
 		
-
 		runGame();
 		
 	}
@@ -172,13 +171,13 @@ public class Main {
  		//sewage system
  		//ute cab co.
  		//birthday gift
- 		gameSquares[92] = new Land(91, "Mulholland Drive", color.darkRed, 450, 70);
- 		gameSquares[93] = new Land(92, "Ventura Boulevard", color.darkRed, 480, 80);
- 		gameSquares[94] = new Chance(93, chanceDeck, players);
- 		gameSquares[95] = new Land(94, "Rodeo Drive", color.darkRed, 510, 90);
- 		gameSquares[96] = new SqueezePlay(95, players);
- 		gameSquares[97] = new Land(96, "The Embarcadero", color.white, 210, 17);
- 		gameSquares[98] = new Land(97, "Fisherman's Wharf", color.white, 250, 21);
+ 		gameSquares[92] = new Land(92, "Mulholland Drive", color.darkRed, 450, 70);
+ 		gameSquares[93] = new Land(93, "Ventura Boulevard", color.darkRed, 480, 80);
+ 		gameSquares[94] = new Chance(94, chanceDeck, players);
+ 		gameSquares[95] = new Land(95, "Rodeo Drive", color.darkRed, 510, 90);
+ 		gameSquares[96] = new SqueezePlay(96, players);
+ 		gameSquares[97] = new Land(97, "The Embarcadero", color.white, 210, 17);
+ 		gameSquares[98] = new Land(98, "Fisherman's Wharf", color.white, 250, 21);
  		//telephone company
  		gameSquares[100] = new CommunityChest(99, communityDeck);
  		gameSquares[101] = new Land(100, "Beacon Street", color.black, 330, 30);
