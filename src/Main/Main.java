@@ -2,12 +2,16 @@ package Main;
 
 import gui.AdditionalWindows.InputReaders.GetTextInput;
 import gui.Board.Board;
+
+import java.awt.Dimension;
+
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import GameSquares.FreePark;
 import GameSquares.GameSquare;
 import GameSquares.Land;
 import GameSquares.Land.color;
+import GameSquares.RollOnce;
 import GameSquares.SqueezePlay;
 import GameSquares.StartSquare;
 import GameSquares.Chance.Chance;
@@ -24,6 +28,7 @@ public class Main {
 	volatile static Boolean				roundEnded		= false;
 	private static GetTextInput			temp;
 	static Board						board;
+	public int	pool = 0;
 	
 	public static void main(String[] args) {
 		changeUITheme();
@@ -33,7 +38,9 @@ public class Main {
 		initializePlayerNames();
 		initializeBoard();
 		
+		Admin.movePlayerTo(0, 30);
 		runGame();
+		
 	}
 	
 	private static void changeUITheme() {
@@ -102,7 +109,7 @@ public class Main {
 		gameSquares[27] = new Land(27, "Ventnor Avenue", color.yellow, 260, 22);
 		//gameSquares[28] = new WaterWorks(28);
  		gameSquares[29] = new Land(29, "Marvin Gardens", color.yellow, 280, 22);
- 		//gameSquares[30] =new RollThree
+ 		gameSquares[30] = new RollOnce(30);
  		gameSquares[31] = new Land(31, "Pacific Avenue", color.green, 300, 26);
  		gameSquares[32] = new Land(32, "North Carolina Avenue", color.green, 300, 26);
  		gameSquares[33] = new CommunityChest(33, communityDeck);

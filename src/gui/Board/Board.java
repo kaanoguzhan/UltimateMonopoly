@@ -1,6 +1,9 @@
 package gui.Board;
 
 import gui.Debug.Debug;
+
+import java.awt.Dimension;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,6 +21,7 @@ public class Board extends JFrame {
 	public static PlayerInfo	informationTable	= new PlayerInfo();
 	private static JLabel		lblBoard;
 	static JLabel				zero, one, two, three;
+	public static int			boardlength;
 	
 	public Board(Player[] players, GameSquare[] gameSquares) {
 		super("Monototype");
@@ -27,6 +31,8 @@ public class Board extends JFrame {
 		setVisible(true);
 		setLayout(null);
 		// setUndecorated(true);
+		Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+		double height = screenSize.getHeight();
 		
 		this.players = players;
 		this.gameSquares = gameSquares;
@@ -43,24 +49,51 @@ public class Board extends JFrame {
 		three = new playerIcon("playerIcon4.gif", 575, 660, 50, 40);
 		add(three);
 		
-		round.setBounds(1060, 11, 550, 250);
-		getContentPane().add(round);
-		
-		JButton debug = new JButton("Debug Window");
-		debug.setBounds(1490, 630, 120, 70);
-		getContentPane().add(debug);
-		debug.addActionListener(al -> {
-			Debug frame = new Debug();
-			frame.setVisible(true);
-		});
-		
-		ImageIcon image = new ImageIcon("board1050.jpg");
-		setLblBoard(new JLabel(image));
-		getContentPane().add(getLblBoard());
-		getLblBoard().setBounds(0, 0, 1050, 1050);
-		
-		informationTable.setBounds(1060, 272, 550, 350);
-		getContentPane().add(informationTable);
+		if(height < 1000) {
+			ImageIcon image = new ImageIcon("board700.jpg");
+			setLblBoard(new JLabel(image));
+			getContentPane().add(getLblBoard());
+			getLblBoard().setBounds(0, 0, 700, 700);
+			boardlength = 700;
+			
+			round.setBounds(750, 11, 550, 250);
+			getContentPane().add(round);
+			
+			JButton debug = new JButton("Debug Window");
+			debug.setBounds(960, 630, 120, 70);
+			getContentPane().add(debug);
+			debug.addActionListener(al -> {
+				Debug frame = new Debug();
+				frame.setVisible(true);
+			});
+			
+			informationTable.setBounds(760, 272, 550, 350);
+			getContentPane().add(informationTable);
+			
+		} else{
+			
+			ImageIcon image = new ImageIcon("board1050.jpg");
+			setLblBoard(new JLabel(image));
+			getContentPane().add(getLblBoard());
+			getLblBoard().setBounds(0, 0, 1050, 1050);
+			boardlength = 1050;
+			
+			round.setBounds(1060, 11, 550, 250);
+			getContentPane().add(round);
+			
+			JButton debug = new JButton("Debug Window");
+			debug.setBounds(1490, 630, 120, 70);
+			getContentPane().add(debug);
+			debug.addActionListener(al -> {
+				Debug frame = new Debug();
+				frame.setVisible(true);
+				
+				informationTable.setBounds(1060, 272, 550, 350);
+				getContentPane().add(informationTable);
+				
+			});
+			
+			}
 	}
 	
 	public void setCurrentPlayer(int id) {
