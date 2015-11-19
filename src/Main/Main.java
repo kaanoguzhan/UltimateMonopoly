@@ -160,37 +160,38 @@ public class Main {
  		gameSquares[85] = new Land(85, "Walnut Street", color.lightRed, 420, 55);
  		gameSquares[86] = new CommunityChest(86, communityDeck);
  		gameSquares[87] = new Land(87, "Market Street", color.lightRed, 420, 55);
+ 		//bus
  		//sewage system
  		//ute cab co.
  		//birthday gift
- 		gameSquares[91] = new Land(91, "Mulholland Drive", color.darkRed, 450, 70);
- 		gameSquares[92] = new Land(92, "Ventura Boulevard", color.darkRed, 480, 80);
- 		gameSquares[93] = new Chance(93, chanceDeck, players);
- 		gameSquares[94] = new Land(94, "Rodeo Drive", color.darkRed, 510, 90);
- 		gameSquares[95] = new SqueezePlay(95, players);
- 		gameSquares[96] = new Land(96, "The Embarcadero", color.white, 210, 17);
- 		gameSquares[97] = new Land(97, "Fisherman's Wharf", color.white, 250, 21);
+ 		gameSquares[92] = new Land(91, "Mulholland Drive", color.darkRed, 450, 70);
+ 		gameSquares[93] = new Land(92, "Ventura Boulevard", color.darkRed, 480, 80);
+ 		gameSquares[94] = new Chance(93, chanceDeck, players);
+ 		gameSquares[95] = new Land(94, "Rodeo Drive", color.darkRed, 510, 90);
+ 		gameSquares[96] = new SqueezePlay(95, players);
+ 		gameSquares[97] = new Land(96, "The Embarcadero", color.white, 210, 17);
+ 		gameSquares[98] = new Land(97, "Fisherman's Wharf", color.white, 250, 21);
  		//telephone company
- 		gameSquares[99] = new CommunityChest(99, communityDeck);
- 		gameSquares[100] = new Land(100, "Beacon Street", color.black, 330, 30);
+ 		gameSquares[100] = new CommunityChest(99, communityDeck);
+ 		gameSquares[101] = new Land(100, "Beacon Street", color.black, 330, 30);
  		//bonus
- 		gameSquares[102] = new Land(102, "Boylston Street", color.black, 330, 30);
- 		gameSquares[103] = new Land(103, "NewBurly Street", color.black, 380, 40);
+ 		gameSquares[103] = new Land(102, "Boylston Street", color.black, 330, 30);
+ 		gameSquares[104] = new Land(103, "NewBurly Street", color.black, 380, 40);
  		//trainstation
- 		gameSquares[105] = new Land(105, "Fift Avenue", color.grey, 430, 60);
- 		gameSquares[106] = new Land(106, "Madison Avenue", color.grey, 430, 60);
+ 		gameSquares[106] = new Land(105, "Fift Avenue", color.grey, 430, 60);
+ 		gameSquares[107] = new Land(106, "Madison Avenue", color.grey, 430, 60);
  		//stock exchange
- 		gameSquares[108] = new Land(108, "Wall Street", color.grey, 500, 80);
+ 		gameSquares[109] = new Land(108, "Wall Street", color.grey, 500, 80);
  		//tax return
  		//gas company
- 		gameSquares[111] = new Chance(111, chanceDeck, players);
- 		gameSquares[112] = new Land(112, "Florida Avenue", color.brown, 130, 9);
+ 		gameSquares[112] = new Chance(111, chanceDeck, players);
+ 		gameSquares[113] = new Land(112, "Florida Avenue", color.brown, 130, 9);
  		//holland tunnel
- 		gameSquares[114] = new Land(115, "Miami Avenue", color.brown, 130, 9);
- 		gameSquares[115] = new Land(115, "Biscayne Avenue", color.brown, 150, 11);
+ 		gameSquares[115] = new Land(115, "Miami Avenue", color.brown, 130, 9);
+ 		gameSquares[116] = new Land(115, "Biscayne Avenue", color.brown, 150, 11);
  		//train station
  		//reverse direction
- 		gameSquares[118] = new Land(118, "Lobard Street", color.white, 210, 17);
+ 		gameSquares[119] = new Land(118, "Lobard Street", color.white, 210, 17);
  		
 		System.out.println("Game Square initialization is complete...");
 	}

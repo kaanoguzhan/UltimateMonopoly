@@ -5,13 +5,10 @@ import Main.Player;
 
 public abstract class GameSquare implements Serializable {
 	private static final long	serialVersionUID	= 1L;
-	protected int				xCoord;
-	protected int				yCoord;
 	
 	protected int				id;
 	protected type				cardType;
 	protected Player			owner;
-	
 	
 	protected GameSquare(int id, type type) {
 		this.id = id;
@@ -26,11 +23,6 @@ public abstract class GameSquare implements Serializable {
 	
 	@Override
 	public abstract String toString();
-	
-	public void setCoordinates(int X, int Y) {
-		xCoord = X;
-		yCoord = Y;
-	}
 	
 	public void setOwner(Player pl) {
 		owner = pl;
