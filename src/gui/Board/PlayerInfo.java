@@ -86,20 +86,20 @@ public class PlayerInfo extends JPanel {
 			int x, y;
 			switch (playerID){
 				case 0:
-					x = Board.squareHolder.getSquare(id).getX() - 25;
-					y = Board.squareHolder.getSquare(id).getY() - 50;
+					x = Board.squareHolder.getSquare(id).getX() - 28;
+					y = Board.squareHolder.getSquare(id).getY() - 40;
 					break;
 				case 1:
-					x = Board.squareHolder.getSquare(id).getX() - 65;
-					y = Board.squareHolder.getSquare(id).getY() - 50;
+					x = Board.squareHolder.getSquare(id).getX() - 55;
+					y = Board.squareHolder.getSquare(id).getY() - 40;
 					break;
 				case 2:
-					x = Board.squareHolder.getSquare(id).getX() - 65;
-					y = Board.squareHolder.getSquare(id).getY() - 10;
+					x = Board.squareHolder.getSquare(id).getX() - 55;
+					y = Board.squareHolder.getSquare(id).getY() - 13;
 					break;
 				case 3:
-					x = Board.squareHolder.getSquare(id).getX() - 25;
-					y = Board.squareHolder.getSquare(id).getY() - 10;
+					x = Board.squareHolder.getSquare(id).getX() - 28;
+					y = Board.squareHolder.getSquare(id).getY() - 13;
 					break;
 				default:
 					x = Board.squareHolder.getSquare(id).getX() - (current.getID() * 30);

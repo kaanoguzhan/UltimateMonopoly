@@ -17,25 +17,7 @@ public class SquareHolder {
 
 		
 		int secondTrack = (int) ((boardLength*0.75) + (squareLength*2)); 
-		int thirdTrack = (int) ((boardLength*0.508) + (squareLength*2) + (squareLength*2)); 
-		
-		System.out.println(secondTrack);
-		System.out.println(thirdTrack);
-		
-		
-//		private void generateSquares() {
-//		int squareLength = 115;
-//		int boardLength = 660;
-//		for (int i = 0; i < 20; i++) {
-//			if (i < 5)
-//				squares.add(new Square(boardLength - (i * squareLength), boardLength, i));
-//			else if (i < 10)
-//				squares.add(new Square(squareLength - 35, boardLength - ((i - 5) * squareLength), i));
-//			else if (i < 15)
-//				squares.add(new Square(squareLength - 35 + ((i - 10) * squareLength), squareLength - 35, i));
-//			else
-//				squares.add(new Square(boardLength - 5, squareLength - 35 + ((i - 15) * squareLength), i));
-//		}
+		int thirdTrack = (int) ((boardLength*0.508) + (squareLength*2) + (squareLength*2)); 		
 
 		for (int i = 0; i < Properties.TOTAL_SQUARES; i++) {
 			if(i == 0)
@@ -44,14 +26,23 @@ public class SquareHolder {
 				squares.add(new Square( (int) ((secondTrack-squareLength) - (i * squareLength)), secondTrack, i));
 			
 			else if (i <= 20)
-				squares.add(new Square( ((squareLength*2) + squareLength),
-						( (int) ((boardLength - (squareLength*2))) -((i-9)*squareLength) ) ,i));
+				squares.add(new Square( (int) ((squareLength*2) + 10+(squareLength*1.4)),
+						( (int) ((boardLength - (squareLength*2))) -((i-9)*squareLength) -5) ,i));
 			
 			else if (i <= 30)
-				squares.add(new Square( (int) ((2*squareLength + squareLength + 22) + ((i-20) * squareLength)), (4*squareLength), i));
+				squares.add(new Square( (int) ((2*squareLength + (2.3*squareLength)) + ((i-20) * squareLength)), (4*squareLength), i));
 			
-			else if (i <= 40)
-				squares.add(new Square( (int) ((2*squareLength + squareLength + 22) + ((i-20) * squareLength)), (4*squareLength), i));
+			else if (i < 40)
+				squares.add(new Square( (int) (boardLength-(squareLength*2)), 
+						(4*squareLength)  +((i-30) * squareLength), i));
+			
+			else if (i <= 54)
+				squares.add(new Square( (int) (boardLength - (squareLength * (i-39))), 
+						(boardLength), i));
+			
+			else if (i <= 68)
+				squares.add(new Square( (int) (squareLength*1.64), 
+						(boardLength - squareLength * (i-53)), i));
 			
 			
 		}
