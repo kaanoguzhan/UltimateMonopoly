@@ -7,4 +7,12 @@ public class Properties {
 	public static final int	HEAVEN_LOCATION			= -1;
 	
 	public static final int	BARGAINBUSINESS_PRICE	= 100;
+	
+	// /////////////////////////////////////////////////////////////////////////////// //
+	// Taxes //
+	public static final int	INCOMETAX_AMOUNT		= 200;
+	public static final int	INCOMETAX_PERCENT		= 10;
+	public static final int	LUXURYTAX_AMOUNT		= 75;
+	public static final int	TAX_REFUND_PECENT		= 50;
+	
 }
