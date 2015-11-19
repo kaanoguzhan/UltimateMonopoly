@@ -23,5 +23,4 @@ public class TransitStation extends GameSquare {
 	public String toString() {
 		return "Transit station from " + id + " to " + connectedTransit;
 	}
-	
 }

@@ -26,11 +26,43 @@ public class Player implements Serializable {
 	}
 	
 	public void moveBy(int amount) {
-		location += amount;
-		if (location >= Properties.TOTAL_SQUARES) {
-			System.out.println(name + " passed Start Square.");
-			addMoney(Properties.START_PASSING_MONEY);
-			location = location % Properties.TOTAL_SQUARES;
+		int projectedLocation = location+amount;
+		
+		if (location<40) {
+			if(projectedLocation>40){
+				location = projectedLocation-40;
+				System.out.println(name + " passed Start Square.");
+				addMoney(Properties.START_PASSING_MONEY);
+			}
+			if(projectedLocation>35){
+				if(amount%2==0) location += (117-35);
+				location = projectedLocation;
+			}else if(projectedLocation>25){
+				if(amount%2==0) location += (75-25);
+				location = projectedLocation;
+			}else if(projectedLocation>15){
+				if(amount%2==0) location += (105-15);
+				location = projectedLocation;
+			}else if(projectedLocation>5){
+				if(amount%2==0) location += (47-5);
+				location = projectedLocation;
+			}
+		}else if (location<98){
+			if(projectedLocation<75){
+				if(amount%2==0) location -= (75-25);
+				location = projectedLocation;
+			}else if(projectedLocation<47){
+				if(amount%2==0) location -= (47-5);
+				location = projectedLocation;
+			}
+		}else if (location<120){
+			if(projectedLocation<117){
+				if(amount%2==0) location -= (117-35);
+				location = projectedLocation;
+			}else if(projectedLocation<105){
+				if(amount%2==0) location -= (105-15);
+				location = projectedLocation;
+			}
 		}
 		System.out.println(name + " moved " + amount + " squares and now is at " + gameSquares[location].toString()
 			+ "\n You have: " + money);
@@ -40,7 +72,7 @@ public class Player implements Serializable {
 	
 	public void moveTo(int id) {
 		System.out.println(name + " is at " + gameSquares[id].toString());
-		if (location > id) {
+		if (id<40&&location > id) {
 			System.out.println(name + " passed Start Square.");
 			addMoney(Properties.START_PASSING_MONEY);
 		}
