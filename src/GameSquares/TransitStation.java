@@ -4,10 +4,10 @@ import Main.Player;
 
 public class TransitStation extends GameSquare {
 	private static final long	serialVersionUID	= 1L;
-
-	private int connectedTransit;
 	
-	public TransitStation(int id,int connectedTransitID) {
+	private int					connectedTransit;
+	
+	public TransitStation(int id, int connectedTransitID) {
 		super(id, type.TransitStation);
 		this.connectedTransit = connectedTransitID;
 		// TODO Auto-generated constructor stub
@@ -21,8 +21,7 @@ public class TransitStation extends GameSquare {
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Transit station from " + id + " to " + connectedTransit;
 	}
 	
 }
