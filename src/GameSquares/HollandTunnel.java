@@ -3,6 +3,7 @@ package GameSquares;
 import Main.Player;
 
 public class HollandTunnel extends GameSquare {
+<<<<<<< HEAD
 
 	private static final long serialVersionUID = 1L;
 	private final int firstHollandTunnel = 54;
@@ -26,4 +27,25 @@ public class HollandTunnel extends GameSquare {
 		return "Holland Tunnel. Location: " + id;
 	}
 
+=======
+	private static final long	serialVersionUID	= 1L;
+	private int					connectedTunnelID;
+	
+	public HollandTunnel(int id, int connectedTunnelID) {
+		super(id, type.HollandTunnel);
+		this.connectedTunnelID = connectedTunnelID;
+		// TODO Auto-generated constructor stub
+	}
+	
+	@Override
+	public void onArrive(Player pl) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public String toString() {
+		return "Holland Tunnel @" + id + " connected with @" + connectedTunnelID;
+	}
+>>>>>>> f45b6e438191095691d653e177464c8d0ad3c130
 }
