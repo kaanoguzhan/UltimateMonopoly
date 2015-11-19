@@ -1,9 +1,7 @@
 package gui.Board;
 
 import gui.Debug.Debug;
-
 import java.awt.Dimension;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,12 +19,12 @@ public class Board extends JFrame {
 	public static PlayerInfo	informationTable	= new PlayerInfo();
 	private static JLabel		lblBoard;
 	static JLabel				zero, one, two, three;
-	public static int			boardlength;
+	
+	// private int boardlength;
 	
 	public Board(Player[] players, GameSquare[] gameSquares) {
 		super("Monototype");
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setSize(1640, 1090);
 		setVisible(true);
 		setLayout(null);
@@ -49,51 +47,32 @@ public class Board extends JFrame {
 		three = new playerIcon("playerIcon4.gif", 575, 660, 50, 40);
 		add(three);
 		
-		if(height < 1000) {
-			ImageIcon image = new ImageIcon("board700.jpg");
-			setLblBoard(new JLabel(image));
-			getContentPane().add(getLblBoard());
-			getLblBoard().setBounds(0, 0, 700, 700);
-			boardlength = 700;
-			
+		Board.lblBoard = new JLabel(new ImageIcon("board1050.jpg"));
+		getContentPane().add(getLblBoard());
+		
+		
+		JButton debug = new JButton("Debug Window");
+		debug.setBounds(1490, 630, 120, 70);
+		getContentPane().add(debug);
+		debug.addActionListener(al -> {
+			Debug frame = new Debug();
+			frame.setVisible(true);
+		});
+		
+		if (height < 1000) {
+			// boardlength = 700;
+			lblBoard.setBounds(0, 0, 700, 700);
 			round.setBounds(750, 11, 550, 250);
-			getContentPane().add(round);
-			
-			JButton debug = new JButton("Debug Window");
-			debug.setBounds(960, 630, 120, 70);
-			getContentPane().add(debug);
-			debug.addActionListener(al -> {
-				Debug frame = new Debug();
-				frame.setVisible(true);
-			});
-			
 			informationTable.setBounds(760, 272, 550, 350);
-			getContentPane().add(informationTable);
-			
-		} else{
-			
-			ImageIcon image = new ImageIcon("board1050.jpg");
-			setLblBoard(new JLabel(image));
-			getContentPane().add(getLblBoard());
-			getLblBoard().setBounds(0, 0, 1050, 1050);
-			boardlength = 1050;
-			
+		} else {
+			// boardlength = 1050;
+			lblBoard.setBounds(0, 0, 1050, 1050);
 			round.setBounds(1060, 11, 550, 250);
-			getContentPane().add(round);
-			
-			JButton debug = new JButton("Debug Window");
-			debug.setBounds(1490, 630, 120, 70);
-			getContentPane().add(debug);
-			debug.addActionListener(al -> {
-				Debug frame = new Debug();
-				frame.setVisible(true);
-				
-				informationTable.setBounds(1060, 272, 550, 350);
-				getContentPane().add(informationTable);
-				
-			});
-			
-			}
+			informationTable.setBounds(1060, 272, 550, 350);
+		}
+		getContentPane().add(round);
+		getContentPane().add(informationTable);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 	}
 	
 	public void setCurrentPlayer(int id) {
