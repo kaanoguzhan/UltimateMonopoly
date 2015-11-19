@@ -5,7 +5,7 @@ import Main.Player;
 public class TaxRefund extends GameSquare {
 	private static final long serialVersionUID = 1L;
 	
-	protected TaxRefund(int id) {
+	public TaxRefund(int id) {
 		super(id, type.TaxRefund);
 	}
 	@Override
