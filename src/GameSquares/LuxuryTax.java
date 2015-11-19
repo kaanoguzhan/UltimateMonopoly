@@ -7,7 +7,7 @@ public class LuxuryTax extends GameSquare{
 	
 	private static final int taxAmount = 75;
 	
-	protected LuxuryTax(int id) {
+	public LuxuryTax(int id) {
 		super(id, type.LuxuryTax);
 	}
 	
@@ -15,6 +15,8 @@ public class LuxuryTax extends GameSquare{
 	public void onArrive(Player pl) {
 		pl.reduceMoney(taxAmount);
 		Main.Main.pool += taxAmount;
+		System.out.println("Player "+ pl.getName()+ " payed " 
+				+ Integer.toString(taxAmount)+" as luxury tax");
 	}
 
 	@Override

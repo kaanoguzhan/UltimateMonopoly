@@ -3,17 +3,18 @@ package Main;
 import gui.AdditionalWindows.InputReaders.GetTextInput;
 import gui.Board.Board;
 
-import java.awt.Dimension;
-
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import GameSquares.FreePark;
 import GameSquares.GameSquare;
+import GameSquares.IncomeTax;
 import GameSquares.Land;
 import GameSquares.Land.color;
+import GameSquares.LuxuryTax;
 import GameSquares.RollOnce;
 import GameSquares.SqueezePlay;
 import GameSquares.StartSquare;
+import GameSquares.TaxRefund;
 import GameSquares.Chance.Chance;
 import GameSquares.Chance.ChanceDeck;
 import GameSquares.CommunityChest.CommunityChest;
@@ -83,7 +84,7 @@ public class Main {
 		gameSquares[1] = new Land(1, "Mediterranean Avenue", color.puple, 60, 2);
 		gameSquares[2] = new CommunityChest(2, communityDeck);
 		gameSquares[3] = new Land(3, "Baltic Avenue", color.puple, 60, 4);
-		//gameSquares[4] = new IncomeTax(4)
+		gameSquares[4] = new IncomeTax(4);
 		//gameSquares[5] = new TransitStation(5, 47)
 		gameSquares[6] = new Land(6, "Oriental Avenue", color.lightBlue, 100, 6);
 		gameSquares[7] = new Chance(7, chanceDeck, players);
@@ -117,7 +118,7 @@ public class Main {
  		//gameSquares[35] = new TransitStation(35, ?)
  		gameSquares[36] = new Chance(36, chanceDeck, players);
  		gameSquares[37] = new Land(37, "Park Place", color.blue, 350, 35);
- 		//luxury tax
+ 		gameSquares[38] = new LuxuryTax(38);
  		gameSquares[39] = new Land(39, "Boardwalk", color.blue, 400, 50);
  		//subway
  		gameSquares[41] = new Land(41, "Lake Street", color.lightPink, 30, 1);
@@ -189,7 +190,7 @@ public class Main {
  		gameSquares[107] = new Land(106, "Madison Avenue", color.grey, 430, 60);
  		//stock exchange
  		gameSquares[109] = new Land(108, "Wall Street", color.grey, 500, 80);
- 		//tax return
+ 		gameSquares[110] = new TaxRefund(110);
  		//gas company
  		gameSquares[112] = new Chance(111, chanceDeck, players);
  		gameSquares[113] = new Land(112, "Florida Avenue", color.brown, 130, 9);
