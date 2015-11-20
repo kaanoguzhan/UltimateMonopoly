@@ -2,6 +2,9 @@ package GameSquares;
 
 import gui.AdditionalWindows.MessageDisplayer;
 import gui.AdditionalWindows.InputReaders.GetYesNoInput;
+
+import java.util.HashMap;
+
 import Main.Player;
 import Main.Properties;
 
@@ -9,23 +12,46 @@ public class Land extends GameSquare implements Ownable{
 	private static final long	serialVersionUID	= 1L;
 	private String	name;
 	private color	color;
-	private int		price, rent;
+	private int		price;
 	private boolean	doubleRent;
 	public boolean	buy;
+	public state currentState = state.unImproved;
+	private HashMap<state, Integer>		rentAndPriceMap = new HashMap<state, Integer>();
 	
 	public enum color {
 		blue, pink, orange, green, puple, lightBlue, red, yellow, white, 
 		black, grey, brown, lightPink, lightGreen, lightYellow, oceanGreen,
 		magenta, gold, lightRed, darkRed
 	}
-
+	
+	public enum state {
+		unImproved, house, twoHouse, threeHouse, fourHouse, hotel, skyscraper, mortgage,
+		price, houseCost, hotelCost, skyCost
+	}
 
 	public Land(int id, String name, color color, int price, int rent) {
 		super(id,type.Land);
 		this.name = name;
 		this.color = color;
 		this.price = price;
-		this.rent = rent;
+		rentAndPriceMap.put(state.price, price);
+		rentAndPriceMap.put(state.unImproved, rent);
+	}
+	
+	public Land addDeedInfo(int house, int two, int three, int four, int hotel, int sky
+							, int mortgage, int houseCost, int hotelCost, int skyCost){
+		rentAndPriceMap.put(state.house, house);
+		rentAndPriceMap.put(state.twoHouse, two);
+		rentAndPriceMap.put(state.threeHouse, three);
+		rentAndPriceMap.put(state.fourHouse, four);
+		rentAndPriceMap.put(state.hotel, hotel);
+		rentAndPriceMap.put(state.skyscraper, sky);
+		rentAndPriceMap.put(state.mortgage, mortgage);
+		rentAndPriceMap.put(state.houseCost, houseCost);
+		rentAndPriceMap.put(state.hotelCost, hotelCost);
+		rentAndPriceMap.put(state.skyCost, skyCost);
+		
+		return this;
 	}
 	
 	@Override
@@ -58,13 +84,13 @@ public class Land extends GameSquare implements Ownable{
 			}
 		} else {
 			if (this.owner != pl) {
-				int totalRent = rent;
+				int totalRent = rentAndPriceMap.get(currentState);
 				System.out.println("This land is owned by " + owner.getName());
 								
 				if (owner.getNumberOfOwnedByColor(this.color) == landsOfThisColor())
 					totalRent *=3;	//Monopoly
 				else if(owner.getNumberOfOwnedByColor(this.color)>landsOfThisColor()/2)
-					totalRent *=2;
+					totalRent *=2;	//majority ownership
 				
 				if (owner.hasRenovationSuccess()){
 				new MessageDisplayer("This land's owner has renovation success card, rent is now $50 more");
@@ -108,13 +134,13 @@ public class Land extends GameSquare implements Ownable{
 		else
 			return false;
 	}
-	private int landOccupation(){ //returns that colors occupation
+	public int landOccupation(){ //returns that colors occupation
 		int occupation = 0;
 		for(int i=0;i<Main.Main.players.length;i++) 
 			occupation += Main.Main.players[i].getNumberOfOwnedByColor(this.color);
 		return occupation;
 	}
-	private int landsOfThisColor(){
+	public int landsOfThisColor(){
 		int number = 0;
 		for(int i=0;i<Main.Main.gameSquares.length;i++){
 			GameSquare a = Main.Main.gameSquares[i];
@@ -141,11 +167,12 @@ public class Land extends GameSquare implements Ownable{
 	}
 	
 	public void setRent(int rent) {
-		this.rent = rent;
+		rentAndPriceMap.remove(currentState);
+		rentAndPriceMap.put(currentState, rent);
 	}
 	
 	public int getRent() {
-		return rent;
+		return rentAndPriceMap.get(currentState);
 	}
 	
 	// ///////////////////////////////////////////////////////////////////////////// //
@@ -158,9 +185,9 @@ public class Land extends GameSquare implements Ownable{
 	public String toString2() {
 		if (doubleRent)
 			return name + "\n Color: " + color + "\n Price: " + price
-				+ "\n Rent: " + rent * 2 + " (Doubled since a player owns all three of these colour.)";
+				+ "\n Rent: " + getRent() * 2 + " (Doubled since a player owns all three of these colour.)";
 		else
 			return name + "\n Color: " + color + "\n Price: " + price
-				+ "\n Rent: " + rent;
+				+ "\n Rent: " + getRent();
 	}
 }
