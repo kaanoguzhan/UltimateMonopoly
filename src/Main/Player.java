@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import GameSquares.GameSquare;
 import GameSquares.Land;
 import GameSquares.Land.color;
+import GameSquares.Ownable;
 import GameSquares.PayDay;
 import GameSquares.CommunityChest.CommunityChest.CommunityChestCardType;
 
@@ -16,6 +17,7 @@ public class Player implements Serializable {
 	private boolean								jailed				= false;
 	private ArrayList<CommunityChestCardType>	Inventory			= new ArrayList<CommunityChestCardType>();
 	private ArrayList<Land>						ownedLands			= new ArrayList<Land>();
+	private ArrayList<Ownable>					ownedSquares		= new ArrayList<Ownable>();
 	
 	public Player(int id, String name, GameSquare[] gameSquares) {
 		this.id = id;
@@ -129,7 +131,7 @@ public class Player implements Serializable {
 			System.out.println(name + "'s money decreased by " + amount + " to " + money);
 		} else if (ownedLands.size() > 0) {
 			gui.AdditionalWindows.List.createAndShowGUI(ownedLands);
-			reduceMoney(0);
+			reduceMoney(amount);
 		} else {
 			location = Properties.HEAVEN_LOCATION;
 			System.out.println(name + " is bankrupt."); // create a new
@@ -181,14 +183,20 @@ public class Player implements Serializable {
 		land.setOwner(null);
 	}
 	
-	public void getOwnership(Land land) {
-		ownedLands.add(land);
-		land.setOwner(this);
+	public void getOwnership(GameSquare square) {
+		if(square instanceof Land)
+			ownedLands.add((Land) square);
+		else ownedSquares.add((Ownable) square);
+		
+		square.setOwner(this);
 	}
 	
-	public void removeOwnership(Land land) {
-		ownedLands.remove(land);
-		land.setOwner(null);
+	public void removeOwnership(GameSquare square) {
+		if(square instanceof Land)
+			ownedLands.remove((Land) square);
+		else ownedSquares.remove((Ownable) square);
+		
+		square.setOwner(null);
 	}
 	
 	public int getID() {

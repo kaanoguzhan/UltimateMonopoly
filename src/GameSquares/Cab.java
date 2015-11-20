@@ -5,9 +5,14 @@ import gui.AdditionalWindows.InputReaders.GetYesNoInput;
 import Main.Player;
 import Main.Properties;
 
-public class Cab extends GameSquare {
+public class Cab extends GameSquare implements Ownable {
 	private static final long	serialVersionUID	= 1L;
 	private String				name;
+	private int 				rent = 50;
+	private int					price = 300;
+	private int					cabStandCost = 150;
+	private boolean				cabStand = false;
+	
 	
 	public Cab(int id, String name) {
 		super(id, type.Cab);
@@ -16,16 +21,20 @@ public class Cab extends GameSquare {
 	
 	@Override
 	public void onArrive(Player pl) {
-		if(this.owner!=null){
+		if(this.owner!=null){			
 			boolean useCab = false;
 			int cabBill = 0;
 			if(this.owner != pl){
+				if(cabStand)
+					pl.pay(this.getOwner(), 2 * rent);
+				else pl.pay(this.getOwner(), rent);
+				
 				useCab = new GetYesNoInput("Its the " + name + " cab !", "Do you want to pay 50$ to take the cab ?")
 						.getValue();
 				if(useCab){
 					playerUseCab(pl);
 					cabBill = Properties.CAB_MONEY;
-					pl.pay(this.owner, cabBill);
+					pl.pay(this.getOwner(), cabBill);
 				}
 			}else{
 				useCab = new GetYesNoInput("You own " + name + " cab !", "Do you want to pay 20$ to take the cab ?")
@@ -36,9 +45,21 @@ public class Cab extends GameSquare {
 					Main.Main.pool += cabBill;
 				}
 			}
-		}		
+		}else{
+			boolean buy = new GetYesNoInput("For " + price + " dollars", "Would you like to buy " + name + " cab station?")
+					.getValue();
+			
+			if (buy) {
+				if (pl.getMoney() >= price) {
+					//pl.buyLand(this);
+					
+					System.out.println("Player bought " + this.name + " cab company.");
+				} else
+					System.out.println("You don't have enough money!");
+			}
+		}
 	}
-	
+		
 	@Override
 	public String toString() {
 		return name + "Cab Co";
@@ -57,5 +78,14 @@ public class Cab extends GameSquare {
 					.getInt();
 			if(checkMove(moveTo)) pl.moveTo(moveTo);
 		}
+	}
+
+	
+	public void buy() {
+		
+	}
+	
+	public void sell() {
+		
 	}
 }

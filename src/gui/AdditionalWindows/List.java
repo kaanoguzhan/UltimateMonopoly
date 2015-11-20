@@ -3,7 +3,11 @@ package gui.AdditionalWindows;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.event.*;
+
+import GameSquares.GameSquare;
 import GameSquares.Land;
+import GameSquares.Ownable;
+
 import java.awt.event.*;
 import java.awt.*;
 
@@ -11,30 +15,33 @@ import java.awt.*;
 public class List extends JPanel implements ListSelectionListener {
 	
 	private static final long		serialVersionUID	= 1L;
-	private JList<Land>				list;
-	private DefaultListModel<Land>	listModel;
-	private JButton					sellButton;
-	ArrayList<Land>					lands;
-	private JLabel					label;
+	private JList<GameSquare>				list;
+	private DefaultListModel<GameSquare>	listModel;
+	private JButton							sellButton;
+	ArrayList<GameSquare>					squares;
+	private JLabel							label;
 	
-	public List(ArrayList<Land> lands) {
+	public List(ArrayList<GameSquare> squares) {
 		super(new BorderLayout());
 		
-		this.lands = lands;
+		this.squares = squares;
 		
-		list = new JList<Land>();
-		listModel = new DefaultListModel<Land>();
+		list = new JList<GameSquare>();
+		listModel = new DefaultListModel<GameSquare>();
 		
-		for (Land a : lands) {
+		for (GameSquare a : squares) {
 			listModel.addElement(a);
 		}
 		
-		if(!(lands.isEmpty()))	
-		label = new JLabel(lands.get(0).toString2());
-		else 
+		if(!(squares.isEmpty())){
+			GameSquare a = squares.get(0);
+			if(a instanceof Land) 
+				label = new JLabel(((Land) a).toString2());
+			else label = new JLabel(a.toString());
+		}else 
 			label = new JLabel();
 		// Create the list and put it in a scroll pane.
-		list = new JList<Land>(listModel);
+		list = new JList<GameSquare>(listModel);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setSelectedIndex(0);
 		list.addListSelectionListener(this);
@@ -58,26 +65,29 @@ public class List extends JPanel implements ListSelectionListener {
 		
 		public void actionPerformed(ActionEvent e) {
 			int index = list.getSelectedIndex();
-			Land a = list.getSelectedValue();
-			if (!(a == null)) a.sell();
+			GameSquare a = list.getSelectedValue();
 			
-			if(index != -1) listModel.remove(index);
-			
-			int size = listModel.getSize();
-			
-			if (size == 0) { // Nobody's left, disable firing.
-				sellButton.setEnabled(false);
-				label.setText(""); // kimse kalmadi bos don veya
-				// this.dispose(); ekrani kapatir
+			if(a instanceof Ownable){
+				if (!(a == null)) ((Ownable)a).sell();
 				
-			} else { // Select an index.
-				if (index == listModel.getSize()) {
-					// removed item in last position
-					index--;
+				if(index != -1) listModel.remove(index);
+				
+				int size = listModel.getSize();
+				
+				if (size == 0) { // Nobody's left, disable firing.
+					sellButton.setEnabled(false);
+					label.setText(""); // kimse kalmadi bos don veya
+					// this.dispose(); ekrani kapatir
+					
+				} else { // Select an index.
+					if (index == listModel.getSize()) {
+						// removed item in last position
+						index--;
+					}
+					
+					list.setSelectedIndex(index);
+					list.ensureIndexIsVisible(index);
 				}
-				
-				list.setSelectedIndex(index);
-				list.ensureIndexIsVisible(index);
 			}
 		}
 	}
@@ -86,10 +96,12 @@ public class List extends JPanel implements ListSelectionListener {
 		
 		// BURAYA DOKUNMA LABEL DEGISIYR SADECE
 		
-		Land a = list.getSelectedValue();
+		GameSquare a = list.getSelectedValue();
 		
 		if (!(a == null)) {
-			label.setText(a.toString2());
+			if(a instanceof Land) 
+				label.setText(((Land) a).toString2());
+			else label.setText(a.toString());
 			label.setPreferredSize(new Dimension(((int) label.getPreferredSize().getWidth()) + 10, ((int) label
 				.getPreferredSize().getHeight())));
 		}
@@ -105,14 +117,23 @@ public class List extends JPanel implements ListSelectionListener {
 	}
 	
 	
-	public static void createAndShowGUI(ArrayList<Land> lands) {
+	public static void createAndShowGUI(ArrayList<?> lands) {
 		// Create and set up the window.
-		List a = new List(lands);
-		JFrame frame = new JFrame("Lands to Sell");
-		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		frame.add(a);
-		frame.setSize(380, 280);
-		frame.setVisible(true);
+		if(lands != null){
+			JFrame frame = null;
+			if(lands.get(0) instanceof Land) {
+				frame = new JFrame("Lands to Sell");
+			}else{
+				frame = new JFrame("Owned properties to Sell");
+			}
+				
+				List a = new List((ArrayList<GameSquare>) lands);
+				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+				frame.add(a);
+				frame.setSize(380, 280);
+				frame.setVisible(true);
+		}
+		
 	}
 	
 }
