@@ -27,19 +27,22 @@ public class Player implements Serializable {
 	public void moveBy(int amount) {
 		int projectedLocation = location + amount;
 
-		if (location < 102) {
+		if (location < 68) {
+			if (projectedLocation > 68) {
+				System.out.println(name + " passed Pay Day Square.");
+				if (amount % 2 != 0)
+					addMoney(Properties.ODD_PAYDAY_PASSING_MONEY);
+				addMoney(Properties.EVEN_PAYDAY_PASSING_MONEY);
+			}
+		}
+
+		if (location < 102 || location >= 111) {
 			if (projectedLocation > 102) {
 				System.out.println(name + " passed Bonus Square.");
 				addMoney(Properties.BONUS_PASSING_MONEY);
 			}
-		} else if (location >= 111) {
-			if (amount % 2 != 0) {
-				if (projectedLocation > 102) {
-					System.out.println(name + " passed Bonus Square.");
-					addMoney(Properties.BONUS_PASSING_MONEY);
-				}
-			}
 		}
+
 		if (location < 40) {
 			if (projectedLocation > 40) {
 				location = projectedLocation - 40;
