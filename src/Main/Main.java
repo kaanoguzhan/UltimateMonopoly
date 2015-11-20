@@ -119,7 +119,7 @@ public class Main {
 		gameSquares[14] = new Land(14, "Virginia Avenue", color.pink, 160, 12)
 				.addDeedInfo(60,180,500,700,900,1400,80,100);
 		gameSquares[15] = new TransitStation(15, 105);
-		gameSquares[16] = new Land(11, "St. James Place", color.orange, 180, 14)
+		gameSquares[16] = new Land(16, "St. James Place", color.orange, 180, 14)
 				.addDeedInfo(70,200,550,750,950,1450,90,100);
 		gameSquares[17] = new CommunityChest(17, communityDeck);
 		gameSquares[18] = new Land(18, "Tennessee Avenue", color.orange, 180, 14)
