@@ -56,50 +56,63 @@ public class Player implements Serializable {
 			
 			if (projectedLocation > 35) {
 				location = projectedLocation;
-				if (amount % 2 == 0)
+				if (amount % 2 == 0){
 					location += (117 - 35);
-				System.out.println(name + " passed transit station");
+					System.out.println(name + " passed transit station");
+				}
 			} else if (projectedLocation > 25) {
 				location = projectedLocation;
-				if (amount % 2 == 0)
+				if (amount % 2 == 0){
 					location += (75 - 25);
-				System.out.println(name + " passed transit station");
+					System.out.println(name + " passed transit station");
+				}
 			} else if (projectedLocation > 15) {
 				location = projectedLocation;
-				if (amount % 2 == 0)
+				if (amount % 2 == 0){
 					location += (105 - 15);
-				System.out.println(name + " passed transit station");
+					System.out.println(name + " passed transit station");
+				}
 			} else if (projectedLocation > 5) {
 				location = projectedLocation;
-				if (amount % 2 == 0)
+				if (amount % 2 == 0){
 					location += (47 - 5);
-				System.out.println(name + " passed transit station");
+					System.out.println(name + " passed transit station");
+				}
 			} else
 				location = projectedLocation;
 		} else if (location < 98) {
 			if (projectedLocation < 75) {
 				location = projectedLocation;
-				if (amount % 2 == 0)
+				if (amount % 2 == 0){
 					location -= (75 - 25);
-				System.out.println(name + " passed transit station");
+					System.out.println(name + " passed transit station");
+				}
 			} else if (projectedLocation < 47) {
 				location = projectedLocation;
-				if (amount % 2 == 0)
+				if (amount % 2 == 0){
 					location -= (47 - 5);
-				System.out.println(name + " passed transit station");
+					System.out.println(name + " passed transit station");
+				}
 			} else
 				location = projectedLocation;
 		} else if (location < 120) {
 			if (projectedLocation < 117) {
 				location = projectedLocation;
-				if (amount % 2 == 0)
+				if (amount % 2 == 0){
 					location -= (117 - 35);
-				System.out.println(name + " passed transit station");
+					if (location > 40) {
+						location = projectedLocation - 40;
+						System.out.println(name + " passed Start Square.");
+						addMoney(Properties.START_PASSING_MONEY);
+					}
+					System.out.println(name + " passed transit station");
+				}
 			} else if (projectedLocation < 105) {
 				location = projectedLocation;
-				if (amount % 2 == 0)
+				if (amount % 2 == 0){
 					location -= (105 - 15);
-				System.out.println(name + " passed transit station");
+					System.out.println(name + " passed transit station");
+				}
 			} else
 				location = projectedLocation;
 		}
@@ -169,16 +182,18 @@ public class Player implements Serializable {
 		return location;
 	}
 	
-	public void buyLand(Land land) {
-		reduceMoney(land.getPrice());
-		getOwnership(land);
+	public void buySquare(GameSquare land) {
+		if(land instanceof Ownable){
+			reduceMoney(((Ownable)land).getPrice());
+			getOwnership(land);
+		}
 	}
 	
-	public void sellLand(Land land) {
+	public void sellSquare(GameSquare land) {
 		if (ownedLands.contains(land)) {
-			addMoney(land.getPrice());
+			addMoney(((Ownable)land).getPrice());
 			removeOwnership(land);
-			System.out.println(name + " sold " + land + " for " + land.getPrice());
+			System.out.println(name + " sold " + land + " for " + ((Ownable)land).getPrice());
 		}
 		land.setOwner(null);
 	}

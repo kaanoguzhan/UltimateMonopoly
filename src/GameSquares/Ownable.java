@@ -1,6 +1,9 @@
 package GameSquares;
 
+import Main.Player;
+
 public interface Ownable {
 	public void sell();
-	public void buy();
+	public int getPrice();
+	public void setOwner(Player pl);
 }

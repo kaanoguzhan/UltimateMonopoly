@@ -5,7 +5,7 @@ import gui.AdditionalWindows.InputReaders.GetYesNoInput;
 import Main.Player;
 import Main.Properties;
 
-public class Land extends GameSquare {
+public class Land extends GameSquare implements Ownable{
 	private static final long	serialVersionUID	= 1L;
 	private String	name;
 	private color	color;
@@ -46,7 +46,7 @@ public class Land extends GameSquare {
 						this.price = Properties.BARGAINBUSINESS_PRICE;
 						pl.removeBargainBusinessCard();
 					}
-					pl.buyLand(this);
+					pl.buySquare(this);
 					this.price = tempPrice;
 					
 					System.out.println("Player bought " + this.name + ". Player has "
@@ -93,7 +93,7 @@ public class Land extends GameSquare {
 	}
 	
 	public void sell() {
-		this.owner.sellLand(this);
+		this.owner.sellSquare(this);
 	}
 	
 	@Override

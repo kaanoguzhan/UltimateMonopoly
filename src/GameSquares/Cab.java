@@ -79,13 +79,13 @@ public class Cab extends GameSquare implements Ownable {
 			if(checkMove(moveTo)) pl.moveTo(moveTo);
 		}
 	}
-
-	
-	public void buy() {
-		
-	}
 	
 	public void sell() {
 		
+	}
+
+	@Override
+	public int getPrice() {
+		return price;
 	}
 }
