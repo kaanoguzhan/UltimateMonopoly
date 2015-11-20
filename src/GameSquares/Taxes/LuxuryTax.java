@@ -15,6 +15,8 @@ public class LuxuryTax extends GameSquare {
 	public void onArrive(Player pl) {
 		pl.reduceMoney(Properties.LUXURYTAX_AMOUNT);
 		Main.Main.pool += Properties.LUXURYTAX_AMOUNT;
+		System.out.println("Player " + pl.getName() + " payed "
+			+ Integer.toString(Properties.LUXURYTAX_AMOUNT) + " as luxury tax");
 	}
 	
 	@Override
