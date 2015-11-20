@@ -14,7 +14,7 @@ public class HollandTunnel extends GameSquare {
 
 	@Override
 	public void onArrive(Player pl) {
-		Admin.movePlayerTo(pl, connectedTunnelID);
+		Admin.movePlayerToForced(pl, connectedTunnelID);
 	}
 
 	@Override

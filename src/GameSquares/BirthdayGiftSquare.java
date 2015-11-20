@@ -19,7 +19,7 @@ public class BirthdayGiftSquare extends GameSquare {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return null;
+		return "Bithday Gift Square";
 	}
 	
 }
