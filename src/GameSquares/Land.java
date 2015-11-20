@@ -58,21 +58,21 @@ public class Land extends GameSquare implements Ownable{
 			}
 		} else {
 			if (this.owner != pl) {
+				int totalRent = rent;
 				System.out.println("This land is owned by " + owner.getName());
+								
+				if (owner.getNumberOfOwnedByColor(this.color) == landsOfThisColor())
+					totalRent *=3;	//Monopoly
+				else if(owner.getNumberOfOwnedByColor(this.color)>landsOfThisColor()/2)
+					totalRent *=2;
 				
 				if (owner.hasRenovationSuccess()){
 				new MessageDisplayer("This land's owner has renovation success card, rent is now $50 more");
-				pl.pay(owner, rent+50);
+				totalRent +=50;
 				owner.removeRenovationSuccessCard();
 				}
 				
-				if (owner.getNumberOfOwnedByColor(this.color) == 3)
-					pl.pay(owner, 2 * rent);
-				else
-					pl.pay(owner, rent);
-				//
-				
-				
+				pl.pay(owner, totalRent);
 				
 			}
 			else
@@ -108,7 +108,22 @@ public class Land extends GameSquare implements Ownable{
 		else
 			return false;
 	}
-	
+	private int landOccupation(){ //returns that colors occupation
+		int occupation = 0;
+		for(int i=0;i<Main.Main.players.length;i++) 
+			occupation += Main.Main.players[i].getNumberOfOwnedByColor(this.color);
+		return occupation;
+	}
+	private int landsOfThisColor(){
+		int number = 0;
+		for(int i=0;i<Main.Main.gameSquares.length;i++){
+			GameSquare a = Main.Main.gameSquares[i];
+			if((a instanceof Land)) {
+				if(((Land) a).getColor() == this.color) number++;
+			}
+		}
+		return number;
+	}
 	// ////////// DO NOT USE THESE METHODS - THESE ARE JUST FOR DEBUGGING ////////// //
 	public void setName(String name) {
 		this.name = name;
@@ -117,7 +132,6 @@ public class Land extends GameSquare implements Ownable{
 	public void setColor(color color) {
 		this.color = color;
 	}
-	
 	public void setPrice(int price) {
 		this.price = price;
 	}
