@@ -20,8 +20,7 @@ public class IncomeTax extends GameSquare {
 			assetTax += lnd.getPrice();
 		assetTax = ((int) assetTax * Properties.INCOMETAX_PERCENT) / 100;
 		
-		boolean payAmount = new GetYesNoInput("<html>Would you like to pay 200$?<br>"
-			+ "If you choose no you will pay 10% of your money </html>","Income Tax").getValue();
+		boolean payAmount = new GetYesNoInput("Income Tax", "Pay 200$ or lose 10% of your money").getValue();
 		
 		pl.reduceMoney(payAmount ? Properties.INCOMETAX_AMOUNT : assetTax);
 		Main.Main.pool += payAmount ? Properties.INCOMETAX_AMOUNT : assetTax;
