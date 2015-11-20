@@ -204,6 +204,7 @@ public class Player implements Serializable {
 			removeOwnership(land);
 			System.out.println(name + " sold " + land + " for " + ((Ownable)land).getPrice());
 		}
+		addMoney(((Ownable)land).getPrice()/2);
 		land.setOwner(null);
 	}
 	
