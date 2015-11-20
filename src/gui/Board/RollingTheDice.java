@@ -200,8 +200,10 @@ public class RollingTheDice extends JPanel implements ActionListener {
 	}
 
 	private void movePlayer(int amount) {
+		Admin.movePlayerBy(playerID, amount);
+		
 		int location = Admin.getPlayerLocation(playerID);
-		location = (location + amount) % 20;
+		location = (location + amount) % 120;
 
 		int x, y;
 		switch (playerID) {
@@ -228,8 +230,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
 		}
 
 		playerName.setBounds(x, y, 50, 40);
-		Admin.movePlayerBy(playerID, amount);
-
 		Board.informationTable.refreshData();
 	}
 
