@@ -9,6 +9,7 @@ public class Properties {
 	public static final int	BARGAINBUSINESS_PRICE	= 100;
 	
 	public static final int	CAB_MONEY				= 50;
+	public static final int	OWNED_CAB_MONEY			= 20;
 	
 	// /////////////////////////////////////////////////////////////////////////////// //
 	// Taxes //
