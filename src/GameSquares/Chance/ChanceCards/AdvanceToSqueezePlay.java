@@ -15,7 +15,7 @@ public class AdvanceToSqueezePlay extends ChanceCard implements Serializable {
 	@Override
 	public void onDraw(Player pl) {
 		new MessageDisplayer(toString());
-		pl.moveTo(15);
+		pl.moveTo(96);
 	}
 	
 	@Override

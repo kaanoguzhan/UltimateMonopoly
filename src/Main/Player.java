@@ -46,43 +46,55 @@ public class Player implements Serializable {
 				System.out.println(name + " passed Start Square.");
 				addMoney(Properties.START_PASSING_MONEY);
 			}
+
 			if (projectedLocation > 35) {
+				location = projectedLocation;
 				if (amount % 2 == 0)
 					location += (117 - 35);
-				location = projectedLocation;
+				System.out.println(name + " passed transit station");
 			} else if (projectedLocation > 25) {
+				location = projectedLocation;
 				if (amount % 2 == 0)
 					location += (75 - 25);
-				location = projectedLocation;
+				System.out.println(name + " passed transit station");
 			} else if (projectedLocation > 15) {
+				location = projectedLocation;
 				if (amount % 2 == 0)
 					location += (105 - 15);
-				location = projectedLocation;
+				System.out.println(name + " passed transit station");
 			} else if (projectedLocation > 5) {
+				location = projectedLocation;
 				if (amount % 2 == 0)
 					location += (47 - 5);
+				System.out.println(name + " passed transit station");
+			} else
 				location = projectedLocation;
-			}
 		} else if (location < 98) {
-			if (projectedLocation > 75) {
+			if (projectedLocation < 75) {
+				location = projectedLocation;
 				if (amount % 2 == 0)
 					location -= (75 - 25);
-				location = projectedLocation;
+				System.out.println(name + " passed transit station");
 			} else if (projectedLocation < 47) {
+				location = projectedLocation;
 				if (amount % 2 == 0)
 					location -= (47 - 5);
+				System.out.println(name + " passed transit station");
+			} else
 				location = projectedLocation;
-			}
 		} else if (location < 120) {
 			if (projectedLocation < 117) {
+				location = projectedLocation;
 				if (amount % 2 == 0)
 					location -= (117 - 35);
-				location = projectedLocation;
+				System.out.println(name + " passed transit station");
 			} else if (projectedLocation < 105) {
+				location = projectedLocation;
 				if (amount % 2 == 0)
 					location -= (105 - 15);
+				System.out.println(name + " passed transit station");
+			} else
 				location = projectedLocation;
-			}
 		}
 		System.out.println(name + " moved " + amount + " squares and now is at " + gameSquares[location].toString()
 				+ "\n You have: " + money);

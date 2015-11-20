@@ -47,7 +47,7 @@ public class Board extends JFrame {
 		three = new playerIcon("playerIcon4.gif", 575, 660, 50, 40);
 		add(three);
 		
-		Board.lblBoard = new JLabel(new ImageIcon("board1050.jpg"));
+		Board.lblBoard = new JLabel(new ImageIcon("board700.jpg"));
 		getContentPane().add(getLblBoard());
 		
 		
