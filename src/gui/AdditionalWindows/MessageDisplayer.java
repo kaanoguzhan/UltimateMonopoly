@@ -7,5 +7,4 @@ public class MessageDisplayer {
 	public MessageDisplayer(String text) {
 		JOptionPane.showMessageDialog(null, text);
 	}
-	
 }
