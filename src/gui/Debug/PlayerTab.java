@@ -160,9 +160,12 @@ public class PlayerTab extends JPanel {
 	}
 	
 	private void fillAllSquares(Choice choice) {
-		for (GameSquare gsq : Main.gameSquares) {
-			choice.add(gsq instanceof Land ? ((Land) gsq).getName() : gsq.getType() + "");
-		}
+		if (Main.gameSquares != null)
+			for (GameSquare gsq : Main.gameSquares) {
+				choice.add(gsq instanceof Land ? ((Land) gsq).getName() : gsq.getType() + "");
+			}
+		else
+			choice.add("...");
 	}
 	
 	private void fillNeuLands(Choice choice, int playerID) {
