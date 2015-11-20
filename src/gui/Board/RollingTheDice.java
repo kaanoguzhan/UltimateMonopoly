@@ -82,11 +82,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
 			result.setText("<html>Dice: " + roll1 + "," + roll2 + "<br>" + "SpeedDie: " + rollSpeed + "</html>");
 			if (!(roll1 == roll2 && roll2 == rollSpeed)) {
 				if (Dice.isMonopolyGuy()) {
-					// result.setText("Dice: " + roll1 + "," + roll2 +
-					// " with SpeedDie:" + rollSpeed);
-					// result.setBounds(7, 115, ((int)
-					// result.getPreferredSize().getWidth()), ((int) result
-					// .getPreferredSize().getHeight()));
 					movePlayer(roll1 + roll2);
 					new gui.AdditionalWindows.MessageDisplayer(" You rolled MonopolyGuy !");
 
@@ -100,11 +95,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
 						doublesRolled = 0;
 					}
 				} else if (Dice.isBus()) {
-					// result.setText("Dice: " + roll1 + "," + roll2 +
-					// " with SpeedDie:" + rollSpeed);
-					// result.setBounds(7, 115, ((int)
-					// result.getPreferredSize().getWidth()), ((int) result
-					// .getPreferredSize().getHeight()));
 					new gui.AdditionalWindows.MessageDisplayer(" You rolled Bus !");
 
 					int option = new GetOneOption(roll1, roll2, roll1 + roll2,
@@ -122,11 +112,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
 						doublesRolled = 0;
 					}
 				} else {
-					// result.setText("Dice: " + roll1 + "," + roll2 +
-					// " with SpeedDie:" + rollSpeed);
-					// result.setBounds(7, 115, ((int)
-					// result.getPreferredSize().getWidth()), ((int) result
-					// .getPreferredSize().getHeight()));
 					movePlayer(roll1 + roll2 + rollSpeed);
 					if (roll1 != roll2) {
 						end.setEnabled(true);
@@ -136,17 +121,12 @@ public class RollingTheDice extends JPanel implements ActionListener {
 			}
 			if (roll1 == roll2) {
 				if (roll1 == rollSpeed) {
-					// result.setText("Dice: " + roll1 + "," + roll2 +
-					// " with SpeedDie:" + rollSpeed);
-					// result.setBounds(7, 115, ((int)
-					// result.getPreferredSize().getWidth()), ((int) result
-					// .getPreferredSize().getHeight()));
 					new gui.AdditionalWindows.MessageDisplayer("You rolled triples, you can go everywhere you can!");
 
 					int moveTo = Integer.MAX_VALUE;
 					while (!((0 <= moveTo) && (moveTo < Properties.TOTAL_SQUARES)))
 						moveTo = new GetTextInput(
-								"Enter the square you want to go, should be between 0 (GO) and 19(Pennysylvania)")
+								"Enter the square you want to go, should be between 0 (GO) and 119(Lobard Street)")
 								.getInt();
 
 					int current = Main.Main.players[playerID].getLocation();
