@@ -12,11 +12,12 @@ public class SquareHolder {
 	}
 	
 	private void generateSquares() {
-		int boardLength = 675;
+		int boardLength = 1025;
+//		int boardLength = 675; // 700lük board için, yukardakini sil 
 		int squareLength  = (int) boardLength/17;
 	
 		int secondTrack = (int) ((boardLength*0.75) + (squareLength*2)); 		
-
+      if(boardLength < 999){
 		for (int i = 0; i < Properties.TOTAL_SQUARES; i++) {
 			if(i == 0)
 				squares.add(new Square(secondTrack,secondTrack,i));	
@@ -43,11 +44,7 @@ public class SquareHolder {
 						(boardLength - squareLength * (i-53)), i));		
 			
 			else if (i <= 82)
-				squares.add(new Square( (int) (squareLength*2 + ((i-67)* squareLength) - 10), 
-						squareLength, i));	
-			
-			else if (i <= 82)
-				squares.add(new Square( (int) (squareLength*2 + ((i-67)* squareLength) - 10), 
+				squares.add(new Square( (int) (squareLength*2 + ((i-67)* squareLength) - squareLength/1.5), 
 						squareLength, i));	
 			
 			else if (i < 96)
@@ -69,9 +66,59 @@ public class SquareHolder {
 			else if (i <= 120)
 				squares.add(new Square( (int) (boardLength - 4*squareLength), 
 						(int) (((6.1*squareLength))+ (squareLength*(i-114))), i));
+		}
 			
 			
-			
+		} else {
+			for (int i = 0; i < Properties.TOTAL_SQUARES; i++) {
+				if(i == 0)
+					squares.add(new Square(secondTrack,secondTrack,i));	
+				else if (i <= 10)
+					squares.add(new Square( (int) ((secondTrack-squareLength + 10) - (i * squareLength)), secondTrack-squareLength/2, i));
+				
+				else if (i <= 20)
+					squares.add(new Square( (int) ((squareLength*2) + 10+(squareLength*1.4)),
+							( (int) ((boardLength - (squareLength*2))) -((i-9)*squareLength) -15) ,i));
+				
+				else if (i <= 30)
+					squares.add(new Square( (int) ((2*squareLength + (2.1*squareLength)) + ((i-20) * squareLength)), (int) (3.7*squareLength), i));
+				
+				else if (i < 40)
+					squares.add(new Square( (int) (boardLength-(squareLength*2.3)), 
+							(int) ((3.8*squareLength)  +((i-30) * squareLength)), i));
+				
+				else if (i <= 54)
+					squares.add(new Square( (int) (boardLength - 5-(squareLength * (i-39))), 
+							(int) (boardLength-squareLength/1.7), i));
+				
+				else if (i <= 68)
+					squares.add(new Square( (int) (squareLength*1.64), 
+							(boardLength - 9 - squareLength * (i-53)), i));		
+				
+				else if (i <= 82)
+					squares.add(new Square( (int) (squareLength*2 + ((i-68)* squareLength)), 
+							(int) (squareLength*1.3), i));	
+				
+				else if (i < 96)
+					squares.add(new Square( (int) (boardLength-(squareLength/3)), 
+							(int) (squareLength*1.95 + ((i-82)*squareLength)), i));
+				
+				else if (i <= 102)
+					squares.add(new Square( (int) ((boardLength-(4.1*squareLength))-(squareLength*(i-95))), 
+							(int) ((boardLength-(5*squareLength))), i));
+				
+				else if (i <= 108)
+					squares.add(new Square( (int) ((5.6*squareLength)), 
+							(int) ((boardLength-(5.1*squareLength))- (squareLength*(i-102))), i));
+				
+				else if (i <= 114)
+					squares.add(new Square( (int) ((6*squareLength)) +(squareLength*(i-108)), 
+							(int) 6*squareLength - squareLength/2, i));
+				
+				else if (i <= 120)
+					squares.add(new Square( (int) (boardLength - 4.4*squareLength), 
+							(int) (((5.85*squareLength))+ (squareLength*(i-114))), i));
+		}
 		}
 		
 	}
