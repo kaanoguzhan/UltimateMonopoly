@@ -1,5 +1,6 @@
 package Main;
 
+import gui.AdditionalWindows.MessageDisplayer;
 import gui.AdditionalWindows.InputReaders.GetTextInput;
 import gui.Board.Board;
 import javax.swing.UIManager;
@@ -41,17 +42,17 @@ import GameSquares.Taxes.LuxuryTax;
 import GameSquares.Taxes.TaxRefund;
 
 public class Main {
-
-	protected static ChanceDeck chanceDeck = null;
-	protected static CommunityChestDeck communityDeck = null;
-	public static GameSquare[] gameSquares = null;
-	public static Player[] players = null;
-	static Boolean play = true;
-	volatile static Boolean roundEnded = false;
-	private static GetTextInput temp;
-	static Board board;
-	public static int pool = 0;
-
+	
+	protected static ChanceDeck			chanceDeck		= null;
+	protected static CommunityChestDeck	communityDeck	= null;
+	public static GameSquare[]			gameSquares		= null;
+	public static Player[]				players			= null;
+	static Boolean						stopGame		= false;
+	volatile static Boolean				roundEnded		= false;
+	private static GetTextInput			temp;
+	static Board						board;
+	public static int					pool			= 0;
+	
 	public static void main(String[] args) {
 		changeUITheme();
 		initializePlayers();
@@ -59,19 +60,19 @@ public class Main {
 		initializeGameSquares();
 		initializePlayerNames();
 		initializeBoard();
-
+		
 		runGame();
 	}
-
+	
 	private static void changeUITheme() {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-				| UnsupportedLookAndFeelException e1) {
+			| UnsupportedLookAndFeelException e1) {
 			e1.printStackTrace();
 		}
 	}
-
+	
 	private static void initializePlayers() {
 		int num0fPlayers = 0;
 		String numberOfPlayers = "";
@@ -82,20 +83,19 @@ public class Main {
 				numberOfPlayers = temp.getString();
 			}
 			players = new Player[num0fPlayers];
-		} catch (Exception e) {
-		}
+		} catch (Exception e) {}
 		System.out.println("Player initialization is complete...");
 	}
-
+	
 	private static void initializeDecks() {
 		chanceDeck = new ChanceDeck(players);
 		communityDeck = new CommunityChestDeck();
 		System.out.println("Deck initialization is complete...");
 	}
-
+	
 	private static void initializeGameSquares() {
 		gameSquares = new GameSquare[Properties.TOTAL_SQUARES];
-
+		
 		gameSquares[0] = new StartSquare(0);
 		gameSquares[1] = new Land(1, "Mediterranean Avenue", color.puple, 60, 2);
 		gameSquares[2] = new CommunityChest(2, communityDeck);
@@ -218,7 +218,7 @@ public class Main {
 		gameSquares[119] = new Land(119, "Lobard Street", color.white, 210, 17);
 		System.out.println("Game Square initialization is complete...");
 	}
-
+	
 	private static void initializePlayerNames() {
 		System.out.println("Write names seperated with spaces.");
 		for (int i = 0; i < players.length; i++) {
@@ -227,30 +227,47 @@ public class Main {
 				name = new GetTextInput("Name of player " + (i + 1) + " : ").getString();
 			players[i] = new Player(i, name, gameSquares);
 		}
-
+		
 		System.out.println("Player Name initialization is complete...");
 	}
-
+	
 	private static void initializeBoard() {
 		board = new Board(players, gameSquares);
 	}
-
+	
 	private static void runGame() {
-		while (play) {
-			for (int playerID = 0; playerID < players.length; playerID++) {
-				board.setCurrentPlayer(playerID);
-				while (!roundEnded)
-					;
-				roundEnded = false;
+		Player lastPlayer = new Player(-1, ".", gameSquares);
+		game:
+		{
+			for (Player currentPlayer : players) {
+				turn:
+				{
+					roundEnded = false;
+					if (currentPlayer.isJailed()) {
+						currentPlayer.setJailed(false);
+						roundEnded = true;
+					}
+					if (currentPlayer.getLocation() == Properties.HEAVEN_LOCATION)
+						break turn;
+					
+					if (lastPlayer == currentPlayer || stopGame)
+						break game;
+					
+					board.setCurrentPlayer(currentPlayer);
+					
+					while (!roundEnded);
+					lastPlayer = currentPlayer;
+				}
 			}
 		}
+		new MessageDisplayer("Congratulations you have finished the game !");
 	}
-
+	
 	public static void endRound() {
 		roundEnded = true;
 	}
-
+	
 	public static void endGame() {
-		play = false;
+		stopGame = true;
 	}
 }

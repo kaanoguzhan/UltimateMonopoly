@@ -75,8 +75,8 @@ public class Board extends JFrame {
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 	}
 	
-	public void setCurrentPlayer(int id) {
-		round.setCurrentPlayer(id);
+	public void setCurrentPlayer(Player player) {
+		round.setCurrentPlayer(player);
 	}
 	public static JLabel getLblBoard() {
 		return lblBoard;

@@ -10,9 +10,10 @@ import GameSquares.CommunityChest.CommunityChest.CommunityChestCardType;
 
 public class Player implements Serializable {
 	private static final long					serialVersionUID	= 1L;
-	private String								name;
 	private int									id, money, location;
+	private String								name;
 	private GameSquare[]						gameSquares;
+	private boolean								jailed				= false;
 	private ArrayList<CommunityChestCardType>	Inventory			= new ArrayList<CommunityChestCardType>();
 	private ArrayList<Land>						ownedLands			= new ArrayList<Land>();
 	
@@ -35,15 +36,15 @@ public class Player implements Serializable {
 				addMoney(Properties.PAYDAY_EVEN);
 			}
 		}
-
+		
 		if (location < 102 || location >= 111) {
-
+			
 			if (projectedLocation > 102) {
 				System.out.println(name + " passed Bonus Square.");
 				addMoney(Properties.BONUS_PASSING_MONEY);
 			}
 		}
-
+		
 		if (location < 40) {
 			if (projectedLocation > 40) {
 				location = projectedLocation - 40;
@@ -257,5 +258,13 @@ public class Player implements Serializable {
 	
 	public ArrayList<CommunityChestCardType> getCommunityChestCards() {
 		return Inventory;
+	}
+
+	public boolean isJailed() {
+		return jailed;
+	}
+
+	public void setJailed(boolean jailed) {
+		this.jailed = jailed;
 	}
 }
