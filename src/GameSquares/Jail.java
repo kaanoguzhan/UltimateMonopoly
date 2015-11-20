@@ -12,8 +12,7 @@ public class Jail extends GameSquare {
 
 	@Override
 	public void onArrive(Player pl) {
-		new gui.AdditionalWindows.MessageDisplayer("You are now in jail for one round.");
-		//Method for waiting one round
+		new gui.AdditionalWindows.MessageDisplayer("You are visiting jail.");
 	}
 
 	@Override

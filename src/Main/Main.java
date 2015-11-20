@@ -2,8 +2,10 @@ package Main;
 
 import gui.AdditionalWindows.InputReaders.GetTextInput;
 import gui.Board.Board;
+
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
 import GameSquares.Auction;
 import GameSquares.BirthdayGiftSquare;
 import GameSquares.BonusSquare;
@@ -14,9 +16,11 @@ import GameSquares.ElectricCompany;
 import GameSquares.FreePark;
 import GameSquares.GameSquare;
 import GameSquares.GasCompany;
+import GameSquares.GoToJail;
 import GameSquares.HollandTunnel;
 import GameSquares.IncomeTax;
 import GameSquares.InternetServiceProvider;
+import GameSquares.Jail;
 import GameSquares.Land;
 import GameSquares.Land.color;
 import GameSquares.PayDay;
@@ -39,17 +43,17 @@ import GameSquares.Taxes.LuxuryTax;
 import GameSquares.Taxes.TaxRefund;
 
 public class Main {
-	
-	protected static ChanceDeck			chanceDeck		= null;
-	protected static CommunityChestDeck	communityDeck	= null;
-	public static GameSquare[]			gameSquares		= null;
-	public static Player[]				players			= null;
-	static Boolean						play			= true;
-	volatile static Boolean				roundEnded		= false;
-	private static GetTextInput			temp;
-	static Board						board;
-	public static int					pool			= 0;
-	
+
+	protected static ChanceDeck chanceDeck = null;
+	protected static CommunityChestDeck communityDeck = null;
+	public static GameSquare[] gameSquares = null;
+	public static Player[] players = null;
+	static Boolean play = true;
+	volatile static Boolean roundEnded = false;
+	private static GetTextInput temp;
+	static Board board;
+	public static int pool = 0;
+
 	public static void main(String[] args) {
 		changeUITheme();
 		initializePlayers();
@@ -57,19 +61,19 @@ public class Main {
 		initializeGameSquares();
 		initializePlayerNames();
 		initializeBoard();
-		
+
 		runGame();
 	}
-	
+
 	private static void changeUITheme() {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-			| UnsupportedLookAndFeelException e1) {
+				| UnsupportedLookAndFeelException e1) {
 			e1.printStackTrace();
 		}
 	}
-	
+
 	private static void initializePlayers() {
 		int num0fPlayers = 0;
 		String numberOfPlayers = "";
@@ -80,19 +84,20 @@ public class Main {
 				numberOfPlayers = temp.getString();
 			}
 			players = new Player[num0fPlayers];
-		} catch (Exception e) {}
+		} catch (Exception e) {
+		}
 		System.out.println("Player initialization is complete...");
 	}
-	
+
 	private static void initializeDecks() {
 		chanceDeck = new ChanceDeck(players);
 		communityDeck = new CommunityChestDeck();
 		System.out.println("Deck initialization is complete...");
 	}
-	
+
 	private static void initializeGameSquares() {
 		gameSquares = new GameSquare[Properties.TOTAL_SQUARES];
-		
+
 		gameSquares[0] = new StartSquare(0);
 		gameSquares[1] = new Land(1, "Mediterranean Avenue", color.puple, 60, 2);
 		gameSquares[2] = new CommunityChest(2, communityDeck);
@@ -103,7 +108,7 @@ public class Main {
 		gameSquares[7] = new Chance(7, chanceDeck, players);
 		gameSquares[8] = new Land(8, "Vermont Avenue", color.lightBlue, 100, 6);
 		gameSquares[9] = new Land(9, "Connecticut Avenue", color.lightBlue, 100, 8);
-		// gameSquares[10] = new Jail(10);
+		gameSquares[10] = new Jail(10);
 		gameSquares[11] = new Land(11, "St. Charles Place", color.pink, 140, 10);
 		gameSquares[12] = new ElectricCompany(12);
 		gameSquares[13] = new Land(13, "States Avenue", color.pink, 140, 10);
@@ -138,7 +143,7 @@ public class Main {
 		gameSquares[42] = new CommunityChest(42, communityDeck);
 		gameSquares[43] = new Land(43, "Nicollet Avenue", color.lightPink, 30, 1);
 		gameSquares[44] = new Land(44, "Hennepin Avenue", color.lightPink, 60, 3);
-		
+
 		gameSquares[45] = new BusTicketSquare(45);
 		gameSquares[46] = new Cab(46, "Checker");
 		gameSquares[47] = new TransitStation(47, 5);
@@ -168,7 +173,7 @@ public class Main {
 		gameSquares[71] = new Land(71, "Randolph Street", color.magenta, 270, 23);
 		gameSquares[72] = new Land(72, "Wacker Drive", color.magenta, 300, 26);
 		gameSquares[73] = new Land(73, "Michigan Avenue", color.magenta, 300, 26);
-		
+
 		gameSquares[74] = new Cab(74, "Yellow");
 		gameSquares[75] = new TransitStation(75, 25);
 		gameSquares[76] = new CommunityChest(76, communityDeck);
@@ -177,7 +182,7 @@ public class Main {
 		gameSquares[79] = new TrashCollector(79);
 		gameSquares[80] = new Land(80, "North Temple", color.gold, 360, 38);
 		gameSquares[81] = new Land(81, "Temple Square", color.gold, 360, 38);
-		// goto jail
+		gameSquares[82] = new GoToJail(82);
 		gameSquares[83] = new Land(83, "South Street", color.lightRed, 390, 45);
 		gameSquares[84] = new Land(84, "Broad Street", color.lightRed, 390, 45);
 		gameSquares[85] = new Land(85, "Walnut Street", color.lightRed, 420, 55);
@@ -217,6 +222,7 @@ public class Main {
 		gameSquares[119] = new Land(118, "Lobard Street", color.white, 210, 17);
 		System.out.println("Game Square initialization is complete...");
 	}
+
 	private static void initializePlayerNames() {
 		System.out.println("Write names seperated with spaces.");
 		for (int i = 0; i < players.length; i++) {
@@ -225,28 +231,29 @@ public class Main {
 				name = new GetTextInput("Name of player " + (i + 1) + " : ").getString();
 			players[i] = new Player(i, name, gameSquares);
 		}
-		
+
 		System.out.println("Player Name initialization is complete...");
 	}
-	
+
 	private static void initializeBoard() {
 		board = new Board(players, gameSquares);
 	}
-	
+
 	private static void runGame() {
 		while (play) {
 			for (int playerID = 0; playerID < players.length; playerID++) {
 				board.setCurrentPlayer(playerID);
-				while (!roundEnded);
+				while (!roundEnded)
+					;
 				roundEnded = false;
 			}
 		}
 	}
-	
+
 	public static void endRound() {
 		roundEnded = true;
 	}
-	
+
 	public static void endGame() {
 		play = false;
 	}
