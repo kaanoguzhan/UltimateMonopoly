@@ -29,7 +29,7 @@ public class PlayerTab extends JPanel {
 		this.playerID = playerID;
 		setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.LIGHT_GRAY));
 		
-		JLabel lblPlayerName1 = new JLabel("Player " + (playerID+1));
+		JLabel lblPlayerName1 = new JLabel("Player " + (playerID + 1));
 		lblPlayerName1.setBounds(0, 0, 625, 22);
 		lblPlayerName1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblPlayerName1.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -160,26 +160,9 @@ public class PlayerTab extends JPanel {
 	}
 	
 	private void fillAllSquares(Choice choice) {
-		choice.add("StartSquare");
-		choice.add("Oriental Ave");
-		choice.add("CommunityChest1");
-		choice.add("Vermont Ave");
-		choice.add("Connecticut");
-		choice.add("RollOnce");
-		choice.add("St. Charles Place");
-		choice.add("Chance1");
-		choice.add("States Ave");
-		choice.add("Virginia");
-		choice.add("FreePark");
-		choice.add("St. James Place");
-		choice.add("CommunityChest2");
-		choice.add("Tennessee");
-		choice.add("New York Ave");
-		choice.add("SqueezePlay");
-		choice.add("Pacific");
-		choice.add("North Carolina");
-		choice.add("Chance2");
-		choice.add("Pennsylvania");
+		for (GameSquare gsq : Main.gameSquares) {
+			choice.add(gsq instanceof Land ? ((Land) gsq).getName() : gsq.getType() + "");
+		}
 	}
 	
 	private void fillNeuLands(Choice choice, int playerID) {
