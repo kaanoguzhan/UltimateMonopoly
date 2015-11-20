@@ -12,7 +12,7 @@ public class Jail extends GameSquare {
 
 	@Override
 	public void onArrive(Player pl) {
-		new gui.AdditionalWindows.MessageDisplayer("You are visiting jail.");
+		System.out.println("You are visiting jail.");
 	}
 
 	@Override
