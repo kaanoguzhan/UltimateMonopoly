@@ -3,23 +3,22 @@ package GameSquares;
 import Main.Player;
 
 public class BonusSquare extends GameSquare {
-	private static final long	serialVersionUID	= 1L;
-	
+	private static final long serialVersionUID = 1L;
+	private final int bonusMoney = 300;
+
 	public BonusSquare(int id) {
 		super(id, type.Bonus);
-		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
 	public void onArrive(Player pl) {
-		// TODO Auto-generated method stub
-		
+		new gui.AdditionalWindows.MessageDisplayer("You are at Bonus Square. You will collect $300.");
+		pl.addMoney(bonusMoney);
 	}
-	
+
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Bonus Square. Location: " + id;
 	}
-	
+
 }
