@@ -38,6 +38,7 @@ public class Player implements Serializable {
 	
 	public void moveBy(int amount) {
 		int projectedLocation = location + amount;
+		if(projectedLocation>119) projectedLocation-=24;
 		if (location < 68) {
 			if (projectedLocation > 68) {
 				System.out.println(name + " passed Pay Day Square.");

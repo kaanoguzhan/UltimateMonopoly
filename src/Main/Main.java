@@ -301,6 +301,7 @@ public class Main {
 	private static void runGame() {
 		Player lastPlayer = new Player(gameSquares);
 		game:
+			while(!stopGame)
 		{
 			for (Player currentPlayer : players) {
 				turn:
@@ -313,9 +314,10 @@ public class Main {
 					if (currentPlayer.getLocation() == Properties.HEAVEN_LOCATION)
 						break turn;
 					
-					if (lastPlayer == currentPlayer || stopGame)
+					if (lastPlayer == currentPlayer){
+						stopGame=true;
 						break game;
-					
+					}					
 					board.setCurrentPlayer(currentPlayer);
 					
 					while (!roundEnded);
