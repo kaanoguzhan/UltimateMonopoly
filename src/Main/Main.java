@@ -299,7 +299,7 @@ public class Main {
 	}
 	
 	private static void runGame() {
-		Player lastPlayer = new Player(-1, ".", gameSquares);
+		Player lastPlayer = new Player(gameSquares);
 		game:
 		{
 			for (Player currentPlayer : players) {

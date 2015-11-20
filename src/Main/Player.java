@@ -27,6 +27,14 @@ public class Player implements Serializable {
 		this.gameSquares = gameSquares;
 		System.out.println("Player " + name + " with " + money + " added.");
 	}
+	//only for dummy player
+	public Player(GameSquare[] gameSquares) {
+		this.id = -1;
+		this.location = -1;
+		this.money = Properties.START_GOLD;
+		this.name = ".";
+		this.gameSquares = gameSquares;
+	}
 	
 	public void moveBy(int amount) {
 		int projectedLocation = location + amount;
