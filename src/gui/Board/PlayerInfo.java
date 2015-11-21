@@ -1,11 +1,17 @@
 package gui.Board;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.util.Vector;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
-import Main.Player;
 import Main.Main;
+import Main.Player;
 
 public class PlayerInfo extends JPanel {
 	
@@ -27,7 +33,6 @@ public class PlayerInfo extends JPanel {
 		
 		pane = new JScrollPane(table);
 		add(pane, BorderLayout.CENTER);
-		
 	}
 	
 	public void resizeColumnWidth(JTable table) {
@@ -44,6 +49,7 @@ public class PlayerInfo extends JPanel {
 	}
 	
 	public void refreshData() {
+		recreateTable();
 		for (int i = 0; i < Main.players.length; i++) {
 			Player current = Main.players[i];
 			String lands = "";
@@ -84,7 +90,7 @@ public class PlayerInfo extends JPanel {
 			int id = current.getLocation();
 			int playerID = current.getID();
 			int x, y;
-			switch (playerID){
+			switch (playerID) {
 				case 0:
 					x = Board.squareHolder.getSquare(id).getX() - 28;
 					y = Board.squareHolder.getSquare(id).getY() - 40;
@@ -106,7 +112,7 @@ public class PlayerInfo extends JPanel {
 					y = Board.squareHolder.getSquare(id).getY();
 					break;
 			}
-
+			
 			
 			if (Player != null)
 				Player.setBounds(x, y, 50, 40);
@@ -118,5 +124,14 @@ public class PlayerInfo extends JPanel {
 			for (int j = 0; j < table.getColumnCount(); j++)
 				table.setValueAt(data[i][j], i, j);
 		}
+	}
+	
+	private void recreateTable() {
+		String[] columns = { "Player Name", "Location", "Money", "Properties" };
+		data = new String[Main.players.length][4];
+		
+		DefaultTableModel dataModel = new DefaultTableModel(data, columns);
+		
+		table.setModel(dataModel);
 	}
 }

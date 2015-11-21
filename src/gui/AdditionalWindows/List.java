@@ -3,18 +3,16 @@ package gui.AdditionalWindows;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.event.*;
-
 import GameSquares.GameSquare;
 import GameSquares.Land;
 import GameSquares.Ownable;
-
 import java.awt.event.*;
 import java.awt.*;
 
 // ListDemo.java requires no other files.
 public class List extends JPanel implements ListSelectionListener {
 	
-	private static final long		serialVersionUID	= 1L;
+	private static final long				serialVersionUID	= 1L;
 	private JList<GameSquare>				list;
 	private DefaultListModel<GameSquare>	listModel;
 	private JButton							sellButton;
@@ -33,12 +31,13 @@ public class List extends JPanel implements ListSelectionListener {
 			listModel.addElement(a);
 		}
 		
-		if(!(squares.isEmpty())){
+		if (!(squares.isEmpty())) {
 			GameSquare a = squares.get(0);
-			if(a instanceof Land) 
+			if (a instanceof Land)
 				label = new JLabel(((Land) a).toString2());
-			else label = new JLabel(a.toString());
-		}else 
+			else
+				label = new JLabel(a.toString());
+		} else
 			label = new JLabel();
 		// Create the list and put it in a scroll pane.
 		list = new JList<GameSquare>(listModel);
@@ -67,10 +66,10 @@ public class List extends JPanel implements ListSelectionListener {
 			int index = list.getSelectedIndex();
 			GameSquare a = list.getSelectedValue();
 			
-			if(a instanceof Ownable){
-				if (!(a == null)) ((Ownable)a).sell();
+			if (a instanceof Ownable) {
+				if (!(a == null)) ((Ownable) a).sell();
 				
-				if(index != -1) listModel.remove(index);
+				if (index != -1) listModel.remove(index);
 				
 				int size = listModel.getSize();
 				
@@ -99,9 +98,10 @@ public class List extends JPanel implements ListSelectionListener {
 		GameSquare a = list.getSelectedValue();
 		
 		if (!(a == null)) {
-			if(a instanceof Land) 
+			if (a instanceof Land)
 				label.setText(((Land) a).toString2());
-			else label.setText(a.toString());
+			else
+				label.setText(a.toString());
 			label.setPreferredSize(new Dimension(((int) label.getPreferredSize().getWidth()) + 10, ((int) label
 				.getPreferredSize().getHeight())));
 		}
@@ -119,19 +119,19 @@ public class List extends JPanel implements ListSelectionListener {
 	
 	public static void createAndShowGUI(ArrayList<?> lands) {
 		// Create and set up the window.
-		if(lands != null){
+		if (lands != null) {
 			JFrame frame = null;
-			if(lands.get(0) instanceof Land) {
+			if (lands.get(0) instanceof Land) {
 				frame = new JFrame("Lands to Sell");
-			}else{
+			} else {
 				frame = new JFrame("Owned properties to Sell");
 			}
-				
-				List a = new List((ArrayList<GameSquare>) lands);
-				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-				frame.add(a);
-				frame.setSize(380, 280);
-				frame.setVisible(true);
+			@SuppressWarnings("unchecked")
+			List a = new List((ArrayList<GameSquare>) lands);
+			frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+			frame.add(a);
+			frame.setSize(380, 280);
+			frame.setVisible(true);
 		}
 		
 	}

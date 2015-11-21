@@ -1,5 +1,6 @@
 package gui.Debug;
 
+import gui.Board.Board;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import Main.SaveLoad.SaveLoad;
@@ -22,6 +23,7 @@ public class SaveLoadTab extends JPanel {
 		btnLoad.setBounds(316, 5, 299, 109);
 		btnLoad.addActionListener(al -> {
 			SaveLoad.load();
+			Board.informationTable.refreshData();
 		});
 		add(btnLoad);
 		

@@ -22,7 +22,7 @@ public class PlayerTab extends JPanel {
 	private static final long	serialVersionUID	= 1L;
 	private int					playerID			= 0;
 	private JTextField			txtMoney1;
-	private Choice				choiceOwnLan, choiceNeuLand;
+	private Choice				choiceOwnLand, choiceNeuLand;
 	
 	public PlayerTab(int playerID) {
 		setLayout(null);
@@ -105,15 +105,15 @@ public class PlayerTab extends JPanel {
 		lblOwnLands1.setBounds(329, 35, 140, 16);
 		add(lblOwnLands1);
 		
-		Choice choiceOwnLan1 = new Choice();
-		fillOwnLands(choiceOwnLan1, playerID);
-		choiceOwnLan1.setBounds(329, 53, 140, 22);
-		add(choiceOwnLan1);
+		choiceOwnLand = new Choice();
+		fillOwnLands(choiceOwnLand, playerID);
+		choiceOwnLand.setBounds(329, 53, 140, 22);
+		add(choiceOwnLand);
 		
-		Choice choiceNeuLand1 = new Choice();
-		fillNeuLands(choiceNeuLand1, playerID);
-		choiceNeuLand1.setBounds(473, 53, 140, 22);
-		add(choiceNeuLand1);
+		choiceNeuLand = new Choice();
+		fillNeuLands(choiceNeuLand, playerID);
+		choiceNeuLand.setBounds(473, 53, 140, 22);
+		add(choiceNeuLand);
 		
 		JLabel lblNeuLands1 = new JLabel("Neutral Lands");
 		lblNeuLands1.setBounds(473, 35, 140, 16);
@@ -121,7 +121,7 @@ public class PlayerTab extends JPanel {
 		
 		JButton btnRemoveLnd1 = new JButton("Remove");
 		btnRemoveLnd1.addActionListener(al -> {
-			Admin.removeOwnership(playerID, choiceOwnLan1.getSelectedItem());
+			Admin.removeOwnership(playerID, choiceOwnLand.getSelectedItem());
 			Debug.refreshLands();
 		});
 		btnRemoveLnd1.setBounds(329, 77, 140, 41);
@@ -129,7 +129,7 @@ public class PlayerTab extends JPanel {
 		
 		JButton btnClaimLnd1 = new JButton("Claim");
 		btnClaimLnd1.addActionListener(al -> {
-			Admin.giveOwnership(playerID, choiceNeuLand1.getSelectedItem());
+			Admin.giveOwnership(playerID, choiceNeuLand.getSelectedItem());
 			Debug.refreshLands();
 		});
 		btnClaimLnd1.setBounds(473, 77, 140, 41);
@@ -173,6 +173,7 @@ public class PlayerTab extends JPanel {
 			for (GameSquare land : Main.gameSquares)
 				if (land instanceof Land && ((Land) land).getOwner() == null)
 					choice.add(((Land) land).getName());
+		return;
 	}
 	
 	private void fillOwnLands(Choice choice, int playerID) {
@@ -180,12 +181,13 @@ public class PlayerTab extends JPanel {
 			for (Land land : Main.players[playerID].getOwnedLands()) {
 				choice.add(land.getName());
 			}
+		return;
 	}
 	
 	void refresh() {
-		choiceOwnLan.removeAll();
+		choiceOwnLand.removeAll();
 		choiceNeuLand.removeAll();
-		fillOwnLands(choiceOwnLan, playerID);
+		fillOwnLands(choiceOwnLand, playerID);
 		fillNeuLands(choiceNeuLand, playerID);
 	}
 }

@@ -175,6 +175,7 @@ public class Admin extends Main {
 					System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
 						+ " is given the ownership of " + currentLandName);
 					Main.players[playerID].getOwnership((Land) gameSquare);
+					break;
 				}
 		}
 		refreshUI();

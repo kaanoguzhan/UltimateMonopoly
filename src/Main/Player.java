@@ -27,7 +27,7 @@ public class Player implements Serializable {
 		this.gameSquares = gameSquares;
 		System.out.println("Player " + name + " with " + money + " added.");
 	}
-	//only for dummy player
+	// only for dummy player
 	public Player(GameSquare[] gameSquares) {
 		this.id = -1;
 		this.location = -1;
@@ -38,7 +38,7 @@ public class Player implements Serializable {
 	
 	public void moveBy(int amount) {
 		int projectedLocation = location + amount;
-		if(projectedLocation>119) projectedLocation-=24;
+		if (projectedLocation > 119) projectedLocation -= 24;
 		if (location < 68) {
 			if (projectedLocation > 68) {
 				System.out.println(name + " passed Pay Day Square.");
@@ -65,25 +65,25 @@ public class Player implements Serializable {
 			
 			if (projectedLocation > 35) {
 				location = projectedLocation;
-				if (amount % 2 == 0){
+				if (amount % 2 == 0) {
 					location += (117 - 35);
 					System.out.println(name + " passed transit station");
 				}
 			} else if (projectedLocation > 25) {
 				location = projectedLocation;
-				if (amount % 2 == 0){
+				if (amount % 2 == 0) {
 					location += (75 - 25);
 					System.out.println(name + " passed transit station");
 				}
 			} else if (projectedLocation > 15) {
 				location = projectedLocation;
-				if (amount % 2 == 0){
+				if (amount % 2 == 0) {
 					location += (105 - 15);
 					System.out.println(name + " passed transit station");
 				}
 			} else if (projectedLocation > 5) {
 				location = projectedLocation;
-				if (amount % 2 == 0){
+				if (amount % 2 == 0) {
 					location += (47 - 5);
 					System.out.println(name + " passed transit station");
 				}
@@ -92,13 +92,13 @@ public class Player implements Serializable {
 		} else if (location < 98) {
 			if (projectedLocation < 75) {
 				location = projectedLocation;
-				if (amount % 2 == 0){
+				if (amount % 2 == 0) {
 					location -= (75 - 25);
 					System.out.println(name + " passed transit station");
 				}
 			} else if (projectedLocation < 47) {
 				location = projectedLocation;
-				if (amount % 2 == 0){
+				if (amount % 2 == 0) {
 					location -= (47 - 5);
 					System.out.println(name + " passed transit station");
 				}
@@ -107,7 +107,7 @@ public class Player implements Serializable {
 		} else if (location < 120) {
 			if (projectedLocation < 117) {
 				location = projectedLocation;
-				if (amount % 2 == 0){
+				if (amount % 2 == 0) {
 					location -= (117 - 35);
 					if (location > 40) {
 						location = projectedLocation - 40;
@@ -118,7 +118,7 @@ public class Player implements Serializable {
 				}
 			} else if (projectedLocation < 105) {
 				location = projectedLocation;
-				if (amount % 2 == 0){
+				if (amount % 2 == 0) {
 					location -= (105 - 15);
 					System.out.println(name + " passed transit station");
 				}
@@ -192,34 +192,36 @@ public class Player implements Serializable {
 	}
 	
 	public void buySquare(GameSquare land) {
-		if(land instanceof Ownable){
-			reduceMoney(((Ownable)land).getPrice());
+		if (land instanceof Ownable) {
+			reduceMoney(((Ownable) land).getPrice());
 			getOwnership(land);
 		}
 	}
 	
 	public void sellSquare(GameSquare land) {
 		if (ownedLands.contains(land)) {
-			addMoney(((Ownable)land).getPrice());
+			addMoney(((Ownable) land).getPrice());
 			removeOwnership(land);
-			System.out.println(name + " sold " + land + " for " + ((Ownable)land).getPrice());
+			System.out.println(name + " sold " + land + " for " + ((Ownable) land).getPrice());
 		}
-		addMoney(((Ownable)land).getPrice()/2);
+		addMoney(((Ownable) land).getPrice() / 2);
 		land.setOwner(null);
 	}
 	
 	public void getOwnership(GameSquare square) {
-		if(square instanceof Land)
+		if (square instanceof Land)
 			ownedLands.add((Land) square);
-		else ownedSquares.add((Ownable) square);
+		else
+			ownedSquares.add((Ownable) square);
 		
 		square.setOwner(this);
 	}
 	
 	public void removeOwnership(GameSquare square) {
-		if(square instanceof Land)
+		if (square instanceof Land)
 			ownedLands.remove((Land) square);
-		else ownedSquares.remove((Ownable) square);
+		else
+			ownedSquares.remove((Ownable) square);
 		
 		square.setOwner(null);
 	}
@@ -292,11 +294,11 @@ public class Player implements Serializable {
 	public ArrayList<CommunityChestCardType> getCommunityChestCards() {
 		return Inventory;
 	}
-
+	
 	public boolean isJailed() {
 		return jailed;
 	}
-
+	
 	public void setJailed(boolean jailed) {
 		this.jailed = jailed;
 	}
