@@ -13,7 +13,8 @@ public class ChanceDeck implements Serializable {
 	public ChanceDeck(Player[] players) {
 		ChanceCard[] cards = { new AdvanceToSqueezePlay(), new AdvanceToStart(), new AdvanceToStCharlesPlace(),
 				new AdvanceToTheNearestRailroad(), new AdvanceToTheNearestUtility(), new ElectedAsChairPerson(players),
-				new GeneralRepairs(), new GetOutOfJail(), new GoToJail(), new SchoolFees(), new ThreeSpacesBack() };
+				new GeneralRepairs(), new GetOutOfJail(), new GoToJail(), new SchoolFees(), new ThreeSpacesBack(),
+				new Hurricane()};
 		this.cards = cards;
 	}
 
