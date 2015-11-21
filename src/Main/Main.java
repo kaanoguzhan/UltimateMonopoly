@@ -40,6 +40,7 @@ import GameSquares.CommunityChest.CommunityChestDeck;
 import GameSquares.Taxes.IncomeTax;
 import GameSquares.Taxes.LuxuryTax;
 import GameSquares.Taxes.TaxRefund;
+import Main.SaveLoad.SaveLoad;
 
 public class Main {
 	
@@ -51,6 +52,7 @@ public class Main {
 	private static GetTextInput			temp;
 	static Board						board;
 	public static int					pool			= 0;
+	private static boolean				loadPrevious;
 	
 	public static void main(String[] args) {
 		changeUITheme();
@@ -78,6 +80,10 @@ public class Main {
 		try {
 			while (num0fPlayers == 0 || num0fPlayers < 0 || numberOfPlayers == null) {
 				temp = new GetTextInput("How many players?");
+				if (temp.getString().equals("l") || temp.getString().equals("load")) {
+					loadPrevious = true;
+					break;
+				}
 				num0fPlayers = temp.getInt();
 				numberOfPlayers = temp.getString();
 			}
@@ -295,6 +301,8 @@ public class Main {
 	
 	private static void initializeBoard() {
 		board = new Board(players, gameSquares);
+		if (loadPrevious)
+			SaveLoad.load();
 	}
 	
 	private static void runGame() {

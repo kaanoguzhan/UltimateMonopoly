@@ -1,5 +1,6 @@
 package gui.AdditionalWindows.InputReaders;
 
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 public class GetTextInput {
@@ -15,9 +16,13 @@ public class GetTextInput {
 	}
 	
 	public int getInt() {
-		if (Answer.length() > 0)
-			return Integer.parseInt(Answer);
-		else
-			return 0;
+		Scanner sc = new Scanner(Answer);
+		int output = 0;
+		
+		if (sc.hasNextInt())
+			output = sc.nextInt();
+		sc.close();
+		
+		return output;
 	}
 }

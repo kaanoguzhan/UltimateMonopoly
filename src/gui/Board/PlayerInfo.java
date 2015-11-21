@@ -2,7 +2,6 @@ package gui.Board;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.util.Vector;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
