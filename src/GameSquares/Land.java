@@ -174,6 +174,9 @@ public class Land extends GameSquare implements Ownable{
 	public state getState(){
 		return currentState;
 	}
+	public void setState(state s){
+		this.currentState = s;
+	}
 	public boolean isOwned()
 	{
 		if (this.owner != null)
