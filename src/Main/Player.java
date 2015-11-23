@@ -8,6 +8,7 @@ import GameSquares.Land.color;
 import GameSquares.Ownable;
 import GameSquares.PayDay;
 import GameSquares.CommunityChest.CommunityChest.CommunityChestCardType;
+import GameSquares.Utilities.Utility;
 
 public class Player implements Serializable {
 	private static final long					serialVersionUID	= 1L;
@@ -129,6 +130,8 @@ public class Player implements Serializable {
 			+ "\n You have: " + money);
 		if (gameSquares[location] instanceof PayDay)
 			((PayDay) gameSquares[location]).onArrive(this, amount);
+		if (gameSquares[location] instanceof Utility)
+			((Utility) gameSquares[location]).onArrive(this, amount);
 		else
 			gameSquares[location].onArrive(this);
 	}
@@ -199,13 +202,17 @@ public class Player implements Serializable {
 	}
 	
 	public void sellSquare(GameSquare land) {
+		if (land instanceof Ownable && !(land instanceof Land)) {
+			addMoney(((Ownable) land).getPrice());
+			removeOwnership(land);
+			System.out.println(name + " sold " + land + " for " + ((Ownable) land).getPrice());
+		}
+		
 		if (ownedLands.contains(land)) {
 			addMoney(((Ownable) land).getPrice());
 			removeOwnership(land);
 			System.out.println(name + " sold " + land + " for " + ((Ownable) land).getPrice());
 		}
-		addMoney(((Ownable) land).getPrice() / 2);
-		land.setOwner(null);
 	}
 	
 	public void getOwnership(GameSquare square) {
@@ -301,5 +308,16 @@ public class Player implements Serializable {
 	
 	public void setJailed(boolean jailed) {
 		this.jailed = jailed;
+	}
+	
+	public int numOfOwnedUtilities() {
+		int output = 0;
+		
+		for (Ownable nextOwn : ownedSquares) {
+			if (nextOwn instanceof Utility)
+				output++;
+		}
+		
+		return output;
 	}
 }
