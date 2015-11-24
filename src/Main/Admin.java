@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import GameSquares.GameSquare;
 import GameSquares.Land;
 import GameSquares.Land.color;
+import GameSquares.Ownable;
 import GameSquares.Chance.ChanceDeck;
 import GameSquares.CommunityChest.CommunityChest.CommunityChestCardType;
 import GameSquares.CommunityChest.CommunityChestDeck;
@@ -140,95 +141,95 @@ public class Admin extends Main {
 		refreshUI();
 	}
 	
-	// Give PLAYER the ownership of LAND
-	public static void giveOwnership(Player player, GameSquare... land) {
-		for (GameSquare currentLand : land) {
-			if (currentLand instanceof Land) {
+	// Give PLAYER the ownership of OWNABLE
+	public static void giveOwnership(Player player, GameSquare... ownable) {
+		for (GameSquare currentOwnable : ownable) {
+			if (currentOwnable instanceof Ownable) {
 				System.out.println("ADMIN -> Player:" + player.getName()
 					+ " is given the ownership of "
-					+ ((Land) currentLand).getName());
-				player.getOwnership((Land) currentLand);
+					+ ((Ownable) currentOwnable).getName());
+				player.getOwnership(currentOwnable);
 			}
 		}
 		refreshUI();
 	}
 	
-	// Give PLAYER the ownership of LAND
-	public static void giveOwnership(Player player, int... landID) {
-		for (int currentLandID : landID) {
-			if (Main.gameSquares[currentLandID] instanceof Land && Main.gameSquares.length - 1 >= currentLandID) {
+	// Give PLAYER the ownership of OWNABLE
+	public static void giveOwnership(Player player, int... OwnableID) {
+		for (int currentOwnableID : OwnableID) {
+			if (Main.gameSquares[currentOwnableID] instanceof Ownable && Main.gameSquares.length - 1 >= currentOwnableID) {
 				System.out.println("ADMIN -> Player:" + player.getName()
 					+ " is given the ownership of "
-					+ ((Land) Main.gameSquares[currentLandID]).getName());
-				player.getOwnership((Land) Main.gameSquares[currentLandID]);
+					+ ((Ownable) Main.gameSquares[currentOwnableID]).getName());
+				player.getOwnership(Main.gameSquares[currentOwnableID]);
 			}
 		}
 		refreshUI();
 	}
 	
-	// Give PLAYER the ownership of LAND
-	public static void giveOwnership(int playerID, String... landName) {
-		for (String currentLandName : landName) {
+	// Give PLAYER the ownership of OWNABLE
+	public static void giveOwnership(int playerID, String... ownableName) {
+		for (String currentOwnableName : ownableName) {
 			for (GameSquare gameSquare : Main.gameSquares)
-				if (gameSquare instanceof Land && Main.players.length - 1 >= playerID &&
-					((Land) gameSquare).getName().equals(currentLandName)) {
+				if (gameSquare instanceof Ownable && Main.players.length - 1 >= playerID &&
+					((Ownable) gameSquare).getName().equals(currentOwnableName)) {
 					System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
-						+ " is given the ownership of " + currentLandName);
-					Main.players[playerID].getOwnership((Land) gameSquare);
+						+ " is given the ownership of " + currentOwnableName);
+					Main.players[playerID].getOwnership(gameSquare);
 					break;
 				}
 		}
 		refreshUI();
 	}
-	// Remove the ownership of LAND from PLAYER
-	public static void removeOwnership(Player player, GameSquare... land) {
-		for (GameSquare currentLand : land) {
-			if (currentLand instanceof Land) {
+	// Remove the ownership of OWNABLE from PLAYER
+	public static void removeOwnership(Player player, GameSquare... ownable) {
+		for (GameSquare currentOwnable : ownable) {
+			if (currentOwnable instanceof Ownable) {
 				System.out.println("ADMIN -> Player:" + player.getName()
 					+ "'s ownership is removed from "
-					+ ((Land) currentLand).getName());
-				player.removeOwnership((Land) currentLand);
+					+ ((Ownable) currentOwnable).getName());
+				player.removeOwnership(currentOwnable);
 			}
 		}
 		refreshUI();
 	}
 	
-	// Remove the ownership of LAND from PLAYER
-	public static void removeOwnership(Player player, int... landID) {
-		for (int currentLandID : landID) {
-			if (Main.gameSquares[currentLandID] instanceof Land && Main.gameSquares.length - 1 >= currentLandID) {
+	// Remove the ownership of OWNABLE from PLAYER
+	public static void removeOwnership(Player player, int... ownableID) {
+		for (int currentOwnableID : ownableID) {
+			if (Main.gameSquares[currentOwnableID] instanceof Ownable && Main.gameSquares.length - 1 >= currentOwnableID) {
 				System.out.println("ADMIN -> Player:" + player.getName()
 					+ "'s ownership is removed from "
-					+ ((Land) Main.gameSquares[currentLandID]).getName());
-				player.removeOwnership((Land) Main.gameSquares[currentLandID]);
+					+ ((Ownable) Main.gameSquares[currentOwnableID]).getName());
+				player.removeOwnership(Main.gameSquares[currentOwnableID]);
 			}
 		}
 		refreshUI();
 	}
 	
-	// Remove the ownership of LAND from PLAYER
-	public static void removeOwnership(int playerID, String... landName) {
-		for (String currentLandName : landName) {
+	// Remove the ownership of OWNABLE from PLAYER
+	public static void removeOwnership(int playerID, String... ownableName) {
+		for (String currentOwnableName : ownableName) {
 			for (GameSquare gameSquare : Main.gameSquares)
-				if (gameSquare instanceof Land && Main.players.length - 1 >= playerID)
-					if (((Land) gameSquare).getName().equals(currentLandName)) {
+				if (gameSquare instanceof Ownable && Main.players.length - 1 >= playerID)
+					if (((Ownable) gameSquare).getName().equals(currentOwnableName)) {
 						System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
-							+ "'s ownership is removed from " + currentLandName);
-						Main.players[playerID].removeOwnership((Land) gameSquare);
+							+ "'s ownership is removed from " + currentOwnableName);
+						Main.players[playerID].removeOwnership( gameSquare);
 					}
 		}
 		refreshUI();
 	}
 	
-	// Remove the ownership of LAND from PLAYER
-	public static void removeOwnership(int playerID, int... landID) {
-		for (int currentLandID : landID) {
-			if (Main.gameSquares[currentLandID] instanceof Land &&
-				Main.gameSquares.length - 1 >= currentLandID && Main.players.length - 1 >= playerID) {
+	// Remove the ownership of OWNABLE from PLAYER
+	public static void removeOwnership(int playerID, int... ownableID) {
+		for (int currentOwnableID : ownableID) {
+			if (Main.gameSquares[currentOwnableID] instanceof Ownable &&
+				Main.gameSquares.length - 1 >= currentOwnableID && Main.players.length - 1 >= playerID) {
 				System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
 					+ "'s ownership is removed from "
-					+ ((Land) Main.gameSquares[currentLandID]).getName());
-				Main.players[playerID].removeOwnership((Land) Main.gameSquares[currentLandID]);
+					+ ((Ownable) Main.gameSquares[currentOwnableID]).getName());
+				Main.players[playerID].removeOwnership( Main.gameSquares[currentOwnableID]);
 			}
 		}
 		refreshUI();

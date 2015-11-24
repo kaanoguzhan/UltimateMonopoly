@@ -260,6 +260,10 @@ public class Player implements Serializable {
 		return ownedLands;
 	}
 	
+	public ArrayList<Ownable> getOwnedSquares() {
+		return ownedSquares;
+	}
+	
 	// ////////// DO NOT USE THESE METHODS - THESE ARE JUST FOR DEBUGGING
 	// ////////// //
 	public void setLocation(int id) {

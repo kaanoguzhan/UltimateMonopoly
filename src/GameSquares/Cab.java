@@ -8,9 +8,10 @@ import Main.Properties;
 public class Cab extends GameSquare implements Ownable {
 	private static final long	serialVersionUID	= 1L;
 	private String				name;
-	private int					rent				= 50;
-	private int					price				= 300;
-	private int					cabStandCost		= 150;
+	private int					rideCost			= Properties.CAB_RIDE_COST;
+	private int					ownedRideCost		= Properties.CAB_OWNED_RIDE_COST;
+	private int					price				= Properties.CAB_PRICE;
+	private int					cabStandCost		= Properties.CAB_STAND_COST;
 	private boolean				cabStand			= false;
 	
 	
@@ -29,46 +30,33 @@ public class Cab extends GameSquare implements Ownable {
 					pl.buySquare(this);
 				else
 					System.out.println("You don't have enough money!");
-			} else {
-				boolean useCab = false;
-				int cabBill = 0;
-				if (this.owner != pl) {
-					if (cabStand)
-						pl.pay(this.getOwner(), 2 * rent);
-					else
-						pl.pay(this.getOwner(), rent);
-					
-					useCab = new GetYesNoInput("Its the " + name + " cab !",
-						"Do you want to pay 50$ to take the cab ?")
-						.getValue();
-					if (useCab) {
-						playerUseCab(pl);
-						cabBill = Properties.CAB_MONEY;
-						pl.pay(this.getOwner(), cabBill);
-					}
-				} else {
-					useCab = new GetYesNoInput("You own " + name + " cab !",
-						"Do you want to pay 20$ to take the cab ?")
-						.getValue();
-					if (useCab) {
-						cabBill = Properties.OWNED_CAB_MONEY;
-						pl.reduceMoney(cabBill);
-						Main.Main.pool += cabBill;
-					} else if (!cabStand) {
-						if (new GetYesNoInput("Build Cab Stand", "Do you want to pay 150$ to build Cab Stand ?")
-							.getValue()) {
-							pl.reduceMoney(cabStandCost);
-							this.cabStand = true;
-						}
-					}
+			}
+		} else if (this.owner != pl) {
+			if (cabStand)
+				pl.pay(this.getOwner(), 2 * rideCost);
+			else
+				pl.pay(this.getOwner(), rideCost);
+			if (new GetYesNoInput("Its the " + name + " cab !", "Do you want to pay 50$ to take the cab ?")
+				.getValue()) {
+				playerUseCab(pl);
+				pl.pay(this.getOwner(), rideCost);
+			}
+		} else {
+			boolean useCab = new GetYesNoInput("You own " + name + " cab !",
+				"Do you want to pay 20$ to take the cab ?")
+				.getValue();
+			if (useCab) {
+				pl.reduceMoney(ownedRideCost);
+				Main.Main.pool += ownedRideCost;
+				playerUseCab(pl);
+			} else if (!cabStand) {
+				if (new GetYesNoInput("Build Cab Stand", "Do you want to pay 150$ to build Cab Stand ?")
+					.getValue()) {
+					pl.reduceMoney(cabStandCost);
+					this.cabStand = true;
 				}
 			}
 		}
-	}
-	
-	@Override
-	public String toString() {
-		return name + "Cab Co";
 	}
 	
 	private boolean checkMove(int i) {
@@ -88,11 +76,21 @@ public class Cab extends GameSquare implements Ownable {
 	}
 	
 	public void sell() {
-		
+		this.owner.sellSquare(this);
 	}
 	
 	@Override
 	public int getPrice() {
 		return price;
+	}
+	
+	@Override
+	public String getName() {
+		return name + "Cab Co";
+	}
+	
+	@Override
+	public String toString() {
+		return name + "Cab Co";
 	}
 }

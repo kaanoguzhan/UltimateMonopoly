@@ -79,6 +79,11 @@ public class Utility extends GameSquare implements Ownable {
 	}
 	
 	@Override
+	public String getName() {
+		return name;
+	}
+	
+	@Override
 	public String toString() {
 		return name;
 	}

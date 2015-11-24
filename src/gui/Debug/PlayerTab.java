@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 import GameSquares.GameSquare;
 import GameSquares.Land;
+import GameSquares.Ownable;
 import Main.Admin;
 import Main.Main;
 
@@ -167,20 +168,24 @@ public class PlayerTab extends JPanel {
 		else
 			choice.add("...");
 	}
-	
 	private void fillNeuLands(Choice choice, int playerID) {
-		if (Main.players != null && Main.players.length - 1 >= playerID)
-			for (GameSquare land : Main.gameSquares)
-				if (land instanceof Land && ((Land) land).getOwner() == null)
-					choice.add(((Land) land).getName());
+		if (Main.players != null && Main.players.length - 1 >= playerID) {
+			for (GameSquare gsq : Main.gameSquares)
+				if (gsq instanceof Ownable && ((Ownable) gsq).getOwner() == null)
+					choice.add(((Ownable) gsq).getName());
+		}
 		return;
 	}
 	
 	private void fillOwnLands(Choice choice, int playerID) {
-		if (Main.players != null && Main.players.length - 1 >= playerID)
+		if (Main.players != null && Main.players.length - 1 >= playerID) {
 			for (Land land : Main.players[playerID].getOwnedLands()) {
 				choice.add(land.getName());
 			}
+			for (Ownable ownable : Main.players[playerID].getOwnedSquares()) {
+				choice.add(ownable.getName());
+			}
+		}
 		return;
 	}
 	
