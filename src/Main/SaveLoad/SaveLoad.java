@@ -54,8 +54,6 @@ public class SaveLoad {
 			f_in.close();
 			obj_in.close();
 			
-			Main.Main.pause = false;
-			
 		} catch (IOException | ClassNotFoundException e) {}
 	}
 }

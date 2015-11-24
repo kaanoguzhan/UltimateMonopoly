@@ -47,7 +47,6 @@ public class Main {
 	static Board						board;
 	public static int					pool			= 0;
 	private static boolean				loadPrevious;
-	public static boolean				pause			= false;
 	
 	public static void main(String[] args) {
 		changeUITheme();
@@ -72,16 +71,13 @@ public class Main {
 	private static void initializePlayers() {
 		int num0fPlayers = 0;
 		String numberOfPlayers = "";
-		init:
 		try {
 			while (num0fPlayers == 0 || num0fPlayers < 0 || numberOfPlayers == null) {
 				temp = new GetTextInput("How many players?");
 				if (temp.getString().equals("l") || temp.getString().equals("load")) {
 					loadPrevious = true;
-					pause = true;
 					SaveLoad.load();
-					while (pause);
-					break init;
+					num0fPlayers = players.length;
 				} else {
 					num0fPlayers = temp.getInt();
 					numberOfPlayers = temp.getString();

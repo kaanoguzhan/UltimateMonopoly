@@ -10,7 +10,7 @@ import Main.Main;
 public class Debug extends JFrame {
 	private static final long	serialVersionUID	= 1L;
 	private JPanel				contentPane;
-	static PlayerTab			Player1, Player2, Player3, Player4;
+	static PlayerPanel			Player1, Player2, Player3, Player4;
 	
 	public Debug() {
 		switch (Main.players.length) {
@@ -48,36 +48,39 @@ public class Debug extends JFrame {
 		// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		// Player 1
-		Player1 = new PlayerTab(0);
+		Player1 = new PlayerPanel(0);
 		Player1.setBounds(0, 0, 625, 131);
 		Players.add(Player1);
 		
 		// Player 2
-		Player2 = new PlayerTab(1);
+		Player2 = new PlayerPanel(1);
 		Player2.setBounds(0, 150, 625, 131);
 		Players.add(Player2);
 		
 		// Player 3
-		Player3 = new PlayerTab(2);
+		Player3 = new PlayerPanel(2);
 		Player3.setBounds(0, 300, 625, 131);
 		Players.add(Player3);
 		
 		// Player 4
-		Player4 = new PlayerTab(3);
+		Player4 = new PlayerPanel(3);
 		Player4.setBounds(0, 450, 625, 131);
 		Players.add(Player4);
 		
 		// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
-		DiceTab panel = new DiceTab();
-		tabbedPane.addTab("Board", null, panel, null);
+		DicePanel diceTab = new DicePanel();
+		tabbedPane.addTab("Dice-Property", null, diceTab, null);
 		
 		// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
-		SaveLoadTab slt = new SaveLoadTab();
-		tabbedPane.addTab("Save-Load", null, slt, null);
+		SaveLoadPanel saveLoadTab = new SaveLoadPanel();
+		tabbedPane.addTab("Save-Load", null, saveLoadTab, null);
+		
+		// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	}
 	
 	static void refreshLands() {

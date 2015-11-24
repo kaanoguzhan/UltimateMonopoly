@@ -1,14 +1,14 @@
 package Main;
 
-import gui.Board.Board;
+import gui.Board.PlayerInfo;
 import java.util.ArrayList;
 import GameSquares.GameSquare;
 import GameSquares.Land;
 import GameSquares.Land.color;
 import GameSquares.Ownable;
 import GameSquares.Cards.ChanceDeck;
-import GameSquares.Cards.CommunityChestDeck;
 import GameSquares.Cards.CommunityChest.CommunityChestCardType;
+import GameSquares.Cards.CommunityChestDeck;
 
 public class Admin extends Main {
 	
@@ -403,7 +403,7 @@ public class Admin extends Main {
 	/** General methods **/
 	/*********************/
 	private static void refreshUI() {
-		Board.informationTable.refreshData();
+		PlayerInfo.refreshData();
 	}
 	
 	public static int getPlayerCount() {
