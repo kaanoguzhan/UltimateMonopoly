@@ -24,8 +24,7 @@ public class StreetRepair extends CommunityChestCard implements Serializable {
 	public void onDraw(Player pl) {
 		new MessageDisplayer(toString());
 		ArrayList<Land> lands = pl.getOwnedLands();
-		// ArrayList<Ownable> cabTransits=pl.getOwnedUtilities(); olacak abizi
-		ArrayList<Ownable> cabTransits = new ArrayList<Ownable>();
+		ArrayList<Ownable> cabTransits = pl.getOwnedSquares();
 		int cabTransit = 0;
 		int houses = 0;
 		int hotels = 0;

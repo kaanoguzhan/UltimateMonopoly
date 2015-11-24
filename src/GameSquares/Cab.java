@@ -1,5 +1,6 @@
 package GameSquares;
 
+import gui.AdditionalWindows.MessageDisplayer;
 import gui.AdditionalWindows.InputReaders.GetTextInput;
 import gui.AdditionalWindows.InputReaders.GetYesNoInput;
 import Main.Player;
@@ -13,6 +14,7 @@ public class Cab extends GameSquare implements Ownable {
 	private int					price				= Properties.CAB_PRICE;
 	private int					cabStandCost		= Properties.CAB_STAND_COST;
 	private boolean				cabStand			= false;
+	private boolean				mortgaged			= false;
 	
 	public Cab(int id, String name) {
 		super(id, type.Cab);
@@ -71,6 +73,27 @@ public class Cab extends GameSquare implements Ownable {
 			if (checkMove(moveTo))
 				pl.moveTo(moveTo);
 		}
+	}
+	
+	public void mortgage() {
+		if (cabStand) {
+			this.owner.addMoney(price / 2);
+			mortgaged = true;
+		} else
+			new MessageDisplayer("You need to have a cab stand in order to mortgage");
+	}
+	
+	public void leaveMortgage(){
+		int mortgageAmount = (int) (1.1*this.price);
+		if(this.owner.getMoney() >= mortgageAmount){
+			this.owner.reduceMoney(mortgageAmount);
+			mortgaged = false;
+		} else
+			new MessageDisplayer("You do not have enough money to leave mortgage");
+	}
+	
+	public boolean isMortgaged(){
+		return mortgaged;
 	}
 	
 	public void sell() {

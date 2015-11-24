@@ -1,5 +1,6 @@
 package GameSquares;
 
+import gui.AdditionalWindows.MessageDisplayer;
 import gui.AdditionalWindows.InputReaders.GetYesNoInput;
 import Main.Player;
 import Main.Properties;
@@ -7,6 +8,7 @@ import Main.Properties;
 public class Utility extends GameSquare implements Ownable {
 	private static final long	serialVersionUID	= 1L;
 	private String				name;
+	private boolean				mortgaged;
 	
 	public Utility(int id, String name, type type) {
 		super(id, type);
@@ -67,6 +69,23 @@ public class Utility extends GameSquare implements Ownable {
 		// Use other onArrive for this GameSquare
 	}
 	
+	public void mortgage() {
+		this.owner.addMoney(Properties.UTILITY_PRICE / 2);
+		mortgaged = true;
+	}
+	
+	public void leaveMortgage(){
+		int mortgageAmount = (int) (1.1*Properties.UTILITY_PRICE);
+		if(this.owner.getMoney() >= mortgageAmount){
+			this.owner.reduceMoney(mortgageAmount);
+			mortgaged = false;
+		} else
+			new MessageDisplayer("You do not have enough money to leave mortgage");
+	}
+	
+	public boolean isMortgaged(){
+		return mortgaged;
+	}
 	
 	@Override
 	public void sell() {

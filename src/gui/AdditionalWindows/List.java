@@ -3,10 +3,13 @@ package gui.AdditionalWindows;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.event.*;
+
+import GameSquares.Cab;
 import GameSquares.GameSquare;
 import GameSquares.Land;
 import GameSquares.Ownable;
 import GameSquares.Land.state;
+import GameSquares.Utility;
 
 import java.awt.event.*;
 import java.awt.*;
@@ -129,9 +132,30 @@ public class List extends JPanel implements ListSelectionListener, ActionListene
 						list.setSelectedIndex(index);
 						list.ensureIndexIsVisible(index);
 					}
-				}}
-					
+				}else if(a instanceof Cab){
+					if(((Cab) a).isMortgaged()){
+						if (!(a == null)) ((Cab) a).leaveMortgage();
+					}else{
+						if (!(a == null)) ((Cab) a).mortgage();
+						
+						if (index == listModel.getSize()) {
+							index--;
+						}
+					}
+				}else if(a instanceof Utility){
+					if(((Utility) a).isMortgaged()){
+						if (!(a == null)) ((Utility) a).leaveMortgage();
+					}else{
+						if (!(a == null)) ((Utility) a).mortgage();
+						
+						if (index == listModel.getSize()) {
+							index--;
+						}
+					}
+				}
 			}
+					
+		}
 	
 	public void valueChanged(ListSelectionEvent e) {
 		
