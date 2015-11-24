@@ -7,25 +7,22 @@ import Main.Player;
 import Main.Properties;
 
 public class Land extends GameSquare implements Ownable {
-	private static final long		serialVersionUID	= 1L;
-	private String					name;
-	private color					color;
-	private int						price;
-	public boolean					buy;
-	public state					currentState		= state.unImproved;
-	private HashMap<state, Integer>	rentAndPriceMap		= new HashMap<state, Integer>();
-	
+	private static final long serialVersionUID = 1L;
+	private String name;
+	private color color;
+	private int price;
+	public boolean buy;
+	public state currentState = state.unImproved;
+	private HashMap<state, Integer> rentAndPriceMap = new HashMap<state, Integer>();
+
 	public enum color {
-		blue, pink, orange, green, puple, lightBlue, red, yellow, white,
-		black, grey, brown, lightPink, lightGreen, lightYellow, oceanGreen,
-		magenta, gold, lightRed, darkRed
+		blue, pink, orange, green, puple, lightBlue, red, yellow, white, black, grey, brown, lightPink, lightGreen, lightYellow, oceanGreen, magenta, gold, lightRed, darkRed
 	}
-	
+
 	public enum state {
-		unImproved, house, twoHouse, threeHouse, fourHouse, hotel, skyscraper, mortgage,
-		price, buildingCost
+		unImproved, house, twoHouse, threeHouse, fourHouse, hotel, skyscraper, mortgage, price, buildingCost
 	}
-	
+
 	public Land(int id, String name, color color, int price, int rent) {
 		super(id, type.Land);
 		this.name = name;
@@ -34,9 +31,9 @@ public class Land extends GameSquare implements Ownable {
 		rentAndPriceMap.put(state.price, price);
 		rentAndPriceMap.put(state.unImproved, rent);
 	}
-	
-	public Land addDeedInfo(int house, int two, int three, int four, int hotel, int sky
-		, int mortgage, int buildingCost) {
+
+	public Land addDeedInfo(int house, int two, int three, int four, int hotel, int sky, int mortgage,
+			int buildingCost) {
 		rentAndPriceMap.put(state.house, house);
 		rentAndPriceMap.put(state.twoHouse, two);
 		rentAndPriceMap.put(state.threeHouse, three);
@@ -45,21 +42,20 @@ public class Land extends GameSquare implements Ownable {
 		rentAndPriceMap.put(state.skyscraper, sky);
 		rentAndPriceMap.put(state.mortgage, mortgage);
 		rentAndPriceMap.put(state.buildingCost, buildingCost);
-		
+
 		return this;
 	}
-	
+
 	@Override
 	public void onArrive(Player pl) {
 		if (this.owner == null) {
 			boolean buy = new GetYesNoInput("For " + price + " dollars", "Would you like to buy " + name + " ?")
-				.getValue();
-			
+					.getValue();
+
 			boolean bargain = false;
 			if (pl.hasBargainBusiness())
-				bargain = new GetYesNoInput("You can use BargainBusiness", "Do you want to use it ?")
-					.getValue();
-			
+				bargain = new GetYesNoInput("You can use BargainBusiness", "Do you want to use it ?").getValue();
+
 			if (buy) {
 				if (pl.getMoney() >= price) {
 					int tempPrice = this.price;
@@ -69,9 +65,9 @@ public class Land extends GameSquare implements Ownable {
 					}
 					pl.buySquare(this);
 					this.price = tempPrice;
-					
+
 					System.out.println("Player bought " + this.name + ". Player has "
-						+ pl.getNumberOfOwnedByColor(this.color) + " of this color");
+							+ pl.getNumberOfOwnedByColor(this.color) + " of this color");
 					if (owner.getNumberOfOwnedByColor(color) > landsOfThisColor() - 1)
 						System.out.println("Now player will get double rents!!!");
 				} else
@@ -80,25 +76,52 @@ public class Land extends GameSquare implements Ownable {
 		} else {
 			if (this.owner != pl) {
 				int totalRent = getRent();
-				System.out.println("This land is owned by " + owner.getName());
-				
+
 				if (owner.hasRenovationSuccess()) {
 					new MessageDisplayer("This land's owner has renovation success card, rent is now $50 more");
 					totalRent += 50;
 					owner.removeRenovationSuccessCard();
 				}
-				
+
 				pl.pay(owner, totalRent);
-				
-			}
-			else
+
+			} else {
+				String name = "";
+				if (currentState == state.unImproved || currentState == state.house || currentState == state.twoHouse
+						|| currentState == state.threeHouse) {
+					name = "House";
+				} else if (currentState == state.fourHouse) {
+					name = "Hotel";
+				} else if (currentState == state.hotel) {
+					name = "Skyscraper";
+				}
+
+				boolean upgrade = new GetYesNoInput("Build" + name,
+						"You can upgrade for " + rentAndPriceMap.get(state.buildingCost)).getValue();
 				System.out.println("Player already owns this land!");
+
+				if (upgrade) {
+					buildStructure(pl);
+				}
+			}
 		}
 	}
-	
+
+	public void buildStructure(Player pl) {
+		if (currentState == state.unImproved || currentState == state.house || currentState == state.twoHouse
+				|| currentState == state.threeHouse) {
+			buildHouse(pl);
+		} else if (currentState == state.fourHouse) {
+			buildHotel(pl);
+		} else if (currentState == state.hotel) {
+			buildSkycraper(pl);
+		}
+
+	}
+
 	public void buildHouse(Player pl) {
 		if (pl.getMoney() >= rentAndPriceMap.get(state.buildingCost)) {
-			if (pl.getNumberOfOwnedByColor(color) == landsOfThisColor()) { // all deeds
+			if (mojorityOwnership()) {
 				boolean built = true;
 				if (currentState == state.unImproved)
 					currentState = state.house;
@@ -112,70 +135,80 @@ public class Land extends GameSquare implements Ownable {
 					built = false;
 					new MessageDisplayer("You already have 4 houses");
 				}
-				if (built) pl.reduceMoney(rentAndPriceMap.get(state.buildingCost));
+				if (built) {
+					pl.reduceMoney(rentAndPriceMap.get(state.buildingCost));
+					System.out.println("House built");
+				}
 			} else
-				new MessageDisplayer("Player should have enought properties of this color");
+				new MessageDisplayer("Player should have enough properties of this color");
 		} else
-			new MessageDisplayer("Player doesn't have enought money");
+			new MessageDisplayer("Player doesn't have enough money");
 	}
-	
+
 	public void buildHotel(Player pl) {
 		if (pl.getMoney() >= rentAndPriceMap.get(state.buildingCost)) {
 			if (pl.getNumberOfOwnedByColor(color) == landsOfThisColor()) {
-				boolean built = true;// check every land of this color have 4 houses
+				boolean built = true;// check every land of this color have 4
+										// houses
 				for (int i = 0; i < Main.Main.gameSquares.length; i++) {
 					GameSquare a = Main.Main.gameSquares[i];
 					if ((a instanceof Land)) {
-						if (((Land) a).getState() == state.fourHouse) built = false;
+						if ((((Land) a).getColor() == color)
+								&& ((((Land) a).getState() != state.fourHouse) && (((Land) a).getState() != state.hotel)
+										&& (((Land) a).getState() != state.skyscraper)))
+							built = false;
 					}
 				}
 				if (built) {
 					pl.reduceMoney(rentAndPriceMap.get(state.buildingCost));
 					currentState = state.hotel;
-					new MessageDisplayer(this.name + " is a hotel.");
-					System.out.println(this.name + " is a hotel.");
+					new MessageDisplayer(this.name + " has a hotel.");
+					System.out.println(this.name + " has a hotel.");
 				} else
 					new MessageDisplayer("Player should have 4 houses each of this color");
 			} else
-				new MessageDisplayer("Player should have enought properties of this color");
+				new MessageDisplayer("Player should have enough properties of this color");
 		} else
-			new MessageDisplayer("Player doesn't have enought money");
+			new MessageDisplayer("Player doesn't have enough money");
 	}
-	
+
 	public void buildSkycraper(Player pl) {
 		if (pl.getMoney() >= rentAndPriceMap.get(state.buildingCost)) {
 			if (pl.getNumberOfOwnedByColor(color) == landsOfThisColor()) {
-				boolean built = true;// check every land of this color have hotel
+				System.out.println(pl.getNumberOfOwnedByColor(color));
+				boolean built = true;// check every land of this color have
+										// hotel
 				for (int i = 0; i < Main.Main.gameSquares.length; i++) {
 					GameSquare a = Main.Main.gameSquares[i];
 					if ((a instanceof Land)) {
-						if (((Land) a).getState() == state.hotel) built = false;
+						if ((((Land) a).getColor() == color) && ((((Land) a).getState() != state.hotel)
+								&& (((Land) a).getState() != state.skyscraper)))
+							built = false;
 					}
 				}
 				if (built) {
 					pl.reduceMoney(rentAndPriceMap.get(state.buildingCost));
 					currentState = state.skyscraper;
-					new MessageDisplayer(this.name + " is a skyscrapper.");
-					System.out.println(this.name + " is a skyscrapper.");
+					new MessageDisplayer(this.name + " has a skyscrapper.");
+					System.out.println(this.name + " has a skyscrapper.");
 				} else
 					new MessageDisplayer("Player should have hotels each of this color");
 			} else
-				new MessageDisplayer("Player should have enought properties of this color");
+				new MessageDisplayer("Player should have enough properties of this color");
 		} else
-			new MessageDisplayer("Player doesn't have enought money");
+			new MessageDisplayer("Player doesn't have enough money");
 	}
-	
+
 	public void sellStructure() {
 		if (currentState == state.unImproved) {
 			sell();
-		}
-		else {
+		} else {
 			this.owner.addMoney(rentAndPriceMap.get(currentState) / 2);
 			new MessageDisplayer(this.name + " downgraded.");
 			downgrade();
 		}
 	}
-	
+
 	public void downgrade() {
 		if (currentState == state.house)
 			currentState = state.unImproved;
@@ -190,115 +223,128 @@ public class Land extends GameSquare implements Ownable {
 		else if (currentState == state.skyscraper)
 			currentState = state.hotel;
 	}
-	
+
 	public void sell() {
 		this.owner.sellSquare(this);
 	}
-	
+
 	public color getColor() {
 		return color;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	@Override
 	public void setOwner(Player player) {
 		this.owner = player;
 	}
-	
+
 	@Override
 	public Player getOwner() {
 		return this.owner;
 	}
+
 	public state getState() {
 		return currentState;
 	}
-	
+
 	public int getPriceOfState() {
 		return rentAndPriceMap.get(currentState);
-		
+
 	}
+
 	public void setState(state s) {
 		this.currentState = s;
 	}
+
 	public boolean isHoused() {
-		return (currentState == state.house) || (currentState == state.twoHouse)
-			|| (currentState == state.threeHouse) || (currentState == state.fourHouse);
+		return (currentState == state.house) || (currentState == state.twoHouse) || (currentState == state.threeHouse)
+				|| (currentState == state.fourHouse);
 	}
-	
-	public void morgageLand(){
-		if(currentState == state.unImproved){
-			this.owner.addMoney(price/2);
+
+	public void morgageLand() {
+		if (currentState == state.unImproved) {
+			this.owner.addMoney(price / 2);
 			setState(state.unImproved);
-		}else new MessageDisplayer ("Property must be un improved to morgage");
+		} else
+			new MessageDisplayer("Property must be un improved to morgage");
 	}
-	
-	public boolean isOwned()
-	{
+
+	public boolean isOwned() {
 		if (this.owner != null)
 			return true;
 		else
 			return false;
 	}
+
 	public int landOccupation() { // returns that colors occupation
 		int occupation = 0;
 		for (int i = 0; i < Main.Main.players.length; i++)
 			occupation += Main.Main.players[i].getNumberOfOwnedByColor(this.color);
 		return occupation;
 	}
+
 	public int landsOfThisColor() {
 		int number = 0;
 		for (int i = 0; i < Main.Main.gameSquares.length; i++) {
 			GameSquare a = Main.Main.gameSquares[i];
 			if ((a instanceof Land)) {
-				if (((Land) a).getColor() == this.color) number++;
+				if (((Land) a).getColor() == this.color)
+					number++;
 			}
 		}
 		return number;
 	}
-	// ////////// DO NOT USE THESE METHODS - THESE ARE JUST FOR DEBUGGING ////////// //
+
+	// ////////// DO NOT USE THESE METHODS - THESE ARE JUST FOR DEBUGGING
+	// ////////// //
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public void setColor(color color) {
 		this.color = color;
 	}
+
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	
+
 	public int getPrice() {
 		return price;
 	}
-	
+
 	public void setRent(int rent) {
 		rentAndPriceMap.remove(currentState);
 		rentAndPriceMap.put(currentState, rent);
 	}
-	
+
 	public int getRent() {
 		int totalRent = rentAndPriceMap.get(currentState);
 		if (currentState == state.mortgage)
 			totalRent = 0;
 		else if (owner.getNumberOfOwnedByColor(this.color) == landsOfThisColor())
-			totalRent *= 3;	// Monopoly
-		else if (owner.getNumberOfOwnedByColor(color) > landsOfThisColor() - 1)
-			totalRent *= 2;	// majority ownership
+			totalRent *= 3; // Monopoly
+		else if (mojorityOwnership())
+			totalRent *= 2; // majority ownership
 		return totalRent;
 	}
-	
-	// ///////////////////////////////////////////////////////////////////////////// //
-	
+
+	public boolean mojorityOwnership() {
+		return owner.getNumberOfOwnedByColor(color) > landsOfThisColor() / 2;
+	}
+
+	// /////////////////////////////////////////////////////////////////////////////
+	// //
+
 	@Override
 	public String toString() {
 		return name;
 	}
-	
+
 	public String toString2() {
-		return name + "\n Color: " + color + "\n Price: " + price
-			+ "\n Rent: " + getRent();
+		return name + "\n Color: " + color + "\n Price: " + price + "\n Rent: " + getRent();
 	}
 }
