@@ -18,7 +18,7 @@ public abstract class GameSquare implements Serializable {
 	public enum type {
 		Chance, CommunityChest, FreePark, Land, RollOnce, StartSquare, SqueezePlay, Cab,
 		LuxuryTax, TransitStation, Jail, ElectricCompany, WaterWorks, Subway, BusTicket,
-		CableCompany, Tunnel, Auction, InternetServiceProvider, Payday, ThrashCollector,
+		CableCompany, Tunnel, Auction, InternetServiceProvider, Payday, TrashCollector,
 		StockExchange, TaxRefund, GasCompany, HollandTunnel, ReverseDirection, IncomeTax,
 		GotoJail, Bus, SewegeSystem, BirthdayGift, TelephoneCompany, Bonus
 	}

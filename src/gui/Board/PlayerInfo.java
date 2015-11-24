@@ -6,7 +6,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import Main.Main;
@@ -125,12 +124,12 @@ public class PlayerInfo extends JPanel {
 		}
 	}
 	
-	private void recreateTable() {
-		String[] columns = { "Player Name", "Location", "Money", "Properties" };
-		data = new String[Main.players.length][4];
-		
-		DefaultTableModel dataModel = new DefaultTableModel(data, columns);
-		
-		table.setModel(dataModel);
-	}
+//	private void recreateTable() {
+//		String[] columns = { "Player Name", "Location", "Money", "Properties" };
+//		data = new String[Main.players.length][4];
+//		
+//		DefaultTableModel dataModel = new DefaultTableModel(data, columns);
+//		
+//		table.setModel(dataModel);
+//	}
 }

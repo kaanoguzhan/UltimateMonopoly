@@ -132,8 +132,8 @@ public class Land extends GameSquare implements Ownable {
 				if (built) {
 					pl.reduceMoney(rentAndPriceMap.get(state.buildingCost));
 					currentState = state.hotel;
-					new MessageDisplayer(this.name+" is a hotel.");
-					System.out.println(this.name+" is a hotel.");
+					new MessageDisplayer(this.name + " is a hotel.");
+					System.out.println(this.name + " is a hotel.");
 				} else
 					new MessageDisplayer("Player should have 4 houses each of this color");
 			} else
@@ -155,8 +155,8 @@ public class Land extends GameSquare implements Ownable {
 				if (built) {
 					pl.reduceMoney(rentAndPriceMap.get(state.buildingCost));
 					currentState = state.skyscraper;
-					new MessageDisplayer(this.name+" is a skyscrapper.");
-					System.out.println(this.name+" is a skyscrapper.");
+					new MessageDisplayer(this.name + " is a skyscrapper.");
+					System.out.println(this.name + " is a skyscrapper.");
 				} else
 					new MessageDisplayer("Player should have hotels each of this color");
 			} else
@@ -190,7 +190,7 @@ public class Land extends GameSquare implements Ownable {
 	public state getState() {
 		return currentState;
 	}
-	public int getPriceOfState(state s){
+	public int getPriceOfState(state s) {
 		return rentAndPriceMap.get(s);
 	}
 	public void setState(state s) {
@@ -242,7 +242,8 @@ public class Land extends GameSquare implements Ownable {
 	
 	public int getRent() {
 		int totalRent = rentAndPriceMap.get(currentState);
-		if(currentState == state.mortgage) totalRent = 0;
+		if (currentState == state.mortgage)
+			totalRent = 0;
 		else if (owner.getNumberOfOwnedByColor(this.color) == landsOfThisColor())
 			totalRent *= 3;	// Monopoly
 		else if (owner.getNumberOfOwnedByColor(color) > landsOfThisColor() - 1)
