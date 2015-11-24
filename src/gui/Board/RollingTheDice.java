@@ -85,15 +85,17 @@ public class RollingTheDice extends JPanel implements ActionListener {
 					player.getOutOfJail();
 					System.out.println("Player:" + player.getName() + " is released from jail, next round "
 							+ player.getName() + " will play.");
+					end.setEnabled(true);
 				} else {
 					int[] rollJail = new Dice().roll2();
 
 					int rollJail1 = rollJail[0];
 					int rollJail2 = rollJail[1];
 
-					if (rollJail1 == rollJail2)
+					if (rollJail1 == rollJail2) {
 						player.getOutOfJail();
-					else {
+						end.setEnabled(true);
+					} else {
 						if (player.hasGetOutOfJail()) {
 							getOutOfJail = new GetYesNoInput("You can use GetOutOfJail Card", "Do you want to use it ?")
 									.getValue();
@@ -106,10 +108,12 @@ public class RollingTheDice extends JPanel implements ActionListener {
 						}
 						if (getOutOfJail) {
 							player.getOutOfJail();
+							end.setEnabled(true);
 						} else {
 							player.reduceJailTime();
 							System.out.println("Player:" + player.getName() + " will be in jail for "
 									+ player.getJailTime() + " rounds.");
+							end.setEnabled(true);
 						}
 					}
 				}
