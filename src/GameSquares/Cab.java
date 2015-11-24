@@ -14,7 +14,6 @@ public class Cab extends GameSquare implements Ownable {
 	private int					cabStandCost		= Properties.CAB_STAND_COST;
 	private boolean				cabStand			= false;
 	
-	
 	public Cab(int id, String name) {
 		super(id, type.Cab);
 		this.name = name;

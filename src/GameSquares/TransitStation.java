@@ -13,7 +13,7 @@ public class TransitStation extends GameSquare {
 	private int					connectedTransit;
 	private String				name;
 	
-	public TransitStation(int id, String name, int connectedTransitID) {
+	public TransitStation(int id, int connectedTransitID, String name) {
 		super(id, type.TransitStation);
 		this.connectedTransit = connectedTransitID;
 		this.name = name;
