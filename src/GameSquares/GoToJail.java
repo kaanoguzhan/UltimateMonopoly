@@ -5,7 +5,6 @@ import Main.Player;
 public class GoToJail extends GameSquare {
 
 	private static final long serialVersionUID = 1L;
-	private int jailID = 10;
 
 	public GoToJail(int id) {
 		super(id, type.GotoJail);
@@ -14,8 +13,7 @@ public class GoToJail extends GameSquare {
 	@Override
 	public void onArrive(Player pl) {
 		System.out.println("Player:" + pl.getName() + " is now going to jail.");
-		pl.setJailed(true);
-		pl.moveTo(jailID);
+		pl.goToJail();
 	}
 
 	@Override

@@ -14,7 +14,7 @@ import GameSquares.Cards.CommunityChest.CommunityChestCardType;
 
 public class Player implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private int id, money, location;
+	private int id, money, location, jailID = 10, jailTime;
 	private String name;
 	private GameSquare[] gameSquares;
 	private boolean jailed = false;
@@ -270,11 +270,11 @@ public class Player implements Serializable {
 	public ArrayList<Land> getOwnedLands() {
 		return ownedLands;
 	}
-	
+
 	public ArrayList<Ownable> getOwnedSquares() {
 		return ownedSquares;
 	}
-	
+
 	// ////////// DO NOT USE THESE METHODS - THESE ARE JUST FOR DEBUGGING
 	// ////////// //
 	public void setLocation(int id) {
@@ -353,8 +353,30 @@ public class Player implements Serializable {
 		return jailed;
 	}
 
-	public void setJailed(boolean jailed) {
-		this.jailed = jailed;
+	public void goToJail() {
+		this.jailed = true;
+		jailTime = 3;
+		this.moveTo(jailID);
+	}
+
+	public void getOutOfJail() {
+		this.jailed = false;
+		jailTime = 0;
+	}
+
+	public boolean isReleaseTime() {
+		if (jailTime == 0)
+			return true;
+		else
+			return false;
+	}
+
+	public int getJailTime() {
+		return jailTime;
+	}
+
+	public void reduceJailTime() {
+		jailTime--;
 	}
 
 	public int numOfOwnedUtilities() {

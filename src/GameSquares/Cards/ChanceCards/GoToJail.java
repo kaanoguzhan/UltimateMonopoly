@@ -10,14 +10,13 @@ public class GoToJail extends ChanceCard implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public GoToJail() {
-		super(ChanceCardType.GoToJail,false);
+		super(ChanceCardType.GoToJail, false);
 	}
 
 	@Override
 	public void onDraw(Player pl) {
 		new MessageDisplayer(toString());
-		pl.setJailed(true);
-		pl.moveTo(10);
+		pl.goToJail();
 	}
 
 	@Override

@@ -10,7 +10,7 @@ public class GetOutOfJail extends ChanceCard implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public GetOutOfJail() {
-		super(ChanceCardType.GetOutOfJail,true);
+		super(ChanceCardType.GetOutOfJail, true);
 	}
 
 	@Override
