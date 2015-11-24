@@ -15,12 +15,12 @@ public class Utility extends GameSquare implements Ownable {
 	
 	public void onArrive(Player pl, int amount) {
 		if (this.owner == null) {
-			boolean buy = new GetYesNoInput("For " + Properties.UTILITY_MONEY + " dollars", "Would you like to buy "
+			boolean buy = new GetYesNoInput("For " + Properties.UTILITY_PRICE + " dollars", "Would you like to buy "
 				+ name + " ?")
 				.getValue();
 			
 			if (buy) {
-				if (pl.getMoney() >= Properties.UTILITY_MONEY) {
+				if (pl.getMoney() >= Properties.UTILITY_PRICE) {
 					pl.buySquare(this);
 				} else
 					System.out.println("You don't have enough money!");
@@ -75,7 +75,7 @@ public class Utility extends GameSquare implements Ownable {
 	
 	@Override
 	public int getPrice() {
-		return Properties.UTILITY_MONEY;
+		return Properties.UTILITY_PRICE;
 	}
 	
 	@Override

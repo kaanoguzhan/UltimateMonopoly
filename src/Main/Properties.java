@@ -6,10 +6,10 @@ public class Properties {
 	public static final int	TOTAL_SQUARES			= 120;
 	public static final int	HEAVEN_LOCATION			= -1;
 	
-	public static final int	BARGAINBUSINESS_PRICE	= 100;
 	
 	public static final int	CAB_MONEY				= 50;
 	public static final int	OWNED_CAB_MONEY			= 20;
+	
 	
 	// /////////////////////////////////////////////////////////////////////////////// //
 	// Taxes //
@@ -26,5 +26,13 @@ public class Properties {
 	public static final int	START_PASSING_MONEY		= 200;
 	
 	
-	public static final int	UTILITY_MONEY			= 150;
+	// /////////////////////////////////////////////////////////////////////////////// //
+	// Cab //
+	public static final int	CabStandCost			= 150;
+	public static final int	CabPrice				= 150;
+	public static final int	CabRent					= 50;
+	
+	
+	public static final int	UTILITY_PRICE			= 150;
+	public static final int	BARGAINBUSINESS_PRICE	= 100;
 }

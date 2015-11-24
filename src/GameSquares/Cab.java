@@ -10,7 +10,7 @@ public class Cab extends GameSquare implements Ownable {
 	private String				name;
 	private int					rent				= 50;
 	private int					price				= 300;
-	// private int cabStandCost = 150;
+	private int					cabStandCost		= 150;
 	private boolean				cabStand			= false;
 	
 	
@@ -21,43 +21,47 @@ public class Cab extends GameSquare implements Ownable {
 	
 	@Override
 	public void onArrive(Player pl) {
-		if (this.owner != null) {
-			boolean useCab = false;
-			int cabBill = 0;
-			if (this.owner != pl) {
-				if (cabStand)
-					pl.pay(this.getOwner(), 2 * rent);
-				else
-					pl.pay(this.getOwner(), rent);
-				
-				useCab = new GetYesNoInput("Its the " + name + " cab !", "Do you want to pay 50$ to take the cab ?")
-					.getValue();
-				if (useCab) {
-					playerUseCab(pl);
-					cabBill = Properties.CAB_MONEY;
-					pl.pay(this.getOwner(), cabBill);
-				}
-			} else {
-				useCab = new GetYesNoInput("You own " + name + " cab !", "Do you want to pay 20$ to take the cab ?")
-					.getValue();
-				if (useCab) {
-					cabBill = Properties.OWNED_CAB_MONEY;
-					pl.reduceMoney(cabBill);
-					Main.Main.pool += cabBill;
-				}
-			}
-		} else {
-			boolean buy = new GetYesNoInput("For " + price + " dollars", "Would you like to buy " + name
-				+ " cab station?")
+		if (this.owner == null) {
+			boolean buy = new GetYesNoInput("For " + price + " dollars", "Would you like to buy " + name + " ?")
 				.getValue();
-			
 			if (buy) {
-				if (pl.getMoney() >= price) {
-					// pl.buyLand(this);
-					
-					System.out.println("Player bought " + this.name + " cab company.");
-				} else
+				if (pl.getMoney() >= price)
+					pl.buySquare(this);
+				else
 					System.out.println("You don't have enough money!");
+			} else {
+				boolean useCab = false;
+				int cabBill = 0;
+				if (this.owner != pl) {
+					if (cabStand)
+						pl.pay(this.getOwner(), 2 * rent);
+					else
+						pl.pay(this.getOwner(), rent);
+					
+					useCab = new GetYesNoInput("Its the " + name + " cab !",
+						"Do you want to pay 50$ to take the cab ?")
+						.getValue();
+					if (useCab) {
+						playerUseCab(pl);
+						cabBill = Properties.CAB_MONEY;
+						pl.pay(this.getOwner(), cabBill);
+					}
+				} else {
+					useCab = new GetYesNoInput("You own " + name + " cab !",
+						"Do you want to pay 20$ to take the cab ?")
+						.getValue();
+					if (useCab) {
+						cabBill = Properties.OWNED_CAB_MONEY;
+						pl.reduceMoney(cabBill);
+						Main.Main.pool += cabBill;
+					} else if (!cabStand) {
+						if (new GetYesNoInput("Build Cab Stand", "Do you want to pay 150$ to build Cab Stand ?")
+							.getValue()) {
+							pl.reduceMoney(cabStandCost);
+							this.cabStand = true;
+						}
+					}
+				}
 			}
 		}
 	}
