@@ -2,6 +2,7 @@ package Main;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
 import GameSquares.GameSquare;
 import GameSquares.Land;
 import GameSquares.Land.color;
@@ -167,6 +168,16 @@ public class Player implements Serializable {
 		}
 	}
 
+	public void payToPool(int amount) {
+		reduceMoney(amount);
+		Main.pool += amount;
+	}
+
+	public void obtainPool() {
+		addMoney(Main.pool * Properties.TAX_REFUND_PERCENT / 100);
+		Main.pool *= (100 - Properties.TAX_REFUND_PERCENT) / 100;
+	}
+
 	public void pay(Player player, int amount) {
 		System.out.println(name + " paid to " + player.getName());
 		this.reduceMoney(amount);
@@ -210,7 +221,7 @@ public class Player implements Serializable {
 			removeOwnership(land);
 			System.out.println(name + " sold " + land + " for " + ((Ownable) land).getPrice());
 		}
-		
+
 		if (ownedLands.contains(land)) {
 			addMoney(((Ownable) land).getPrice());
 			removeOwnership(land);
@@ -323,15 +334,15 @@ public class Player implements Serializable {
 	public void setJailed(boolean jailed) {
 		this.jailed = jailed;
 	}
-	
+
 	public int numOfOwnedUtilities() {
 		int output = 0;
-		
+
 		for (Ownable nextOwn : ownedSquares) {
 			if (nextOwn instanceof Utility)
 				output++;
 		}
-		
+
 		return output;
 	}
 }

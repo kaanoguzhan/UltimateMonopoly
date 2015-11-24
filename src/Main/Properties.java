@@ -16,7 +16,7 @@ public class Properties {
 	public static final int	INCOMETAX_AMOUNT		= 200;
 	public static final int	INCOMETAX_PERCENT		= 10;
 	public static final int	LUXURYTAX_AMOUNT		= 75;
-	public static final int	TAX_REFUND_PECENT		= 50;
+	public static final int	TAX_REFUND_PERCENT		= 50;
 	
 	
 	// /////////////////////////////////////////////////////////////////////////////// //

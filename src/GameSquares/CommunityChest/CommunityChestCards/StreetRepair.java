@@ -15,6 +15,7 @@ import Main.Player;
 
 public class StreetRepair extends CommunityChestCard implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private int cabTransitRepair = 25, houseRepair = 40, hotelRepair = 115, skyscraperRepair = 100;
 
 	public StreetRepair() {
 		super();
@@ -49,7 +50,8 @@ public class StreetRepair extends CommunityChestCard implements Serializable {
 			else if (lands.get(i).getState() == state.skyscraper)
 				skyscrapers += 1;
 		}
-		pl.reduceMoney(25 * cabTransit + 40 * houses + 115 * hotels + 100 * skyscrapers);
+		pl.reduceMoney(cabTransitRepair * cabTransit + houseRepair * houses + hotelRepair * hotels + skyscraperRepair
+				* skyscrapers);
 	}
 
 	@Override

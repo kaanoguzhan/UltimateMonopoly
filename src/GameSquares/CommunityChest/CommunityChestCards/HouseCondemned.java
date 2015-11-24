@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import GameSquares.Land;
-import GameSquares.Land.state;
 import GameSquares.CommunityChest.CommunityChestCard;
 import Main.Player;
 
