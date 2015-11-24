@@ -14,7 +14,7 @@ import GameSquares.CommunityChest.CommunityChest.CommunityChestCardType;
 
 public class Player implements Serializable {
 	private static final long					serialVersionUID	= 1L;
-	private int									id, money, location;
+	private int									id, money, location, jailTime=3;
 	private String								name;
 	private GameSquare[]						gameSquares;
 	private boolean								jailed				= false;

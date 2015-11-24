@@ -228,6 +228,13 @@ public class Land extends GameSquare implements Ownable {
 			|| (currentState == state.threeHouse) || (currentState == state.fourHouse);
 	}
 	
+	public void morgageLand(){
+		if(currentState == state.unImproved){
+			this.owner.addMoney(price/2);
+			setState(state.unImproved);
+		}else new MessageDisplayer ("Property must be un improved to morgage");
+	}
+	
 	public boolean isOwned()
 	{
 		if (this.owner != null)
