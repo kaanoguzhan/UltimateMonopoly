@@ -106,9 +106,10 @@ public class Main {
 		gameSquares[6] = new Land(6, "Oriental Avenue", color.lightBlue, 100, 6).addDeedInfo(30, 90, 270, 400, 550,
 			1050, 50, 50);
 		gameSquares[7] = new Chance(7, chanceDeck, players);
-		gameSquares[8] = new Land(8, "Vermont Avenue", color.lightBlue, 100, 6).addDeedInfo(30, 90, 270, 400, 550,
-			1050, 50, 50);
-		gameSquares[9] = new Land(9, "Connecticut Avenue", color.lightBlue, 100, 8);
+		gameSquares[8] = new Land(8, "Vermont Avenue", color.lightBlue, 100, 6)
+			.addDeedInfo(30, 90, 270, 400, 550, 1050, 50, 50);
+		gameSquares[9] = new Land(9, "Connecticut Avenue", color.lightBlue, 100, 8)
+				.addDeedInfo(30, 90, 270, 400, 550, 1050, 50, 50);
 		gameSquares[10] = new Jail(10);
 		gameSquares[11] = new Land(11, "St. Charles Place", color.pink, 140, 10).addDeedInfo(50, 150, 450, 625, 750,
 			1250, 70, 100);

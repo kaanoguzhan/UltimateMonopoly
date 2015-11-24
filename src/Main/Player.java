@@ -169,7 +169,7 @@ public class Player implements Serializable {
 			money -= amount;
 			System.out.println(name + "'s money decreased by " + amount + " to " + money);
 		} else if (ownedLands.size() > 0) {
-			gui.AdditionalWindows.List.createAndShowGUI(ownedLands);
+			gui.AdditionalWindows.List.createAndShowGUI(ownedLands,ownedSquares);
 			reduceMoney(amount);
 		} else {
 			location = Properties.HEAVEN_ID;

@@ -10,25 +10,30 @@ import java.awt.event.*;
 import java.awt.*;
 
 // ListDemo.java requires no other files.
-public class List extends JPanel implements ListSelectionListener {
+public class List extends JPanel implements ListSelectionListener, ActionListener {
 	
 	private static final long				serialVersionUID	= 1L;
 	private JList<GameSquare>				list;
 	private DefaultListModel<GameSquare>	listModel;
-	private JButton							sellButton;
-	ArrayList<GameSquare>					squares;
+	private JButton							sellButton,mortgageButton;
+	ArrayList<GameSquare>					squares,squares2;
 	private JLabel							label;
 	
-	public List(ArrayList<GameSquare> squares) {
+	public List(ArrayList<GameSquare> squares,ArrayList<GameSquare> squares2) {
 		super(new BorderLayout());
 		
 		this.squares = squares;
+		this.squares2 = squares2;
 		
 		list = new JList<GameSquare>();
 		listModel = new DefaultListModel<GameSquare>();
 		
 		for (GameSquare a : squares) {
 			listModel.addElement(a);
+		}
+		
+		for (GameSquare b : squares2) {
+			listModel.addElement(b);
 		}
 		
 		if (!(squares.isEmpty())) {
@@ -39,6 +44,16 @@ public class List extends JPanel implements ListSelectionListener {
 				label = new JLabel(a.toString());
 		} else
 			label = new JLabel();
+		
+		if (!(squares2.isEmpty())) {
+			GameSquare a = squares2.get(0);
+			if (a instanceof Land)
+				label = new JLabel(((Land) a).toString2());
+			else
+				label = new JLabel(a.toString());
+		} else
+			label = new JLabel();
+		
 		// Create the list and put it in a scroll pane.
 		list = new JList<GameSquare>(listModel);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -51,16 +66,19 @@ public class List extends JPanel implements ListSelectionListener {
 		
 		sellButton = new JButton("SELL");
 		sellButton.setActionCommand("SELL");
-		sellButton.addActionListener(new SellListener());
+		sellButton.addActionListener(this);
+		
+		mortgageButton = new JButton("MORTGAGE");
+		mortgageButton.setActionCommand("MORTGAGE");
+		mortgageButton.addActionListener(this);
 		
 		add(listScrollPane, BorderLayout.WEST);
 		label.setPreferredSize(new Dimension(((int) label.getPreferredSize().getWidth()), ((int) label
 			.getPreferredSize().getHeight())));
 		add(label);
 		add(sellButton, BorderLayout.AFTER_LAST_LINE);
+		add(mortgageButton, BorderLayout.NORTH);
 	}
-	
-	class SellListener implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
 			int index = list.getSelectedIndex();
@@ -89,7 +107,7 @@ public class List extends JPanel implements ListSelectionListener {
 				}
 			}
 		}
-	}
+	
 	
 	public void valueChanged(ListSelectionEvent e) {
 		
@@ -117,7 +135,8 @@ public class List extends JPanel implements ListSelectionListener {
 	}
 	
 	
-	public static void createAndShowGUI(ArrayList<?> lands) {
+	@SuppressWarnings("unchecked")
+	public static void createAndShowGUI(ArrayList<?> lands,ArrayList<?> ownables) {
 		// Create and set up the window.
 		if (lands != null) {
 			JFrame frame = null;
@@ -126,8 +145,7 @@ public class List extends JPanel implements ListSelectionListener {
 			} else {
 				frame = new JFrame("Owned properties to Sell");
 			}
-			@SuppressWarnings("unchecked")
-			List a = new List((ArrayList<GameSquare>) lands);
+			List a = new List((ArrayList<GameSquare>) lands,(ArrayList<GameSquare>) ownables);
 			frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 			frame.add(a);
 			frame.setSize(380, 280);

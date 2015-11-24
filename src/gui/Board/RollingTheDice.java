@@ -229,7 +229,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 				.getPreferredSize().getHeight()));
 			sell.setEnabled(false);
 		} else if (arg0.getSource() == sell) {
-			gui.AdditionalWindows.List.createAndShowGUI(player.getOwnedLands());
+			gui.AdditionalWindows.List.createAndShowGUI(player.getOwnedLands(),player.getOwnedSquares());
 			
 			if (!rolledDoubles) {
 				button.setEnabled(false);
