@@ -77,6 +77,10 @@ public class Cab extends GameSquare implements Ownable {
 		this.owner.sellSquare(this);
 	}
 	
+	public boolean standed(){
+		return cabStand;
+	}
+	
 	@Override
 	public int getPrice() {
 		return price;

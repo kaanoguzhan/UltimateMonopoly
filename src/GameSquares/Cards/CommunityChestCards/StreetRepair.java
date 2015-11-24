@@ -13,13 +13,13 @@ import GameSquares.Cards.CommunityChest.CommunityChestCardType;
 import Main.Player;
 
 public class StreetRepair extends CommunityChestCard implements Serializable {
-	private static final long	serialVersionUID	= 1L;
-	private int					cabTransitRepair	= 25, houseRepair = 40, hotelRepair = 115, skyscraperRepair = 100;
-	
+	private static final long serialVersionUID = 1L;
+	private int cabTransitRepair = 25, houseRepair = 40, hotelRepair = 115, skyscraperRepair = 100;
+
 	public StreetRepair() {
 		super(CommunityChestCardType.StreetRepair, false);
 	}
-	
+
 	@Override
 	public void onDraw(Player pl) {
 		new MessageDisplayer(toString());
@@ -31,7 +31,9 @@ public class StreetRepair extends CommunityChestCard implements Serializable {
 		int hotels = 0;
 		int skyscrapers = 0;
 		for (int i = 0; i < cabTransits.size(); i++) {
-			if (cabTransits.get(i) instanceof Cab || cabTransits.get(i) instanceof TransitStation) {
+			if ((cabTransits.get(i) instanceof Cab) && (((Cab) cabTransits.get(i)).standed())) {
+				cabTransit++;
+			} else if (cabTransits.get(i) instanceof TransitStation) {
 				cabTransit++;
 			}
 		}
@@ -50,17 +52,17 @@ public class StreetRepair extends CommunityChestCard implements Serializable {
 				skyscrapers += 1;
 		}
 		pl.reduceMoney(cabTransitRepair * cabTransit + houseRepair * houses + hotelRepair * hotels + skyscraperRepair
-			* skyscrapers);
+				* skyscrapers);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "You picked Assessed for Street Repairs Card. Now you will pay $25 per cab-transit station, $40 per house $115 per hotel and $100 per skyscraper you own.";
 	}
-	
+
 	@Override
 	public String getName() {
 		return "Street Repair";
 	}
-	
+
 }
