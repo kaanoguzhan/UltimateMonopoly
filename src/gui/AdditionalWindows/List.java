@@ -6,6 +6,8 @@ import javax.swing.event.*;
 import GameSquares.GameSquare;
 import GameSquares.Land;
 import GameSquares.Ownable;
+import GameSquares.Land.state;
+
 import java.awt.event.*;
 import java.awt.*;
 
@@ -81,6 +83,7 @@ public class List extends JPanel implements ListSelectionListener, ActionListene
 	}
 		
 		public void actionPerformed(ActionEvent e) {
+			if(e.getSource() == sellButton){
 			int index = list.getSelectedIndex();
 			GameSquare a = list.getSelectedValue();
 			
@@ -105,9 +108,30 @@ public class List extends JPanel implements ListSelectionListener, ActionListene
 					list.setSelectedIndex(index);
 					list.ensureIndexIsVisible(index);
 				}
+			} } else if (e.getSource() == mortgageButton){
+				int index = list.getSelectedIndex();
+				GameSquare a = list.getSelectedValue();
+				
+				if (a instanceof Land) {
+					
+					if(((Land) a).getState() == state.mortgage){
+						if (!(a == null)) ((Land) a).leaveMortgage();
+						
+					} else{
+					
+					if (!(a == null)) ((Land) a).mortgage();
+					
+						if (index == listModel.getSize()) {
+							// removed item in last position
+							index--;
+						}
+						
+						list.setSelectedIndex(index);
+						list.ensureIndexIsVisible(index);
+					}
+				}}
+					
 			}
-		}
-	
 	
 	public void valueChanged(ListSelectionEvent e) {
 		

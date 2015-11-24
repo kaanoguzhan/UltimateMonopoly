@@ -25,11 +25,13 @@ public class HouseCondemned extends CommunityChestCard implements Serializable {
 			if (lands.get(i).isHoused())
 				housed.add(lands.get(i));
 		}
+		if(housed.size() != 0){
 		Random rgen = new Random();
-		int condemnedHoused = rgen.nextInt(housed.size());
+		int condemnedHoused = rgen.nextInt(housed.size()+1);
 		Land condemned = housed.get(condemnedHoused);
 		pl.addMoney(condemned.getPriceOfState() / 2);
 		condemned.downgrade();
+		}
 	}
 
 	@Override
