@@ -1,4 +1,4 @@
-package GameSquares.CommunityChest;
+package GameSquares.Cards;
 
 import GameSquares.GameSquare;
 import Main.Player;

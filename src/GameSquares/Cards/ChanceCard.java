@@ -1,4 +1,4 @@
-package GameSquares.Chance;
+package GameSquares.Cards;
 
 import Main.Player;
 

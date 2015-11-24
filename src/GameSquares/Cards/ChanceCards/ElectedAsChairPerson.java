@@ -1,8 +1,8 @@
-package GameSquares.Chance.ChanceCards;
+package GameSquares.Cards.ChanceCards;
 
 import java.io.Serializable;
 import gui.AdditionalWindows.MessageDisplayer;
-import GameSquares.Chance.ChanceCard;
+import GameSquares.Cards.ChanceCard;
 import Main.Player;
 
 public class ElectedAsChairPerson extends ChanceCard implements Serializable {

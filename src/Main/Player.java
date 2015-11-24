@@ -1,18 +1,16 @@
 package Main;
 
 import gui.AdditionalWindows.InputReaders.GetTextInput;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-
 import GameSquares.GameSquare;
 import GameSquares.Land;
 import GameSquares.Land.color;
 import GameSquares.Ownable;
 import GameSquares.PayDay;
 import GameSquares.Utility;
-import GameSquares.Chance.Chance.ChanceCardType;
-import GameSquares.CommunityChest.CommunityChest.CommunityChestCardType;
+import GameSquares.Cards.Chance.ChanceCardType;
+import GameSquares.Cards.CommunityChest.CommunityChestCardType;
 
 public class Player implements Serializable {
 	private static final long serialVersionUID = 1L;

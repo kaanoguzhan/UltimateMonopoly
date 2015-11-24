@@ -1,8 +1,8 @@
-package GameSquares.CommunityChest.CommunityChestCards;
+package GameSquares.Cards.CommunityChestCards;
 
 import java.io.Serializable;
 import gui.AdditionalWindows.MessageDisplayer;
-import GameSquares.CommunityChest.CommunityChestCard;
+import GameSquares.Cards.CommunityChestCard;
 import Main.Player;
 
 public class RecieveConsultancyFee extends CommunityChestCard implements Serializable {

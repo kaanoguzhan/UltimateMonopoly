@@ -1,26 +1,25 @@
-package GameSquares.Chance.ChanceCards;
+package GameSquares.Cards.ChanceCards;
 
 import java.io.Serializable;
 import gui.AdditionalWindows.MessageDisplayer;
-import GameSquares.Chance.ChanceCard;
+import GameSquares.Cards.ChanceCard;
 import Main.Player;
 
-public class AdvanceToStart extends ChanceCard implements Serializable {
+public class AdvanceToSqueezePlay extends ChanceCard implements Serializable {
 	private static final long	serialVersionUID	= 1L;
 	
-	public AdvanceToStart() {
+	public AdvanceToSqueezePlay() {
 		super();
 	}
 	
 	@Override
 	public void onDraw(Player pl) {
 		new MessageDisplayer(toString());
-		pl.moveTo(0);
-		
+		pl.moveTo(96);
 	}
 	
 	@Override
 	public String toString() {
-		return "You picked AdvanceToStart Card.";
+		return "You picked AdvanceToSqueezePlay Card.";
 	}
 }

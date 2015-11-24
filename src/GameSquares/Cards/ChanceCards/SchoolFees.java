@@ -1,29 +1,26 @@
-package GameSquares.Chance.ChanceCards;
+package GameSquares.Cards.ChanceCards;
 
 import gui.AdditionalWindows.MessageDisplayer;
-
 import java.io.Serializable;
-
-import GameSquares.Chance.ChanceCard;
+import GameSquares.Cards.ChanceCard;
 import Main.Player;
 
-public class GoToJail extends ChanceCard implements Serializable {
+public class SchoolFees extends ChanceCard implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	public GoToJail() {
+	public SchoolFees() {
 		super();
 	}
 
 	@Override
 	public void onDraw(Player pl) {
 		new MessageDisplayer(toString());
-		pl.setJailed(true);
-		pl.moveTo(10);
+		// Pay the pool $150
 	}
 
 	@Override
 	public String toString() {
-		return "You picked GoToJail Card.";
+		return "You picked SchoolFees Card.";
 	}
 
 }

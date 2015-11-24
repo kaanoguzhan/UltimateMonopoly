@@ -1,9 +1,9 @@
-package GameSquares.CommunityChest.CommunityChestCards;
+package GameSquares.Cards.CommunityChestCards;
 
 import java.io.Serializable;
 import gui.AdditionalWindows.MessageDisplayer;
-import GameSquares.CommunityChest.CommunityChest.CommunityChestCardType;
-import GameSquares.CommunityChest.CommunityChestCard;
+import GameSquares.Cards.CommunityChestCard;
+import GameSquares.Cards.CommunityChest.CommunityChestCardType;
 import Main.Player;
 
 public class RenovationSuccess extends CommunityChestCard implements Serializable {

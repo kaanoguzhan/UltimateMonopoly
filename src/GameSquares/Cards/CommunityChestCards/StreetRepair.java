@@ -1,16 +1,14 @@
-package GameSquares.CommunityChest.CommunityChestCards;
+package GameSquares.Cards.CommunityChestCards;
 
 import gui.AdditionalWindows.MessageDisplayer;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-
 import GameSquares.Cab;
 import GameSquares.Land;
 import GameSquares.Land.state;
 import GameSquares.Ownable;
 import GameSquares.TransitStation;
-import GameSquares.CommunityChest.CommunityChestCard;
+import GameSquares.Cards.CommunityChestCard;
 import Main.Player;
 
 public class StreetRepair extends CommunityChestCard implements Serializable {

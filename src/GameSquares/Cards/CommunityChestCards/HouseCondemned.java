@@ -1,13 +1,11 @@
-package GameSquares.CommunityChest.CommunityChestCards;
+package GameSquares.Cards.CommunityChestCards;
 
 import gui.AdditionalWindows.MessageDisplayer;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
-
 import GameSquares.Land;
-import GameSquares.CommunityChest.CommunityChestCard;
+import GameSquares.Cards.CommunityChestCard;
 import Main.Player;
 
 public class HouseCondemned extends CommunityChestCard implements Serializable {

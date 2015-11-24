@@ -6,9 +6,9 @@ import GameSquares.GameSquare;
 import GameSquares.Land;
 import GameSquares.Land.color;
 import GameSquares.Ownable;
-import GameSquares.Chance.ChanceDeck;
-import GameSquares.CommunityChest.CommunityChest.CommunityChestCardType;
-import GameSquares.CommunityChest.CommunityChestDeck;
+import GameSquares.Cards.ChanceDeck;
+import GameSquares.Cards.CommunityChestDeck;
+import GameSquares.Cards.CommunityChest.CommunityChestCardType;
 
 public class Admin extends Main {
 	

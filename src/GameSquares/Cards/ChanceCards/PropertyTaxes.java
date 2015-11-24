@@ -1,11 +1,10 @@
-package GameSquares.Chance.ChanceCards;
+package GameSquares.Cards.ChanceCards;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
 import GameSquares.Land;
 import GameSquares.Land.state;
-import GameSquares.Chance.ChanceCard;
+import GameSquares.Cards.ChanceCard;
 import Main.Player;
 import gui.AdditionalWindows.MessageDisplayer;
 

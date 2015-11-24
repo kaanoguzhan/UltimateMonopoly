@@ -1,10 +1,8 @@
-package GameSquares.Chance.ChanceCards;
+package GameSquares.Cards.ChanceCards;
 
 import gui.AdditionalWindows.MessageDisplayer;
-
 import java.io.Serializable;
-
-import GameSquares.Chance.ChanceCard;
+import GameSquares.Cards.ChanceCard;
 import Main.Player;
 
 public class AdvanceToTheNearestRailroad extends ChanceCard implements Serializable {

@@ -1,28 +1,26 @@
-package GameSquares.Chance.ChanceCards;
+package GameSquares.Cards.ChanceCards;
 
 import gui.AdditionalWindows.MessageDisplayer;
-
 import java.io.Serializable;
-
-import GameSquares.Chance.ChanceCard;
+import GameSquares.Cards.ChanceCard;
 import Main.Player;
 
-public class ThreeSpacesBack extends ChanceCard implements Serializable {
+public class AdvanceToTheNearestUtility extends ChanceCard implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	public ThreeSpacesBack() {
+	public AdvanceToTheNearestUtility() {
 		super();
 	}
 
 	@Override
 	public void onDraw(Player pl) {
 		new MessageDisplayer(toString());
-		pl.moveBy(-3);
+		// moveTo nearest Utility
 	}
 
 	@Override
 	public String toString() {
-		return "You picked ThreeSpacesBack Card.";
+		return "You picked AdvanceToTheNearestUtility Card.";
 	}
 
 }
