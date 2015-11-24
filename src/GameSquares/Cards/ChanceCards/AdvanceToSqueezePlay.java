@@ -1,7 +1,8 @@
 package GameSquares.Cards.ChanceCards;
 
-import java.io.Serializable;
 import gui.AdditionalWindows.MessageDisplayer;
+import java.io.Serializable;
+import GameSquares.Cards.Chance.ChanceCardType;
 import GameSquares.Cards.ChanceCard;
 import Main.Player;
 
@@ -9,7 +10,7 @@ public class AdvanceToSqueezePlay extends ChanceCard implements Serializable {
 	private static final long	serialVersionUID	= 1L;
 	
 	public AdvanceToSqueezePlay() {
-		super();
+		super(ChanceCardType.AdvanceToSqueezePlay, false);
 	}
 	
 	@Override
@@ -21,5 +22,10 @@ public class AdvanceToSqueezePlay extends ChanceCard implements Serializable {
 	@Override
 	public String toString() {
 		return "You picked AdvanceToSqueezePlay Card.";
+	}
+	
+	@Override
+	public String getName() {
+		return "Advance to SqueezePlay";
 	}
 }

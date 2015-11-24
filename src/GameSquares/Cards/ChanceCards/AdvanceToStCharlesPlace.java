@@ -2,6 +2,7 @@ package GameSquares.Cards.ChanceCards;
 
 import java.io.Serializable;
 import gui.AdditionalWindows.MessageDisplayer;
+import GameSquares.Cards.Chance.ChanceCardType;
 import GameSquares.Cards.ChanceCard;
 import Main.Player;
 
@@ -9,7 +10,7 @@ public class AdvanceToStCharlesPlace extends ChanceCard implements Serializable 
 	private static final long	serialVersionUID	= 1L;
 	
 	public AdvanceToStCharlesPlace() {
-		super();
+		super(ChanceCardType.AdvanceToStCharlesPlace, false);
 	}
 	
 	@Override
@@ -21,5 +22,10 @@ public class AdvanceToStCharlesPlace extends ChanceCard implements Serializable 
 	@Override
 	public String toString() {
 		return "You picked AdvanceToStCharlesPlace Card.";
+	}
+	
+	@Override
+	public String getName() {
+		return "Advance to StCharlesPlace";
 	}
 }

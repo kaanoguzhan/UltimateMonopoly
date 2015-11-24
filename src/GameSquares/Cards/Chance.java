@@ -27,7 +27,7 @@ public class Chance extends GameSquare {
 	
 	@Override
 	public String toString() {
-		return "Chance. Location: " + id;
+		return "Chance at Location: " + id;
 	}
 	
 }

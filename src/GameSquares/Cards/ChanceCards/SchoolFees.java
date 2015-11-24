@@ -3,13 +3,14 @@ package GameSquares.Cards.ChanceCards;
 import gui.AdditionalWindows.MessageDisplayer;
 import java.io.Serializable;
 import GameSquares.Cards.ChanceCard;
+import GameSquares.Cards.Chance.ChanceCardType;
 import Main.Player;
 
 public class SchoolFees extends ChanceCard implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public SchoolFees() {
-		super();
+		super(ChanceCardType.SchoolFees,false);
 	}
 
 	@Override
@@ -21,6 +22,11 @@ public class SchoolFees extends ChanceCard implements Serializable {
 	@Override
 	public String toString() {
 		return "You picked SchoolFees Card.";
+	}
+
+	@Override
+	public String getName() {
+		return "School Fees";
 	}
 
 }

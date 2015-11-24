@@ -2,6 +2,7 @@ package GameSquares.Cards.CommunityChestCards;
 
 import java.io.Serializable;
 import gui.AdditionalWindows.MessageDisplayer;
+import GameSquares.Cards.CommunityChest.CommunityChestCardType;
 import GameSquares.Cards.CommunityChestCard;
 import Main.Player;
 
@@ -9,7 +10,7 @@ public class RecieveConsultancyFee extends CommunityChestCard implements Seriali
 	private static final long	serialVersionUID	= 1L;
 	
 	public RecieveConsultancyFee() {
-		super();
+		super(CommunityChestCardType.RecieveConsultancyFee,false);
 	}
 	
 	@Override
@@ -25,6 +26,6 @@ public class RecieveConsultancyFee extends CommunityChestCard implements Seriali
 	
 	@Override
 	public String getName() {
-		return "RecieveConsultancyFee";
+		return "Recieve Consultancy Fee";
 	}
 }

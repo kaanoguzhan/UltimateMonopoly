@@ -4,11 +4,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import GameSquares.Land;
 import GameSquares.Land.state;
+import GameSquares.Cards.Chance.ChanceCardType;
 import GameSquares.Cards.ChanceCard;
 import Main.Player;
 import gui.AdditionalWindows.MessageDisplayer;
 
 public class PropertyTaxes extends ChanceCard implements Serializable{
+	
+	public PropertyTaxes() {
+		super(ChanceCardType.PropertyTaxes, false);
+	}
+
 	private static final long serialVersionUID = 1L;
 	private int tax = 5;
 
@@ -30,6 +36,11 @@ public class PropertyTaxes extends ChanceCard implements Serializable{
 	@Override
 	public String toString() {
 		return "You picked property taxes. Pay 5$ to the pool for each unmortgaged property you own. ";
+	}
+
+	@Override
+	public String getName() {
+		return "Property Taxes";
 	}
 
 }

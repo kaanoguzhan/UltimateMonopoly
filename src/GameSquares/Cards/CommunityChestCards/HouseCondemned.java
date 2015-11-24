@@ -6,13 +6,14 @@ import java.util.ArrayList;
 import java.util.Random;
 import GameSquares.Land;
 import GameSquares.Cards.CommunityChestCard;
+import GameSquares.Cards.CommunityChest.CommunityChestCardType;
 import Main.Player;
 
 public class HouseCondemned extends CommunityChestCard implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public HouseCondemned() {
-		super();
+		super(CommunityChestCardType.HouseCondemned,false);
 	}
 
 	@Override
@@ -38,7 +39,7 @@ public class HouseCondemned extends CommunityChestCard implements Serializable {
 
 	@Override
 	public String getName() {
-		return "HouseCondemned";
+		return "House Condemned";
 	}
 
 }

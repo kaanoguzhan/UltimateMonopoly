@@ -10,7 +10,7 @@ public class BargainBusiness extends CommunityChestCard implements Serializable 
 	private static final long	serialVersionUID	= 1L;
 	
 	public BargainBusiness() {
-		super();
+		super(CommunityChestCardType.BargainBusiness,false);
 	}
 	
 	@Override
@@ -26,6 +26,6 @@ public class BargainBusiness extends CommunityChestCard implements Serializable 
 	
 	@Override
 	public String getName() {
-		return "BargainBusiness";
+		return "Bargain Business";
 	}
 }

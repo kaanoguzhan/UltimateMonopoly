@@ -25,6 +25,6 @@ public class CommunityChest extends GameSquare {
 
 	@Override
 	public String toString() {
-		return "Community Chest. Location: " + id;
+		return "Community Chest at Location: " + id;
 	}
 }

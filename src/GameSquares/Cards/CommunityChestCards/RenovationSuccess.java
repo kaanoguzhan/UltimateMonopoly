@@ -10,7 +10,7 @@ public class RenovationSuccess extends CommunityChestCard implements Serializabl
 	private static final long	serialVersionUID	= 1L;
 	
 	public RenovationSuccess() {
-		super();
+		super(CommunityChestCardType.RenovationSuccess, true);
 	}
 	
 	@Override
@@ -26,6 +26,6 @@ public class RenovationSuccess extends CommunityChestCard implements Serializabl
 	
 	@Override
 	public String getName() {
-		return "RenovationSuccess";
+		return "Renovation Success";
 	}
 }

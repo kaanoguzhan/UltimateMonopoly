@@ -3,13 +3,14 @@ package GameSquares.Cards.ChanceCards;
 import gui.AdditionalWindows.MessageDisplayer;
 import java.io.Serializable;
 import GameSquares.Cards.ChanceCard;
+import GameSquares.Cards.Chance.ChanceCardType;
 import Main.Player;
 
 public class ThreeSpacesBack extends ChanceCard implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public ThreeSpacesBack() {
-		super();
+		super(ChanceCardType.ThreeSpacesBack,false);
 	}
 
 	@Override
@@ -21,6 +22,11 @@ public class ThreeSpacesBack extends ChanceCard implements Serializable {
 	@Override
 	public String toString() {
 		return "You picked ThreeSpacesBack Card.";
+	}
+
+	@Override
+	public String getName() {
+		return "Three spaces back";
 	}
 
 }

@@ -1,10 +1,22 @@
 package GameSquares.Cards;
 
-import Main.Player;
+import GameSquares.Cards.Chance.ChanceCardType;
 
-public abstract class ChanceCard {
+public abstract class ChanceCard implements Card {
 	
-	public abstract void onDraw(Player pl);
+	private ChanceCardType	type;
+	private boolean			keepable;
 	
-	public abstract String toString();
+	public ChanceCard(ChanceCardType type, boolean isKeepable) {
+		this.type = type;
+		this.keepable = isKeepable;
+	}
+	
+	public ChanceCardType getType() {
+		return type;
+	}
+	
+	public boolean isKeepable() {
+		return keepable;
+	}
 }

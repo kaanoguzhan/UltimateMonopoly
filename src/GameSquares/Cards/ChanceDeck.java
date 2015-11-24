@@ -12,7 +12,7 @@ import GameSquares.Cards.ChanceCards.GeneralRepairs;
 import GameSquares.Cards.ChanceCards.GetOutOfJail;
 import GameSquares.Cards.ChanceCards.GoToJail;
 import GameSquares.Cards.ChanceCards.Hurricane;
-import GameSquares.Cards.ChanceCards.MardiGras;
+import GameSquares.Cards.ChanceCards.MargiGras;
 import GameSquares.Cards.ChanceCards.PropertyTaxes;
 import GameSquares.Cards.ChanceCards.SchoolFees;
 import GameSquares.Cards.ChanceCards.ThreeSpacesBack;
@@ -26,7 +26,7 @@ public class ChanceDeck implements Serializable {
 		ChanceCard[] cards = { new AdvanceToSqueezePlay(), new AdvanceToStart(), new AdvanceToStCharlesPlace(),
 				new AdvanceToTheNearestRailroad(), new AdvanceToTheNearestUtility(), new ElectedAsChairPerson(players),
 				new GeneralRepairs(), new GetOutOfJail(), new GoToJail(), new SchoolFees(), new ThreeSpacesBack(),
-				new Hurricane(), new MardiGras(), new PropertyTaxes() };
+				new Hurricane(), new MargiGras(), new PropertyTaxes() };
 		this.cards = cards;
 	}
 	
