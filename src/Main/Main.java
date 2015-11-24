@@ -12,6 +12,7 @@ import GameSquares.BusTicketSquare;
 import GameSquares.Cab;
 import GameSquares.FreePark;
 import GameSquares.GameSquare;
+import GameSquares.GameSquare.type;
 import GameSquares.GoToJail;
 import GameSquares.HollandTunnel;
 import GameSquares.Jail;
@@ -25,6 +26,7 @@ import GameSquares.StartSquare;
 import GameSquares.StockExchange;
 import GameSquares.Subway;
 import GameSquares.TransitStation;
+import GameSquares.Utility;
 import GameSquares.Chance.Chance;
 import GameSquares.Chance.ChanceDeck;
 import GameSquares.CommunityChest.CommunityChest;
@@ -32,14 +34,6 @@ import GameSquares.CommunityChest.CommunityChestDeck;
 import GameSquares.Taxes.IncomeTax;
 import GameSquares.Taxes.LuxuryTax;
 import GameSquares.Taxes.TaxRefund;
-import GameSquares.Utilities.CableCompany;
-import GameSquares.Utilities.ElectricCompany;
-import GameSquares.Utilities.GasCompany;
-import GameSquares.Utilities.InternetServiceProvider;
-import GameSquares.Utilities.SewageSystem;
-import GameSquares.Utilities.TelephoneCompany;
-import GameSquares.Utilities.TrashCollector;
-import GameSquares.Utilities.WaterWorks;
 import Main.SaveLoad.SaveLoad;
 
 public class Main {
@@ -118,7 +112,7 @@ public class Main {
 		gameSquares[10] = new Jail(10);
 		gameSquares[11] = new Land(11, "St. Charles Place", color.pink, 140, 10)
 			.addDeedInfo(50, 150, 450, 625, 750, 1250, 70, 100);
-		gameSquares[12] = new ElectricCompany(12);
+		gameSquares[12] = new Utility(12, "Electric Company", type.ElectricCompany);
 		gameSquares[13] = new Land(13, "States Avenue", color.pink, 140, 10)
 			.addDeedInfo(50, 150, 450, 625, 750, 1250, 70, 100);
 		gameSquares[14] = new Land(14, "Virginia Avenue", color.pink, 160, 12)
@@ -144,7 +138,7 @@ public class Main {
 			.addDeedInfo(110, 330, 800, 975, 1050, 2150, 130, 150);
 		gameSquares[27] = new Land(27, "Ventnor Avenue", color.yellow, 260, 22)
 			.addDeedInfo(110, 330, 800, 975, 1050, 2150, 130, 150);
-		gameSquares[28] = new WaterWorks(28);
+		gameSquares[28] = new Utility(28, "Water Workd", type.WaterWorks);
 		gameSquares[29] = new Land(29, "Marvin Gardens", color.yellow, 280, 22)
 			.addDeedInfo(120, 360, 850, 1025, 1200, 2200, 140, 150);
 		gameSquares[30] = new RollOnce(30);
@@ -178,7 +172,7 @@ public class Main {
 		gameSquares[49] = new Land(49, "Canal Street", color.lightGreen, 90, 5)
 			.addDeedInfo(25, 80, 225, 360, 600, 1000, 50, 50);
 		gameSquares[50] = new Chance(50, chanceDeck, players);
-		gameSquares[51] = new CableCompany(51);
+		gameSquares[51] = new Utility(51, "Cable Company", type.CableCompany);
 		gameSquares[52] = new Land(52, "Magazine Street", color.lightGreen, 120, 8)
 			.addDeedInfo(40, 100, 300, 450, 600, 1100, 60, 50);
 		gameSquares[53] = new Land(53, "Bourbon Street", color.lightGreen, 120, 8)
@@ -189,7 +183,7 @@ public class Main {
 			.addDeedInfo(55, 160, 475, 650, 800, 1300, 70, 100);
 		gameSquares[57] = new Land(57, "Westheimer Road", color.lightYellow, 150, 11)
 			.addDeedInfo(55, 160, 475, 650, 800, 1300, 70, 100);
-		gameSquares[58] = new InternetServiceProvider(58);
+		gameSquares[58] = new Utility(58, "Internet Service Provider", type.InternetServiceProvider);
 		gameSquares[59] = new Land(59, "Kýrby Drive", color.lightYellow, 180, 14)
 			.addDeedInfo(70, 200, 550, 750, 950, 1450, 80, 100);
 		gameSquares[60] = new Land(60, "Cullen Bouleward", color.lightYellow, 180, 14)
@@ -222,7 +216,7 @@ public class Main {
 			.addDeedInfo(160, 470, 1050, 2250, 1500, 2500, 130, 200);
 		gameSquares[78] = new Land(78, "West Temple", color.gold, 330, 32)
 			.addDeedInfo(160, 470, 1500, 1250, 1500, 2500, 130, 200);
-		gameSquares[79] = new TrashCollector(79);
+		gameSquares[79] = new Utility(79, "Trash Collector", type.TrashCollector);
 		gameSquares[80] = new Land(80, "North Temple", color.gold, 360, 38)
 			.addDeedInfo(170, 520, 1125, 1275, 1425, 1650, 140, 200);
 		gameSquares[81] = new Land(81, "Temple Square", color.gold, 360, 38)
@@ -238,7 +232,7 @@ public class Main {
 		gameSquares[87] = new Land(87, "Market Street", color.lightRed, 420, 55)
 			.addDeedInfo(225, 630, 1450, 1750, 2050, 3550, 160, 250);
 		gameSquares[88] = new BusTicketSquare(88);
-		gameSquares[89] = new SewageSystem(89);
+		gameSquares[89] = new Utility(89, "Sewage System", type.SewegeSystem);
 		gameSquares[90] = new Cab(90, "Ute");
 		gameSquares[91] = new BirthdayGiftSquare(91);
 		gameSquares[92] = new Land(92, "Mulholland Drive", color.darkRed, 450, 70)
@@ -253,7 +247,7 @@ public class Main {
 			.addDeedInfo(85, 240, 475, 670, 1025, 1525, 105, 100);
 		gameSquares[98] = new Land(98, "Fisherman's Wharf", color.white, 250, 21)
 			.addDeedInfo(105, 320, 780, 950, 1125, 1625, 125, 100);
-		gameSquares[99] = new TelephoneCompany(99);
+		gameSquares[99] = new Utility(99, "Telephone Company", type.TelephoneCompany);
 		gameSquares[100] = new CommunityChest(100, communityDeck);
 		gameSquares[101] = new Land(101, "Beacon Street", color.black, 330, 30)
 			.addDeedInfo(160, 470, 1050, 1250, 1500, 2500, 165, 200);
@@ -271,7 +265,7 @@ public class Main {
 		gameSquares[109] = new Land(109, "Wall Street", color.grey, 500, 80)
 			.addDeedInfo(300, 800, 1800, 2200, 2700, 4200, 250, 300);
 		gameSquares[110] = new TaxRefund(110);
-		gameSquares[111] = new GasCompany(111);
+		gameSquares[111] = new Utility(111, "Gas Company", type.GasCompany);
 		gameSquares[112] = new Chance(112, chanceDeck, players);
 		gameSquares[113] = new Land(113, "Florida Avenue", color.brown, 130, 9)
 			.addDeedInfo(45, 120, 350, 500, 700, 1200, 65, 50);

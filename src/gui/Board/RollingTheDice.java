@@ -81,10 +81,27 @@ public class RollingTheDice extends JPanel implements ActionListener {
 			int roll2 = roll[1];
 			int rollSpeed = roll[2];
 			
-			if (BoardTab.chckbxSetDice.isSelected()) {
+			if (BoardTab.chckbxSetDice != null && BoardTab.chckbxSetDice.isSelected()) {
 				roll1 = Integer.parseInt(BoardTab.txtDie1.getText());
 				roll2 = Integer.parseInt(BoardTab.txtDie2.getText());
 				rollSpeed = Integer.parseInt(BoardTab.txtSpeedDie.getText());
+				switch (rollSpeed) {
+					case 1:
+					case 2:
+					case 3:
+						Dice.bus = false;
+						Dice.monopolyGuy = false;
+						break;
+					case 4:
+					case 5:
+						Dice.bus = false;
+						Dice.monopolyGuy = true;
+						break;
+					case 6:
+						Dice.bus = true;
+						Dice.monopolyGuy = false;
+						break;
+				}
 			}
 			
 			result.setText("<html>Dice: " + roll1 + "," + roll2 + "<br>" + "SpeedDie: " + rollSpeed + "</html>");

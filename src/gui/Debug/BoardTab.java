@@ -3,10 +3,9 @@ package gui.Debug;
 import gui.Board.Board;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.swing.JCheckBox;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JLabel;
 
 public class BoardTab extends JPanel {
 	private static final long	serialVersionUID	= 1L;

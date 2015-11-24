@@ -1,9 +1,6 @@
-package GameSquares.Utilities;
+package GameSquares;
 
-import gui.AdditionalWindows.MessageDisplayer;
 import gui.AdditionalWindows.InputReaders.GetYesNoInput;
-import GameSquares.GameSquare;
-import GameSquares.Ownable;
 import Main.Player;
 import Main.Properties;
 
@@ -22,25 +19,41 @@ public class Utility extends GameSquare implements Ownable {
 				+ name + " ?")
 				.getValue();
 			
-			boolean bargain = false;
-			if (pl.hasBargainBusiness())
-				bargain = new GetYesNoInput("You can use BargainBusiness", "Do you want to use it ?")
-					.getValue();
-			
 			if (buy) {
 				if (pl.getMoney() >= Properties.UTILITY_MONEY) {
-					int price = Properties.UTILITY_MONEY;
-					if (bargain) {
-						price = Properties.BARGAINBUSINESS_PRICE;
-						pl.removeBargainBusinessCard();
-					}
 					pl.buySquare(this);
 				} else
 					System.out.println("You don't have enough money!");
 			}
 		} else {
 			if (this.owner != pl) {
-				int totalRent = amount*this.owner.numOfOwnedUtilities();
+				int totalRent = amount;
+				switch (this.owner.numOfOwnedUtilities()) {
+					case 1:
+						totalRent *= 4;
+						break;
+					case 2:
+						totalRent *= 10;
+						break;
+					case 3:
+						totalRent *= 20;
+						break;
+					case 4:
+						totalRent *= 40;
+						break;
+					case 5:
+						totalRent *= 80;
+						break;
+					case 6:
+						totalRent *= 100;
+						break;
+					case 7:
+						totalRent *= 120;
+						break;
+					case 8:
+						totalRent *= 150;
+						break;
+				}
 				System.out.println("This Utility is owned by " + owner.getName());
 				
 				pl.pay(owner, totalRent);
@@ -67,7 +80,6 @@ public class Utility extends GameSquare implements Ownable {
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return name;
 	}
 }
