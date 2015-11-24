@@ -20,6 +20,7 @@ public class OnlinePricing extends CommunityChestCard implements Serializable {
 		new MessageDisplayer(toString());
 		pl.addToInventory(CommunityChestCardType.OnlinePricing);
 		//Next time you land on anyone else's railroad only pay 1/2 the rent.
+		//RailRoad onArrive calls this.
 	}
 
 	@Override

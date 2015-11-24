@@ -2,7 +2,7 @@ package Main;
 
 public class Properties {
 	public static final int	START_GOLD				= 3200;
-	public static final int	BONUS_PASSING_MONEY		= 200;
+	public static final int	BONUS_PASSING_MONEY		= 250;
 	public static final int	TOTAL_SQUARES			= 120;
 	public static final int	HEAVEN_LOCATION			= -1;
 	

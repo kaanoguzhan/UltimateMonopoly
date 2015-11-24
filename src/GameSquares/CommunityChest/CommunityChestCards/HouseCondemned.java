@@ -22,15 +22,16 @@ public class HouseCondemned extends CommunityChestCard implements Serializable {
 	public void onDraw(Player pl) {
 		new MessageDisplayer(toString());
 		ArrayList<Land> lands = pl.getOwnedLands();
-		ArrayList<Land> houses = new ArrayList<Land>();
+		ArrayList<Land> housed = new ArrayList<Land>();
 		for (int i = 0; i < lands.size(); i++) {
-			if (lands.get(i).getState() == state.house)
-				houses.add(lands.get(i));
+			if (lands.get(i).isHoused())
+				housed.add(lands.get(i));
 		}
 		Random rgen = new Random();
-		int condemnedHouse = rgen.nextInt(houses.size());
-		houses.get(condemnedHouse);
-		// sell a house randomly.
+		int condemnedHoused = rgen.nextInt(housed.size());
+		Land condemned = housed.get(condemnedHoused);
+		pl.addMoney(condemned.getPriceOfState() / 2);
+		condemned.downgrade();
 	}
 
 	@Override
