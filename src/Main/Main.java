@@ -102,7 +102,7 @@ public class Main {
 		gameSquares[3] = new Land(3, "Baltic Avenue", color.puple, 60, 4)
 			.addDeedInfo(20, 60, 180, 320, 450, 950, 30, 50);
 		gameSquares[4] = new IncomeTax(4);
-		gameSquares[5] = new TransitStation(5, 47);
+		gameSquares[5] = new TransitStation(5, 47,"Reading");
 		gameSquares[6] = new Land(6, "Oriental Avenue", color.lightBlue, 100, 6)
 			.addDeedInfo(30, 90, 270, 400, 550, 1050, 50, 50);
 		gameSquares[7] = new Chance(7, chanceDeck, players);
