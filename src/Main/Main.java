@@ -47,6 +47,7 @@ public class Main {
 	static Board						board;
 	public static int					pool			= 0;
 	private static boolean				loadPrevious;
+	public static boolean				pause			= false;
 	
 	public static void main(String[] args) {
 		changeUITheme();
@@ -71,21 +72,26 @@ public class Main {
 	private static void initializePlayers() {
 		int num0fPlayers = 0;
 		String numberOfPlayers = "";
+		init:
 		try {
 			while (num0fPlayers == 0 || num0fPlayers < 0 || numberOfPlayers == null) {
 				temp = new GetTextInput("How many players?");
 				if (temp.getString().equals("l") || temp.getString().equals("load")) {
 					loadPrevious = true;
-					break;
+					pause = true;
+					SaveLoad.load();
+					while (pause);
+					break init;
+				} else {
+					num0fPlayers = temp.getInt();
+					numberOfPlayers = temp.getString();
 				}
-				num0fPlayers = temp.getInt();
-				numberOfPlayers = temp.getString();
 			}
-			players = new Player[num0fPlayers];
+			if (!loadPrevious)
+				players = new Player[num0fPlayers];
 		} catch (Exception e) {}
 		System.out.println("Player initialization is complete...");
 	}
-	
 	private static void initializeDecks() {
 		chanceDeck = new ChanceDeck(players);
 		communityDeck = new CommunityChestDeck();
@@ -289,14 +295,11 @@ public class Main {
 				name = new GetTextInput("Name of player " + (i + 1) + " : ").getString();
 			players[i] = new Player(i, name, gameSquares);
 		}
-		
 		System.out.println("Player Name initialization is complete...");
 	}
 	
 	private static void initializeBoard() {
 		board = new Board(players, gameSquares);
-		if (loadPrevious)
-			SaveLoad.load();
 	}
 	
 	private static void runGame() {

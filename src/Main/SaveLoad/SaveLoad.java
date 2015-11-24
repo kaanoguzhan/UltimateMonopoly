@@ -1,5 +1,6 @@
 package Main.SaveLoad;
 
+import gui.Board.PlayerInfo;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -27,7 +28,6 @@ public class SaveLoad {
 		} catch (IOException e) {}
 	}
 	
-	
 	public static void load() {
 		try {
 			FileInputStream f_in = new FileInputStream("savegame.data");
@@ -37,16 +37,24 @@ public class SaveLoad {
 			Object[] obj = (Object[]) obj_in.readObject();
 			
 			// Load objects
-			Main.Main.players = obj[0] instanceof Player[] ? (Player[]) obj[0] : null;
+			if (obj[0] instanceof Player[])
+				System.out.println("LOAD player[]");
+			
+			Main.Main.players = (Player[]) obj[0];
 			Main.Main.gameSquares = obj[1] instanceof GameSquare[] ? (GameSquare[]) obj[1] : null;
 			
 			// Check for error
 			if (Main.Main.players == null || Main.Main.gameSquares == null)
 				System.out.println("!!! Error on loading objects !!!");
 			
+			// Recreate some UI Objects
+			PlayerInfo.recreateTable();
+			
 			// Close InputStreams
 			f_in.close();
 			obj_in.close();
+			
+			Main.Main.pause = false;
 			
 		} catch (IOException | ClassNotFoundException e) {}
 	}
