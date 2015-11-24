@@ -12,7 +12,10 @@ public class Jail extends GameSquare {
 
 	@Override
 	public void onArrive(Player pl) {
-		System.out.println("You are visiting jail.");
+		if (pl.isJailed()) {
+			
+		} else
+			System.out.println("You are visiting jail.");
 	}
 
 	@Override
