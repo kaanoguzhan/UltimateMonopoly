@@ -13,15 +13,17 @@ import GameSquares.Cards.Chance.ChanceCardType;
 import GameSquares.Cards.CommunityChest.CommunityChestCardType;
 
 public class Player implements Serializable {
-	private static final long serialVersionUID = 1L;
-	private int id, money, location, jailID = 10, jailTime;
-	private String name;
-	private GameSquare[] gameSquares;
-	private boolean jailed = false;
-	private ArrayList<CommunityChestCardType> Inventory = new ArrayList<CommunityChestCardType>();
-	private ArrayList<Land> ownedLands = new ArrayList<Land>();
-	private ArrayList<Ownable> ownedSquares = new ArrayList<Ownable>();
-
+	private static final long					serialVersionUID	= 1L;
+	private int									id, money, location, jailTime;
+	private int									jailID				= Properties.JailID;
+	private String								name;
+	private GameSquare[]						gameSquares;
+	private boolean								jailed				= false;
+	private ArrayList<CommunityChestCardType>	Inventory			= new ArrayList<CommunityChestCardType>();
+	private ArrayList<Land>						ownedLands			= new ArrayList<Land>();
+	private ArrayList<Ownable>					ownedSquares		= new ArrayList<Ownable>();
+	
+	// Default Constructor
 	public Player(int id, String name, GameSquare[] gameSquares) {
 		this.id = id;
 		this.location = 0;
@@ -30,8 +32,8 @@ public class Player implements Serializable {
 		this.gameSquares = gameSquares;
 		System.out.println("Player " + name + " with " + money + " added.");
 	}
-
-	// only for dummy player
+	
+	// Constructor for dummy player
 	public Player(GameSquare[] gameSquares) {
 		this.id = -1;
 		this.location = -1;
@@ -39,7 +41,7 @@ public class Player implements Serializable {
 		this.name = ".";
 		this.gameSquares = gameSquares;
 	}
-
+	
 	public void moveBy(int amount) {
 		int projectedLocation = location + amount;
 		if (projectedLocation > 119)
@@ -52,22 +54,22 @@ public class Player implements Serializable {
 				addMoney(Properties.PAYDAY_EVEN);
 			}
 		}
-
+		
 		if (location < 102 || location >= 111) {
-
+			
 			if (projectedLocation > 102) {
 				System.out.println(name + " passed Bonus Square.");
 				addMoney(Properties.BONUS_PASSING_MONEY);
 			}
 		}
-
+		
 		if (location < 40) {
 			if (projectedLocation > 40) {
 				location = projectedLocation - 40;
 				System.out.println(name + " passed Start Square.");
 				addMoney(Properties.START_PASSING_MONEY);
 			}
-
+			
 			if (projectedLocation > 35) {
 				location = projectedLocation;
 				if (amount % 2 == 0) {
@@ -131,7 +133,7 @@ public class Player implements Serializable {
 				location = projectedLocation;
 		}
 		System.out.println(name + " moved " + amount + " squares and now is at " + gameSquares[location].toString()
-				+ "\n You have: " + money);
+			+ "\n You have: " + money);
 		if (gameSquares[location] instanceof PayDay)
 			((PayDay) gameSquares[location]).onArrive(this, amount);
 		else if (gameSquares[location] instanceof Utility)
@@ -140,7 +142,7 @@ public class Player implements Serializable {
 		else
 			gameSquares[location].onArrive(this);
 	}
-
+	
 	public void moveTo(int id) {
 		System.out.println(name + " is at " + gameSquares[id].toString());
 		if (id < 40 && location > id) {
@@ -148,19 +150,19 @@ public class Player implements Serializable {
 			addMoney(Properties.START_PASSING_MONEY);
 		}
 		location = id;
-
+		
 		if (gameSquares[location] instanceof Utility) {
 			int amount = new GetTextInput("Total dice ?").getInt();
 			((Utility) gameSquares[location]).onArrive(this, amount);
 		} else
 			gameSquares[location].onArrive(this);
 	}
-
+	
 	public void addMoney(int amount) {
 		money += amount;
 		System.out.println(name + "'s money increased by " + amount + " to " + money);
 	}
-
+	
 	public void reduceMoney(int amount) {
 		if (money >= amount) {
 			money -= amount;
@@ -169,95 +171,95 @@ public class Player implements Serializable {
 			gui.AdditionalWindows.List.createAndShowGUI(ownedLands);
 			reduceMoney(amount);
 		} else {
-			location = Properties.HEAVEN_LOCATION;
+			location = Properties.HEAVEN_ID;
 			System.out.println(name + " is bankrupt."); // create a new
 														// additional window
 		}
 	}
-
+	
 	public void payToPool(int amount) {
 		reduceMoney(amount);
 		Main.pool += amount;
 	}
-
+	
 	public void obtainPool() {
 		addMoney(Main.pool * Properties.TAX_REFUND_PERCENT / 100);
 		Main.pool *= (100 - Properties.TAX_REFUND_PERCENT) / 100;
 	}
-
+	
 	public void pay(Player player, int amount) {
 		System.out.println(name + " paid to " + player.getName());
 		this.reduceMoney(amount);
 		player.addMoney(amount);
 	}
-
+	
 	public void addToInventory(CommunityChestCardType cardType) {
 		Inventory.add(cardType);
 	}
-
+	
 	public boolean haveCard(CommunityChestCardType cardType) {
 		return Inventory.contains(cardType);
 	}
-
+	
 	// public void removeCard(CommunityChestCardType cardType) {
 	// Inventory.remove(cardType);
 	// }
-
+	
 	public int getMoney() {
 		return money;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
-
+	
 	public int getLocation() {
 		return location;
 	}
-
+	
 	public void buySquare(GameSquare land) {
 		if (land instanceof Ownable) {
 			reduceMoney(((Ownable) land).getPrice());
 			getOwnership(land);
 		}
 	}
-
+	
 	public void sellSquare(GameSquare land) {
 		if (land instanceof Ownable && !(land instanceof Land)) {
 			addMoney(((Ownable) land).getPrice());
 			removeOwnership(land);
 			System.out.println(name + " sold " + land + " for " + ((Ownable) land).getPrice());
 		}
-
+		
 		if (ownedLands.contains(land)) {
 			addMoney(((Ownable) land).getPrice());
 			removeOwnership(land);
 			System.out.println(name + " sold " + land + " for " + ((Ownable) land).getPrice());
 		}
 	}
-
+	
 	public void getOwnership(GameSquare square) {
 		if (square instanceof Land)
 			ownedLands.add((Land) square);
 		else
 			ownedSquares.add((Ownable) square);
-
+		
 		square.setOwner(this);
 	}
-
+	
 	public void removeOwnership(GameSquare square) {
 		if (square instanceof Land)
 			ownedLands.remove((Land) square);
 		else
 			ownedSquares.remove((Ownable) square);
-
+		
 		square.setOwner(null);
 	}
-
+	
 	public int getID() {
 		return id;
 	}
-
+	
 	public int getNumberOfOwnedByColor(color color) {
 		int counter = 0;
 		for (Land land : ownedLands) {
@@ -266,72 +268,72 @@ public class Player implements Serializable {
 		}
 		return counter;
 	}
-
+	
 	public ArrayList<Land> getOwnedLands() {
 		return ownedLands;
 	}
-
+	
 	public ArrayList<Ownable> getOwnedSquares() {
 		return ownedSquares;
 	}
-
+	
 	// ////////// DO NOT USE THESE METHODS - THESE ARE JUST FOR DEBUGGING
 	// ////////// //
 	public void setLocation(int id) {
 		this.location = id;
 	}
-
+	
 	public void setMoney(int amount) {
 		this.money = amount;
 	}
-
+	
 	// /////////////////////////////////////////////////////////////////////////////
 	// //
-
+	
 	public boolean hasGetOutOfJail() {
 		if (Inventory.contains(ChanceCardType.GetOutOfJail))
 			return true;
 		else
 			return false;
 	}
-
+	
 	public void removeGetOutOfJailCard() {
 		Inventory.remove(ChanceCardType.GetOutOfJail);
 	}
-
+	
 	public boolean hasOnlinePricing() {
 		if (Inventory.contains(CommunityChestCardType.OnlinePricing))
 			return true;
 		else
 			return false;
 	}
-
+	
 	public void removeOnlinePricingCard() {
 		Inventory.remove(CommunityChestCardType.OnlinePricing);
 	}
-
+	
 	public boolean hasBargainBusiness() {
 		if (Inventory.contains(CommunityChestCardType.BargainBusiness))
 			return true;
 		else
 			return false;
 	}
-
+	
 	public void removeBargainBusinessCard() {
 		Inventory.remove(CommunityChestCardType.BargainBusiness);
 	}
-
+	
 	public boolean hasRenovationSuccess() {
 		if (Inventory.contains(CommunityChestCardType.RenovationSuccess))
 			return true;
 		else
 			return false;
 	}
-
+	
 	public void removeRenovationSuccessCard() {
 		Inventory.remove(CommunityChestCardType.RenovationSuccess);
 	}
-
+	
 	public String toString() {
 		String Lands = "[";
 		for (Land land : ownedLands) {
@@ -340,53 +342,54 @@ public class Player implements Serializable {
 		if (Lands.length() > 2)
 			Lands = Lands.substring(0, Lands.length() - 2);
 		Lands += "]";
-
+		
 		return "Player " + name + " has " + money + " is at " + gameSquares[location] + "\n" + "Has Cards:" + Inventory
-				+ "\n" + "Has Lands:" + Lands;
+			+ "\n" + "Has Lands:" + Lands;
 	}
-
+	
 	public ArrayList<CommunityChestCardType> getCommunityChestCards() {
 		return Inventory;
 	}
-
+	
 	public boolean isJailed() {
 		return jailed;
 	}
-
+	
 	public void goToJail() {
 		this.jailed = true;
 		jailTime = 3;
 		this.moveTo(jailID);
 	}
-
+	
 	public void getOutOfJail() {
 		this.jailed = false;
 		jailTime = 0;
 	}
-
+	
 	public boolean isReleaseTime() {
 		if (jailTime == 0)
 			return true;
 		else
 			return false;
 	}
-
+	
 	public int getJailTime() {
 		return jailTime;
 	}
-
+	
 	public void reduceJailTime() {
 		jailTime--;
+		
 	}
-
+	
 	public int numOfOwnedUtilities() {
 		int output = 0;
-
+		
 		for (Ownable nextOwn : ownedSquares) {
 			if (nextOwn instanceof Utility)
 				output++;
 		}
-
+		
 		return output;
 	}
 }
