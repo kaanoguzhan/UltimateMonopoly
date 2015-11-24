@@ -17,6 +17,7 @@ public class GoToJail extends ChanceCard implements Serializable {
 	@Override
 	public void onDraw(Player pl) {
 		new MessageDisplayer(toString());
+		pl.setJailed(true);
 		pl.moveTo(10);
 	}
 

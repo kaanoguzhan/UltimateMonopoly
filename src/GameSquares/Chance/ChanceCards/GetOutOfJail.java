@@ -17,7 +17,6 @@ public class GetOutOfJail extends ChanceCard implements Serializable {
 	@Override
 	public void onDraw(Player pl) {
 		new MessageDisplayer(toString());
-		// Out of Jail method
 	}
 
 	@Override
