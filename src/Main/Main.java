@@ -184,7 +184,7 @@ public class Main {
 		gameSquares[57] = new Land(57, "Westheimer Road", color.lightYellow, 150, 11)
 			.addDeedInfo(55, 160, 475, 650, 800, 1300, 70, 100);
 		gameSquares[58] = new Utility(58, "Internet Service Provider", type.InternetServiceProvider);
-		gameSquares[59] = new Land(59, "Kýrby Drive", color.lightYellow, 180, 14)
+		gameSquares[59] = new Land(59, "Kirby Drive", color.lightYellow, 180, 14)
 			.addDeedInfo(70, 200, 550, 750, 950, 1450, 80, 100);
 		gameSquares[60] = new Land(60, "Cullen Bouleward", color.lightYellow, 180, 14)
 			.addDeedInfo(70, 200, 550, 750, 950, 1450, 80, 100);

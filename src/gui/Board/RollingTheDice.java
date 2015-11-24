@@ -3,7 +3,7 @@ package gui.Board;
 import gui.Dice;
 import gui.AdditionalWindows.InputReaders.GetOneOption;
 import gui.AdditionalWindows.InputReaders.GetTextInput;
-import gui.Debug.BoardTab;
+import gui.Debug.DiceTab;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -81,10 +81,10 @@ public class RollingTheDice extends JPanel implements ActionListener {
 			int roll2 = roll[1];
 			int rollSpeed = roll[2];
 			
-			if (BoardTab.chckbxSetDice != null && BoardTab.chckbxSetDice.isSelected()) {
-				roll1 = Integer.parseInt(BoardTab.txtDie1.getText());
-				roll2 = Integer.parseInt(BoardTab.txtDie2.getText());
-				rollSpeed = Integer.parseInt(BoardTab.txtSpeedDie.getText());
+			if (DiceTab.chcbxExist && DiceTab.chcbxTicked) {
+				roll1 = DiceTab.Die1;
+				roll2 = DiceTab.Die2;
+				rollSpeed = DiceTab.SpeedDie;
 				switch (rollSpeed) {
 					case 1:
 					case 2:
