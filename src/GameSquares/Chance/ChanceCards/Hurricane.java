@@ -9,7 +9,6 @@ import GameSquares.GameSquare;
 import GameSquares.Land;
 import GameSquares.Chance.ChanceCard;
 import GameSquares.Land.color;
-import GameSquares.Land.state;
 import Main.Player;
 import gui.AdditionalWindows.MessageDisplayer;
 
@@ -52,21 +51,11 @@ public class Hurricane extends ChanceCard implements Serializable {
 				GameSquare a = Main.Main.gameSquares[i];
 				if(a instanceof Land) 
 					if(((Land) a).getColor()==selectedColor) 
-						downGrade((Land) a);
+						((Land) a).downgrade();
 			}
 		else new MessageDisplayer("No opponent have a color group");
 	}
-	
-	private void downGrade(Land a){
-		state s = a.getState();
-		if(s==state.house)a.setState(state.unImproved);
-		else if(s==state.twoHouse)a.setState(state.house);
-		else if(s==state.threeHouse)a.setState(state.house);
-		else if(s==state.fourHouse)a.setState(state.house);
-		else if(s==state.hotel)a.setState(state.house);
-		else if(s==state.skyscraper)a.setState(state.house);
-	}
-	
+		
 	public int landsOfThisColor(color c){
 		int number = 0;
 		for(int i=0;i<Main.Main.gameSquares.length;i++){
