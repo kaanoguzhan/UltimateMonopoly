@@ -4,7 +4,7 @@ import gui.AdditionalWindows.InputReaders.GetYesNoInput;
 import Main.Player;
 import Main.Properties;
 
-public class TransitStation extends GameSquare {
+public class TransitStation extends GameSquare implements Ownable {
 	private static final long	serialVersionUID	= 1L;
 	private int					price				= Properties.TRANSITSTATION_PRICE;
 	private int					depotCost			= Properties.TRANSITSTATION_DEPOT_COST;
@@ -31,12 +31,29 @@ public class TransitStation extends GameSquare {
 					System.out.println("You don't have enough money!");
 			}
 		} else if (this.owner != pl) {
-			pl.pay(this.getOwner(), rent * 2 ^ (DeportCount));
+			pl.pay(this.getOwner(), rent * (int) Math.pow(2, DeportCount));
 		} else if (new GetYesNoInput("Build Train Depot", "Do you want to pay " + depotCost + "$ to build Cab Stand ?")
 			.getValue()) {
 			pl.reduceMoney(depotCost);
 			this.DeportCount++;
 		}
+	}
+	
+	
+	
+	@Override
+	public void sell() {
+		this.owner.sellSquare(this);
+	}
+	
+	@Override
+	public int getPrice() {
+		return price;
+	}
+	
+	@Override
+	public String getName() {
+		return name + "Railroad";
 	}
 	
 	@Override
