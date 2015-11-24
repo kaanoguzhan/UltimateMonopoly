@@ -1,7 +1,9 @@
 package GameSquares.Cards.ChanceCards;
 
 import gui.AdditionalWindows.MessageDisplayer;
+
 import java.io.Serializable;
+
 import GameSquares.Cards.ChanceCard;
 import GameSquares.Cards.Chance.ChanceCardType;
 import Main.Player;
@@ -16,6 +18,7 @@ public class GetOutOfJail extends ChanceCard implements Serializable {
 	@Override
 	public void onDraw(Player pl) {
 		new MessageDisplayer(toString());
+		pl.addToInventoryC(ChanceCardType.GetOutOfJail);
 	}
 
 	@Override

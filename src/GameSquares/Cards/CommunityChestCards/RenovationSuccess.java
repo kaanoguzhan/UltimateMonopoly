@@ -16,7 +16,7 @@ public class RenovationSuccess extends CommunityChestCard implements Serializabl
 	@Override
 	public void onDraw(Player pl) {
 		new MessageDisplayer(toString());
-		pl.addToInventory(CommunityChestCardType.RenovationSuccess);
+		pl.addToInventoryCC(CommunityChestCardType.RenovationSuccess);
 	}
 	
 	@Override

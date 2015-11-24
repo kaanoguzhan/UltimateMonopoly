@@ -16,7 +16,7 @@ public class BargainBusiness extends CommunityChestCard implements Serializable 
 	@Override
 	public void onDraw(Player pl) {
 		new MessageDisplayer(toString());
-		pl.addToInventory(CommunityChestCardType.BargainBusiness);
+		pl.addToInventoryCC(CommunityChestCardType.BargainBusiness);
 	}
 	
 	@Override
