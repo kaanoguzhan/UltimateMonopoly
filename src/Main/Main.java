@@ -102,7 +102,7 @@ public class Main {
 		gameSquares[3] = new Land(3, "Baltic Avenue", color.puple, 60, 4)
 			.addDeedInfo(20, 60, 180, 320, 450, 950, 30, 50);
 		gameSquares[4] = new IncomeTax(4);
-		gameSquares[5] = new TransitStation(5, 47);
+		gameSquares[5] = new TransitStation(5, 47, "Reading");
 		gameSquares[6] = new Land(6, "Oriental Avenue", color.lightBlue, 100, 6)
 			.addDeedInfo(30, 90, 270, 400, 550, 1050, 50, 50);
 		gameSquares[7] = new Chance(7, chanceDeck, players);
@@ -117,7 +117,7 @@ public class Main {
 			.addDeedInfo(50, 150, 450, 625, 750, 1250, 70, 100);
 		gameSquares[14] = new Land(14, "Virginia Avenue", color.pink, 160, 12)
 			.addDeedInfo(60, 180, 500, 700, 900, 1400, 80, 100);
-		gameSquares[15] = new TransitStation(15, 105);
+		gameSquares[15] = new TransitStation(15, 105, "Pennsylvania");
 		gameSquares[16] = new Land(16, "St. James Place", color.orange, 180, 14)
 			.addDeedInfo(70, 200, 550, 750, 950, 1450, 90, 100);
 		gameSquares[17] = new CommunityChest(17, communityDeck);
@@ -133,7 +133,7 @@ public class Main {
 			.addDeedInfo(90, 250, 700, 875, 1050, 2050, 110, 150);
 		gameSquares[24] = new Land(24, "Illinois Avenue", color.red, 240, 20)
 			.addDeedInfo(100, 300, 750, 925, 1100, 2100, 120, 150);
-		gameSquares[25] = new TransitStation(25, 75);
+		gameSquares[25] = new TransitStation(25, 75, "Short Line");
 		gameSquares[26] = new Land(26, "Atlantic Avenue", color.yellow, 260, 22)
 			.addDeedInfo(110, 330, 800, 975, 1050, 2150, 130, 150);
 		gameSquares[27] = new Land(27, "Ventnor Avenue", color.yellow, 260, 22)
@@ -149,7 +149,7 @@ public class Main {
 		gameSquares[33] = new CommunityChest(33, communityDeck);
 		gameSquares[34] = new Land(34, "Pennsylvania Avenue", color.green, 320, 28)
 			.addDeedInfo(150, 450, 1000, 1200, 1400, 2400, 160, 200);
-		gameSquares[35] = new TransitStation(35, 117);
+		gameSquares[35] = new TransitStation(35, 117, "B&O");
 		gameSquares[36] = new Chance(36, chanceDeck, players);
 		gameSquares[37] = new Land(37, "Park Place", color.blue, 350, 35)
 			.addDeedInfo(175, 500, 1100, 1300, 1500, 2500, 175, 200);
@@ -166,7 +166,7 @@ public class Main {
 			.addDeedInfo(15, 45, 120, 240, 350, 850, 30, 50);
 		gameSquares[45] = new BusTicketSquare(45);
 		gameSquares[46] = new Cab(46, "Checker");
-		gameSquares[47] = new TransitStation(47, 5);
+		gameSquares[47] = new TransitStation(47, 5, "Reading");
 		gameSquares[48] = new Land(48, "Esplanade Avenue", color.lightGreen, 90, 5)
 			.addDeedInfo(25, 80, 225, 360, 600, 1000, 50, 50);
 		gameSquares[49] = new Land(49, "Canal Street", color.lightGreen, 90, 5)
@@ -210,7 +210,7 @@ public class Main {
 		gameSquares[73] = new Land(73, "Michigan Avenue", color.magenta, 300, 26)
 			.addDeedInfo(130, 390, 900, 1100, 1275, 2275, 120, 150);
 		gameSquares[74] = new Cab(74, "Yellow");
-		gameSquares[75] = new TransitStation(75, 25);
+		gameSquares[75] = new TransitStation(75, 25, "Short Line");
 		gameSquares[76] = new CommunityChest(76, communityDeck);
 		gameSquares[77] = new Land(77, "South Temple", color.gold, 330, 32)
 			.addDeedInfo(160, 470, 1050, 2250, 1500, 2500, 130, 200);
@@ -256,7 +256,7 @@ public class Main {
 			.addDeedInfo(160, 470, 1050, 1250, 1500, 2500, 165, 200);
 		gameSquares[104] = new Land(104, "NewBurly Street", color.black, 380, 40)
 			.addDeedInfo(185, 550, 1200, 1500, 1700, 2700, 190, 200);
-		gameSquares[105] = new TransitStation(105, 15);
+		gameSquares[105] = new TransitStation(105, 15, "Pennsylvania");
 		gameSquares[106] = new Land(106, "Fift Avenue", color.grey, 430, 60)
 			.addDeedInfo(220, 650, 1500, 1800, 2100, 3600, 215, 300);
 		gameSquares[107] = new Land(107, "Madison Avenue", color.grey, 430, 60)
@@ -274,7 +274,7 @@ public class Main {
 			.addDeedInfo(45, 120, 320, 500, 700, 1200, 65, 50);
 		gameSquares[116] = new Land(116, "Biscayne Avenue", color.brown, 150, 11)
 			.addDeedInfo(55, 160, 475, 650, 800, 1300, 75, 50);
-		gameSquares[117] = new TransitStation(117, 35);
+		gameSquares[117] = new TransitStation(117, 35, "B&O");
 		gameSquares[118] = new ReverseDirection(118);
 		gameSquares[119] = new Land(119, "Lombard Street", color.white, 210, 17)
 			.addDeedInfo(85, 240, 475, 670, 1025, 1525, 105, 100);
