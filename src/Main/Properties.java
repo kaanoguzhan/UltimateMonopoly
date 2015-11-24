@@ -24,4 +24,7 @@ public class Properties {
 	public static final int	PAYDAY_ODD				= 300;
 	public static final int	PAYDAY_EVEN				= 400;
 	public static final int	START_PASSING_MONEY		= 200;
+	
+	
+	public static final int	UTILITY_MONEY			= 150;
 }

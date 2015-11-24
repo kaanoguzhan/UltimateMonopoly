@@ -1,5 +1,7 @@
-package GameSquares;
+package GameSquares.Utilities;
 
+import GameSquares.GameSquare;
+import GameSquares.GameSquare.type;
 import Main.Player;
 
 public class ElectricCompany extends GameSquare {

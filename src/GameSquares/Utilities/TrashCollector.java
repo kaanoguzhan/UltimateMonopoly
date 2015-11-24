@@ -1,12 +1,14 @@
-package GameSquares;
+package GameSquares.Utilities;
 
+import GameSquares.GameSquare;
+import GameSquares.GameSquare.type;
 import Main.Player;
 
-public class GasCompany extends GameSquare {
+public class TrashCollector extends GameSquare {
 	private static final long	serialVersionUID	= 1L;
 
-	public GasCompany(int id) {
-		super(id, type.GasCompany);
+	public TrashCollector(int id) {
+		super(id, type.ThrashCollector);
 		// TODO Auto-generated constructor stub
 	}
 	

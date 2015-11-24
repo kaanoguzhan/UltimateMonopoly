@@ -48,7 +48,7 @@ public class PlayerInfo extends JPanel {
 	}
 	
 	public void refreshData() {
-		recreateTable();
+		// recreateTable();
 		for (int i = 0; i < Main.players.length; i++) {
 			Player current = Main.players[i];
 			String lands = "";

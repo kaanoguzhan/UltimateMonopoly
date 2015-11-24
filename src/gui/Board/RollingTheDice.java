@@ -3,6 +3,7 @@ package gui.Board;
 import gui.Dice;
 import gui.AdditionalWindows.InputReaders.GetOneOption;
 import gui.AdditionalWindows.InputReaders.GetTextInput;
+import gui.Debug.BoardTab;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -79,6 +80,12 @@ public class RollingTheDice extends JPanel implements ActionListener {
 			int roll1 = roll[0];
 			int roll2 = roll[1];
 			int rollSpeed = roll[2];
+			
+			if (BoardTab.chckbxSetDice.isSelected()) {
+				roll1 = Integer.parseInt(BoardTab.txtDie1.getText());
+				roll2 = Integer.parseInt(BoardTab.txtDie2.getText());
+				rollSpeed = Integer.parseInt(BoardTab.txtSpeedDie.getText());
+			}
 			
 			result.setText("<html>Dice: " + roll1 + "," + roll2 + "<br>" + "SpeedDie: " + rollSpeed + "</html>");
 			if (!(roll1 == roll2 && roll2 == rollSpeed)) {
@@ -179,7 +186,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
 		Board.informationTable.refreshData();
 		Board.informationTable.validate();
 	}
-	
 	private void movePlayer(int amount) {
 		player.moveBy(amount);
 		

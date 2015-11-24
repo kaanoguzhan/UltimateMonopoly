@@ -1,12 +1,14 @@
-package GameSquares;
+package GameSquares.Utilities;
 
+import GameSquares.GameSquare;
+import GameSquares.GameSquare.type;
 import Main.Player;
 
-public class SewageSystem extends GameSquare {
+public class InternetServiceProvider extends GameSquare {
 	private static final long	serialVersionUID	= 1L;
-	
-	public SewageSystem(int id) {
-		super(id, type.SewegeSystem);
+
+	public InternetServiceProvider(int id) {
+		super(id, type.InternetServiceProvider);
 		// TODO Auto-generated constructor stub
 	}
 	
