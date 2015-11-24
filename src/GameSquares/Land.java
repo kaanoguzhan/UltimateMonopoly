@@ -121,7 +121,7 @@ public class Land extends GameSquare implements Ownable {
 
 	public void buildHouse(Player pl) {
 		if (pl.getMoney() >= rentAndPriceMap.get(state.buildingCost)) {
-			if (mojorityOwnership()) {
+			if (majorityOwnership()) {
 				boolean built = true;
 				if (currentState == state.unImproved)
 					currentState = state.house;
@@ -210,6 +210,9 @@ public class Land extends GameSquare implements Ownable {
 	}
 
 	public void downgrade() {
+		if(currentState == state.unImproved){
+			//
+		}
 		if (currentState == state.house)
 			currentState = state.unImproved;
 		else if (currentState == state.twoHouse)
@@ -327,12 +330,12 @@ public class Land extends GameSquare implements Ownable {
 			totalRent = 0;
 		else if (owner.getNumberOfOwnedByColor(this.color) == landsOfThisColor())
 			totalRent *= 3; // Monopoly
-		else if (mojorityOwnership())
+		else if (majorityOwnership())
 			totalRent *= 2; // majority ownership
 		return totalRent;
 	}
 
-	public boolean mojorityOwnership() {
+	public boolean majorityOwnership() {
 		return owner.getNumberOfOwnedByColor(color) > landsOfThisColor() / 2;
 	}
 
