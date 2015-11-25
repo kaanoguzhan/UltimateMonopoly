@@ -6,7 +6,7 @@ import GameSquares.Cards.CommunityChestCards.HouseCondemned;
 import GameSquares.Cards.CommunityChestCards.OnlinePricing;
 import GameSquares.Cards.CommunityChestCards.StreetRepair;
 
-public class CommunityChestDeck implements Serializable {
+public class CommunityChestDeck implements Serializable, Deck {
 	private static final long		serialVersionUID	= 1L;
 	private CommunityChestCard[]	cards				= null;
 	
@@ -20,5 +20,9 @@ public class CommunityChestDeck implements Serializable {
 	
 	public CommunityChestCard draw() {
 		return cards[new Random().nextInt(cards.length)];
+	}
+	
+	public CommunityChestCard[] getDeck() {
+		return cards;
 	}
 }

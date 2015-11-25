@@ -1,8 +1,6 @@
 package gui.Debug;
 
 import java.awt.Choice;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -11,6 +9,8 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import GameSquares.Land;
 import GameSquares.Ownable;
+import GameSquares.Cards.ChanceCard;
+import GameSquares.Cards.CommunityChestCard;
 import Main.Admin;
 import Main.Main;
 import Main.Player;
@@ -20,7 +20,7 @@ public class DicePanel extends JPanel {
 	public static int			Die1, Die2, SpeedDie;
 	public static boolean		chcbxTicked;
 	public static boolean		chcbxExist			= false;
-	public static Choice		choice;
+	public static Choice		chcOwnables;
 	public static int			currentPlayerID;
 	
 	public DicePanel() {
@@ -57,26 +57,22 @@ public class DicePanel extends JPanel {
 		add(chckbxSetDice);
 		chcbxExist = true;
 		
-		choice = new Choice();
-		choice.setBounds(237, 58, 261, 20);
-		add(choice);
+		chcOwnables = new Choice();
+		chcOwnables.setBounds(237, 58, 261, 20);
+		add(chcOwnables);
 		
 		JButton btnNewButton = new JButton("Upgrade");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.upgradeOwnable(choice.getSelectedItem());
-				Debug.refreshLands();
-			}
+		btnNewButton.addActionListener(al -> {
+			Admin.upgradeOwnable(chcOwnables.getSelectedItem());
+			Debug.refreshLands();
 		});
 		btnNewButton.setBounds(504, 56, 110, 28);
 		add(btnNewButton);
 		
 		JButton btnDowngrade = new JButton("Downgrade");
-		btnDowngrade.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Admin.downgradeOwnable(choice.getSelectedItem());
-				Debug.refreshLands();
-			}
+		btnDowngrade.addActionListener(al -> {
+			Admin.downgradeOwnable(chcOwnables.getSelectedItem());
+			Debug.refreshLands();
 		});
 		btnDowngrade.setBounds(504, 84, 110, 28);
 		add(btnDowngrade);
@@ -85,41 +81,55 @@ public class DicePanel extends JPanel {
 		separator.setBounds(12, 45, 602, 2);
 		add(separator);
 		
-		Choice choice_1 = new Choice();
-		choice_1.addItemListener(il -> {
-			fillCombo(choice_1.getSelectedIndex());
+		Choice chcPlayers = new Choice();
+		chcPlayers.addItemListener(il -> {
+			fillCombo(chcPlayers.getSelectedIndex());
 		});
-		choice_1.setBounds(12, 57, 116, 22);
+		chcPlayers.setBounds(12, 57, 116, 22);
 		for (Player pl : Main.players)
-			choice_1.add(pl.getName());
-		add(choice_1);
+			chcPlayers.add(pl.getName());
+		add(chcPlayers);
 		
 		JLabel lblOwnedPropertied = new JLabel("Owned Properties:");
 		lblOwnedPropertied.setBounds(142, 58, 90, 21);
 		add(lblOwnedPropertied);
 		
 		JLabel lblGiveCard = new JLabel("Give Card:");
-		lblGiveCard.setBounds(142, 121, 90, 21);
+		lblGiveCard.setBounds(181, 121, 51, 21);
 		add(lblGiveCard);
 		
-		Choice choice_2 = new Choice();
-		choice_2.setBounds(237, 121, 261, 20);
-		// for (CommunityChestCard ccc : Main.communityDeck)
-		// add(choice_2);
+		Choice chcCards = new Choice();
+		chcCards.setBounds(237, 121, 261, 20);
+		for (ChanceCard ccc : Main.chanceDeck.getDeck())
+			if (ccc.isKeepable())
+				chcCards.add(ccc.getName());
+		for (CommunityChestCard ccc : Main.communityDeck.getDeck())
+			if (ccc.isKeepable())
+				chcCards.add(ccc.getName());
+		add(chcCards);
 		
-		JButton button = new JButton("Downgrade");
-		button.setBounds(504, 118, 110, 28);
-		add(button);
+		JButton btnGive = new JButton("Give");
+		btnGive.addActionListener(al -> {
+			Player pl = Main.players[chcPlayers.getSelectedIndex()];
+			for (ChanceCard cc : Main.chanceDeck.getDeck())
+				if (cc.getName().equals(chcCards.getSelectedItem())) {
+					pl.addToInventoryC(cc.getType());
+				}
+			for (CommunityChestCard ccc : Main.communityDeck.getDeck())
+				if (ccc.getName().equals(chcCards.getSelectedItem()))
+					pl.addToInventoryCC(ccc.getType());
+		});
+		btnGive.setBounds(504, 118, 110, 28);
+		add(btnGive);
 	}
-	
 	private void fillCombo(int playerID) {
-		choice.removeAll();
+		chcOwnables.removeAll();
 		if (Main.players != null && Main.players.length - 1 >= currentPlayerID) {
 			for (Land land : Main.players[playerID].getOwnedLands()) {
-				choice.add(land.getName());
+				chcOwnables.add(land.getName());
 			}
 			for (Ownable ownable : Main.players[playerID].getOwnedSquares()) {
-				choice.add(ownable.getName());
+				chcOwnables.add(ownable.getName());
 			}
 		}
 	}
