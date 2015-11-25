@@ -3,16 +3,15 @@ package gui.Debug;
 import java.awt.Choice;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.beans.PropertyChangeEvent;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import GameSquares.Land;
 import GameSquares.Ownable;
+import Main.Admin;
 import Main.Main;
 import Main.Player;
 
@@ -44,7 +43,7 @@ public class DicePanel extends JPanel {
 		txtSpeedDie.setText(SpeedDie + "");
 		
 		JCheckBox chckbxSetDice = new JCheckBox("Fix Dice");
-		chckbxSetDice.setBounds(392, 9, 113, 25);
+		chckbxSetDice.setBounds(392, 9, 69, 25);
 		chckbxSetDice.addActionListener(al -> {
 			if (chcbxTicked)
 				chcbxTicked = false;
@@ -65,17 +64,21 @@ public class DicePanel extends JPanel {
 		JButton btnNewButton = new JButton("Upgrade");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Admin.upgradeOwnable(choice.getSelectedItem());
+				Debug.refreshLands();
 			}
 		});
-		btnNewButton.setBounds(392, 57, 113, 28);
+		btnNewButton.setBounds(392, 57, 110, 28);
 		add(btnNewButton);
 		
 		JButton btnDowngrade = new JButton("Downgrade");
 		btnDowngrade.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Admin.downgradeOwnable(choice.getSelectedItem());
+				Debug.refreshLands();
 			}
 		});
-		btnDowngrade.setBounds(392, 90, 113, 28);
+		btnDowngrade.setBounds(392, 90, 110, 28);
 		add(btnDowngrade);
 		
 		JSeparator separator = new JSeparator();
@@ -95,10 +98,10 @@ public class DicePanel extends JPanel {
 	private void fillCombo(int playerID) {
 		choice.removeAll();
 		if (Main.players != null && Main.players.length - 1 >= currentPlayerID) {
-			for (Land land : Main.players[currentPlayerID].getOwnedLands()) {
+			for (Land land : Main.players[playerID].getOwnedLands()) {
 				choice.add(land.getName());
 			}
-			for (Ownable ownable : Main.players[currentPlayerID].getOwnedSquares()) {
+			for (Ownable ownable : Main.players[playerID].getOwnedSquares()) {
 				choice.add(ownable.getName());
 			}
 		}

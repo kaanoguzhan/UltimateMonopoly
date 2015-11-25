@@ -9,7 +9,7 @@ public class TransitStation extends GameSquare implements Ownable {
 	private int					price				= Properties.TRANSITSTATION_PRICE;
 	private int					depotCost			= Properties.TRANSITSTATION_DEPOT_COST;
 	private int					rent				= Properties.TRANSITSTATION_RENT;
-	private int					DeportCount			= 0;
+	private int					depotCount			= 0;
 	private int					connectedTransit;
 	private String				name;
 	
@@ -31,11 +31,11 @@ public class TransitStation extends GameSquare implements Ownable {
 					System.out.println("You don't have enough money!");
 			}
 		} else if (this.owner != pl) {
-			pl.pay(this.getOwner(), rent * (int) Math.pow(2, DeportCount));
+			pl.pay(this.getOwner(), rent * (int) Math.pow(2, depotCount));
 		} else if (new GetYesNoInput("Build Train Depot", "Do you want to pay " + depotCost + "$ to build Cab Stand ?")
 			.getValue()) {
 			pl.reduceMoney(depotCost);
-			this.DeportCount++;
+			upgrade();
 		}
 	}
 	
@@ -57,7 +57,22 @@ public class TransitStation extends GameSquare implements Ownable {
 	}
 	
 	@Override
+	public void upgrade() {
+		depotCount++;
+	}
+	
+	@Override
+	public void downgrade() {
+		depotCount--;
+	}
+	
+	@Override
+	public String getUpgradeState() {
+		return "The Transit station from " + id + " to " + connectedTransit + " now has " + depotCount + " Depots";
+	}
+	
+	@Override
 	public String toString() {
-		return "Transit station from " + id + " to " + connectedTransit;
+		return "The Transit station from " + id + " to " + connectedTransit;
 	}
 }

@@ -176,19 +176,52 @@ public class Land extends GameSquare implements Ownable {
 		}
 	}
 	
+	public void upgrade() {
+		switch (currentState) {
+			case unImproved:
+				currentState = state.house;
+				break;
+			case house:
+				currentState = state.twoHouse;
+				break;
+			case twoHouse:
+				currentState = state.threeHouse;
+				break;
+			case threeHouse:
+				currentState = state.fourHouse;
+				break;
+			case fourHouse:
+				currentState = state.hotel;
+				break;
+			case hotel:
+				currentState = state.skyscraper;
+				break;
+			default:
+				System.out.println("No further upgrade possible");
+				break;
+		}
+	}
 	public void downgrade() {
-		if (currentState == state.house)
-			currentState = state.unImproved;
-		else if (currentState == state.twoHouse)
-			currentState = state.house;
-		else if (currentState == state.threeHouse)
-			currentState = state.twoHouse;
-		else if (currentState == state.fourHouse)
-			currentState = state.threeHouse;
-		else if (currentState == state.hotel)
-			currentState = state.fourHouse;
-		else if (currentState == state.skyscraper)
-			currentState = state.hotel;
+		switch (currentState) {
+			case house:
+				currentState = state.unImproved;
+				break;
+			case twoHouse:
+				currentState = state.house;
+				break;
+			case threeHouse:
+				currentState = state.twoHouse;
+				break;
+			case fourHouse:
+				currentState = state.threeHouse;
+				break;
+			case skyscraper:
+				currentState = state.hotel;
+				break;
+			default:
+				System.out.println("No further downgrade possible");
+				break;
+		}
 	}
 	
 	public void sell() {
@@ -228,11 +261,12 @@ public class Land extends GameSquare implements Ownable {
 			|| (currentState == state.threeHouse) || (currentState == state.fourHouse);
 	}
 	
-	public void morgageLand(){
-		if(currentState == state.unImproved){
-			this.owner.addMoney(price/2);
+	public void morgageLand() {
+		if (currentState == state.unImproved) {
+			this.owner.addMoney(price / 2);
 			setState(state.unImproved);
-		}else new MessageDisplayer ("Property must be un improved to morgage");
+		} else
+			new MessageDisplayer("Property must be un improved to morgage");
 	}
 	
 	public boolean isOwned()
@@ -290,7 +324,10 @@ public class Land extends GameSquare implements Ownable {
 		return totalRent;
 	}
 	
-	// ///////////////////////////////////////////////////////////////////////////// //
+	@Override
+	public String getUpgradeState() {
+		return "The land " + name + "'s Upgrade status is  " + currentState;
+	}
 	
 	@Override
 	public String toString() {

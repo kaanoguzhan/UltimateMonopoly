@@ -84,6 +84,20 @@ public class Utility extends GameSquare implements Ownable {
 	}
 	
 	@Override
+	public void upgrade() {
+		System.out.println("No further upgrade possible");
+	}
+	@Override
+	public void downgrade() {
+		System.out.println("No further downgrade possible");
+	}
+	
+	@Override
+	public String getUpgradeState() {
+		return "Utility " + name + " has no Upgrade on it.";
+	}
+	
+	@Override
 	public String toString() {
 		return name;
 	}
