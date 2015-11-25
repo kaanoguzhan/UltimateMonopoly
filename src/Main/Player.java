@@ -181,11 +181,13 @@ public class Player implements Serializable {
 	public void payToPool(int amount) {
 		reduceMoney(amount);
 		Main.pool += amount;
+		System.out.println("pool has "+Main.pool);
 	}
 
 	public void obtainPool() {
 		addMoney(Main.pool * Properties.TAX_REFUND_PERCENT / 100);
-		Main.pool *= (100 - Properties.TAX_REFUND_PERCENT) / 100;
+		Main.pool = Main.pool*(100 - Properties.TAX_REFUND_PERCENT) / 100;
+		System.out.println("pool has "+Main.pool);
 	}
 
 	public void pay(Player player, int amount) {
