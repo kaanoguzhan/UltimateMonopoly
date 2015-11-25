@@ -41,6 +41,15 @@ public class List extends JPanel implements ListSelectionListener, ActionListene
 			listModel.addElement(b);
 		}
 		
+		if (!(squares2.isEmpty())) {
+			GameSquare a = squares2.get(0);
+			if (a instanceof Land)
+				label = new JLabel(((Land) a).toString2());
+			else
+				label = new JLabel(a.toString());
+		} else
+			label = new JLabel();
+		
 		if (!(squares.isEmpty())) {
 			GameSquare a = squares.get(0);
 			if (a instanceof Land)
@@ -50,14 +59,7 @@ public class List extends JPanel implements ListSelectionListener, ActionListene
 		} else
 			label = new JLabel();
 		
-		if (!(squares2.isEmpty())) {
-			GameSquare a = squares2.get(0);
-			if (a instanceof Land)
-				label = new JLabel(((Land) a).toString2());
-			else
-				label = new JLabel(a.toString());
-		} else
-			label = new JLabel();
+		
 		
 		// Create the list and put it in a scroll pane.
 		list = new JList<GameSquare>(listModel);
@@ -91,9 +93,21 @@ public class List extends JPanel implements ListSelectionListener, ActionListene
 			GameSquare a = list.getSelectedValue();
 			
 			if (a instanceof Ownable) {
-				if (!(a == null)) ((Ownable) a).sell();
+				if (!(a == null)) 
+					if(a instanceof Land){
+						if(((Land) a).getState() == state.unImproved){
+					((Land) a).sell();
+					if (index != -1) listModel.remove(index);
+					}  else{
+						((Land) a).downgrade();
+					
+					}		
+					} else {
+						((Ownable) a).sell();
+						if (index != -1) listModel.remove(index);
+					}
 				
-				if (index != -1) listModel.remove(index);
+				
 				
 				int size = listModel.getSize();
 				

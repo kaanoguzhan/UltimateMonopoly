@@ -76,18 +76,16 @@ public class Main {
 				temp = new GetTextInput("How many players?");
 				if (temp.getString().equals("l") || temp.getString().equals("load")) {
 					loadPrevious = true;
-					SaveLoad.load();
-					num0fPlayers = players.length;
-				} else {
-					num0fPlayers = temp.getInt();
-					numberOfPlayers = temp.getString();
+					break;
 				}
+				num0fPlayers = temp.getInt();
+				numberOfPlayers = temp.getString();
 			}
-			if (!loadPrevious)
-				players = new Player[num0fPlayers];
+			players = new Player[num0fPlayers];
 		} catch (Exception e) {}
 		System.out.println("Player initialization is complete...");
 	}
+	
 	private static void initializeDecks() {
 		chanceDeck = new ChanceDeck(players);
 		communityDeck = new CommunityChestDeck();
@@ -141,7 +139,7 @@ public class Main {
 			2150, 130, 150);
 		gameSquares[27] = new Land(27, "Ventnor Avenue", color.yellow, 260, 22).addDeedInfo(110, 330, 800, 975, 1050,
 			2150, 130, 150);
-		gameSquares[28] = new Utility(28, "Water Workd", type.WaterWorks);
+		gameSquares[28] = new Utility(28, "Water Works", type.WaterWorks);
 		gameSquares[29] = new Land(29, "Marvin Gardens", color.yellow, 280, 22).addDeedInfo(120, 360, 850, 1025, 1200,
 			2200, 140, 150);
 		gameSquares[30] = new RollOnce(30);
@@ -292,11 +290,14 @@ public class Main {
 				name = new GetTextInput("Name of player " + (i + 1) + " : ").getString();
 			players[i] = new Player(i, name, gameSquares);
 		}
+		
 		System.out.println("Player Name initialization is complete...");
 	}
 	
 	private static void initializeBoard() {
 		board = new Board(players, gameSquares);
+		if (loadPrevious)
+			SaveLoad.load();
 	}
 	
 	private static void runGame() {
