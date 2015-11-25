@@ -12,8 +12,8 @@ public class SquareHolder {
 	}
 	
 	private void generateSquares() {
-	//	int boardLength = 1025;
-		int boardLength = 675; // 700lük board için, yukardakini sil 
+		int boardLength = 1025;
+	//	int boardLength = 675; // 700lük board için, yukardakini sil 
 		int squareLength  = (int) boardLength/17;
 	
 		int secondTrack = (int) ((boardLength*0.75) + (squareLength*2)); 		
