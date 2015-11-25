@@ -45,7 +45,7 @@ public class Player implements Serializable {
 
 	 public void moveBy(int amount) {
 	        int nextLocation = location + 1;
-	        for(int i=0;i<amount-1;i++){
+	        for(int i=0;i<amount;i++){
 	            
 	            if(amount%2==0){//transit locations
 	                boolean passed = true;
@@ -84,7 +84,7 @@ public class Player implements Serializable {
 	            nextLocation++;                        //update location
 	            
 	        }
-	        location = nextLocation;
+	        location = nextLocation-1;
 	        System.out.println(name + " moved " + amount + " squares and now is at " + gameSquares[location].toString()
 	                + "\n You have: " + money);
 	        if (gameSquares[location] instanceof PayDay)
