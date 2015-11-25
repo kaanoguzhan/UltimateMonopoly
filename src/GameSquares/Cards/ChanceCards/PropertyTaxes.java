@@ -29,8 +29,7 @@ public class PropertyTaxes extends ChanceCard implements Serializable{
 				taxSum+=tax;
 		}
 		
-		pl.reduceMoney(taxSum);
-		Main.Main.pool += taxSum;
+		pl.payToPool(taxSum);
 	}
 
 	@Override

@@ -14,9 +14,9 @@ public class TaxRefund extends GameSquare {
 
 	@Override
 	public void onArrive(Player pl) {
-		pl.obtainPool();
 		System.out.println("Player " + pl.getName() + " recieved "
 				+ Integer.toString(Main.pool * Properties.TAX_REFUND_PERCENT / 100) + " from the pool as tax refund");
+		pl.obtainPool();
 	}
 
 	@Override

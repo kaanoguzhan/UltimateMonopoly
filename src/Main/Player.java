@@ -14,7 +14,7 @@ import GameSquares.Cards.CommunityChest.CommunityChestCardType;
 
 public class Player implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private int id, money, location, jailTime;
+	private int id, money, location, jailTime, doublesRolled;
 	private int jailID = Properties.JailID;
 	private String name;
 	private GameSquare[] gameSquares;
@@ -169,7 +169,7 @@ public class Player implements Serializable {
 			money -= amount;
 			System.out.println(name + "'s money decreased by " + amount + " to " + money);
 		} else if (ownedLands.size() > 0) {
-			gui.AdditionalWindows.List.createAndShowGUI(ownedLands,ownedSquares);
+			gui.AdditionalWindows.List.createAndShowGUI(ownedLands, ownedSquares);
 			reduceMoney(amount);
 		} else {
 			location = Properties.HEAVEN_ID;
@@ -181,11 +181,13 @@ public class Player implements Serializable {
 	public void payToPool(int amount) {
 		reduceMoney(amount);
 		Main.pool += amount;
+		System.out.println("pool has " + Main.pool);
 	}
 
 	public void obtainPool() {
 		addMoney(Main.pool * Properties.TAX_REFUND_PERCENT / 100);
-		Main.pool *= (100 - Properties.TAX_REFUND_PERCENT) / 100;
+		Main.pool = Main.pool * (100 - Properties.TAX_REFUND_PERCENT) / 100;
+		System.out.println("pool has " + Main.pool);
 	}
 
 	public void pay(Player player, int amount) {
@@ -382,8 +384,7 @@ public class Player implements Serializable {
 	public boolean isReleaseTime() {
 		if (jailTime == 0)
 			return true;
-		else
-			return false;
+		return false;
 	}
 
 	public int getJailTime() {
@@ -392,7 +393,24 @@ public class Player implements Serializable {
 
 	public void reduceJailTime() {
 		jailTime--;
+	}
 
+	public void resetDoublesRolled() {
+		doublesRolled = 0;
+	}
+
+	public boolean isThirdDoubles() {
+		if (doublesRolled == 3)
+			return true;
+		return false;
+	}
+
+	public int getDoublesRolled() {
+		return doublesRolled;
+	}
+
+	public void doublesRolled() {
+		doublesRolled++;
 	}
 
 	public int numOfOwnedUtilities() {

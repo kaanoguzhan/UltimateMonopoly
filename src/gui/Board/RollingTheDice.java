@@ -21,8 +21,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 	private static final long	serialVersionUID	= 1L;
 	private JLabel				playerName, result, dice, whichPlayer;
 	private JButton				button, end, sell;
-	private boolean				rolledDoubles		= false, getOutOfJail = false;
-	private int					doublesRolled		= 0;
+	private boolean				getOutOfJail		= false;
 	private Player				player;
 	
 	public RollingTheDice() {
@@ -67,8 +66,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
-		sell.setEnabled(!player.getOwnedLands().isEmpty() || !player.getOwnedSquares().isEmpty());
-		
+		sell.setEnabled(!player.getOwnedLands().isEmpty());
 		whichPlayer.setText((player.getName() + " is playing"));
 		whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
 			.getPreferredSize().getHeight()));
@@ -145,25 +143,23 @@ public class RollingTheDice extends JPanel implements ActionListener {
 				
 				result.setText("<html>Dice: " + roll1 + "," + roll2 + "<br>" + "SpeedDie: " + rollSpeed + "</html>");
 				
-				if (!(roll1 == roll2 && roll2 == rollSpeed)) {
+				if (roll1 != roll2) {
 					if (Dice.isMonopolyGuy()) {
 						
 						boolean even = false;
-						if((roll1+roll2) % 2 == 0) 
-							even= true;						
+						if ((roll1 + roll2) % 2 == 0)
+							even = true;
 						
 						movePlayer(roll1 + roll2);
 						new gui.AdditionalWindows.MessageDisplayer(" You rolled MonopolyGuy !");
-						
-						if (Admin.allLandsOwned()){
-							Admin.movePlayerToNextLand(player.getID(),even);
+						if (Admin.allLandsOwned()) {
+							Admin.movePlayerToNextLand(player.getID(), even);
 						}
 						else
-							Admin.movePlayerToNextNeutralLand(player.getID(),even);
-						
+							Admin.movePlayerToNextNeutralLand(player.getID(), even);
 						if (roll1 != roll2) {
+							player.resetDoublesRolled();
 							end.setEnabled(true);
-							doublesRolled = 0;
 						}
 					} else if (Dice.isBus()) {
 						new gui.AdditionalWindows.MessageDisplayer(" You rolled Bus !");
@@ -180,14 +176,12 @@ public class RollingTheDice extends JPanel implements ActionListener {
 						
 						if (roll1 != roll2) {
 							end.setEnabled(true);
-							doublesRolled = 0;
+							player.resetDoublesRolled();
 						}
 					} else {
 						movePlayer(roll1 + roll2 + rollSpeed);
-						if (roll1 != roll2) {
-							end.setEnabled(true);
-							doublesRolled = 0;
-						}
+						player.resetDoublesRolled();
+						end.setEnabled(true);
 					}
 				}
 				if (roll1 == roll2) {
@@ -203,27 +197,55 @@ public class RollingTheDice extends JPanel implements ActionListener {
 						int current = player.getLocation();
 						Admin.movePlayerBy(player.getID(), ((moveTo - current) % 20));
 						
+						player.resetDoublesRolled();
 						end.setEnabled(true);
-						doublesRolled = 0;
 					} else {
-						rolledDoubles = true;
-						doublesRolled++;
-						if (doublesRolled == 3) {
-							rolledDoubles = false;
-							doublesRolled = 0;
+						player.doublesRolled();
+						if (player.isThirdDoubles()) {
+							player.resetDoublesRolled();
 							new gui.AdditionalWindows.MessageDisplayer(
 								"This is your third doubles, now you will go to jail !");
 							player.goToJail();
 							button.setEnabled(false);
 							end.setEnabled(true);
 						} else {
-							new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
-							button.setEnabled(true);
+							if (Dice.isMonopolyGuy()) {
+								movePlayer(roll1 + roll2);
+								new gui.AdditionalWindows.MessageDisplayer(" You rolled MonopolyGuy !");
+								
+								boolean even = false;
+								if ((roll1 + roll2) % 2 == 0)
+									even = true;
+								
+								if (Admin.allLandsOwned())
+									Admin.movePlayerToNextLand(player.getID(), even);
+								else
+									Admin.movePlayerToNextNeutralLand(player.getID(), even);
+								new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
+								button.setEnabled(true);
+							} else if (Dice.isBus()) {
+								new gui.AdditionalWindows.MessageDisplayer(" You rolled Bus !");
+								
+								int option = new GetOneOption(roll1, roll2, roll1 + roll2,
+									"How many squares would you like to move?").getResponse();
+								
+								if (option == 0)
+									movePlayer(roll1);
+								if (option == 1)
+									movePlayer(roll2);
+								if (option == 2)
+									movePlayer(roll1 + roll2);
+								new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
+								button.setEnabled(true);
+							} else {
+								movePlayer(roll1 + roll2 + rollSpeed);
+								new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
+								button.setEnabled(true);
+							}
 						}
 					}
 				} else {
-					rolledDoubles = false;
-					doublesRolled = 0;
+					player.resetDoublesRolled();
 					end.setEnabled(true);
 				}
 			}
@@ -235,9 +257,9 @@ public class RollingTheDice extends JPanel implements ActionListener {
 				.getPreferredSize().getHeight()));
 			sell.setEnabled(false);
 		} else if (arg0.getSource() == sell) {
-			gui.AdditionalWindows.List.createAndShowGUI(player.getOwnedLands(),player.getOwnedSquares());
+			gui.AdditionalWindows.List.createAndShowGUI(player.getOwnedLands(), player.getOwnedSquares());
 			
-			if (!rolledDoubles) {
+			if (player.getDoublesRolled() == 0) {
 				button.setEnabled(false);
 				end.setEnabled(true);
 			} else {
