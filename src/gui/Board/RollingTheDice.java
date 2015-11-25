@@ -144,7 +144,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 
 				result.setText("<html>Dice: " + roll1 + "," + roll2 + "<br>" + "SpeedDie: " + rollSpeed + "</html>");
 
-				if (!(roll1 == roll2 && roll2 == rollSpeed)) {
+				if (roll1 != roll2) {
 					if (Dice.isMonopolyGuy()) {
 						movePlayer(roll1 + roll2);
 						new gui.AdditionalWindows.MessageDisplayer(" You rolled MonopolyGuy !");
@@ -177,10 +177,8 @@ public class RollingTheDice extends JPanel implements ActionListener {
 						}
 					} else {
 						movePlayer(roll1 + roll2 + rollSpeed);
-						if (roll1 != roll2) {
-							player.resetDoublesRolled();
-							end.setEnabled(true);
-						}
+						player.resetDoublesRolled();
+						end.setEnabled(true);
 					}
 				}
 				if (roll1 == roll2) {
@@ -208,6 +206,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 							button.setEnabled(false);
 							end.setEnabled(true);
 						} else {
+							movePlayer(roll1 + roll2 + rollSpeed);
 							new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
 							button.setEnabled(true);
 						}
