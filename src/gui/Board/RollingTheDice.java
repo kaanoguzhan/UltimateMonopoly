@@ -4,7 +4,7 @@ import gui.Dice;
 import gui.AdditionalWindows.InputReaders.GetOneOption;
 import gui.AdditionalWindows.InputReaders.GetTextInput;
 import gui.AdditionalWindows.InputReaders.GetYesNoInput;
-import gui.Debug.DicePanel;
+import gui.Debug.DiceTab;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -67,7 +67,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
-		sell.setEnabled(!player.getOwnedLands().isEmpty());
+		sell.setEnabled(!player.getOwnedLands().isEmpty() || !player.getOwnedSquares().isEmpty());
 		
 		whichPlayer.setText((player.getName() + " is playing"));
 		whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
@@ -120,10 +120,10 @@ public class RollingTheDice extends JPanel implements ActionListener {
 				int roll2 = roll[1];
 				int rollSpeed = roll[2];
 				
-				if (DicePanel.chcbxExist && DicePanel.chcbxTicked) {
-					roll1 = DicePanel.Die1;
-					roll2 = DicePanel.Die2;
-					rollSpeed = DicePanel.SpeedDie;
+				if (DiceTab.chcbxExist && DiceTab.chcbxTicked) {
+					roll1 = DiceTab.Die1;
+					roll2 = DiceTab.Die2;
+					rollSpeed = DiceTab.SpeedDie;
 					switch (rollSpeed) {
 						case 1:
 						case 2:
@@ -147,13 +147,19 @@ public class RollingTheDice extends JPanel implements ActionListener {
 				
 				if (!(roll1 == roll2 && roll2 == rollSpeed)) {
 					if (Dice.isMonopolyGuy()) {
+						
+						boolean even = false;
+						if((roll1+roll2) % 2 == 0) 
+							even= true;						
+						
 						movePlayer(roll1 + roll2);
 						new gui.AdditionalWindows.MessageDisplayer(" You rolled MonopolyGuy !");
 						
-						if (Admin.allLandsOwned())
-							Admin.movePlayerToNextLand(player.getID());
+						if (Admin.allLandsOwned()){
+							Admin.movePlayerToNextLand(player.getID(),even);
+						}
 						else
-							Admin.movePlayerToNextNeutralLand(player.getID());
+							Admin.movePlayerToNextNeutralLand(player.getID(),even);
 						
 						if (roll1 != roll2) {
 							end.setEnabled(true);
@@ -240,7 +246,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 			
 		}
 		
-		PlayerInfo.refreshData();
+		Board.informationTable.refreshData();
 		Board.informationTable.validate();
 	}
 	
@@ -275,7 +281,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 		}
 		
 		playerName.setBounds(x, y, 50, 40);
-		PlayerInfo.refreshData();
+		Board.informationTable.refreshData();
 	}
 	
 	public void setCurrentPlayer(Player player) {
@@ -302,7 +308,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 				break;
 		}
 		
-		PlayerInfo.refreshData();
+		Board.informationTable.refreshData();
 		Board.informationTable.validate();
 	}
 }

@@ -58,7 +58,7 @@ public class Utility extends GameSquare implements Ownable {
 				}
 				System.out.println("This Utility is owned by " + owner.getName());
 				
-				if(!isMortgaged()) pl.pay(owner, totalRent);
+				pl.pay(owner, totalRent);
 			}
 			else
 				System.out.println("Player already owns this land!");
@@ -103,21 +103,13 @@ public class Utility extends GameSquare implements Ownable {
 	}
 	
 	@Override
-	public void upgrade() {
-		System.out.println("No further upgrade possible");
-	}
-	@Override
-	public void downgrade() {
-		System.out.println("No further downgrade possible");
-	}
-	
-	@Override
-	public String getUpgradeState() {
-		return "Utility " + name + " has no Upgrade on it.";
-	}
-	
-	@Override
 	public String toString() {
 		return name;
+	}
+	public boolean isOwned() {
+		if (this.owner != null)
+			return true;
+		else
+			return false;
 	}
 }

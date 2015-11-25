@@ -33,7 +33,7 @@ public class Cab extends GameSquare implements Ownable {
 					System.out.println("You don't have enough money!");
 			}
 		} else if (this.owner != pl) {
-			if (cabStand && !isMortgaged())
+			if (cabStand)
 				pl.pay(this.getOwner(), 2 * rideCost);
 			else
 				pl.pay(this.getOwner(), rideCost);
@@ -43,6 +43,14 @@ public class Cab extends GameSquare implements Ownable {
 				pl.pay(this.getOwner(), rideCost);
 			}
 		} else {
+			if (!cabStand) {
+				if (new GetYesNoInput("Build Cab Stand", "Do you want to pay 150$ to build Cab Stand ?")
+					.getValue()) {
+					pl.reduceMoney(cabStandCost);
+					this.cabStand = true;
+				}
+			}
+			
 			boolean useCab = new GetYesNoInput("You own " + name + " cab !",
 				"Do you want to pay 20$ to take the cab ?")
 				.getValue();
@@ -50,13 +58,7 @@ public class Cab extends GameSquare implements Ownable {
 				pl.reduceMoney(ownedRideCost);
 				Main.Main.pool += ownedRideCost;
 				playerUseCab(pl);
-			} else if (!cabStand) {
-				if (new GetYesNoInput("Build Cab Stand", "Do you want to pay 150$ to build Cab Stand ?")
-					.getValue()) {
-					pl.reduceMoney(cabStandCost);
-					upgrade();
-				}
-			}
+			} 
 		}
 	}
 	
@@ -115,28 +117,13 @@ public class Cab extends GameSquare implements Ownable {
 	}
 	
 	@Override
-	public void upgrade() {
-		if (cabStand)
-			System.out.println("No further upgrade possible");
-		else
-			cabStand = true;
-	}
-	
-	@Override
-	public void downgrade() {
-		if (cabStand)
-			cabStand = false;
-		else
-			System.out.println("No further downgrade possible");
-	}
-	
-	@Override
-	public String getUpgradeState() {
-		return name + "Cab Co. has a Cab Stand.";
-	}
-	
-	@Override
 	public String toString() {
 		return name + "Cab Co";
+	}
+	public boolean isOwned() {
+		if (this.owner != null)
+			return true;
+		else
+			return false;
 	}
 }
