@@ -11,9 +11,9 @@ public class CommunityChestDeck implements Serializable {
 	private CommunityChestCard[]	cards				= null;
 	
 	public CommunityChestDeck() {
-		CommunityChestCard[] cards = { //new BargainBusiness(), 
-				new HouseCondemned(), new OnlinePricing(),
-				//new RecieveConsultancyFee(), new RenovationSuccess(), 
+		CommunityChestCard[] cards = {				// new BargainBusiness(),
+		new HouseCondemned(), new OnlinePricing(),
+				// new RecieveConsultancyFee(), new RenovationSuccess(),
 				new StreetRepair() };
 		this.cards = cards;
 	}

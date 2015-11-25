@@ -182,7 +182,6 @@ public class Admin extends Main {
 						Main.players[playerID].getOwnership(Main.gameSquares[((TransitStation) gameSquare)
 							.getConnectedTransit()]);
 					}
-					
 					break;
 				}
 		}
@@ -211,9 +210,7 @@ public class Admin extends Main {
 					removeOwnershipExec(pl, ownbl);
 				}
 			return;
-			
 		}
-		
 		removeOwnershipExec(pl, ownbl);
 	}
 	private static void removeOwnershipExec(Player pl, Ownable ownbl) {
@@ -348,7 +345,6 @@ public class Admin extends Main {
 				else if (currentCheck == 75)
 					currentCheck = 25;
 				else if (currentCheck == 117) currentCheck = 35;
-				
 			}
 			if (currentCheck == 39)
 				currentCheck = 0;
@@ -380,7 +376,6 @@ public class Admin extends Main {
 	
 	// Moves PLAYER to NEXT LAND
 	public static void movePlayerToNextLand(int playerID, boolean even) {
-		
 		int start = Main.players[playerID].getLocation();
 		int currentCheck = start + 1;
 		while (currentCheck != start) {
@@ -401,7 +396,6 @@ public class Admin extends Main {
 				else if (currentCheck == 75)
 					currentCheck = 25;
 				else if (currentCheck == 117) currentCheck = 35;
-				
 			}
 			
 			if (currentCheck == 39)
@@ -418,7 +412,6 @@ public class Admin extends Main {
 			}
 			currentCheck++;
 		}
-		
 	}
 	
 	/************************/
@@ -453,13 +446,12 @@ public class Admin extends Main {
 	}
 	
 	// Checks if all LAND's are OWNED
-	
 	public static boolean allLandsOwned() {
-		for (GameSquare currentLand : Main.gameSquares) {
-			if (currentLand instanceof Ownable && !((Ownable) currentLand).isOwned()) { return false; }
-		}
+		for (GameSquare currentLand : Main.gameSquares)
+			if (currentLand instanceof Ownable && !((Ownable) currentLand).isOwned()) return false;
 		return true;
 	}
+	
 	/*********************/
 	/** General methods **/
 	/*********************/

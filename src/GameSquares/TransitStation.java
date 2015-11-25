@@ -27,6 +27,7 @@ public class TransitStation extends GameSquare implements Ownable {
 				.getValue();
 			if (buy) {
 				if (pl.getMoney() >= price) {
+					
 					pl.buySquare(this);
 					pl.buySquare(Main.Main.gameSquares[connectedTransit]);
 				}

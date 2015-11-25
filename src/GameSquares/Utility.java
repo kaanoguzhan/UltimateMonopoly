@@ -101,11 +101,11 @@ public class Utility extends GameSquare implements Ownable {
 	public String getName() {
 		return name;
 	}
+	
 	public boolean isOwned() {
 		if (this.owner != null)
 			return true;
-		else
-			return false;
+		return false;
 	}
 	
 	@Override

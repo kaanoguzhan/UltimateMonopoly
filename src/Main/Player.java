@@ -43,106 +43,58 @@ public class Player implements Serializable {
 		this.gameSquares = gameSquares;
 	}
 
-	public void moveBy(int amount) {
-		int projectedLocation = location + amount;
-		if (projectedLocation > 119)
-			projectedLocation -= 24;
-		if (location < 68) {
-			if (projectedLocation > 68) {
-				System.out.println(name + " passed Pay Day Square.");
-				if (amount % 2 != 0)
-					addMoney(Properties.PAYDAY_ODD);
-				addMoney(Properties.PAYDAY_EVEN);
-			}
-		}
-
-		if (location < 102 || location >= 111) {
-
-			if (projectedLocation > 102) {
-				System.out.println(name + " passed Bonus Square.");
-				addMoney(Properties.BONUS_PASSING_MONEY);
-			}
-		}
-
-		if (location < 40) {
-			if (projectedLocation > 40) {
-				location = projectedLocation - 40;
-				System.out.println(name + " passed Start Square.");
-				addMoney(Properties.START_PASSING_MONEY);
-			}
-
-			if (projectedLocation > 35) {
-				location = projectedLocation;
-				if (amount % 2 == 0) {
-					location += (117 - 35);
-					System.out.println(name + " passed transit station");
-				}
-			} else if (projectedLocation > 25) {
-				location = projectedLocation;
-				if (amount % 2 == 0) {
-					location += (75 - 25);
-					System.out.println(name + " passed transit station");
-				}
-			} else if (projectedLocation > 15) {
-				location = projectedLocation;
-				if (amount % 2 == 0) {
-					location += (105 - 15);
-					System.out.println(name + " passed transit station");
-				}
-			} else if (projectedLocation > 5) {
-				location = projectedLocation;
-				if (amount % 2 == 0) {
-					location += (47 - 5);
-					System.out.println(name + " passed transit station");
-				}
-			} else
-				location = projectedLocation;
-		} else if (location < 98) {
-			if (projectedLocation < 75) {
-				location = projectedLocation;
-				if (amount % 2 == 0) {
-					location -= (75 - 25);
-					System.out.println(name + " passed transit station");
-				}
-			} else if (projectedLocation < 47) {
-				location = projectedLocation;
-				if (amount % 2 == 0) {
-					location -= (47 - 5);
-					System.out.println(name + " passed transit station");
-				}
-			} else
-				location = projectedLocation;
-		} else if (location < 120) {
-			if (projectedLocation < 117) {
-				location = projectedLocation;
-				if (amount % 2 == 0) {
-					location -= (117 - 35);
-					if (location > 40) {
-						location = projectedLocation - 40;
-						System.out.println(name + " passed Start Square.");
-						addMoney(Properties.START_PASSING_MONEY);
-					}
-					System.out.println(name + " passed transit station");
-				}
-			} else if (projectedLocation < 105) {
-				location = projectedLocation;
-				if (amount % 2 == 0) {
-					location -= (105 - 15);
-					System.out.println(name + " passed transit station");
-				}
-			} else
-				location = projectedLocation;
-		}
-		System.out.println(name + " moved " + amount + " squares and now is at " + gameSquares[location].toString()
-				+ "\n You have: " + money);
-		if (gameSquares[location] instanceof PayDay)
-			((PayDay) gameSquares[location]).onArrive(this, amount);
-		else if (gameSquares[location] instanceof Utility)
-			// amount = new GetTextInput("sdsd").getInt();
-			((Utility) gameSquares[location]).onArrive(this, amount);
-		else
-			gameSquares[location].onArrive(this);
-	}
+	 public void moveBy(int amount) {
+	        int nextLocation = location + 1;
+	        for(int i=0;i<amount;i++){
+	            
+	            if(amount%2==0){//transit locations
+	                boolean passed = true;
+	                if(nextLocation==5)nextLocation=47;
+	                else if(nextLocation==15)nextLocation=105;
+	                else if(nextLocation==25)nextLocation=75;
+	                else if(nextLocation==35)nextLocation=117;
+	                else if(nextLocation==47)nextLocation=5;
+	                else if(nextLocation==105)nextLocation=15;
+	                else if(nextLocation==75)i=25;
+	                else if(nextLocation==117)nextLocation=35;
+	                else passed = false;
+	                
+	                if(passed)System.out.println(name + " passed transit station");
+	            }
+	            
+	            if(nextLocation==40)nextLocation=0;            //track endings
+	            else if(nextLocation==120)nextLocation=97;
+	            else if(nextLocation==96)nextLocation=40;
+	            
+	            if(nextLocation==0){                //start square
+	                System.out.println(name + " passed Start Square.");
+	                addMoney(Properties.START_PASSING_MONEY);
+	            }
+	            
+	            if(nextLocation==68){                //payday
+	                System.out.println(name + " passed Pay Day Square.");
+	                if (amount % 2 != 0)
+	                    addMoney(Properties.PAYDAY_ODD);
+	                addMoney(Properties.PAYDAY_EVEN);
+	            }
+	            if(nextLocation==102){                //bonus
+	                System.out.println(name + " passed Bonus Square.");
+	                addMoney(Properties.BONUS_PASSING_MONEY);
+	            }
+	            nextLocation++;                        //update location
+	            
+	        }
+	        location = nextLocation-1;
+	        System.out.println(name + " moved " + amount + " squares and now is at " + gameSquares[location].toString()
+	                + "\n You have: " + money);
+	        if (gameSquares[location] instanceof PayDay)
+	            ((PayDay) gameSquares[location]).onArrive(this, amount);
+	        else if (gameSquares[location] instanceof Utility)
+	            // amount = new GetTextInput("sdsd").getInt();
+	            ((Utility) gameSquares[location]).onArrive(this, amount);
+	        else
+	            gameSquares[location].onArrive(this);
+	    }
 
 	public void moveTo(int id) {
 		System.out.println(name + " is at " + gameSquares[id].toString());
