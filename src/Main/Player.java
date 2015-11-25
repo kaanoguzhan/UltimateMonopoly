@@ -8,6 +8,7 @@ import GameSquares.Land;
 import GameSquares.Land.color;
 import GameSquares.Ownable;
 import GameSquares.PayDay;
+import GameSquares.TransitStation;
 import GameSquares.Utility;
 import GameSquares.Cards.Chance.ChanceCardType;
 import GameSquares.Cards.CommunityChest.CommunityChestCardType;
@@ -189,6 +190,9 @@ public class Player implements Serializable {
 
 	public void sellSquare(GameSquare land) {
 		if (land instanceof Ownable && !(land instanceof Land)) {
+			if(land instanceof TransitStation)
+			addMoney(((Ownable) land).getPrice() / 2);
+			else
 			addMoney(((Ownable) land).getPrice());
 			removeOwnership(land);
 			System.out.println(name + " sold " + land + " for " + ((Ownable) land).getPrice());

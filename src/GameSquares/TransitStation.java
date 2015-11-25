@@ -36,9 +36,9 @@ public class TransitStation extends GameSquare implements Ownable {
 			}
 		} else if (this.owner != pl) {
 			if (pl.hasOnlinePricing()) {
-				if (onlinePricing = new GetYesNoInput("You can use OnlinePricing", "Do you want to use it ?")
+				if (onlinePricing = new GetYesNoInput("Online Pricing", "Do you want to use it ?")
 					.getValue())
-					pl.pay(this.getOwner(), rent * (int) Math.pow(2, depotCount) / 2);
+					pl.pay(this.getOwner(), ((rent * (int) Math.pow(2, depotCount)) / 2));
 				pl.removeOnlinePricingCard();
 			}
 			if (!onlinePricing)

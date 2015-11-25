@@ -44,16 +44,14 @@ public class Cab extends GameSquare implements Ownable {
 			}
 		} else {
 			if (!cabStand) {
-				if (new GetYesNoInput("Build Cab Stand", "Do you want to pay 150$ to build Cab Stand ?")
+				if (new GetYesNoInput("Do you want to pay 150$ to build Cab Stand ?","Build Cab Stand")
 					.getValue()) {
 					pl.reduceMoney(cabStandCost);
 					this.cabStand = true;
 				}
 			}
 			
-			boolean useCab = new GetYesNoInput("You own " + name + " cab !",
-				"Do you want to pay 20$ to take the cab ?")
-				.getValue();
+			boolean useCab = new GetYesNoInput("Do you want to pay 20$ to take the cab ?","You own " + name + " cab !").getValue();
 			if (useCab) {
 				pl.reduceMoney(ownedRideCost);
 				Main.Main.pool += ownedRideCost;

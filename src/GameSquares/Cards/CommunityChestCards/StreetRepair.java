@@ -33,7 +33,7 @@ public class StreetRepair extends CommunityChestCard implements Serializable {
 			if ((cabTransits.get(i) instanceof Cab) && (((Cab) cabTransits.get(i)).standed())) {
 				cabTransit++;
 			} else if (cabTransits.get(i) instanceof TransitStation) {
-				cabTransit++;
+				cabTransit+=cabTransit/2;
 			}
 		}
 		for (int i = 0; i < lands.size(); i++) {
@@ -50,8 +50,7 @@ public class StreetRepair extends CommunityChestCard implements Serializable {
 			else if (lands.get(i).getState() == state.skyscraper)
 				skyscrapers += 1;
 		}
-		pl.reduceMoney(cabTransitRepair * cabTransit + houseRepair * houses + hotelRepair * hotels + skyscraperRepair
-				* skyscrapers);
+		pl.reduceMoney(cabTransitRepair * cabTransit + houseRepair * houses + hotelRepair * hotels + skyscraperRepair* skyscrapers);
 	}
 
 	@Override
