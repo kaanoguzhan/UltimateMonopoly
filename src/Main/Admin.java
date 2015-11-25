@@ -182,58 +182,36 @@ public class Admin extends Main {
 		}
 		refreshUI();
 	}
-	// Remove the ownership of OWNABLE from PLAYER
-	public static void removeOwnership(Player player, GameSquare... ownable) {
-		for (GameSquare currentOwnable : ownable) {
-			if (currentOwnable instanceof Ownable) {
-				System.out.println("ADMIN -> Player:" + player.getName()
-					+ "'s ownership is removed from "
-					+ ((Ownable) currentOwnable).getName());
-				player.removeOwnership(currentOwnable);
-			}
-		}
-		refreshUI();
-	}
 	
 	// Remove the ownership of OWNABLE from PLAYER
-	public static void removeOwnership(Player player, int... ownableID) {
-		for (int currentOwnableID : ownableID) {
-			if (Main.gameSquares[currentOwnableID] instanceof Ownable
-				&& Main.gameSquares.length - 1 >= currentOwnableID) {
-				System.out.println("ADMIN -> Player:" + player.getName()
-					+ "'s ownership is removed from "
-					+ ((Ownable) Main.gameSquares[currentOwnableID]).getName());
-				player.removeOwnership(Main.gameSquares[currentOwnableID]);
-			}
-		}
-		refreshUI();
-	}
-	
-	// Remove the ownership of OWNABLE from PLAYER
-	public static void removeOwnership(int playerID, String... ownableName) {
-		for (String currentOwnableName : ownableName) {
+	public static <T> void removeOwnership(T player, T ownable) {
+		// Get Player
+		Player pl = null;
+		if (player instanceof Player)
+			pl = (Player) player;
+		else if (player instanceof Integer && Main.players.length - 1 >= (Integer) player)
+			pl = Main.players[(int) player];
+		
+		// Get Ownable
+		Ownable ownbl = null;
+		if (ownable instanceof Ownable)
+			ownbl = (Ownable) ownable;
+		else if (ownable instanceof Integer && Main.gameSquares.length - 1 >= (Integer) ownable)
+			ownbl = (Ownable) Main.gameSquares[(int) ownable];
+		else if (ownable instanceof String) {
 			for (GameSquare gameSquare : Main.gameSquares)
-				if (gameSquare instanceof Ownable && Main.players.length - 1 >= playerID)
-					if (((Ownable) gameSquare).getName().equals(currentOwnableName)) {
-						System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
-							+ "'s ownership is removed from " + currentOwnableName);
-						Main.players[playerID].removeOwnership(gameSquare);
-					}
+				if (gameSquare instanceof Ownable && ((Ownable) gameSquare).getName().equals(ownable)) {
+					ownbl = (Ownable) gameSquare;
+					removeOwnershipExec(pl, ownbl);
+				}
+			return;
 		}
-		refreshUI();
+		
+		removeOwnershipExec(pl, ownbl);
 	}
-	
-	// Remove the ownership of OWNABLE from PLAYER
-	public static void removeOwnership(int playerID, int... ownableID) {
-		for (int currentOwnableID : ownableID) {
-			if (Main.gameSquares[currentOwnableID] instanceof Ownable &&
-				Main.gameSquares.length - 1 >= currentOwnableID && Main.players.length - 1 >= playerID) {
-				System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
-					+ "'s ownership is removed from "
-					+ ((Ownable) Main.gameSquares[currentOwnableID]).getName());
-				Main.players[playerID].removeOwnership(Main.gameSquares[currentOwnableID]);
-			}
-		}
+	private static void removeOwnershipExec(Player pl, Ownable ownbl) {
+		System.out.println("ADMIN -> Player:" + pl.getName() + "'s ownership is removed from " + ownbl.getName());
+		pl.removeOwnership((GameSquare) ownbl);
 		refreshUI();
 	}
 	

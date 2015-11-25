@@ -13,6 +13,7 @@ import GameSquares.Ownable;
 import Main.Admin;
 import Main.Main;
 import Main.Player;
+import javax.swing.JLabel;
 
 public class DicePanel extends JPanel {
 	private static final long	serialVersionUID	= 1L;
@@ -57,7 +58,7 @@ public class DicePanel extends JPanel {
 		chcbxExist = true;
 		
 		choice = new Choice();
-		choice.setBounds(140, 57, 244, 28);
+		choice.setBounds(235, 58, 263, 20);
 		add(choice);
 		
 		JButton btnNewButton = new JButton("Upgrade");
@@ -67,7 +68,7 @@ public class DicePanel extends JPanel {
 				Debug.refreshLands();
 			}
 		});
-		btnNewButton.setBounds(392, 57, 110, 28);
+		btnNewButton.setBounds(504, 56, 110, 28);
 		add(btnNewButton);
 		
 		JButton btnDowngrade = new JButton("Downgrade");
@@ -77,7 +78,7 @@ public class DicePanel extends JPanel {
 				Debug.refreshLands();
 			}
 		});
-		btnDowngrade.setBounds(392, 90, 110, 28);
+		btnDowngrade.setBounds(504, 84, 110, 28);
 		add(btnDowngrade);
 		
 		JSeparator separator = new JSeparator();
@@ -92,6 +93,10 @@ public class DicePanel extends JPanel {
 		for (Player pl : Main.players)
 			choice_1.add(pl.getName());
 		add(choice_1);
+		
+		JLabel lblOwnedPropertied = new JLabel("Owned Properties:");
+		lblOwnedPropertied.setBounds(142, 58, 90, 21);
+		add(lblOwnedPropertied);
 	}
 	
 	private void fillCombo(int playerID) {
