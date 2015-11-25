@@ -7,19 +7,19 @@ import GameSquares.GameSquare;
 import GameSquares.Land;
 import GameSquares.Land.color;
 import GameSquares.Ownable;
-import GameSquares.PayDay;
 import GameSquares.TransitStation;
 import GameSquares.Utility;
 import GameSquares.Cards.Chance.ChanceCardType;
 import GameSquares.Cards.CommunityChest.CommunityChestCardType;
 
 public class Player implements Serializable {
+	
 	private static final long					serialVersionUID	= 1L;
 	private int									id, money, location, jailTime, doublesRolled;
 	private int									jailID				= Properties.JailID;
 	private String								name;
 	private GameSquare[]						gameSquares;
-	private boolean								jailed				= false;
+	private boolean								jailed				= false, bonusPassAvailable;
 	private ArrayList<CommunityChestCardType>	InventoryCC			= new ArrayList<CommunityChestCardType>();
 	private ArrayList<ChanceCardType>			InventoryC			= new ArrayList<ChanceCardType>();
 	private ArrayList<Land>						ownedLands			= new ArrayList<Land>();
@@ -43,9 +43,12 @@ public class Player implements Serializable {
 		this.name = ".";
 		this.gameSquares = gameSquares;
 	}
-	
 	public void moveBy(int amount) {
 		int nextLocation = location + 1;
+		bonusPassAvailable = true;
+		if (location == 102) {
+			bonusPassAvailable = false;
+		}
 		for (int i = 0; i < amount; i++) {
 			
 			if (amount % 2 == 0) {// transit locations
@@ -68,41 +71,41 @@ public class Player implements Serializable {
 					nextLocation = 35;
 				else
 					passed = false;
-				
-				if (passed) System.out.println(name + " passed transit station");
+				if (passed)
+					System.out.println(name + " passed transit station");
 			}
 			
 			if (nextLocation == 40)
-				nextLocation = 0;            // track endings
+				nextLocation = 0; // track endings
 			else if (nextLocation == 120)
 				nextLocation = 97;
-			else if (nextLocation == 96) nextLocation = 40;
+			else if (nextLocation == 96)
+				nextLocation = 40;
 			
-			if (nextLocation == 0) {                // start square
+			if (nextLocation == 0) { // start square
 				System.out.println(name + " passed Start Square.");
 				addMoney(Properties.START_PASSING_MONEY);
 			}
 			
-			if (nextLocation == 68) {                // payday
+			if (nextLocation == 68) { // payday
 				System.out.println(name + " passed Pay Day Square.");
-				if (amount % 2 != 0)
+				if (amount % 2 != 0) {
 					addMoney(Properties.PAYDAY_ODD);
-				addMoney(Properties.PAYDAY_EVEN);
+				} else {
+					addMoney(Properties.PAYDAY_EVEN);
+				}
 			}
-			if (nextLocation == 102) {                // bonus
+			if (nextLocation == 103 && bonusPassAvailable) { // bonus
 				System.out.println(name + " passed Bonus Square.");
 				addMoney(Properties.BONUS_PASSING_MONEY);
 			}
-			nextLocation++;                        // update location
+			nextLocation++; // update location
 			
 		}
 		location = nextLocation - 1;
 		System.out.println(name + " moved " + amount + " squares and now is at " + gameSquares[location].toString()
 			+ "\n You have: " + money);
-		if (gameSquares[location] instanceof PayDay)
-			((PayDay) gameSquares[location]).onArrive(this, amount);
-		else if (gameSquares[location] instanceof Utility)
-			// amount = new GetTextInput("sdsd").getInt();
+		if (gameSquares[location] instanceof Utility)
 			((Utility) gameSquares[location]).onArrive(this, amount);
 		else
 			gameSquares[location].onArrive(this);
@@ -203,10 +206,10 @@ public class Player implements Serializable {
 	
 	public void sellSquare(GameSquare land) {
 		if (land instanceof Ownable && !(land instanceof Land)) {
-			if(land instanceof TransitStation)
-			addMoney(((Ownable) land).getPrice() / 2);
+			if (land instanceof TransitStation)
+				addMoney(((Ownable) land).getPrice() / 2);
 			else
-			addMoney(((Ownable) land).getPrice());
+				addMoney(((Ownable) land).getPrice());
 			removeOwnership(land);
 			System.out.println(name + " sold " + land + " for " + ((Ownable) land).getPrice());
 		}
