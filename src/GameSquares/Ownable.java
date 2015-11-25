@@ -12,4 +12,5 @@ public interface Ownable {
 	public void upgrade();
 	public void downgrade();
 	public String getUpgradeState();
+	public boolean isOwned();
 }

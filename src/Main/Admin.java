@@ -6,6 +6,7 @@ import GameSquares.GameSquare;
 import GameSquares.Land;
 import GameSquares.Land.color;
 import GameSquares.Ownable;
+import GameSquares.TransitStation;
 import GameSquares.Cards.ChanceDeck;
 import GameSquares.Cards.CommunityChest.CommunityChestCardType;
 import GameSquares.Cards.CommunityChestDeck;
@@ -177,6 +178,11 @@ public class Admin extends Main {
 					System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
 						+ " is given the ownership of " + currentOwnableName);
 					Main.players[playerID].getOwnership(gameSquare);
+					if (gameSquare instanceof TransitStation) {
+						Main.players[playerID].getOwnership(Main.gameSquares[((TransitStation) gameSquare)
+							.getConnectedTransit()]);
+					}
+					
 					break;
 				}
 		}
@@ -205,6 +211,7 @@ public class Admin extends Main {
 					removeOwnershipExec(pl, ownbl);
 				}
 			return;
+			
 		}
 		
 		removeOwnershipExec(pl, ownbl);
@@ -320,15 +327,42 @@ public class Admin extends Main {
 	}
 	
 	// Moves PLAYER to NEXT NOT OWNED LAND
-	public static void movePlayerToNextNeutralLand(int playerID) {
-		for (int i = 0; i < Main.gameSquares.length; i++) {
-			GameSquare nextGameSquare = Main.gameSquares[(Main.players[playerID].getLocation() + i)
-				% Main.gameSquares.length];
-			if (nextGameSquare instanceof Land && !((Land) nextGameSquare).isOwned()) {
+	public static void movePlayerToNextNeutralLand(int playerID, boolean even) {
+		int start = Main.players[playerID].getLocation();
+		int currentCheck = start + 1;
+		while (currentCheck != start) {
+			System.out.print("now at " + currentCheck);
+			if (even) {
+				if (currentCheck == 5)
+					currentCheck = 47;
+				else if (currentCheck == 15)
+					currentCheck = 105;
+				else if (currentCheck == 25)
+					currentCheck = 75;
+				else if (currentCheck == 35)
+					currentCheck = 117;
+				else if (currentCheck == 47)
+					currentCheck = 5;
+				else if (currentCheck == 105)
+					currentCheck = 15;
+				else if (currentCheck == 75)
+					currentCheck = 25;
+				else if (currentCheck == 117) currentCheck = 35;
+				
+			}
+			if (currentCheck == 39)
+				currentCheck = 0;
+			else if (currentCheck == 120)
+				currentCheck = 97;
+			else if (currentCheck == 96) currentCheck = 40;
+			
+			GameSquare nextGameSquare = Main.gameSquares[currentCheck % Main.gameSquares.length];
+			if (nextGameSquare instanceof Ownable && !((Ownable) nextGameSquare).isOwned()) {
 				movePlayerTo(Main.players[playerID], nextGameSquare);
 				refreshUI();
 				break;
 			}
+			currentCheck++;
 		}
 	}
 	
@@ -345,16 +379,46 @@ public class Admin extends Main {
 	}
 	
 	// Moves PLAYER to NEXT LAND
-	public static void movePlayerToNextLand(int playerID) {
-		for (int i = 1; i < Main.gameSquares.length; i++) {
-			GameSquare nextGameSquare = Main.gameSquares[(Main.players[playerID].getLocation() + i)
-				% Main.gameSquares.length];
-			if (nextGameSquare instanceof Land) {
+	public static void movePlayerToNextLand(int playerID, boolean even) {
+		
+		int start = Main.players[playerID].getLocation();
+		int currentCheck = start + 1;
+		while (currentCheck != start) {
+			System.out.print("now at " + currentCheck);
+			if (even) {
+				if (currentCheck == 5)
+					currentCheck = 47;
+				else if (currentCheck == 15)
+					currentCheck = 105;
+				else if (currentCheck == 25)
+					currentCheck = 75;
+				else if (currentCheck == 35)
+					currentCheck = 117;
+				else if (currentCheck == 47)
+					currentCheck = 5;
+				else if (currentCheck == 105)
+					currentCheck = 15;
+				else if (currentCheck == 75)
+					currentCheck = 25;
+				else if (currentCheck == 117) currentCheck = 35;
+				
+			}
+			
+			if (currentCheck == 39)
+				currentCheck = 0;
+			else if (currentCheck == 120)
+				currentCheck = 97;
+			else if (currentCheck == 96) currentCheck = 40;
+			
+			GameSquare nextGameSquare = Main.gameSquares[currentCheck % Main.gameSquares.length];
+			if (nextGameSquare instanceof Ownable) {
 				movePlayerTo(Main.players[playerID], nextGameSquare);
 				refreshUI();
 				break;
 			}
+			currentCheck++;
 		}
+		
 	}
 	
 	/************************/
@@ -389,19 +453,12 @@ public class Admin extends Main {
 	}
 	
 	// Checks if all LAND's are OWNED
+	
 	public static boolean allLandsOwned() {
-		int a = 0;
-		boolean exist = false;
 		for (GameSquare currentLand : Main.gameSquares) {
-			if (currentLand instanceof Land && ((Land) currentLand).isOwned()) {
-				a++;
-			}
+			if (currentLand instanceof Ownable && !((Ownable) currentLand).isOwned()) { return false; }
 		}
-		if (a == 12)
-			exist = true;
-		else
-			exist = false;
-		return exist;
+		return true;
 	}
 	/*********************/
 	/** General methods **/

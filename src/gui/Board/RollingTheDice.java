@@ -67,7 +67,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
-		sell.setEnabled(!player.getOwnedLands().isEmpty());
+		sell.setEnabled(!player.getOwnedLands().isEmpty() || !player.getOwnedSquares().isEmpty());
 		
 		whichPlayer.setText((player.getName() + " is playing"));
 		whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
@@ -147,13 +147,19 @@ public class RollingTheDice extends JPanel implements ActionListener {
 				
 				if (!(roll1 == roll2 && roll2 == rollSpeed)) {
 					if (Dice.isMonopolyGuy()) {
+						
+						boolean even = false;
+						if((roll1+roll2) % 2 == 0) 
+							even= true;						
+						
 						movePlayer(roll1 + roll2);
 						new gui.AdditionalWindows.MessageDisplayer(" You rolled MonopolyGuy !");
 						
-						if (Admin.allLandsOwned())
-							Admin.movePlayerToNextLand(player.getID());
+						if (Admin.allLandsOwned()){
+							Admin.movePlayerToNextLand(player.getID(),even);
+						}
 						else
-							Admin.movePlayerToNextNeutralLand(player.getID());
+							Admin.movePlayerToNextNeutralLand(player.getID(),even);
 						
 						if (roll1 != roll2) {
 							end.setEnabled(true);

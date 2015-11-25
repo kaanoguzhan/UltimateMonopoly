@@ -5,9 +5,8 @@ import Main.Player;
 import Main.Properties;
 
 public class TransitStation extends GameSquare implements Ownable {
-	
 	private static final long	serialVersionUID	= 1L;
-	private int					price				= Properties.TRANSITSTATION_PRICE;
+	private int					price				= Properties.TRANSITSTATION_PRICE / 2;
 	private int					depotCost			= Properties.TRANSITSTATION_DEPOT_COST;
 	private int					rent				= Properties.TRANSITSTATION_RENT;
 	private int					depotCount			= 0;
@@ -27,8 +26,10 @@ public class TransitStation extends GameSquare implements Ownable {
 			boolean buy = new GetYesNoInput("For " + price + " dollars", "Would you like to buy " + name + "Railroad ?")
 				.getValue();
 			if (buy) {
-				if (pl.getMoney() >= price)
+				if (pl.getMoney() >= price) {
 					pl.buySquare(this);
+					pl.buySquare(Main.Main.gameSquares[connectedTransit]);
+				}
 				else
 					System.out.println("You don't have enough money!");
 			}
@@ -41,16 +42,20 @@ public class TransitStation extends GameSquare implements Ownable {
 			}
 			if (!onlinePricing)
 				pl.pay(this.getOwner(), rent * (int) Math.pow(2, depotCount));
-			
 		} else if (new GetYesNoInput("Build Train Depot", "Do you want to pay " + depotCost + "$ to build Cab Stand ?")
 			.getValue()) {
 			pl.reduceMoney(depotCost);
-			upgrade();
+			this.depotCount++;
 		}
 	}
+	
 	@Override
 	public void sell() {
 		this.owner.sellSquare(this);
+	}
+	
+	public int getConnectedTransit() {
+		return connectedTransit;
 	}
 	
 	@Override
@@ -60,7 +65,7 @@ public class TransitStation extends GameSquare implements Ownable {
 	
 	@Override
 	public String getName() {
-		return name + "Railroad";
+		return name + " Railroad";
 	}
 	
 	@Override
@@ -78,8 +83,15 @@ public class TransitStation extends GameSquare implements Ownable {
 		return "The Transit station from " + id + " to " + connectedTransit + " now has " + depotCount + " Depots";
 	}
 	
+	public boolean isOwned() {
+		if (this.owner != null)
+			return true;
+		else
+			return false;
+	}
+	
 	@Override
 	public String toString() {
-		return "The Transit station from " + id + " to " + connectedTransit;
+		return "Transit station from " + id + " to " + connectedTransit;
 	}
 }
