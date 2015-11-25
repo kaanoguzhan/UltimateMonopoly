@@ -1,15 +1,15 @@
 package gui.Debug;
 
-import gui.Board.Board;
+import gui.Board.PlayerInfo;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import Main.SaveLoad.SaveLoad;
 
 
-public class SaveLoadTab extends JPanel {
+public class SaveLoadPanel extends JPanel {
 	private static final long	serialVersionUID	= 1L;
 	
-	public SaveLoadTab() {
+	public SaveLoadPanel() {
 		setLayout(null);
 		
 		JButton btnSave = new JButton("Save");
@@ -23,7 +23,7 @@ public class SaveLoadTab extends JPanel {
 		btnLoad.setBounds(316, 5, 299, 109);
 		btnLoad.addActionListener(al -> {
 			SaveLoad.load();
-			Board.informationTable.refreshData();
+			PlayerInfo.refreshData();
 		});
 		add(btnLoad);
 		

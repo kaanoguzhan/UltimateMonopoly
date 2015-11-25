@@ -1,14 +1,14 @@
 package Main;
 
-import gui.Board.Board;
+import gui.Board.PlayerInfo;
 import java.util.ArrayList;
 import GameSquares.GameSquare;
 import GameSquares.Land;
 import GameSquares.Land.color;
 import GameSquares.Ownable;
 import GameSquares.Cards.ChanceDeck;
-import GameSquares.Cards.CommunityChestDeck;
 import GameSquares.Cards.CommunityChest.CommunityChestCardType;
+import GameSquares.Cards.CommunityChestDeck;
 
 public class Admin extends Main {
 	
@@ -157,7 +157,8 @@ public class Admin extends Main {
 	// Give PLAYER the ownership of OWNABLE
 	public static void giveOwnership(Player player, int... OwnableID) {
 		for (int currentOwnableID : OwnableID) {
-			if (Main.gameSquares[currentOwnableID] instanceof Ownable && Main.gameSquares.length - 1 >= currentOwnableID) {
+			if (Main.gameSquares[currentOwnableID] instanceof Ownable
+				&& Main.gameSquares.length - 1 >= currentOwnableID) {
 				System.out.println("ADMIN -> Player:" + player.getName()
 					+ " is given the ownership of "
 					+ ((Ownable) Main.gameSquares[currentOwnableID]).getName());
@@ -197,7 +198,8 @@ public class Admin extends Main {
 	// Remove the ownership of OWNABLE from PLAYER
 	public static void removeOwnership(Player player, int... ownableID) {
 		for (int currentOwnableID : ownableID) {
-			if (Main.gameSquares[currentOwnableID] instanceof Ownable && Main.gameSquares.length - 1 >= currentOwnableID) {
+			if (Main.gameSquares[currentOwnableID] instanceof Ownable
+				&& Main.gameSquares.length - 1 >= currentOwnableID) {
 				System.out.println("ADMIN -> Player:" + player.getName()
 					+ "'s ownership is removed from "
 					+ ((Ownable) Main.gameSquares[currentOwnableID]).getName());
@@ -215,7 +217,7 @@ public class Admin extends Main {
 					if (((Ownable) gameSquare).getName().equals(currentOwnableName)) {
 						System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
 							+ "'s ownership is removed from " + currentOwnableName);
-						Main.players[playerID].removeOwnership( gameSquare);
+						Main.players[playerID].removeOwnership(gameSquare);
 					}
 		}
 		refreshUI();
@@ -229,10 +231,34 @@ public class Admin extends Main {
 				System.out.println("ADMIN -> Player:" + Main.players[playerID].getName()
 					+ "'s ownership is removed from "
 					+ ((Ownable) Main.gameSquares[currentOwnableID]).getName());
-				Main.players[playerID].removeOwnership( Main.gameSquares[currentOwnableID]);
+				Main.players[playerID].removeOwnership(Main.gameSquares[currentOwnableID]);
 			}
 		}
 		refreshUI();
+	}
+	
+	// Upgrage Ownable if possible
+	public static void upgradeOwnable(String... ownableName) {
+		for (String currentOwnableName : ownableName) {
+			for (GameSquare gameSquare : Main.gameSquares)
+				if (gameSquare instanceof Ownable && ((Ownable) gameSquare).getName().equals(currentOwnableName)) {
+					((Ownable) gameSquare).upgrade();
+					System.out.println("ADMIN -> Ownable " + currentOwnableName + " is upgraded." + " "
+						+ ((Ownable) gameSquare).getUpgradeState());
+				}
+		}
+	}
+	
+	// Downgrade Ownable if possible
+	public static void downgradeOwnable(String... ownableName) {
+		for (String currentOwnableName : ownableName) {
+			for (GameSquare gameSquare : Main.gameSquares)
+				if (gameSquare instanceof Ownable && ((Ownable) gameSquare).getName().equals(currentOwnableName)) {
+					((Ownable) gameSquare).downgrade();
+					System.out.println("ADMIN -> Ownable " + currentOwnableName + " is upgraded." + " "
+						+ ((Ownable) gameSquare).getUpgradeState());
+				}
+		}
 	}
 	
 	// Return PLAYER's ID
@@ -403,7 +429,7 @@ public class Admin extends Main {
 	/** General methods **/
 	/*********************/
 	private static void refreshUI() {
-		Board.informationTable.refreshData();
+		PlayerInfo.refreshData();
 	}
 	
 	public static int getPlayerCount() {

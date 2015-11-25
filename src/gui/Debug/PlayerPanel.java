@@ -19,13 +19,13 @@ import GameSquares.Ownable;
 import Main.Admin;
 import Main.Main;
 
-public class PlayerTab extends JPanel {
+public class PlayerPanel extends JPanel {
 	private static final long	serialVersionUID	= 1L;
 	private int					playerID			= 0;
 	private JTextField			txtMoney1;
 	private Choice				choiceOwnLand, choiceNeuLand;
 	
-	public PlayerTab(int playerID) {
+	public PlayerPanel(int playerID) {
 		setLayout(null);
 		this.playerID = playerID;
 		setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.LIGHT_GRAY));
@@ -174,7 +174,6 @@ public class PlayerTab extends JPanel {
 				if (gsq instanceof Ownable && ((Ownable) gsq).getOwner() == null)
 					choice.add(((Ownable) gsq).getName());
 		}
-		return;
 	}
 	
 	private void fillOwnLands(Choice choice, int playerID) {
@@ -186,7 +185,6 @@ public class PlayerTab extends JPanel {
 				choice.add(ownable.getName());
 			}
 		}
-		return;
 	}
 	
 	void refresh() {

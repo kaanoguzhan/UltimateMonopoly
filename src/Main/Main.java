@@ -76,16 +76,18 @@ public class Main {
 				temp = new GetTextInput("How many players?");
 				if (temp.getString().equals("l") || temp.getString().equals("load")) {
 					loadPrevious = true;
-					break;
+					SaveLoad.load();
+					num0fPlayers = players.length;
+				} else {
+					num0fPlayers = temp.getInt();
+					numberOfPlayers = temp.getString();
 				}
-				num0fPlayers = temp.getInt();
-				numberOfPlayers = temp.getString();
 			}
-			players = new Player[num0fPlayers];
+			if (!loadPrevious)
+				players = new Player[num0fPlayers];
 		} catch (Exception e) {}
 		System.out.println("Player initialization is complete...");
 	}
-	
 	private static void initializeDecks() {
 		chanceDeck = new ChanceDeck(players);
 		communityDeck = new CommunityChestDeck();
@@ -290,14 +292,11 @@ public class Main {
 				name = new GetTextInput("Name of player " + (i + 1) + " : ").getString();
 			players[i] = new Player(i, name, gameSquares);
 		}
-		
 		System.out.println("Player Name initialization is complete...");
 	}
 	
 	private static void initializeBoard() {
 		board = new Board(players, gameSquares);
-		if (loadPrevious)
-			SaveLoad.load();
 	}
 	
 	private static void runGame() {

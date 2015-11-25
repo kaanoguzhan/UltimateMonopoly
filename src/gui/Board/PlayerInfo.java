@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import GameSquares.Land;
@@ -17,9 +18,9 @@ import Main.Player;
 public class PlayerInfo extends JPanel {
 	
 	private static final long	serialVersionUID	= 1L;
-	JTable						table;
+	static JTable				table;
 	JScrollPane					pane;
-	String[][]					data;
+	static String[][]			data;
 	
 	public PlayerInfo() {
 		setLayout(new BorderLayout());
@@ -49,8 +50,7 @@ public class PlayerInfo extends JPanel {
 		}
 	}
 	
-	public void refreshData() {
-		// recreateTable();
+	public static void refreshData() {
 		for (int i = 0; i < Main.players.length; i++) {
 			Player current = Main.players[i];
 			String lands = "";
@@ -76,7 +76,7 @@ public class PlayerInfo extends JPanel {
 		refreshTable();
 		refreshPlayerLocations();
 	}
-	private void refreshPlayerLocations() {
+	private static void refreshPlayerLocations() {
 		for (int i = 0; i < Main.players.length; i++) {
 			Player current = Main.players[i];
 			JLabel Player = null;
@@ -127,19 +127,20 @@ public class PlayerInfo extends JPanel {
 		}
 	}
 	
-	private void refreshTable() {
+	private static void refreshTable() {
 		for (int i = 0; i < table.getRowCount(); i++) {
 			for (int j = 0; j < table.getColumnCount(); j++)
 				table.setValueAt(data[i][j], i, j);
 		}
 	}
 	
-	// private void recreateTable() {
-	// String[] columns = { "Player Name", "Location", "Money", "Properties" };
-	// data = new String[Main.players.length][4];
-	//
-	// DefaultTableModel dataModel = new DefaultTableModel(data, columns);
-	//
-	// table.setModel(dataModel);
-	// }
+	public static void recreateTable() {
+		String[] columns = { "Player Name", "Location", "Money", "Properties" };
+		data = new String[Main.players.length][4];
+		
+		DefaultTableModel dataModel = new DefaultTableModel(data, columns);
+		refreshData();
+		
+		table.setModel(dataModel);
+	}
 }

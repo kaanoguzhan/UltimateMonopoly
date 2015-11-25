@@ -54,7 +54,7 @@ public class Cab extends GameSquare implements Ownable {
 				if (new GetYesNoInput("Build Cab Stand", "Do you want to pay 150$ to build Cab Stand ?")
 					.getValue()) {
 					pl.reduceMoney(cabStandCost);
-					this.cabStand = true;
+					upgrade();
 				}
 			}
 		}
@@ -112,6 +112,27 @@ public class Cab extends GameSquare implements Ownable {
 	@Override
 	public String getName() {
 		return name + "Cab Co";
+	}
+	
+	@Override
+	public void upgrade() {
+		if (cabStand)
+			System.out.println("No further upgrade possible");
+		else
+			cabStand = true;
+	}
+	
+	@Override
+	public void downgrade() {
+		if (cabStand)
+			cabStand = false;
+		else
+			System.out.println("No further downgrade possible");
+	}
+	
+	@Override
+	public String getUpgradeState() {
+		return name + "Cab Co. has a Cab Stand.";
 	}
 	
 	@Override
