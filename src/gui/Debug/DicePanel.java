@@ -110,19 +110,18 @@ public class DicePanel extends JPanel {
 		
 		JButton btnGive = new JButton("Give");
 		btnGive.addActionListener(al -> {
+			Player pl = Main.players[chcPlayers.getSelectedIndex()];
 			for (ChanceCard cc : Main.chanceDeck.getDeck())
 				if (cc.getName().equals(chcCards.getSelectedItem())) {
-					int a = chcPlayers.getSelectedIndex();
-					Main.players[a].addToInventoryC(cc.getType());
+					pl.addToInventoryC(cc.getType());
 				}
 			for (CommunityChestCard ccc : Main.communityDeck.getDeck())
 				if (ccc.getName().equals(chcCards.getSelectedItem()))
-					Main.players[chcPlayers.getSelectedIndex()].addToInventoryCC(ccc.getType());
+					pl.addToInventoryCC(ccc.getType());
 		});
 		btnGive.setBounds(504, 118, 110, 28);
 		add(btnGive);
 	}
-	
 	private void fillCombo(int playerID) {
 		chcOwnables.removeAll();
 		if (Main.players != null && Main.players.length - 1 >= currentPlayerID) {
