@@ -287,8 +287,11 @@ public class Land extends GameSquare implements Ownable {
 	}
 	
 	public int getPriceOfState() {
-		return rentAndPriceMap.get(currentState);
-		
+		return rentAndPriceMap.get(currentState);	
+	}
+	
+	public int getBuildingCost() {
+		return rentAndPriceMap.get(state.buildingCost);
 	}
 	
 	public void setState(state s) {
