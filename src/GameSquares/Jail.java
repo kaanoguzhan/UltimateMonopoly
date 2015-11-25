@@ -35,6 +35,8 @@ public class Jail extends GameSquare {
 			}
 		} else
 			System.out.println("Player:" + pl.getName() + " is now visiting jail.");
+		
+		getOutOfJail = false;
 	}
 
 	@Override
