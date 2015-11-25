@@ -76,7 +76,9 @@ public class TransitStation extends GameSquare implements Ownable {
 	
 	@Override
 	public void downgrade() {
-		depotCount--;
+		if (depotCount > 0)
+			depotCount--;
+		System.out.println("No further downgrade possible");
 	}
 	
 	@Override

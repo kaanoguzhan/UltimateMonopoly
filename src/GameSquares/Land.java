@@ -248,6 +248,9 @@ public class Land extends GameSquare implements Ownable {
 			case fourHouse:
 				currentState = state.threeHouse;
 				break;
+			case hotel:
+				currentState = state.fourHouse;
+				break;
 			case skyscraper:
 				currentState = state.hotel;
 				break;

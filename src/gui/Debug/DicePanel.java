@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
@@ -13,7 +14,6 @@ import GameSquares.Ownable;
 import Main.Admin;
 import Main.Main;
 import Main.Player;
-import javax.swing.JLabel;
 
 public class DicePanel extends JPanel {
 	private static final long	serialVersionUID	= 1L;
@@ -58,7 +58,7 @@ public class DicePanel extends JPanel {
 		chcbxExist = true;
 		
 		choice = new Choice();
-		choice.setBounds(235, 58, 263, 20);
+		choice.setBounds(237, 58, 261, 20);
 		add(choice);
 		
 		JButton btnNewButton = new JButton("Upgrade");
@@ -97,6 +97,19 @@ public class DicePanel extends JPanel {
 		JLabel lblOwnedPropertied = new JLabel("Owned Properties:");
 		lblOwnedPropertied.setBounds(142, 58, 90, 21);
 		add(lblOwnedPropertied);
+		
+		JLabel lblGiveCard = new JLabel("Give Card:");
+		lblGiveCard.setBounds(142, 121, 90, 21);
+		add(lblGiveCard);
+		
+		Choice choice_2 = new Choice();
+		choice_2.setBounds(237, 121, 261, 20);
+		// for (CommunityChestCard ccc : Main.communityDeck)
+		// add(choice_2);
+		
+		JButton button = new JButton("Downgrade");
+		button.setBounds(504, 118, 110, 28);
+		add(button);
 	}
 	
 	private void fillCombo(int playerID) {

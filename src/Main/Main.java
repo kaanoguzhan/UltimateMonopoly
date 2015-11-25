@@ -38,8 +38,8 @@ import Main.SaveLoad.SaveLoad;
 
 public class Main {
 	
-	protected static ChanceDeck			chanceDeck		= null;
-	protected static CommunityChestDeck	communityDeck	= null;
+	public static ChanceDeck			chanceDeck		= null;
+	public static CommunityChestDeck	communityDeck	= null;
 	public static GameSquare[]			gameSquares		= null;
 	public static Player[]				players			= null;
 	volatile static Boolean				roundEnded		= false;
@@ -109,7 +109,7 @@ public class Main {
 		gameSquares[8] = new Land(8, "Vermont Avenue", color.lightBlue, 100, 6)
 			.addDeedInfo(30, 90, 270, 400, 550, 1050, 50, 50);
 		gameSquares[9] = new Land(9, "Connecticut Avenue", color.lightBlue, 100, 8)
-				.addDeedInfo(30, 90, 270, 400, 550, 1050, 50, 50);
+			.addDeedInfo(30, 90, 270, 400, 550, 1050, 50, 50);
 		gameSquares[10] = new Jail(10);
 		gameSquares[11] = new Land(11, "St. Charles Place", color.pink, 140, 10).addDeedInfo(50, 150, 450, 625, 750,
 			1250, 70, 100);
