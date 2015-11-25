@@ -33,7 +33,7 @@ public class Cab extends GameSquare implements Ownable {
 					System.out.println("You don't have enough money!");
 			}
 		} else if (this.owner != pl) {
-			if (cabStand)
+			if (cabStand && !isMortgaged())
 				pl.pay(this.getOwner(), 2 * rideCost);
 			else
 				pl.pay(this.getOwner(), rideCost);

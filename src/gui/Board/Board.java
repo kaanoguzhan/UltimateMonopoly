@@ -47,12 +47,11 @@ public class Board extends JFrame {
 		three = new playerIcon("playerIcon4.gif", 575, 660, 50, 40);
 		add(three);
 		
-		Board.lblBoard = new JLabel(new ImageIcon("board1050.jpg"));
+		Board.lblBoard = new JLabel(new ImageIcon("board700.jpg"));
 		getContentPane().add(getLblBoard());
 		
 		
 		JButton debug = new JButton("Debug Window");
-		debug.setBounds(1490, 630, 120, 70);
 		getContentPane().add(debug);
 		debug.addActionListener(al -> {
 			Debug frame = new Debug();
@@ -64,11 +63,13 @@ public class Board extends JFrame {
 			lblBoard.setBounds(0, 0, 700, 700);
 			round.setBounds(750, 11, 550, 250);
 			informationTable.setBounds(760, 272, 550, 350);
+			debug.setBounds(760, 630, 120, 70);
 		} else {
 			// boardlength = 1050;
 			lblBoard.setBounds(0, 0, 1050, 1050);
 			round.setBounds(1060, 11, 550, 250);
 			informationTable.setBounds(1060, 272, 550, 350);
+			debug.setBounds(1490, 630, 120, 70);
 		}
 		getContentPane().add(round);
 		getContentPane().add(informationTable);

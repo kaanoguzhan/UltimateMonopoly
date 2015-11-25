@@ -58,7 +58,7 @@ public class Utility extends GameSquare implements Ownable {
 				}
 				System.out.println("This Utility is owned by " + owner.getName());
 				
-				pl.pay(owner, totalRent);
+				if(!isMortgaged()) pl.pay(owner, totalRent);
 			}
 			else
 				System.out.println("Player already owns this land!");

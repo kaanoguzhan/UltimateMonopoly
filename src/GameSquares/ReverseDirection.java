@@ -19,7 +19,7 @@ public class ReverseDirection extends GameSquare {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return null;
+		return "Reverse Direction";
 	}
 	
 }
