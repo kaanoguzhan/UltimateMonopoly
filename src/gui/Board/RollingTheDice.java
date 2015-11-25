@@ -4,7 +4,7 @@ import gui.Dice;
 import gui.AdditionalWindows.InputReaders.GetOneOption;
 import gui.AdditionalWindows.InputReaders.GetTextInput;
 import gui.AdditionalWindows.InputReaders.GetYesNoInput;
-import gui.Debug.DiceTab;
+import gui.Debug.DicePanel;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -120,10 +120,10 @@ public class RollingTheDice extends JPanel implements ActionListener {
 				int roll2 = roll[1];
 				int rollSpeed = roll[2];
 				
-				if (DiceTab.chcbxExist && DiceTab.chcbxTicked) {
-					roll1 = DiceTab.Die1;
-					roll2 = DiceTab.Die2;
-					rollSpeed = DiceTab.SpeedDie;
+				if (DicePanel.chcbxExist && DicePanel.chcbxTicked) {
+					roll1 = DicePanel.Die1;
+					roll2 = DicePanel.Die2;
+					rollSpeed = DicePanel.SpeedDie;
 					switch (rollSpeed) {
 						case 1:
 						case 2:
