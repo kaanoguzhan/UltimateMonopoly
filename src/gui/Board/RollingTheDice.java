@@ -206,9 +206,35 @@ public class RollingTheDice extends JPanel implements ActionListener {
 							button.setEnabled(false);
 							end.setEnabled(true);
 						} else {
-							movePlayer(roll1 + roll2 + rollSpeed);
-							new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
-							button.setEnabled(true);
+							if (Dice.isMonopolyGuy()) {
+								movePlayer(roll1 + roll2);
+								new gui.AdditionalWindows.MessageDisplayer(" You rolled MonopolyGuy !");
+
+								if (Admin.allLandsOwned())
+									Admin.movePlayerToNextLand(player.getID());
+								else
+									Admin.movePlayerToNextNeutralLand(player.getID());
+								new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
+								button.setEnabled(true);
+							} else if (Dice.isBus()) {
+								new gui.AdditionalWindows.MessageDisplayer(" You rolled Bus !");
+
+								int option = new GetOneOption(roll1, roll2, roll1 + roll2,
+										"How many squares would you like to move?").getResponse();
+
+								if (option == 0)
+									movePlayer(roll1);
+								if (option == 1)
+									movePlayer(roll2);
+								if (option == 2)
+									movePlayer(roll1 + roll2);
+								new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
+								button.setEnabled(true);
+							} else {
+								movePlayer(roll1 + roll2 + rollSpeed);
+								new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
+								button.setEnabled(true);
+							}
 						}
 					}
 				} else {
