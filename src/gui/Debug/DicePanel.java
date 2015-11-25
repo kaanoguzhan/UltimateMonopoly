@@ -3,15 +3,18 @@ package gui.Debug;
 import java.awt.Choice;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.beans.PropertyChangeEvent;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import GameSquares.Land;
 import GameSquares.Ownable;
 import Main.Main;
+import Main.Player;
 
 public class DicePanel extends JPanel {
 	private static final long	serialVersionUID	= 1L;
@@ -19,7 +22,6 @@ public class DicePanel extends JPanel {
 	public static boolean		chcbxTicked;
 	public static boolean		chcbxExist			= false;
 	public static Choice		choice;
-	private JRadioButton		rbtn1, rbtn2, rbtn3, rbtn4;
 	public static int			currentPlayerID;
 	
 	public DicePanel() {
@@ -56,35 +58,6 @@ public class DicePanel extends JPanel {
 		add(chckbxSetDice);
 		chcbxExist = true;
 		
-		
-		rbtn1 = new JRadioButton("Player 1");
-		rbtn1.addActionListener(al -> {
-			switchPlayer(1);
-		});
-		rbtn1.setBounds(12, 60, 97, 25);
-		add(rbtn1);
-		
-		rbtn2 = new JRadioButton("Player 2");
-		rbtn1.addActionListener(al -> {
-			switchPlayer(2);
-		});
-		rbtn2.setBounds(12, 90, 97, 25);
-		add(rbtn2);
-		
-		rbtn3 = new JRadioButton("Player 3");
-		rbtn1.addActionListener(al -> {
-			switchPlayer(3);
-		});
-		rbtn3.setBounds(12, 120, 97, 25);
-		add(rbtn3);
-		
-		rbtn4 = new JRadioButton("Player 4");
-		rbtn1.addActionListener(al -> {
-			switchPlayer(4);
-		});
-		rbtn4.setBounds(12, 150, 97, 25);
-		add(rbtn4);
-		
 		choice = new Choice();
 		choice.setBounds(140, 57, 244, 28);
 		add(choice);
@@ -108,21 +81,19 @@ public class DicePanel extends JPanel {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(12, 45, 602, 2);
 		add(separator);
-	}
-	
-	
-	private void switchPlayer(int playerID) {
-		currentPlayerID = playerID;
 		
-		// Disable All Radio Buttons
-		if (currentPlayerID != 1) rbtn1.setSelected(false);
-		if (currentPlayerID != 2) rbtn2.setSelected(false);
-		if (currentPlayerID != 3) rbtn3.setSelected(false);
-		if (currentPlayerID != 4) rbtn4.setSelected(false);
-		fillCombo();
+		Choice choice_1 = new Choice();
+		choice_1.addItemListener(il -> {
+			fillCombo(choice_1.getSelectedIndex());
+		});
+		choice_1.setBounds(12, 57, 116, 22);
+		for (Player pl : Main.players)
+			choice_1.add(pl.getName());
+		add(choice_1);
 	}
 	
-	private void fillCombo() {
+	private void fillCombo(int playerID) {
+		choice.removeAll();
 		if (Main.players != null && Main.players.length - 1 >= currentPlayerID) {
 			for (Land land : Main.players[currentPlayerID].getOwnedLands()) {
 				choice.add(land.getName());
@@ -131,6 +102,5 @@ public class DicePanel extends JPanel {
 				choice.add(ownable.getName());
 			}
 		}
-		return; // TODO Delete this line
 	}
 }

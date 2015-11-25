@@ -174,7 +174,6 @@ public class PlayerPanel extends JPanel {
 				if (gsq instanceof Ownable && ((Ownable) gsq).getOwner() == null)
 					choice.add(((Ownable) gsq).getName());
 		}
-		return; // TODO Delete this line
 	}
 	
 	private void fillOwnLands(Choice choice, int playerID) {
@@ -186,7 +185,6 @@ public class PlayerPanel extends JPanel {
 				choice.add(ownable.getName());
 			}
 		}
-		return; // TODO Delete this line
 	}
 	
 	void refresh() {
