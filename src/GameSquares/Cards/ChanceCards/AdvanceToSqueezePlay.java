@@ -2,7 +2,6 @@ package GameSquares.Cards.ChanceCards;
 
 import gui.AdditionalWindows.MessageDisplayer;
 import java.io.Serializable;
-import GameSquares.Cards.Chance.ChanceCardType;
 import GameSquares.Cards.ChanceCard;
 import Main.Player;
 
@@ -10,7 +9,7 @@ public class AdvanceToSqueezePlay extends ChanceCard implements Serializable {
 	private static final long	serialVersionUID	= 1L;
 	
 	public AdvanceToSqueezePlay() {
-		super(ChanceCardType.AdvanceToSqueezePlay, false);
+		super(CardType.AdvanceToSqueezePlay, false);
 	}
 	
 	@Override

@@ -9,21 +9,19 @@ import GameSquares.Land.color;
 import GameSquares.Ownable;
 import GameSquares.TransitStation;
 import GameSquares.Utility;
-import GameSquares.Cards.Chance.ChanceCardType;
-import GameSquares.Cards.CommunityChest.CommunityChestCardType;
+import GameSquares.Cards.Card.CardType;
 
 public class Player implements Serializable {
 	
-	private static final long					serialVersionUID	= 1L;
-	private int									id, money, location, jailTime, doublesRolled;
-	private int									jailID				= Properties.JailID;
-	private String								name;
-	private GameSquare[]						gameSquares;
-	private boolean								jailed				= false, bonusPassAvailable;
-	private ArrayList<CommunityChestCardType>	InventoryCC			= new ArrayList<CommunityChestCardType>();
-	private ArrayList<ChanceCardType>			InventoryC			= new ArrayList<ChanceCardType>();
-	private ArrayList<Land>						ownedLands			= new ArrayList<Land>();
-	private ArrayList<Ownable>					ownedSquares		= new ArrayList<Ownable>();
+	private static final long	serialVersionUID	= 1L;
+	private int					id, money, location, jailTime, doublesRolled;
+	private int					jailID				= Properties.JailID;
+	private String				name;
+	private GameSquare[]		gameSquares;
+	private boolean				jailed				= false, bonusPassAvailable;
+	private ArrayList<CardType>	cardInventory		= new ArrayList<CardType>();
+	private ArrayList<Land>		ownedLands			= new ArrayList<Land>();
+	private ArrayList<Ownable>	ownedSquares		= new ArrayList<Ownable>();
 	
 	// Default Constructor
 	public Player(int id, String name, GameSquare[] gameSquares) {
@@ -163,22 +161,13 @@ public class Player implements Serializable {
 		player.addMoney(amount);
 	}
 	
-	public void addToInventoryCC(CommunityChestCardType cardType) {
-		InventoryCC.add(cardType);
+	public void addToCardInventory(CardType cardType) {
+		cardInventory.add(cardType);
 		System.out.println("Player " + name + " is given the card " + cardType);
 	}
 	
-	public boolean haveCardCC(CommunityChestCardType cardType) {
-		return InventoryCC.contains(cardType);
-	}
-	
-	public void addToInventoryC(ChanceCardType cardType) {
-		InventoryC.add(cardType);
-		System.out.println("Player " + name + " is given the card " + cardType);
-	}
-	
-	public boolean haveCardC(ChanceCardType cardType) {
-		return InventoryC.contains(cardType);
+	public boolean haveCard(CardType cardType) {
+		return cardInventory.contains(cardType);
 	}
 	
 	// public void removeCard(CommunityChestCardType cardType) {
@@ -274,68 +263,33 @@ public class Player implements Serializable {
 	// //
 	
 	public boolean hasGetOutOfJail() {
-		if (InventoryC.contains(ChanceCardType.GetOutOfJail))
-			return true;
-		else
-			return false;
+		return cardInventory.contains(CardType.GetOutOfJail);
+	}
+	public boolean hasOnlinePricing() {
+		return cardInventory.contains(CardType.OnlinePricing);
+	}
+	public boolean hasBargainBusiness() {
+		return cardInventory.contains(CardType.BargainBusiness);
+	}
+	public boolean hasRenovationSuccess() {
+		return cardInventory.contains(CardType.RenovationSuccess);
 	}
 	
 	public void removeGetOutOfJailCard() {
-		InventoryC.remove(ChanceCardType.GetOutOfJail);
+		cardInventory.remove(CardType.GetOutOfJail);
 	}
-	
-	public boolean hasOnlinePricing() {
-		if (InventoryCC.contains(CommunityChestCardType.OnlinePricing))
-			return true;
-		else
-			return false;
-	}
-	
 	public void removeOnlinePricingCard() {
-		InventoryCC.remove(CommunityChestCardType.OnlinePricing);
+		cardInventory.remove(CardType.OnlinePricing);
 	}
-	
-	public boolean hasBargainBusiness() {
-		if (InventoryCC.contains(CommunityChestCardType.BargainBusiness))
-			return true;
-		else
-			return false;
-	}
-	
 	public void removeBargainBusinessCard() {
-		InventoryCC.remove(CommunityChestCardType.BargainBusiness);
+		cardInventory.remove(CardType.BargainBusiness);
 	}
-	
-	public boolean hasRenovationSuccess() {
-		if (InventoryCC.contains(CommunityChestCardType.RenovationSuccess))
-			return true;
-		else
-			return false;
-	}
-	
 	public void removeRenovationSuccessCard() {
-		InventoryCC.remove(CommunityChestCardType.RenovationSuccess);
+		cardInventory.remove(CardType.RenovationSuccess);
 	}
 	
-	public String toString() {
-		String Lands = "[";
-		for (Land land : ownedLands) {
-			Lands += land.getName() + ", ";
-		}
-		if (Lands.length() > 2)
-			Lands = Lands.substring(0, Lands.length() - 2);
-		Lands += "]";
-		
-		return "Player " + name + " has " + money + " is at " + gameSquares[location] + "\n" + "Has Cards:"
-			+ InventoryCC + "\n" + "Has Lands:" + Lands;
-	}
-	
-	public ArrayList<CommunityChestCardType> getCommunityChestCards() {
-		return InventoryCC;
-	}
-	
-	public ArrayList<ChanceCardType> getChanceCards() {
-		return InventoryC;
+	public ArrayList<CardType> getCardsInventory() {
+		return cardInventory;
 	}
 	
 	public boolean isJailed() {
@@ -394,5 +348,18 @@ public class Player implements Serializable {
 		}
 		
 		return output;
+	}
+	
+	public String toString() {
+		String Lands = "[";
+		for (Land land : ownedLands) {
+			Lands += land.getName() + ", ";
+		}
+		if (Lands.length() > 2)
+			Lands = Lands.substring(0, Lands.length() - 2);
+		Lands += "]";
+		
+		return "Player " + name + " has " + money + " is at " + gameSquares[location] + "\n" + "Has Cards:"
+			+ cardInventory + "\n" + "Has Lands:" + Lands;
 	}
 }

@@ -1,18 +1,16 @@
 package GameSquares.Cards;
 
-import GameSquares.Cards.CommunityChest.CommunityChestCardType;
-
 public abstract class CommunityChestCard implements Card {
 	
-	private CommunityChestCardType	type;
+	private CardType	type;
 	private boolean					keepable;
 	
-	public CommunityChestCard(CommunityChestCardType type, boolean isKeepable) {
+	public CommunityChestCard(CardType type, boolean isKeepable) {
 		this.type = type;
 		this.keepable = isKeepable;
 	}
 	
-	public CommunityChestCardType getType() {
+	public CardType getType() {
 		return type;
 	}
 	

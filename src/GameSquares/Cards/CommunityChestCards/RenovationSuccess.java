@@ -1,22 +1,21 @@
 package GameSquares.Cards.CommunityChestCards;
 
-import java.io.Serializable;
 import gui.AdditionalWindows.MessageDisplayer;
+import java.io.Serializable;
 import GameSquares.Cards.CommunityChestCard;
-import GameSquares.Cards.CommunityChest.CommunityChestCardType;
 import Main.Player;
 
 public class RenovationSuccess extends CommunityChestCard implements Serializable {
 	private static final long	serialVersionUID	= 1L;
 	
 	public RenovationSuccess() {
-		super(CommunityChestCardType.RenovationSuccess, true);
+		super(CardType.RenovationSuccess, true);
 	}
 	
 	@Override
 	public void onDraw(Player pl) {
 		new MessageDisplayer(toString());
-		pl.addToInventoryCC(CommunityChestCardType.RenovationSuccess);
+		pl.addToCardInventory(CardType.RenovationSuccess);
 	}
 	
 	@Override

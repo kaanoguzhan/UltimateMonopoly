@@ -2,7 +2,6 @@ package GameSquares.Cards.ChanceCards;
 
 import gui.AdditionalWindows.MessageDisplayer;
 import java.io.Serializable;
-import GameSquares.Cards.Chance.ChanceCardType;
 import GameSquares.Cards.ChanceCard;
 import Main.Player;
 
@@ -10,7 +9,7 @@ public class AdvanceToTheNearestRailroad extends ChanceCard implements Serializa
 	private static final long serialVersionUID = 1L;
 
 	public AdvanceToTheNearestRailroad() {
-		super(ChanceCardType.AdvanceToTheNearestRailroad,false);
+		super(CardType.AdvanceToTheNearestRailroad,false);
 	}
 
 	@Override

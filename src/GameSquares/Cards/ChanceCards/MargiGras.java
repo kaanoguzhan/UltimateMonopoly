@@ -1,17 +1,16 @@
 package GameSquares.Cards.ChanceCards;
 
+import gui.AdditionalWindows.MessageDisplayer;
 import java.io.Serializable;
 import GameSquares.Cards.ChanceCard;
-import GameSquares.Cards.Chance.ChanceCardType;
 import Main.Player;
 import Main.Properties;
-import gui.AdditionalWindows.MessageDisplayer;
 
 public class MargiGras extends ChanceCard implements Serializable {
 	private static final long	serialVersionUID	= 1L;
 	
 	public MargiGras() {
-		super(ChanceCardType.MargiGras, false);
+		super(CardType.MargiGras, false);
 	}
 	
 	@Override

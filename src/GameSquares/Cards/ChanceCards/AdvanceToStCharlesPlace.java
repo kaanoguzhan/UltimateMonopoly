@@ -1,8 +1,7 @@
 package GameSquares.Cards.ChanceCards;
 
-import java.io.Serializable;
 import gui.AdditionalWindows.MessageDisplayer;
-import GameSquares.Cards.Chance.ChanceCardType;
+import java.io.Serializable;
 import GameSquares.Cards.ChanceCard;
 import Main.Player;
 
@@ -10,7 +9,7 @@ public class AdvanceToStCharlesPlace extends ChanceCard implements Serializable 
 	private static final long	serialVersionUID	= 1L;
 	
 	public AdvanceToStCharlesPlace() {
-		super(ChanceCardType.AdvanceToStCharlesPlace, false);
+		super(CardType.AdvanceToStCharlesPlace, false);
 	}
 	
 	@Override

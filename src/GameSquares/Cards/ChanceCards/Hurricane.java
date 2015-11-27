@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import GameSquares.Land;
 import GameSquares.Cards.ChanceCard;
-import GameSquares.Cards.Chance.ChanceCardType;
 import Main.Player;
 
 public class Hurricane extends ChanceCard implements Serializable {
@@ -13,7 +12,7 @@ public class Hurricane extends ChanceCard implements Serializable {
 	private static final long	serialVersionUID	= 1L;
 	
 	public Hurricane() {
-		super(ChanceCardType.Hurricane, false);
+		super(CardType.Hurricane, false);
 	}
 	@Override
 	public void onDraw(Player pl) {

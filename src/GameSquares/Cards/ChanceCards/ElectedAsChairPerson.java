@@ -1,9 +1,8 @@
 package GameSquares.Cards.ChanceCards;
 
-import java.io.Serializable;
 import gui.AdditionalWindows.MessageDisplayer;
+import java.io.Serializable;
 import GameSquares.Cards.ChanceCard;
-import GameSquares.Cards.Chance.ChanceCardType;
 import Main.Player;
 
 public class ElectedAsChairPerson extends ChanceCard implements Serializable {
@@ -12,7 +11,7 @@ public class ElectedAsChairPerson extends ChanceCard implements Serializable {
 	private Player[]			players				= null;
 	
 	public ElectedAsChairPerson(Player[] players) {
-		super(ChanceCardType.ElectedAsChairPerson, false);
+		super(CardType.ElectedAsChairPerson, false);
 		this.players = players;
 	}
 	@Override

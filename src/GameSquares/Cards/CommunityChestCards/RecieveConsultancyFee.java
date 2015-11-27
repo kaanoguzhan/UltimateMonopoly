@@ -1,8 +1,7 @@
 package GameSquares.Cards.CommunityChestCards;
 
-import java.io.Serializable;
 import gui.AdditionalWindows.MessageDisplayer;
-import GameSquares.Cards.CommunityChest.CommunityChestCardType;
+import java.io.Serializable;
 import GameSquares.Cards.CommunityChestCard;
 import Main.Player;
 
@@ -10,7 +9,7 @@ public class RecieveConsultancyFee extends CommunityChestCard implements Seriali
 	private static final long	serialVersionUID	= 1L;
 	
 	public RecieveConsultancyFee() {
-		super(CommunityChestCardType.RecieveConsultancyFee,false);
+		super(CardType.RecieveConsultancyFee,false);
 	}
 	
 	@Override

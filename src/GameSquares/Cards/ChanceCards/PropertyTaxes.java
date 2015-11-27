@@ -1,18 +1,17 @@
 package GameSquares.Cards.ChanceCards;
 
+import gui.AdditionalWindows.MessageDisplayer;
 import java.io.Serializable;
 import java.util.ArrayList;
 import GameSquares.Land;
 import GameSquares.Land.state;
-import GameSquares.Cards.Chance.ChanceCardType;
 import GameSquares.Cards.ChanceCard;
 import Main.Player;
-import gui.AdditionalWindows.MessageDisplayer;
 
 public class PropertyTaxes extends ChanceCard implements Serializable{
 	
 	public PropertyTaxes() {
-		super(ChanceCardType.PropertyTaxes, false);
+		super(CardType.PropertyTaxes, false);
 	}
 
 	private static final long serialVersionUID = 1L;

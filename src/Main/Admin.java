@@ -8,7 +8,6 @@ import GameSquares.Land.color;
 import GameSquares.Ownable;
 import GameSquares.TransitStation;
 import GameSquares.Cards.ChanceDeck;
-import GameSquares.Cards.CommunityChest.CommunityChestCardType;
 import GameSquares.Cards.CommunityChestDeck;
 
 public class Admin extends Main {
@@ -465,10 +464,6 @@ public class Admin extends Main {
 	
 	public static int getGameSquareCount() {
 		return Main.gameSquares.length;
-	}
-	
-	public static ArrayList<CommunityChestCardType> getPlayerCommunityChestCards(int playerID) {
-		return Main.players[playerID].getCommunityChestCards();
 	}
 	
 	public static GameSquare[] getGameSquares() {

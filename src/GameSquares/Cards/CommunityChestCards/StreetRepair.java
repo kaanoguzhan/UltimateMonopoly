@@ -9,7 +9,6 @@ import GameSquares.Land.state;
 import GameSquares.Ownable;
 import GameSquares.TransitStation;
 import GameSquares.Cards.CommunityChestCard;
-import GameSquares.Cards.CommunityChest.CommunityChestCardType;
 import Main.Player;
 
 public class StreetRepair extends CommunityChestCard implements Serializable {
@@ -17,7 +16,7 @@ public class StreetRepair extends CommunityChestCard implements Serializable {
 	private int cabTransitRepair = 25, houseRepair = 40, hotelRepair = 115, skyscraperRepair = 100;
 
 	public StreetRepair() {
-		super(CommunityChestCardType.StreetRepair, false);
+		super(CardType.StreetRepair, false);
 	}
 
 	@Override
