@@ -33,6 +33,7 @@ public class SaveLoad {
             ObjectInputStream obj_in = new ObjectInputStream(f_in);
             
             // Read Players
+//            Main.players = (Player[]) obj_in.readObject();
             Object[] obj = (Object[]) obj_in.readObject();
             
             // Load objects
@@ -53,6 +54,8 @@ public class SaveLoad {
             f_in.close();
             obj_in.close();
             
-        } catch (IOException | ClassNotFoundException e) {}
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace(System.out);
+        }
     }
 }

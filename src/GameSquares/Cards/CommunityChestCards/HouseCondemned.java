@@ -10,7 +10,7 @@ import Main.Player;
 
 public class HouseCondemned extends CommunityChestCard implements Serializable {
     private static final long serialVersionUID = 1L;
-    
+
     public HouseCondemned() {
         super(CardType.HouseCondemned, false);
     }
