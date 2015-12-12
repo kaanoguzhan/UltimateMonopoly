@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import GameSquares.GameSquare;
 import Main.Player;
+import Main.Properties;
 
 public class Board extends JFrame {
     
@@ -16,7 +17,7 @@ public class Board extends JFrame {
     GameSquare[]              gameSquares;
     private RollingTheDice    round            = new RollingTheDice();
     static SquareHolder       squareHolder     = new SquareHolder();
-    public static PlayerInfo  informationTable = new PlayerInfo();
+    public static PlayerInfo  informationTable = new PlayerInfo(Properties.DEFAULT_PLAYER_NUMBER);
     private static JLabel     lblBoard;
     static JLabel             zero, one, two, three;
     
@@ -61,13 +62,13 @@ public class Board extends JFrame {
         if (height < 1000) {
             // boardlength = 700;
             lblBoard.setBounds(0, 0, 700, 700);
-            round.setBounds(750, 11, 550, 250);
+            round.setBounds(750, 11, 800, 250);
             informationTable.setBounds(760, 272, 550, 350);
             debug.setBounds(760, 630, 120, 70);
         } else {
             // boardlength = 1050;
             lblBoard.setBounds(0, 0, 1050, 1050);
-            round.setBounds(1060, 11, 550, 250);
+            round.setBounds(1060, 11, 800, 250);
             informationTable.setBounds(1060, 272, 550, 350);
             debug.setBounds(1490, 630, 120, 70);
         }

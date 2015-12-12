@@ -1,6 +1,6 @@
 package Main;
 
-import gui.Board.PlayerInfo;
+import gui.Board.Board;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -32,14 +32,10 @@ public class SaveLoad {
             FileInputStream f_in = new FileInputStream("savegame.data");
             ObjectInputStream obj_in = new ObjectInputStream(f_in);
             
-            // Read Players
-//            Main.players = (Player[]) obj_in.readObject();
+            // Read Data
             Object[] obj = (Object[]) obj_in.readObject();
             
-            // Load objects
-            if (obj[0] instanceof Player[])
-                System.out.println("LOAD player[]");
-            
+            // Load Game
             Main.players = obj[0] instanceof Player[] ? (Player[]) obj[0] : null;
             Main.gameSquares = obj[1] instanceof GameSquare[] ? (GameSquare[]) obj[1] : null;
             
@@ -48,7 +44,7 @@ public class SaveLoad {
                 System.out.println("!!! Error on loading objects !!!");
             
             // Recreate some UI Objects
-            PlayerInfo.recreateTable();
+            Board.informationTable.recreateTable();
             
             // Close InputStreams
             f_in.close();

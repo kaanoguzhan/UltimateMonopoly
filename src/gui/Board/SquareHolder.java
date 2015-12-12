@@ -1,7 +1,7 @@
 package gui.Board;
 
 import java.util.ArrayList;
-import Main.Properties;
+import Main.Main;
 
 public class SquareHolder {
     private ArrayList<Square> squares = new ArrayList<Square>();
@@ -17,7 +17,7 @@ public class SquareHolder {
         
         int secondTrack = (int) ((boardLength * 0.75) + (squareLength * 2));
         if (boardLength < 999) {
-            for (int i = 0; i < Properties.TOTAL_SQUARES; i++) {
+            for (int i = 0; i < Main.gameSquares.length; i++) {
                 if (i == 0)
                     squares.add(new Square(secondTrack, secondTrack, i));
                 else if (i <= 10)
@@ -72,7 +72,7 @@ public class SquareHolder {
             
             
         } else {
-            for (int i = 0; i < Properties.TOTAL_SQUARES; i++) {
+            for (int i = 0; i < Main.gameSquares.length; i++) {
                 if (i == 0)
                     squares.add(new Square(secondTrack, secondTrack, i));
                 else if (i <= 10)

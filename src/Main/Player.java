@@ -15,7 +15,7 @@ public class Player implements Serializable {
     
     private static final long   serialVersionUID = 1L;
     private int                 id, money, location, jailTime, doublesRolled;
-    private int                 jailID           = Properties.JailID;
+    private int                 jailID           = Properties.JAIL_ID;
     private String              name;
     private GameSquare[]        gameSquares;
     private boolean             jailed           = false, bonusPassAvailable;

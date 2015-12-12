@@ -92,7 +92,11 @@ public class Main {
     }
     
     private static void initializeGameSquares() {
-        gameSquares = new GameSquare[Properties.TOTAL_SQUARES];
+        gameSquares = new GameSquare[120];
+//        if (loadPrevious) {
+//            System.out.println("Game Square initialization is complete...");
+//            return;
+//        }
         
         gameSquares[0] = new StartSquare(0);
         gameSquares[1] = new Land(1, "Mediterranean Avenue", color.puple, 60, 2).addDeedInfo(10, 30, 90, 160, 250, 750,
@@ -282,7 +286,10 @@ public class Main {
     }
     
     private static void initializePlayerNames() {
-        System.out.println("Write names seperated with spaces.");
+//        if (loadPrevious) {
+//            System.out.println("Player Name initialization is complete...");
+//            return;
+//        }
         for (int i = 0; i < players.length; i++) {
             String name = null;
             while (name == null || name.length() < 1)

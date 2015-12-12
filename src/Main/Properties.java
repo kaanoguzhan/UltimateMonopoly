@@ -3,9 +3,9 @@ package Main;
 public class Properties {
     public static final int START_GOLD                = 3200;
     public static final int BONUS_PASSING_MONEY       = 250;
-    public static final int TOTAL_SQUARES             = 120;
+    public static final int DEFAULT_PLAYER_NUMBER     = 4;
     public static final int HEAVEN_ID                 = -1;
-    public static final int JailID                    = 10;
+    public static final int JAIL_ID                   = 10;
     
     
     // /////////////////////////////////////////////////////////////////////////////// //
@@ -38,6 +38,9 @@ public class Properties {
     public static final int TRANSITSTATION_RENT       = 25;
     
     
+    // /////////////////////////////////////////////////////////////////////////////// //
+    // Price Modifications //
     public static final int UTILITY_PRICE             = 150;
     public static final int BARGAINBUSINESS_PRICE     = 100;
+    
 }

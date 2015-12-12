@@ -22,7 +22,7 @@ public class PlayerInfo extends JPanel {
     JScrollPane               pane;
     static String[][]         data;
     
-    public PlayerInfo() {
+    public PlayerInfo(int size) {
         setLayout(new BorderLayout());
         
         String[] column = { "Player Name", "Location", "Money", "Properties" };
@@ -134,13 +134,22 @@ public class PlayerInfo extends JPanel {
         }
     }
     
-    public static void recreateTable() {
-        String[] columns = { "Player Name", "Location", "Money", "Properties" };
+    public void recreateTable() {
+        String[] column = { "Player Name", "Location", "Money", "Properties" };
         data = new String[Main.players.length][4];
         
-        DefaultTableModel dataModel = new DefaultTableModel(data, columns);
+        DefaultTableModel dataModel = new DefaultTableModel(data, column);
+        
+        table.removeAll();
+        table.setModel(dataModel);
         refreshData();
         
-        table.setModel(dataModel);
+        // table = new JTable(data, column);
+        // table.setFillsViewportHeight(true);
+        // refreshData();
+        // resizeColumnWidth(table);
+        //
+        // pane = new JScrollPane(table);
+        // add(pane, BorderLayout.CENTER);
     }
 }

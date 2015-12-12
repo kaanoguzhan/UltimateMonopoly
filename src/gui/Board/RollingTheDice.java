@@ -14,8 +14,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import Main.Admin;
+import Main.Main;
 import Main.Player;
-import Main.Properties;
 
 public class RollingTheDice extends JPanel implements ActionListener {
     private static final long serialVersionUID = 1L;
@@ -190,7 +190,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
                         new gui.AdditionalWindows.MessageDisplayer("You rolled triples, you can go everywhere you can!");
                         
                         int moveTo = Integer.MAX_VALUE;
-                        while (!((0 <= moveTo) && (moveTo < Properties.TOTAL_SQUARES)))
+                        while (!((0 <= moveTo) && (moveTo < Main.gameSquares.length)))
                             moveTo = new GetTextInput(
                                 "Enter the square you want to go, should be between 0 (GO) and 119(Lobard Street)")
                                 .getInt();
@@ -251,7 +251,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
                 }
             }
         } else if (arg0.getSource() == end) {
-            Main.Main.endRound();
+            Main.endRound();
             whichPlayer.setText(player.getName() + " has ended his/her turn. Now its "
                 + Admin.getNextPlayerName(player.getID()) + "'s turn.");
             whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
