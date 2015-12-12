@@ -137,7 +137,7 @@ public class PlayerInfo extends JPanel {
     public void recreateTable() {
         String[] column = { "Player Name", "Location", "Money", "Properties" };
         data = new String[Main.players.length][4];
-        
+            
         DefaultTableModel dataModel = new DefaultTableModel(data, column);
         
         table.removeAll();

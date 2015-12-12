@@ -11,6 +11,7 @@ public class Debug extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel            contentPane;
     static PlayerPanel        Player1, Player2, Player3, Player4;
+    private SaveLoadPanel saveLoadTab;
     
     public Debug() {
         switch (Main.players.length) {
@@ -76,7 +77,7 @@ public class Debug extends JFrame {
         // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
-        SaveLoadPanel saveLoadTab = new SaveLoadPanel();
+         saveLoadTab = new SaveLoadPanel();
         tabbedPane.addTab("Save-Load", null, saveLoadTab, null);
         
         // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

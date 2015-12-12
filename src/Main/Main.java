@@ -37,15 +37,18 @@ import GameSquares.Taxes.TaxRefund;
 
 public class Main {
     
-    public static ChanceDeck         chanceDeck    = null;
-    public static CommunityChestDeck communityDeck = null;
-    public static GameSquare[]       gameSquares   = null;
-    public static Player[]           players       = null;
-    volatile static Boolean          roundEnded    = false;
+    public static ChanceDeck         chanceDeck     = null;
+    public static CommunityChestDeck communityDeck  = null;
+    public static GameSquare[]       gameSquares    = null;
+    public static Player[]           players        = null;
+    public static Player             CurrentPlayer  = null;
+    volatile static Boolean          roundEnded     = false;
+    private volatile static Boolean  stopTurnLoop   = false;
     private static GetTextInput      temp;
     static Board                     board;
-    public static int                pool          = 0;
+    public static int                pool           = 0;
     private static boolean           loadPrevious;
+    public static boolean            loadProtection = false;
     
     public static void main(String[] args) {
         changeUITheme();
@@ -55,7 +58,10 @@ public class Main {
         initializePlayerNames();
         initializeBoard();
         
-        runGame();
+        if (loadPrevious)
+            continueFromSave();
+        else
+            runGame();
     }
     
     private static void changeUITheme() {
@@ -93,10 +99,10 @@ public class Main {
     
     private static void initializeGameSquares() {
         gameSquares = new GameSquare[120];
-//        if (loadPrevious) {
-//            System.out.println("Game Square initialization is complete...");
-//            return;
-//        }
+        if (loadPrevious) {
+            System.out.println("Game Square initialization is complete...");
+            return;
+        }
         
         gameSquares[0] = new StartSquare(0);
         gameSquares[1] = new Land(1, "Mediterranean Avenue", color.puple, 60, 2).addDeedInfo(10, 30, 90, 160, 250, 750,
@@ -286,10 +292,11 @@ public class Main {
     }
     
     private static void initializePlayerNames() {
-//        if (loadPrevious) {
-//            System.out.println("Player Name initialization is complete...");
-//            return;
-//        }
+        // TODO Remove or Uncomment
+        // if (loadPrevious) {
+        // System.out.println("Player Name initialization is complete...");
+        // return;
+        // }
         for (int i = 0; i < players.length; i++) {
             String name = null;
             while (name == null || name.length() < 1)
@@ -306,25 +313,66 @@ public class Main {
             SaveLoad.load();
     }
     
+    public static void continueFromSave() {
+        board.setPlayerTurnLabel("Loaded from save! It's " + CurrentPlayer.getName() + "'s turn.");
+        board.round.loadCurrentPlayer(CurrentPlayer);
+        int startID = CurrentPlayer.getID();
+        for (int i = CurrentPlayer.getID(); i < Main.players.length; i++) {
+            roundEnded = false;
+            CurrentPlayer = Main.players[i];
+            if (Main.players[i].getLocation() == Properties.HEAVEN_ID)
+                continue;
+            
+            if (i != startID)
+                board.setCurrentPlayer(Main.players[i]);
+            
+            while (!roundEnded);
+            
+            if (loadProtection)
+                board.reduceLoadProtection();
+        }
+        stopTurnLoop = false;
+        runGame();
+    }
+    
+    
     private static void runGame() {
+        if (!loadPrevious)
+            board.setPlayerTurnLabel("A new game has begun!");
+        
         Player lastPlayer = new Player(gameSquares);
         game:
         for (;;) {
-            for (Player currentPlayer : players) {
-                turn:
-                {
-                    roundEnded = false;
-                    if (currentPlayer.getLocation() == Properties.HEAVEN_ID)
-                        break turn;
-                    
-                    if (lastPlayer == currentPlayer) {
-                        break game;
+            run:
+            {
+                for (Player currentPlayer : players) {
+                    turn:
+                    {
+                        roundEnded = false;
+                        CurrentPlayer = currentPlayer;
+                        if (currentPlayer.getLocation() == Properties.HEAVEN_ID)
+                            break turn;
+                        
+                        if (lastPlayer == currentPlayer) {
+                            break game;
+                        }
+                        
+                        if (stopTurnLoop)
+                            break run;
+                        
+                        board.setCurrentPlayer(currentPlayer);
+                        
+                        while (!roundEnded) {
+                            if (stopTurnLoop) {
+                                continueFromSave();
+                                break run;
+                            };
+                        }
+                        lastPlayer = currentPlayer;
+                        
+                        if (loadProtection)
+                            board.reduceLoadProtection();
                     }
-                    
-                    board.setCurrentPlayer(currentPlayer);
-                    
-                    while (!roundEnded);
-                    lastPlayer = currentPlayer;
                 }
             }
         }
@@ -333,5 +381,9 @@ public class Main {
     
     public static void endRound() {
         roundEnded = true;
+    }
+    
+    public static void stopTurnLoop() {
+        stopTurnLoop = true;
     }
 }

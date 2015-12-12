@@ -15,7 +15,7 @@ public class Board extends JFrame {
     private static final long serialVersionUID = 1L;
     Player[]                  players;
     GameSquare[]              gameSquares;
-    private RollingTheDice    round            = new RollingTheDice();
+    public RollingTheDice     round            = new RollingTheDice();
     static SquareHolder       squareHolder     = new SquareHolder();
     public static PlayerInfo  informationTable = new PlayerInfo(Properties.DEFAULT_PLAYER_NUMBER);
     private static JLabel     lblBoard;
@@ -85,6 +85,18 @@ public class Board extends JFrame {
     }
     public static void setLblBoard(JLabel lblBoard) {
         Board.lblBoard = lblBoard;
+    }
+    
+    public void setPlayerTurnLabel(String string) {
+        round.setPlayerTurnLabel(string);
+    }
+
+    public void initiateLoadProtection() {
+        round.initiateLoadProtection();   
+    }
+    
+    public void reduceLoadProtection(){
+        round.reduceLoadProtection();
     }
 }
 

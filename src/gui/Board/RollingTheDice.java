@@ -16,18 +16,22 @@ import javax.swing.JPanel;
 import Main.Admin;
 import Main.Main;
 import Main.Player;
+import Main.Properties;
+import javax.swing.SwingConstants;
 
 public class RollingTheDice extends JPanel implements ActionListener {
     private static final long serialVersionUID = 1L;
-    private JLabel            playerName, result, dice, whichPlayer;
-    private JButton           button, end, sell;
+    private JLabel            playerName, result, dice, lblLoadProtection;
+    public JLabel             whichPlayer;
+    public JButton            btnRoll, btnEnd, btnSell;
     private boolean           getOutOfJail     = false;
     private Player            player;
+    private int               loadProtectionCounter;
     
     public RollingTheDice() {
         setLayout(null);
-        sell = new JButton();
-        button = new JButton();
+        btnSell = new JButton();
+        btnRoll = new JButton();
         dice = new JLabel();
         result = new JLabel();
         
@@ -36,7 +40,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
         dice.setBounds(7, 10, ((int) dice.getPreferredSize().getWidth()), ((int) dice.getPreferredSize().getHeight()));
         add(dice);
         
-        whichPlayer = new JLabel("It Player 1's turn");
+        whichPlayer = new JLabel("                                                                                  ");
         whichPlayer.setFont(new Font("Tahoma", Font.PLAIN, 20));
         whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
             .getPreferredSize().getHeight()));
@@ -48,37 +52,43 @@ public class RollingTheDice extends JPanel implements ActionListener {
             .getHeight()));
         add(result);
         
-        end = new JButton("End Round");
-        end.setBounds(140, 80, 116, 61);
-        add(end);
-        end.addActionListener(this);
+        btnEnd = new JButton("End Round");
+        btnEnd.setBounds(140, 80, 116, 61);
+        add(btnEnd);
+        btnEnd.addActionListener(this);
         
-        button.addActionListener(this);
-        button.setText("Roll");
-        button.setBounds(7, 80, 116, 61);
-        add(button);
+        btnRoll.addActionListener(this);
+        btnRoll.setText("Roll");
+        btnRoll.setBounds(7, 80, 116, 61);
+        add(btnRoll);
         
-        sell = new JButton("Sell");
-        sell.addActionListener(this);
-        sell.setBounds(7, 200, 116, 40);
-        add(sell);
+        btnSell = new JButton("Sell");
+        btnSell.addActionListener(this);
+        btnSell.setBounds(7, 200, 116, 40);
+        add(btnSell);
+        
+        lblLoadProtection = new JLabel("Load Protection");
+        lblLoadProtection.setHorizontalAlignment(SwingConstants.CENTER);
+        lblLoadProtection.setBounds(140, 201, 116, 39);
+        lblLoadProtection.setVisible(false);
+        add(lblLoadProtection);
         
     }
     
     public void actionPerformed(ActionEvent arg0) {
-        sell.setEnabled(!player.getOwnedLands().isEmpty() || !player.getOwnedSquares().isEmpty());
+        btnSell.setEnabled(!player.getOwnedLands().isEmpty() || !player.getOwnedSquares().isEmpty());
         whichPlayer.setText((player.getName() + " is playing"));
         whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
             .getPreferredSize().getHeight()));
         
-        button.setEnabled(false);
-        if (arg0.getSource() == button) {
+        btnRoll.setEnabled(false);
+        if (arg0.getSource() == btnRoll) {
             if (player.isJailed()) {
                 if (player.isReleaseTime()) {
                     player.getOutOfJail();
                     System.out.println("Player:" + player.getName() + " is released from jail, next round "
                         + player.getName() + " will play.");
-                    end.setEnabled(true);
+                    btnEnd.setEnabled(true);
                 } else {
                     int[] rollJail = new Dice().roll2();
                     
@@ -87,7 +97,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
                     
                     if (rollJail1 == rollJail2) {
                         player.getOutOfJail();
-                        end.setEnabled(true);
+                        btnEnd.setEnabled(true);
                     } else {
                         if (player.hasGetOutOfJail()) {
                             getOutOfJail = new GetYesNoInput("You can use GetOutOfJail Card", "Do you want to use it ?")
@@ -101,12 +111,12 @@ public class RollingTheDice extends JPanel implements ActionListener {
                         }
                         if (getOutOfJail) {
                             player.getOutOfJail();
-                            end.setEnabled(true);
+                            btnEnd.setEnabled(true);
                         } else {
                             player.reduceJailTime();
                             System.out.println("Player:" + player.getName() + " will be in jail for "
                                 + player.getJailTime() + " rounds.");
-                            end.setEnabled(true);
+                            btnEnd.setEnabled(true);
                         }
                     }
                 }
@@ -160,7 +170,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
                         
                         if (roll1 != roll2) {
                             player.resetDoublesRolled();
-                            end.setEnabled(true);
+                            btnEnd.setEnabled(true);
                         }
                     } else if (Dice.isBus()) {
                         new gui.AdditionalWindows.MessageDisplayer(" You rolled Bus !");
@@ -176,13 +186,13 @@ public class RollingTheDice extends JPanel implements ActionListener {
                             movePlayer(roll1 + roll2);
                         
                         if (roll1 != roll2) {
-                            end.setEnabled(true);
+                            btnEnd.setEnabled(true);
                             player.resetDoublesRolled();
                         }
                     } else {
                         movePlayer(roll1 + roll2 + rollSpeed);
                         player.resetDoublesRolled();
-                        end.setEnabled(true);
+                        btnEnd.setEnabled(true);
                     }
                 }
                 if (roll1 == roll2) {
@@ -199,7 +209,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
                         Admin.movePlayerBy(player.getID(), ((moveTo - current) % 20));
                         
                         player.resetDoublesRolled();
-                        end.setEnabled(true);
+                        btnEnd.setEnabled(true);
                     } else {
                         player.doublesRolled();
                         if (player.isThirdDoubles()) {
@@ -207,8 +217,8 @@ public class RollingTheDice extends JPanel implements ActionListener {
                             new gui.AdditionalWindows.MessageDisplayer(
                                 "This is your third doubles, now you will go to jail !");
                             player.goToJail();
-                            button.setEnabled(false);
-                            end.setEnabled(true);
+                            btnRoll.setEnabled(false);
+                            btnEnd.setEnabled(true);
                         } else {
                             if (Dice.isMonopolyGuy()) {
                                 movePlayer(roll1 + roll2);
@@ -223,7 +233,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
                                 else
                                     Admin.movePlayerToNextNeutralLand(player.getID(), even);
                                 new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
-                                button.setEnabled(true);
+                                btnRoll.setEnabled(true);
                             } else if (Dice.isBus()) {
                                 new gui.AdditionalWindows.MessageDisplayer(" You rolled Bus !");
                                 
@@ -237,34 +247,34 @@ public class RollingTheDice extends JPanel implements ActionListener {
                                 if (option == 2)
                                     movePlayer(roll1 + roll2);
                                 new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
-                                button.setEnabled(true);
+                                btnRoll.setEnabled(true);
                             } else {
                                 movePlayer(roll1 + roll2 + rollSpeed);
                                 new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
-                                button.setEnabled(true);
+                                btnRoll.setEnabled(true);
                             }
                         }
                     }
                 } else {
                     player.resetDoublesRolled();
-                    end.setEnabled(true);
+                    btnEnd.setEnabled(true);
                 }
             }
-        } else if (arg0.getSource() == end) {
+        } else if (arg0.getSource() == btnEnd) {
             Main.endRound();
             whichPlayer.setText(player.getName() + " has ended his/her turn. Now its "
                 + Admin.getNextPlayerName(player.getID()) + "'s turn.");
             whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
                 .getPreferredSize().getHeight()));
-            sell.setEnabled(false);
-        } else if (arg0.getSource() == sell) {
+            btnSell.setEnabled(false);
+        } else if (arg0.getSource() == btnSell) {
             gui.AdditionalWindows.List.createAndShowGUI(player.getOwnedLands(), player.getOwnedSquares());
             
             if (player.getDoublesRolled() == 0) {
-                button.setEnabled(false);
-                end.setEnabled(true);
+                btnRoll.setEnabled(false);
+                btnEnd.setEnabled(true);
             } else {
-                button.setEnabled(true);
+                btnRoll.setEnabled(true);
             }
             
         }
@@ -309,13 +319,28 @@ public class RollingTheDice extends JPanel implements ActionListener {
     
     public void setCurrentPlayer(Player player) {
         this.player = player;
+        
+        // TODO gereksiz bu kod sanirim ? Main de zaten sira gelmiyor heavenda ise
         if (-1 == player.getLocation())
-            end.doClick();
+            btnEnd.doClick();
+        // ///////////////////
         
-        button.setEnabled(true);
-        end.setEnabled(false);
-        sell.setEnabled(false);
+        boolean[] btns = { true, false, false };
+        setButtonEnableds(btns);
         
+        setplayerName(player);
+    }
+    public void loadCurrentPlayer(Player player) {
+        this.player = player;
+        
+        // TODO gereksiz bu kod sanirim ? Main de zaten sira gelmiyor heavenda ise
+        if (-1 == player.getLocation())
+            btnEnd.doClick();
+        // ///////////////////
+        
+        setplayerName(player);
+    }
+    private void setplayerName(Player player) {
         switch (player.getID()) {
             case 0:
                 this.playerName = Board.zero;
@@ -333,5 +358,35 @@ public class RollingTheDice extends JPanel implements ActionListener {
         
         PlayerInfo.refreshData();
         Board.informationTable.validate();
+    }
+    
+    public void setPlayerTurnLabel(String string) {
+        whichPlayer.setText(string);
+    }
+    
+    public boolean[] getButtonEnableds() {
+        boolean[] output = { btnRoll.isEnabled(), btnEnd.isEnabled(), btnSell.isEnabled() };
+        return output;
+    }
+    
+    public void setButtonEnableds(boolean[] arry) {
+        btnRoll.setEnabled(arry[0]);
+        btnEnd.setEnabled(arry[1]);;
+        btnSell.setEnabled(arry[2]);
+    }
+    
+    public void initiateLoadProtection() {
+        Main.loadProtection = true;
+        loadProtectionCounter = Properties.LOAD_PRORECTION_COUNTER;
+        lblLoadProtection.setText("<html>Load Protection<br>Turn/s left:" + loadProtectionCounter + "</html>");
+        lblLoadProtection.setVisible(true);
+    }
+    
+    public void reduceLoadProtection() {
+        if (loadProtectionCounter < 2) {
+            lblLoadProtection.setVisible(false);
+            Main.loadProtection = false;
+        } else
+            lblLoadProtection.setText("<html>Load Protection<br>Turn/s left:" + --loadProtectionCounter + "</html>");
     }
 }

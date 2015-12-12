@@ -24,7 +24,9 @@ public class SaveLoadPanel extends JPanel {
         btnLoad.addActionListener(al -> {
             SaveLoad.load();
             PlayerInfo.refreshData();
+            btnLoad.setEnabled(false);
         });
+        btnLoad.setEnabled(!Main.Main.loadProtection);
         add(btnLoad);
         
     }

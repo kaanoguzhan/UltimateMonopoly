@@ -12,7 +12,8 @@ public class SaveLoad {
     
     public static void save() {
         try {
-            Object[] objArry = { Main.players, Main.gameSquares };
+            Object[] objArry = { Main.players, Main.gameSquares, Main.CurrentPlayer,
+                    Main.board.round.getButtonEnableds() };
             
             FileOutputStream f_out = new FileOutputStream("savegame.data");
             ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
@@ -26,7 +27,6 @@ public class SaveLoad {
             
         } catch (IOException e) {}
     }
-    
     public static void load() {
         try {
             FileInputStream f_in = new FileInputStream("savegame.data");
@@ -36,8 +36,11 @@ public class SaveLoad {
             Object[] obj = (Object[]) obj_in.readObject();
             
             // Load Game
-            Main.players = obj[0] instanceof Player[] ? (Player[]) obj[0] : null;
-            Main.gameSquares = obj[1] instanceof GameSquare[] ? (GameSquare[]) obj[1] : null;
+            Main.stopTurnLoop();
+            Main.players = (Player[]) obj[0];
+            Main.gameSquares = (GameSquare[]) obj[1];
+            Main.CurrentPlayer = (Player) obj[2];
+            Main.board.round.setButtonEnableds((boolean[]) obj[3]);
             
             // Check for error
             if (Main.players == null || Main.gameSquares == null)
@@ -45,6 +48,7 @@ public class SaveLoad {
             
             // Recreate some UI Objects
             Board.informationTable.recreateTable();
+            Main.board.initiateLoadProtection();
             
             // Close InputStreams
             f_in.close();
