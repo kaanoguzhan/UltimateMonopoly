@@ -6,26 +6,26 @@ import GameSquares.Cards.CommunityChestCard;
 import Main.Player;
 
 public class OnlinePricing extends CommunityChestCard implements Serializable {
-	private static final long	serialVersionUID	= 1L;
-	
-	public OnlinePricing() {
-		super(CardType.OnlinePricing,true);
-	}
-	
-	@Override
-	public void onDraw(Player pl) {
-		new MessageDisplayer(toString());
-		pl.addToCardInventory(CardType.OnlinePricing);
-	}
-	
-	@Override
-	public String toString() {
-		return "You picked Special Online Pricing Card. Next time you land on anyone else's railroad only pay 1/2 the rent.";
-	}
-	
-	@Override
-	public String getName() {
-		return "Online Pricing";
-	}
-	
+    private static final long serialVersionUID = 1L;
+    
+    public OnlinePricing() {
+        super(CardType.OnlinePricing, true);
+    }
+    
+    @Override
+    public void onDraw(Player pl) {
+        new MessageDisplayer(toString());
+        pl.addToCardInventory(CardType.OnlinePricing);
+    }
+    
+    @Override
+    public String toString() {
+        return "You picked Special Online Pricing Card. Next time you land on anyone else's railroad only pay 1/2 the rent.";
+    }
+    
+    @Override
+    public String getName() {
+        return "Online Pricing";
+    }
+    
 }
