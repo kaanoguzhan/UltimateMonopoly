@@ -350,6 +350,11 @@ public class Player implements Serializable {
         return output;
     }
     
+    public boolean repOK(){
+    	return (money>=0)&&(120>location)&&(location>=0)&&
+    			(cardInventory!=null)&&(ownedLands!=null)&&(ownedSquares!=null);
+    }
+    
     public String toString() {
         String Lands = "[";
         for (Land land : ownedLands) {

@@ -390,6 +390,10 @@ public class Land extends GameSquare implements Ownable {
         return "The land " + name + "'s Upgrade status is  " + currentState;
     }
     
+    public boolean repOK(){
+    	return super.repOK()&&(price>0)&&(color!=null)&&(currentState!=null);
+    }
+    
     @Override
     public String toString() {
         return name;
