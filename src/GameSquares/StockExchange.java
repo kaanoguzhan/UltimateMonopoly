@@ -1,5 +1,6 @@
 package GameSquares;
 
+import gui.AdditionalWindows.StockExcWindow;
 import Main.Player;
 
 public class StockExchange extends GameSquare {
@@ -12,8 +13,8 @@ public class StockExchange extends GameSquare {
     
     @Override
     public void onArrive(Player pl) {
-        // TODO Auto-generated method stub
-        
+        StockExcWindow ste = new StockExcWindow();
+        ste.setVisible(true);
     }
     
     @Override

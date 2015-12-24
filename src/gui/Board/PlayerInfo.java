@@ -12,6 +12,8 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import GameSquares.Land;
 import GameSquares.Ownable;
+import GameSquares.Cards.Card;
+import GameSquares.Cards.Card.CardType;
 import Main.Main;
 import Main.Player;
 
@@ -25,8 +27,8 @@ public class PlayerInfo extends JPanel {
     public PlayerInfo(int size) {
         setLayout(new BorderLayout());
         
-        String[] column = { "Player Name", "Location", "Money", "Properties" };
-        data = new String[Main.players.length][4];
+        String[] column = { "Player Name", "Location", "Money", "Properties", "Cards", "Stocks" };
+        data = new String[Main.players.length][6];
         
         table = new JTable(data, column);
         table.setFillsViewportHeight(true);
@@ -52,15 +54,31 @@ public class PlayerInfo extends JPanel {
     
     public static void refreshData() {
         for (int i = 0; i < Main.players.length; i++) {
-            Player current = Main.players[i];
-            String lands = "";
+            String lands = "", cards = "", stocks = "";
+            Player crrtPlayer = Main.players[i];
             
             // TODO Should be changed after Ownable + OwnedLands merge
             ArrayList<Ownable> arry = new ArrayList<Ownable>();
-            for (Land lnd : current.getOwnedLands())
+            for (Land lnd : crrtPlayer.getOwnedLands())
                 arry.add(lnd);
-            for (Ownable ows : current.getOwnedSquares())
+            for (Ownable ows : crrtPlayer.getOwnedSquares())
                 arry.add(ows);
+            
+            ArrayList<CardType> arrys = crrtPlayer.getCardsInventory();
+            int goj = 0, op = 0;
+            for (CardType crdty : arrys) {
+                switch (crdty) {
+                    case GetOutOfJail:
+                        goj++;
+                        break;
+                    case OnlinePricing:
+                        op++;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            cards = "Jail:" + goj + " - Online:" + op;  
             
             for (int j = 0; j < arry.size(); j++)
                 if (j > 0)
@@ -68,10 +86,12 @@ public class PlayerInfo extends JPanel {
                 else
                     lands += arry.get(j).getID();
             
-            data[i][0] = ("" + current.getName());
-            data[i][1] = ("" + current.getLocation());
-            data[i][2] = ("" + current.getMoney());
+            data[i][0] = ("" + crrtPlayer.getName());
+            data[i][1] = ("" + crrtPlayer.getLocation());
+            data[i][2] = ("" + crrtPlayer.getMoney());
             data[i][3] = (lands);
+            data[i][4] = (cards);
+            data[i][5] = (stocks);
         }
         refreshTable();
         refreshPlayerLocations();
@@ -135,21 +155,13 @@ public class PlayerInfo extends JPanel {
     }
     
     public void recreateTable() {
-        String[] column = { "Player Name", "Location", "Money", "Properties" };
-        data = new String[Main.players.length][4];
-            
+        String[] column = { "Player Name", "Location", "Money", "Properties", "Cards", "Stocks" };
+        data = new String[Main.players.length][6];
+        
         DefaultTableModel dataModel = new DefaultTableModel(data, column);
         
         table.removeAll();
         table.setModel(dataModel);
         refreshData();
-        
-        // table = new JTable(data, column);
-        // table.setFillsViewportHeight(true);
-        // refreshData();
-        // resizeColumnWidth(table);
-        //
-        // pane = new JScrollPane(table);
-        // add(pane, BorderLayout.CENTER);
     }
 }

@@ -292,11 +292,6 @@ public class Main {
     }
     
     private static void initializePlayerNames() {
-        // TODO Remove or Uncomment
-        // if (loadPrevious) {
-        // System.out.println("Player Name initialization is complete...");
-        // return;
-        // }
         for (int i = 0; i < players.length; i++) {
             String name = null;
             while (name == null || name.length() < 1)
