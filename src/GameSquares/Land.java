@@ -11,7 +11,7 @@ public class Land extends GameSquare implements Ownable {
     private String                  name;
     private color                   color;
     private int                     price;
-    public boolean                  bsduy;
+    public boolean                  buy;
     public state                    currentState     = state.unImproved;
     private HashMap<state, Integer> rentAndPriceMap  = new HashMap<state, Integer>();
     
