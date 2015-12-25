@@ -10,7 +10,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
-import GameSquares.Land;
 import GameSquares.Ownable;
 import GameSquares.Cards.Card.CardType;
 import Main.Main;
@@ -56,12 +55,7 @@ public class PlayerInfo extends JPanel {
             String lands = "", cards = "", stocks = "";
             Player crrtPlayer = Main.players[i];
             
-            // TODO Should be changed after Ownable + OwnedLands merge
-            ArrayList<Ownable> arry = new ArrayList<Ownable>();
-            for (Land lnd : crrtPlayer.getOwnedLands())
-                arry.add(lnd);
-            for (Ownable ows : crrtPlayer.getOwnedSquares())
-                arry.add(ows);
+            ArrayList<Ownable> arry = crrtPlayer.getOwnedSquares();
             for (int j = 0; j < arry.size(); j++)
                 if (j > 0)
                     lands += " - " + arry.get(j).getID();

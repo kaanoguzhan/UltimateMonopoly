@@ -178,9 +178,6 @@ public class PlayerPanel extends JPanel {
     
     private void fillOwnLands(Choice choice, int playerID) {
         if (Main.players != null && Main.players.length - 1 >= playerID) {
-            for (Land land : Main.players[playerID].getOwnedLands()) {
-                choice.add(land.getName());
-            }
             for (Ownable ownable : Main.players[playerID].getOwnedSquares()) {
                 choice.add(ownable.getName());
             }

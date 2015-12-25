@@ -7,7 +7,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
-import GameSquares.Land;
 import GameSquares.Ownable;
 import GameSquares.Cards.ChanceCard;
 import GameSquares.Cards.CommunityChestCard;
@@ -125,9 +124,6 @@ public class DicePanel extends JPanel {
     private void fillCombo(int playerID) {
         chcOwnables.removeAll();
         if (Main.players != null && Main.players.length - 1 >= currentPlayerID) {
-            for (Land land : Main.players[playerID].getOwnedLands()) {
-                chcOwnables.add(land.getName());
-            }
             for (Ownable ownable : Main.players[playerID].getOwnedSquares()) {
                 chcOwnables.add(ownable.getName());
             }

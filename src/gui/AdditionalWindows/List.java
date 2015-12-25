@@ -19,14 +19,13 @@ public class List extends JPanel implements ListSelectionListener, ActionListene
     private JList<GameSquare>            list;
     private DefaultListModel<GameSquare> listModel;
     private JButton                      sellButton, mortgageButton;
-    ArrayList<GameSquare>                squares, squares2;
+    ArrayList<GameSquare>                squares;
     private JLabel                       label;
     
-    public List(ArrayList<GameSquare> squares, ArrayList<GameSquare> squares2) {
+    public List(ArrayList<GameSquare> squares) {
         super(new BorderLayout());
         
         this.squares = squares;
-        this.squares2 = squares2;
         
         list = new JList<GameSquare>();
         listModel = new DefaultListModel<GameSquare>();
@@ -35,25 +34,8 @@ public class List extends JPanel implements ListSelectionListener, ActionListene
             listModel.addElement(a);
         }
         
-        for (GameSquare b : squares2) {
-            listModel.addElement(b);
-        }
-        
-        if (!(squares2.isEmpty())) {
-            GameSquare a = squares2.get(0);
-            if (a instanceof Land)
-                label = new JLabel(((Land) a).toString2());
-            else
-                label = new JLabel(a.toString());
-        } else
-            label = new JLabel();
-        
         if (!(squares.isEmpty())) {
-            GameSquare a = squares.get(0);
-            if (a instanceof Land)
-                label = new JLabel(((Land) a).toString2());
-            else
-                label = new JLabel(a.toString());
+            label = new JLabel(squares.get(0).toString());
         } else
             label = new JLabel();
         
@@ -197,16 +179,12 @@ public class List extends JPanel implements ListSelectionListener, ActionListene
     
     
     @SuppressWarnings("unchecked")
-    public static void createAndShowGUI(ArrayList<?> lands, ArrayList<?> ownables) {
+    public static void createAndShowGUI(ArrayList<?> ownables) {
         // Create and set up the window.
-        if (lands != null) {
+        if (ownables != null) {
             JFrame frame = null;
-            if (lands.get(0) instanceof Land) {
-                frame = new JFrame("Lands to Sell");
-            } else {
-                frame = new JFrame("Owned properties to Sell");
-            }
-            List a = new List((ArrayList<GameSquare>) lands, (ArrayList<GameSquare>) ownables);
+            frame = new JFrame("Owned properties to Sell");
+            List a = new List((ArrayList<GameSquare>) ownables);
             frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             frame.add(a);
             frame.setSize(380, 280);
@@ -214,5 +192,4 @@ public class List extends JPanel implements ListSelectionListener, ActionListene
         }
         
     }
-    
 }

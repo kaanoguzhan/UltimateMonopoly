@@ -22,7 +22,6 @@ public class Player implements Serializable {
     private GameSquare[]        gameSquares;
     private boolean             jailed           = false, bonusPassAvailable;
     private ArrayList<CardType> cardInventory    = new ArrayList<CardType>();
-    private ArrayList<Land>     ownedLands       = new ArrayList<Land>();
     private ArrayList<Ownable>  ownedSquares     = new ArrayList<Ownable>();
     private int[]               Stocks           = new int[6];
     public boolean              testing          = false;
@@ -157,8 +156,8 @@ public class Player implements Serializable {
         if (money >= amount) {
             money -= amount;
             System.out.println(name + "'s money decreased by " + amount + " to " + money);
-        } else if (ownedLands.size() > 0) {
-            gui.AdditionalWindows.List.createAndShowGUI(ownedLands, ownedSquares);
+        } else if (ownedSquares.size() > 0) {
+            gui.AdditionalWindows.List.createAndShowGUI(ownedSquares);
             reduceMoney(amount);
         } else {
             location = Properties.HEAVEN_ID;
@@ -263,7 +262,7 @@ public class Player implements Serializable {
             System.out.println(name + " sold " + land + " for " + ((Ownable) land).getPrice());
         }
         
-        if (ownedLands.contains(land)) {
+        if (ownedSquares.contains(land)) {
             addMoney(((Ownable) land).getPrice());
             removeOwnership(land);
             System.out.println(name + " sold " + land + " for " + ((Ownable) land).getPrice());
@@ -271,19 +270,13 @@ public class Player implements Serializable {
     }
     
     public void getOwnership(GameSquare square) {
-        if (square instanceof Land)
-            ownedLands.add((Land) square);
-        else
-            ownedSquares.add((Ownable) square);
+        ownedSquares.add((Ownable) square);
         
         square.setOwner(this);
     }
     
     public void removeOwnership(GameSquare square) {
-        if (square instanceof Land)
-            ownedLands.remove((Land) square);
-        else
-            ownedSquares.remove((Ownable) square);
+        ownedSquares.remove((Ownable) square);
         
         square.setOwner(null);
     }
@@ -297,17 +290,12 @@ public class Player implements Serializable {
      * @return number of lands of this color this player owns */
     public int getNumberOfOwnedByColor(color color) {
         int counter = 0;
-        for (Land land : ownedLands) {
-            if (land.getColor() == color)
+        for (Ownable ownable : ownedSquares) {
+            if (ownable instanceof Land && ((Land) ownable).getColor() == color)
                 counter++;
         }
         return counter;
     }
-    
-    public ArrayList<Land> getOwnedLands() {
-        return ownedLands;
-    }
-    
     public ArrayList<Ownable> getOwnedSquares() {
         return ownedSquares;
     }
@@ -418,10 +406,20 @@ public class Player implements Serializable {
         return output;
     }
     
+    /** @return The Lands owned by this player */
+    public ArrayList<Land> getOwnedLands() {
+        ArrayList<Land> output = new ArrayList<Land>();
+        for (Ownable ownable : ownedSquares) {
+            if (ownable instanceof Land)
+                output.add((Land) ownable);
+        }
+        return output;
+    }
+    
     /** @return Returns player information */
     public String toString() {
         String Lands = "[";
-        for (Land land : ownedLands) {
+        for (Ownable land : ownedSquares) {
             Lands += land.getName() + ", ";
         }
         if (Lands.length() > 2)
@@ -440,7 +438,9 @@ public class Player implements Serializable {
         }
         
         return (money >= 0) && (120 > location) && (location >= 0) &&
-            (cardInventory != null) && (ownedLands != null) && (ownedSquares != null)
+            (cardInventory != null) && (ownedSquares != null) && (ownedSquares != null)
             && sqOk && (doublesRolled >= 0) && (doublesRolled <= 3) && (jailTime >= 0) && (jailTime <= 3);
     }
+    
+    
 }
