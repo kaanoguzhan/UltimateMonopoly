@@ -321,7 +321,10 @@ public class Main {
             if (i != startID)
                 board.setCurrentPlayer(Main.players[i]);
             
-            while (!roundEnded);
+            while (!roundEnded)
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {};
             
             if (loadProtection)
                 board.reduceLoadProtection();
@@ -358,6 +361,9 @@ public class Main {
                         board.setCurrentPlayer(currentPlayer);
                         
                         while (!roundEnded) {
+                            try {
+                                Thread.sleep(100);
+                            } catch (InterruptedException e) {}
                             if (stopTurnLoop) {
                                 continueFromSave();
                                 break run;
@@ -372,6 +378,9 @@ public class Main {
             }
         }
         new MessageDisplayer("Congratulations you have finished the game !");
+        
+        
+        
     }
     
     public static void endRound() {

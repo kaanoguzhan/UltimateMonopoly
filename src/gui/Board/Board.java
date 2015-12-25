@@ -28,7 +28,7 @@ public class Board extends JFrame {
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1640, 1090);
         setVisible(true);
-        setLayout(null);
+        getContentPane().setLayout(null);
         // setUndecorated(true);
         Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         double height = screenSize.getHeight();
@@ -37,16 +37,16 @@ public class Board extends JFrame {
         this.gameSquares = gameSquares;
         
         zero = new playerIcon("playerIcon1.gif", 650, 660, 50, 40);
-        add(zero);
+        getContentPane().add(zero);
         
         one = new playerIcon("playerIcon2.gif", 625, 660, 50, 40);
-        add(one);
+        getContentPane().add(one);
         
         two = new playerIcon("playerIcon3.gif", 600, 660, 50, 40);
-        add(two);
+        getContentPane().add(two);
         
         three = new playerIcon("playerIcon4.gif", 575, 660, 50, 40);
-        add(three);
+        getContentPane().add(three);
         
         Board.lblBoard = new JLabel(new ImageIcon("board1050.jpg"));
         getContentPane().add(getLblBoard());
@@ -58,25 +58,31 @@ public class Board extends JFrame {
             Debug frame = new Debug();
             frame.setVisible(true);
         });
+        debug.setBounds(1728, 972, 120, 70);
         
+        round.setBounds(1050, 0, 798, 250);
+        informationTable.setBounds(1060, 261, 788, 200);
+        Runnable infoTableDelayedResize = () -> {
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {}
+            informationTable.setBounds(1060, 261, 788, PlayerInfo.table.getSize().height+27);
+            informationTable.validate();
+        };
+        new Thread(infoTableDelayedResize).start();
+        
+        lblBoard.setBounds(0, 0, 1050, 1050);
         if (height < 1000) {
-            // boardlength = 700;
+            // boardlength = 700-;
             lblBoard.setBounds(0, 0, 700, 700);
             round.setBounds(750, 11, 800, 250);
             informationTable.setBounds(760, 272, 550, 350);
             debug.setBounds(760, 630, 120, 70);
-        } else {
-            // boardlength = 1050;
-            lblBoard.setBounds(0, 0, 1050, 1050);
-            round.setBounds(1060, 11, 800, 250);
-            informationTable.setBounds(1060, 272, 550, 350);
-            debug.setBounds(1490, 630, 120, 70);
         }
         getContentPane().add(round);
         getContentPane().add(informationTable);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
-    
     public void setCurrentPlayer(Player player) {
         round.setCurrentPlayer(player);
     }

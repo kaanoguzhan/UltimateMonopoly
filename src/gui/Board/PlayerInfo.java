@@ -1,15 +1,12 @@
 package gui.Board;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumnModel;
 import GameSquares.Ownable;
 import GameSquares.Cards.Card.CardType;
 import Main.Main;
@@ -29,26 +26,26 @@ public class PlayerInfo extends JPanel {
         data = new String[Main.players.length][6];
         
         table = new JTable(data, column);
-        table.setFillsViewportHeight(true);
         refreshData();
-        resizeColumnWidth(table);
+        resizeTable();
+        // resizeColumnWidth(table);
         
         pane = new JScrollPane(table);
         add(pane, BorderLayout.CENTER);
     }
     
-    public void resizeColumnWidth(JTable table) {
-        final TableColumnModel columnModel = table.getColumnModel();
-        for (int x = 0; x < table.getColumnCount(); x++) {
-            int width = 50;
-            for (int row = 0; row < table.getRowCount(); row++) {
-                TableCellRenderer renderer = table.getCellRenderer(row, x);
-                Component comp = table.prepareRenderer(renderer, row, x);
-                width = Math.max(comp.getPreferredSize().width + 1, width);
-            }
-            columnModel.getColumn(x).setPreferredWidth(width);
-        }
-    }
+    // public void resizeColumnWidth(JTable table) {
+    // final TableColumnModel columnModel = table.getColumnModel();
+    // for (int x = 0; x < table.getColumnCount(); x++) {
+    // int width = 50;
+    // for (int row = 0; row < table.getRowCount(); row++) {
+    // TableCellRenderer renderer = table.getCellRenderer(row, x);
+    // Component comp = table.prepareRenderer(renderer, row, x);
+    // width = Math.max(comp.getPreferredSize().width + 1, width);
+    // }
+    // columnModel.getColumn(x).setPreferredWidth(width);
+    // }
+    // }
     
     public static void refreshData() {
         for (int i = 0; i < Main.players.length; i++) {
@@ -92,6 +89,7 @@ public class PlayerInfo extends JPanel {
         refreshTable();
         refreshPlayerLocations();
     }
+    
     private static void refreshPlayerLocations() {
         for (int i = 0; i < Main.players.length; i++) {
             Player current = Main.players[i];
@@ -143,6 +141,16 @@ public class PlayerInfo extends JPanel {
         }
     }
     
+    private void resizeTable() {
+        table.getColumnModel().getColumn(0).setMaxWidth(100);
+        table.getColumnModel().getColumn(1).setMaxWidth(50);
+        table.getColumnModel().getColumn(2).setMaxWidth(50);
+        table.getColumnModel().getColumn(3).setMaxWidth(400);
+        table.getColumnModel().getColumn(4).setMaxWidth(100);
+        table.getColumnModel().getColumn(5).setMaxWidth(100);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+    }
+    
     private static void refreshTable() {
         for (int i = 0; i < table.getRowCount(); i++) {
             for (int j = 0; j < table.getColumnCount(); j++)
@@ -158,6 +166,8 @@ public class PlayerInfo extends JPanel {
         
         table.removeAll();
         table.setModel(dataModel);
+        resizeTable();
+        
         refreshData();
     }
 }
