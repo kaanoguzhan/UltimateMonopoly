@@ -17,7 +17,7 @@ public class playerTest extends Main{
 		temp.moveBy(10);
 		int b = temp.getLocation();
 		assertEquals("testing square id", 52, 52);
-//		assertTrue("repOk?"temp.repOK());
+		assertTrue("repOk?",temp.repOK());
 		
 	}
 	
