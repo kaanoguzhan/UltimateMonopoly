@@ -14,6 +14,7 @@ public class Land extends GameSquare implements Ownable {
     public boolean                  buy;
     public state                    currentState     = state.unImproved;
     private HashMap<state, Integer> rentAndPriceMap  = new HashMap<state, Integer>();
+    public boolean 					testing=false;
     
     public enum color {
         blue, pink, orange, green, puple, lightBlue, red, yellow, white, black, grey, brown, lightPink, lightGreen, lightYellow, oceanGreen, magenta, gold, lightRed, darkRed
@@ -142,6 +143,7 @@ public class Land extends GameSquare implements Ownable {
             } else
                 new MessageDisplayer("Player should have enough properties of this color");
         } else
+        	if(!testing)
             new MessageDisplayer("Player doesn't have enough money");
     }
     
@@ -162,6 +164,7 @@ public class Land extends GameSquare implements Ownable {
                 if (built) {
                     pl.reduceMoney(rentAndPriceMap.get(state.buildingCost));
                     currentState = state.hotel;
+                    if(!testing)
                     new MessageDisplayer(this.name + " has a hotel.");
                     System.out.println(this.name + " has a hotel.");
                 } else
@@ -189,6 +192,7 @@ public class Land extends GameSquare implements Ownable {
                 if (built) {
                     pl.reduceMoney(rentAndPriceMap.get(state.buildingCost));
                     currentState = state.skyscraper;
+                    if(!testing)
                     new MessageDisplayer(this.name + " has a skyscrapper.");
                     System.out.println(this.name + " has a skyscrapper.");
                 } else
@@ -391,24 +395,29 @@ public class Land extends GameSquare implements Ownable {
     }
     
     public boolean repOK(){
-    	boolean owneredAndUnImproved = (currentState!=state.unImproved&&owner!=null);
+    	boolean owneredAndUnImproved = true;
+    	
+    	if(currentState!=state.unImproved && owner == null)
+    		owneredAndUnImproved =false;
     	
     	boolean structureIfMajority = true;
-    	if(currentState!=state.unImproved || currentState!=state.mortgage) 
+    	if((currentState!=state.unImproved || currentState!=state.mortgage) && owner!=null) 
     		structureIfMajority = majorityOwnership();
     	
     	boolean skyIfHotel = true;
     	boolean hotelIf4House = true;
+    	
+    	if(currentState== state.hotel && currentState == state.skyscraper){
         for (int i = 0; i < Main.Main.gameSquares.length; i++) {
             GameSquare a = Main.Main.gameSquares[i];
             if ((a instanceof Land) && (((Land) a).getColor() == this.color)) {
                 if (((Land) a).getState() != state.hotel)
                 	skyIfHotel = false;
-                if (((Land) a).getState() != state.hotel)
+                if (((Land) a).getState() != state.fourHouse)
                 	hotelIf4House = false;
             }
         }
-    	
+    	}
     	return super.repOK()&&(price>0)&&(color!=null)&&(currentState!=null)
     			&&owneredAndUnImproved&&structureIfMajority&&skyIfHotel&&hotelIf4House;
     }

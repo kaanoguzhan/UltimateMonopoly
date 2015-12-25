@@ -10,13 +10,14 @@ import Main.Player;
 
 public class HouseCondemned extends CommunityChestCard implements Serializable {
     private static final long serialVersionUID = 1L;
-
+    public boolean testing = false;
     public HouseCondemned() {
         super(CardType.HouseCondemned, false);
     }
     
     @Override
     public void onDraw(Player pl) {
+    	if(!testing)
         new MessageDisplayer(toString());
         ArrayList<Land> lands = pl.getOwnedLands();
         ArrayList<Land> housed = new ArrayList<Land>();
