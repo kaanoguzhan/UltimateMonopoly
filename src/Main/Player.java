@@ -1,8 +1,11 @@
 package Main;
 
 import gui.AdditionalWindows.InputReaders.GetTextInput;
+import gui.Board.Board;
+import gui.Board.PlayerInfo;
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import GameSquares.GameSquare;
 import GameSquares.Land;
 import GameSquares.Land.color;
@@ -23,7 +26,7 @@ public class Player implements Serializable {
     private ArrayList<CardType> cardInventory    = new ArrayList<CardType>();
     private ArrayList<Land>     ownedLands       = new ArrayList<Land>();
     private ArrayList<Ownable>  ownedSquares     = new ArrayList<Ownable>();
-    private int[]               Stocks           = { 0, 0, 0, 0, 0, 0 };
+    private int[]               Stocks           = new int[6];
     
     // Default Constructor
     public Player(int id, String name, GameSquare[] gameSquares) {
@@ -140,8 +143,8 @@ public class Player implements Serializable {
             reduceMoney(amount);
         } else {
             location = Properties.HEAVEN_ID;
-            System.out.println(name + " is bankrupt."); // create a new
-                                                        // additional window
+            System.out.println(name + " is bankrupt.");
+            JOptionPane.showMessageDialog(null, "Player:" + name + " is bankrupt!");
         }
     }
     
@@ -193,6 +196,8 @@ public class Player implements Serializable {
             reduceMoney(((Ownable) land).getPrice());
             getOwnership(land);
         }
+        PlayerInfo.refreshData();
+        Board.informationTable.validate();
     }
     
     public void sellSquare(GameSquare land) {
@@ -329,9 +334,13 @@ public class Player implements Serializable {
     
     public void buyStock(stockType stt) {
         Stocks[stt.getOrder()]++;
+        reduceMoney(stt.getPrice());
+        PlayerInfo.refreshData();
+        Board.informationTable.validate();
     }
-    public void settStock(stockType stt) {
+    public void sellStock(stockType stt) {
         Stocks[stt.getOrder()]--;
+        addMoney(stt.getPrice());
     }
     public int getStockAmount(stockType stt) {
         return Stocks[stt.getOrder()];
@@ -373,5 +382,9 @@ public class Player implements Serializable {
         
         return "Player " + name + " has " + money + " is at " + gameSquares[location] + "\n" + "Has Cards:"
             + cardInventory + "\n" + "Has Lands:" + Lands;
+    }
+    
+    public int[] getStocks() {
+        return Stocks;
     }
 }

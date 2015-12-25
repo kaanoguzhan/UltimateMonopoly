@@ -8,24 +8,28 @@ public class StockExchange extends GameSquare {
     
     public StockExchange(int id) {
         super(id, type.StockExchange);
-        // TODO Auto-generated constructor stub
     }
     
     public enum stockType {
-        AcmeMotors(0),
-        UnitedRailways(1),
-        GeneralRadIO(2),
-        NationalUtilities(3),
-        AlliedSteamships(4),
-        MotionPictures(5);
+        AcmeMotors(0, 100),
+        UnitedRailways(1, 110),
+        GeneralRadIO(2, 120),
+        NationalUtilities(3, 130),
+        AlliedSteamships(4, 140),
+        MotionPictures(5, 150);
         
         private int order;
+        private int price;
         
-        stockType(int order) {
+        stockType(int order, int price) {
             this.order = order;
+            this.price = price;
         }
         public int getOrder() {
             return order;
+        }
+        public int getPrice() {
+            return price;
         }
     }
     
@@ -37,8 +41,6 @@ public class StockExchange extends GameSquare {
     
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
-        return null;
+        return "Stock Exchange Square";
     }
-    
 }

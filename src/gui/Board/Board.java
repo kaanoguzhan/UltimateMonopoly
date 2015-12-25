@@ -90,12 +90,12 @@ public class Board extends JFrame {
     public void setPlayerTurnLabel(String string) {
         round.setPlayerTurnLabel(string);
     }
-
+    
     public void initiateLoadProtection() {
-        round.initiateLoadProtection();   
+        round.initiateLoadProtection();
     }
     
-    public void reduceLoadProtection(){
+    public void reduceLoadProtection() {
         round.reduceLoadProtection();
     }
 }

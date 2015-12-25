@@ -7,6 +7,7 @@ public class Properties {
     public static final int HEAVEN_ID                 = -1;
     public static final int JAIL_ID                   = 10;
     public static final int LOAD_PRORECTION_COUNTER   = 4;
+    public static final int AUTOCLOSE_TIMEOUT         = 3;
     
     
     // /////////////////////////////////////////////////////////////////////////////// //

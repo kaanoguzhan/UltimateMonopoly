@@ -62,6 +62,11 @@ public class PlayerInfo extends JPanel {
                 arry.add(lnd);
             for (Ownable ows : crrtPlayer.getOwnedSquares())
                 arry.add(ows);
+            for (int j = 0; j < arry.size(); j++)
+                if (j > 0)
+                    lands += " - " + arry.get(j).getID();
+                else
+                    lands += arry.get(j).getID();
             
             ArrayList<CardType> arrys = crrtPlayer.getCardsInventory();
             int goj = 0, op = 0;
@@ -77,13 +82,11 @@ public class PlayerInfo extends JPanel {
                         break;
                 }
             }
-            cards = "Jail:" + goj + " - Online:" + op;  
+            cards = "Jail:" + goj + " - Online:" + op;
             
-            for (int j = 0; j < arry.size(); j++)
-                if (j > 0)
-                    lands += " - " + arry.get(j).getID();
-                else
-                    lands += arry.get(j).getID();
+            int[] stocksArry = crrtPlayer.getStocks();
+            stocks = stocksArry[0] + " - " + stocksArry[1] + " - " + stocksArry[2] + " - "
+                + stocksArry[3] + " - " + stocksArry[4] + " - " + stocksArry[5];
             
             data[i][0] = ("" + crrtPlayer.getName());
             data[i][1] = ("" + crrtPlayer.getLocation());
