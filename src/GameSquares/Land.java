@@ -205,7 +205,7 @@ public class Land extends GameSquare implements Ownable {
     
     /**
      * @param pl
-     * @require pl != null
+     * @requires pl != null
      * @modifies pl, current state
      * @effects The pl pays the building cost and this land now has a skyscraper 
      * built on top of hotels when owner has majority

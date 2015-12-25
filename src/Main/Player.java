@@ -49,7 +49,7 @@ public class Player implements Serializable {
 	}
 	/**
 	 * @param amount
-	 * @requires amount>0
+	 * @requires amount is greater than 0
 	 * @modifies this
 	 * @effects this player moves according to the amount given
 	 */
@@ -124,7 +124,7 @@ public class Player implements Serializable {
 
 	/**
 	 * @param id
-	 * @requires number of game squares>id>=0
+	 * @requires number of game squares is greater than id is greater than or equal to 0
 	 * @modifies this
 	 * @effects this player goes to the square with the given id
 	 */
@@ -145,7 +145,7 @@ public class Player implements Serializable {
 
 	/**
 	 * @param amount
-	 * @requires amount>=0
+	 * @requires amount is greater than or equal to 0
 	 * @modifies this
 	 * @effects this players money is increased by amount
 	 */
@@ -156,7 +156,7 @@ public class Player implements Serializable {
 
 	/**
 	 * @param amount
-	 * @requires amount>=0
+	 * @requires amount is greater than or equal to 0
 	 * @modifies this
 	 * @effects this players money is decreased by amount
 	 */
@@ -176,7 +176,7 @@ public class Player implements Serializable {
 
 	/**
 	 * @param amount
-	 * @requires amount>=0
+	 * @requires amount is greater than or equal to 0
 	 * @modifies this, Main
 	 * @effects this players money is decreased by amount and is added to the pool
 	 */
@@ -199,7 +199,7 @@ public class Player implements Serializable {
 	/**
 	 * @param player
 	 * @param amount
-	 * @requires player != null, amount>0
+	 * @requires player != null, amount is greater than 0
 	 * @modifies this, player
 	 * @effects reduces this players money by amount and adds it to player
 	 */
