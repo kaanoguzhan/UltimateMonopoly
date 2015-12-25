@@ -27,7 +27,7 @@ public class HurricaneCardTest {
 		card.testing = true;
 		card.onDraw(temp);
 
-		assertEquals("testing if the card works when player has majority ownership but no houses",testerLand1.currentState,state.unImproved);
+		assertEquals("testing if the card works when player has majority ownership but no houses",state.unImproved,testerLand1.currentState);
 		
 	}
 	
@@ -49,7 +49,7 @@ public class HurricaneCardTest {
 		card.testing = true;
 		card.onDraw(temp);
 
-		assertEquals("testing if works for a house built land",testerLand1.currentState,state.unImproved);
+		assertEquals("testing if works for a house built land",state.unImproved,testerLand1.currentState);
 		
 	}
 	
@@ -71,7 +71,7 @@ public class HurricaneCardTest {
 		card.testing = true;
 		card.onDraw(temp);
 
-		assertEquals("testing if works for a hotel built land",testerLand1.currentState,state.fourHouse);
+		assertEquals("testing if works for a hotel built land",state.fourHouse,testerLand1.currentState);
 		
 	}
 	
@@ -93,7 +93,7 @@ public class HurricaneCardTest {
 		card.testing = true;
 		card.onDraw(temp);
 
-		assertEquals("testing if works for a skyscraper built land",testerLand1.currentState,state.hotel);
+		assertEquals("testing if works for a skyscraper built land",state.hotel,testerLand1.currentState);
 		
 	}
 	
@@ -111,7 +111,7 @@ public class HurricaneCardTest {
 		card.testing = true;
 		card.onDraw(temp);
 
-		assertEquals("testing if works for a non-majority ownership land",testerLand1.currentState,state.unImproved);
+		assertEquals("testing if works for a non-majority ownership land",state.unImproved,testerLand1.currentState);
 		
 	}
 	

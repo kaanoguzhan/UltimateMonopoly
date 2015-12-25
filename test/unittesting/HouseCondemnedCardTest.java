@@ -30,7 +30,7 @@ public class HouseCondemnedCardTest {
 		
 		houseCard.onDraw(temp);
 		
-		assertEquals("testing if it works when player has no house",testerLand1.currentState,state.unImproved);
+		assertEquals("testing if it works when player has no house",state.unImproved,testerLand1.currentState);
 		
 	}
 	
@@ -56,7 +56,7 @@ public class HouseCondemnedCardTest {
 		int PlayerMoneyFinal = temp.getMoney();
 		
 		assertTrue("testing if it works when player has no house",PlayerMoneyFinal > InitialPlayerMoney);
-		assertEquals("testing if it works when player has no house",testerLand1.currentState,state.unImproved);
+		assertEquals("testing if it works when player has no house",state.unImproved,testerLand1.currentState);
 		
 	}
 

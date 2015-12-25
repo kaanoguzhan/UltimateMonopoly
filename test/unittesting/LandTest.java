@@ -33,7 +33,7 @@ public class LandTest {
 		
 		landTester1.buildStructure(abdullah);
 		
-		assertEquals("testing if building house works",landTester1.currentState,state.house);
+		assertEquals("testing if building house works",state.house,landTester1.currentState);
 		assertTrue("representation check",landTester1.repOK());
 		
 	}
@@ -54,7 +54,7 @@ public class LandTest {
 		landTester2.setState(state.fourHouse);
 		landTester1.buildStructure(abdullah);
 		
-		assertEquals("testing if building hotel works",landTester1.currentState,state.hotel);
+		assertEquals("testing if building hotel works",state.hotel,landTester1.currentState);
 		assertTrue("representation check",landTester1.repOK());
 		
 	}
@@ -75,7 +75,7 @@ public class LandTest {
 		landTester2.setState(state.hotel);
 		landTester1.buildStructure(abdullah);
 		
-		assertEquals("testing if building skyscraper works",landTester1.currentState,state.skyscraper);
+		assertEquals("testing if building skyscraper works",state.skyscraper,landTester1.currentState);
 		assertTrue("representation check",landTester1.repOK());
 		
 	}
@@ -95,7 +95,7 @@ public class LandTest {
 		landTester1.testing=true;
 		landTester1.buildStructure(abdullah);
 		
-		assertEquals("testing to build structure when player does not have enough money",landTester1.currentState,state.unImproved);
+		assertEquals("testing to build structure when player does not have enough money",state.unImproved,landTester1.currentState);
 		assertTrue("representation check",landTester1.repOK());
 
 	}
@@ -116,7 +116,7 @@ public class LandTest {
 		landTester2.setState(state.skyscraper);
 		landTester1.buildStructure(abdullah);
 
-		assertEquals("testing if trying to build structure does anything when it has a skyscraper",landTester1.currentState,state.skyscraper);
+		assertEquals("testing if trying to build structure does anything when it has a skyscraper",state.skyscraper,landTester1.currentState);
 		assertTrue("representation check",landTester1.repOK());
 		
 	}
