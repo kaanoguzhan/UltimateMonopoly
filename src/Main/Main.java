@@ -91,13 +91,13 @@ public class Main {
         System.out.println("Player initialization is complete...");
     }
     
-    private static void initializeDecks() {
+    public static void initializeDecks() {
         chanceDeck = new ChanceDeck(players);
         communityDeck = new CommunityChestDeck();
         System.out.println("Deck initialization is complete...");
     }
     
-    private static void initializeGameSquares() {
+    public static void initializeGameSquares() {
         gameSquares = new GameSquare[120];
         if (loadPrevious) {
             System.out.println("Game Square initialization is complete...");

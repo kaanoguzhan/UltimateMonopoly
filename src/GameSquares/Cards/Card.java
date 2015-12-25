@@ -3,6 +3,12 @@ package GameSquares.Cards;
 import Main.Player;
 
 public interface Card {
+	/**
+	 * @param pl
+	 * @requires pl != null
+	 * @modifies Players playing, lands
+	 * @effects Effects decided according to the card type
+	 */
     public void onDraw(Player pl);
     public String toString();
     public String getName();

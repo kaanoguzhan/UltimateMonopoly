@@ -5,7 +5,6 @@ import gui.Board.Board;
 import gui.Board.PlayerInfo;
 import java.io.Serializable;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import GameSquares.GameSquare;
 import GameSquares.Land;
 import GameSquares.Land.color;
@@ -16,7 +15,6 @@ import GameSquares.Utility;
 import GameSquares.Cards.Card.CardType;
 
 public class Player implements Serializable {
-    
     private static final long   serialVersionUID = 1L;
     private int                 id, money, location, jailTime, doublesRolled;
     private int                 jailID           = Properties.JAIL_ID;
@@ -27,8 +25,12 @@ public class Player implements Serializable {
     private ArrayList<Land>     ownedLands       = new ArrayList<Land>();
     private ArrayList<Ownable>  ownedSquares     = new ArrayList<Ownable>();
     private int[]               Stocks           = new int[6];
+    public boolean              testing          = false;
     
     // Default Constructor
+    /** @param id
+     * @param name
+     * @param gameSquares */
     public Player(int id, String name, GameSquare[] gameSquares) {
         this.id = id;
         this.location = 0;
@@ -46,6 +48,10 @@ public class Player implements Serializable {
         this.name = ".";
         this.gameSquares = gameSquares;
     }
+    /** @param amount
+     * @requires amount is greater than 0
+     * @modifies this
+     * @effects this player moves according to the amount given */
     public void moveBy(int amount) {
         int nextLocation = location + 1;
         bonusPassAvailable = true;
@@ -108,12 +114,17 @@ public class Player implements Serializable {
         location = nextLocation - 1;
         System.out.println(name + " moved " + amount + " squares and now is at " + gameSquares[location].toString()
             + "\n You have: " + money);
-        if (gameSquares[location] instanceof Utility)
-            ((Utility) gameSquares[location]).onArrive(this, amount);
-        else
-            gameSquares[location].onArrive(this);
+        if (!testing)
+            if (gameSquares[location] instanceof Utility)
+                ((Utility) gameSquares[location]).onArrive(this, amount);
+            else
+                gameSquares[location].onArrive(this);
     }
     
+    /** @param id
+     * @requires number of game squares is greater than id is greater than or equal to 0
+     * @modifies this
+     * @effects this player goes to the square with the given id */
     public void moveTo(int id) {
         System.out.println(name + " is at " + gameSquares[id].toString());
         if (id < 40 && location > id) {
@@ -129,11 +140,19 @@ public class Player implements Serializable {
             gameSquares[location].onArrive(this);
     }
     
+    /** @param amount
+     * @requires amount is greater than or equal to 0
+     * @modifies this
+     * @effects this players money is increased by amount */
     public void addMoney(int amount) {
         money += amount;
         System.out.println(name + "'s money increased by " + amount + " to " + money);
     }
     
+    /** @param amount
+     * @requires amount is greater than or equal to 0
+     * @modifies this
+     * @effects this players money is decreased by amount */
     public void reduceMoney(int amount) {
         if (money >= amount) {
             money -= amount;
@@ -143,41 +162,71 @@ public class Player implements Serializable {
             reduceMoney(amount);
         } else {
             location = Properties.HEAVEN_ID;
-            System.out.println(name + " is bankrupt.");
-            JOptionPane.showMessageDialog(null, "Player:" + name + " is bankrupt!");
+            System.out.println(name + " is bankrupt."); // create a new
+            // additional window
         }
     }
     
+    /** @param amount
+     * @requires amount is greater than or equal to 0
+     * @modifies this, Main
+     * @effects this players money is decreased by amount and is added to the pool */
     public void payToPool(int amount) {
         reduceMoney(amount);
         Main.pool += amount;
         System.out.println("pool has " + Main.pool);
     }
     
+    /** @modifies this, Main
+     * @effects this players money is increased by total pool*refund percent and is decreased from the pool */
     public void obtainPool() {
         addMoney(Main.pool * Properties.TAX_REFUND_PERCENT / 100);
         Main.pool = Main.pool * (100 - Properties.TAX_REFUND_PERCENT) / 100;
         System.out.println("pool has " + Main.pool);
     }
     
+    /** @param player
+     * @param amount
+     * @requires player != null, amount is greater than 0
+     * @modifies this, player
+     * @effects reduces this players money by amount and adds it to player */
     public void pay(Player player, int amount) {
         System.out.println(name + " paid to " + player.getName());
         this.reduceMoney(amount);
         player.addMoney(amount);
     }
     
+    /** @param cardType
+     * @modifies this
+     * @effects Adds the given card to the players card inventory */
     public void addToCardInventory(CardType cardType) {
         cardInventory.add(cardType);
         System.out.println("Player " + name + " is given the card " + cardType);
     }
     
+    /** @param cardType
+     * @return Return true if the player has the card type */
     public boolean haveCard(CardType cardType) {
         return cardInventory.contains(cardType);
     }
     
-    // public void removeCard(CommunityChestCardType cardType) {
-    // Inventory.remove(cardType);
-    // }
+    // TODO buraya bir bak eklenicek var mi
+    public void buyStock(stockType stt) {
+        Stocks[stt.getOrder()]++;
+        reduceMoney(stt.getPrice());
+        PlayerInfo.refreshData();
+        Board.informationTable.validate();
+    }
+    public void sellStock(stockType stt) {
+        Stocks[stt.getOrder()]--;
+        addMoney(stt.getPrice());
+    }
+    public int getStockAmount(stockType stt) {
+        return Stocks[stt.getOrder()];
+    }
+    public int[] getStocks() {
+        return Stocks;
+    }
     
     public int getMoney() {
         return money;
@@ -191,15 +240,19 @@ public class Player implements Serializable {
         return location;
     }
     
+    /** @param land
+     * @modifies this
+     * @effects this player pays for the land and owns it */
     public void buySquare(GameSquare land) {
         if (land instanceof Ownable) {
             reduceMoney(((Ownable) land).getPrice());
             getOwnership(land);
         }
-        PlayerInfo.refreshData();
-        Board.informationTable.validate();
     }
     
+    /** @param land
+     * @modifies this
+     * @effects this player get half the price of land and relinquishes ownership */
     public void sellSquare(GameSquare land) {
         if (land instanceof Ownable && !(land instanceof Land)) {
             if (land instanceof TransitStation)
@@ -239,6 +292,9 @@ public class Player implements Serializable {
         return id;
     }
     
+    /** @param color
+     *            The color type is present in the game
+     * @return number of lands of this color this player owns */
     public int getNumberOfOwnedByColor(color color) {
         int counter = 0;
         for (Land land : ownedLands) {
@@ -303,12 +359,16 @@ public class Player implements Serializable {
         return jailed;
     }
     
+    /** @modifies this
+     * @effects this player goes to jail and is now jailed */
     public void goToJail() {
         this.jailed = true;
         jailTime = 3;
         this.moveTo(jailID);
     }
     
+    /** @modifies this
+     * @effects this player is not jailed */
     public void getOutOfJail() {
         this.jailed = false;
         jailTime = 0;
@@ -332,20 +392,6 @@ public class Player implements Serializable {
         doublesRolled = 0;
     }
     
-    public void buyStock(stockType stt) {
-        Stocks[stt.getOrder()]++;
-        reduceMoney(stt.getPrice());
-        PlayerInfo.refreshData();
-        Board.informationTable.validate();
-    }
-    public void sellStock(stockType stt) {
-        Stocks[stt.getOrder()]--;
-        addMoney(stt.getPrice());
-    }
-    public int getStockAmount(stockType stt) {
-        return Stocks[stt.getOrder()];
-    }
-    
     public boolean isThirdDoubles() {
         if (doublesRolled == 3)
             return true;
@@ -360,6 +406,7 @@ public class Player implements Serializable {
         doublesRolled++;
     }
     
+    /** @return The number of utilities owned by this player */
     public int numOfOwnedUtilities() {
         int output = 0;
         
@@ -371,6 +418,7 @@ public class Player implements Serializable {
         return output;
     }
     
+    /** @return Returns player information */
     public String toString() {
         String Lands = "[";
         for (Land land : ownedLands) {
@@ -384,7 +432,15 @@ public class Player implements Serializable {
             + cardInventory + "\n" + "Has Lands:" + Lands;
     }
     
-    public int[] getStocks() {
-        return Stocks;
+    /** @return Checks the representation invariants */
+    public boolean repOK() {
+        boolean sqOk = true;
+        for (int i = 0; i < ownedSquares.size(); i++) {
+            if (ownedSquares.get(i) instanceof Land) sqOk = false;
+        }
+        
+        return (money >= 0) && (120 > location) && (location >= 0) &&
+            (cardInventory != null) && (ownedLands != null) && (ownedSquares != null)
+            && sqOk && (doublesRolled >= 0) && (doublesRolled <= 3) && (jailTime >= 0) && (jailTime <= 3);
     }
 }
