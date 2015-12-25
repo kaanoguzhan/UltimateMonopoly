@@ -12,7 +12,6 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import GameSquares.Land;
 import GameSquares.Ownable;
-import GameSquares.Cards.Card;
 import GameSquares.Cards.Card.CardType;
 import Main.Main;
 import Main.Player;

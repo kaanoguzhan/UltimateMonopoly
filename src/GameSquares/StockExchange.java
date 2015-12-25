@@ -11,9 +11,27 @@ public class StockExchange extends GameSquare {
         // TODO Auto-generated constructor stub
     }
     
+    public enum stockType {
+        AcmeMotors(0),
+        UnitedRailways(1),
+        GeneralRadIO(2),
+        NationalUtilities(3),
+        AlliedSteamships(4),
+        MotionPictures(5);
+        
+        private int order;
+        
+        stockType(int order) {
+            this.order = order;
+        }
+        public int getOrder() {
+            return order;
+        }
+    }
+    
     @Override
     public void onArrive(Player pl) {
-        StockExcWindow ste = new StockExcWindow();
+        StockExcWindow ste = new StockExcWindow(pl);
         ste.setVisible(true);
     }
     

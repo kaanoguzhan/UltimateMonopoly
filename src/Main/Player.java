@@ -7,6 +7,7 @@ import GameSquares.GameSquare;
 import GameSquares.Land;
 import GameSquares.Land.color;
 import GameSquares.Ownable;
+import GameSquares.StockExchange.stockType;
 import GameSquares.TransitStation;
 import GameSquares.Utility;
 import GameSquares.Cards.Card.CardType;
@@ -22,6 +23,7 @@ public class Player implements Serializable {
     private ArrayList<CardType> cardInventory    = new ArrayList<CardType>();
     private ArrayList<Land>     ownedLands       = new ArrayList<Land>();
     private ArrayList<Ownable>  ownedSquares     = new ArrayList<Ownable>();
+    private int[]               Stocks           = { 0, 0, 0, 0, 0, 0 };
     
     // Default Constructor
     public Player(int id, String name, GameSquare[] gameSquares) {
@@ -323,6 +325,16 @@ public class Player implements Serializable {
     
     public void resetDoublesRolled() {
         doublesRolled = 0;
+    }
+    
+    public void buyStock(stockType stt) {
+        Stocks[stt.getOrder()]++;
+    }
+    public void settStock(stockType stt) {
+        Stocks[stt.getOrder()]--;
+    }
+    public int getStockAmount(stockType stt) {
+        return Stocks[stt.getOrder()];
     }
     
     public boolean isThirdDoubles() {
