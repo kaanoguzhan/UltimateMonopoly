@@ -43,4 +43,8 @@ public abstract class GameSquare implements Serializable {
     public int getID() {
         return id;
     }
+    
+    public boolean repOK(){
+    	return (120>id)&&(id>=0);
+    }
 }

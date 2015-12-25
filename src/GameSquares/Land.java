@@ -390,6 +390,29 @@ public class Land extends GameSquare implements Ownable {
         return "The land " + name + "'s Upgrade status is  " + currentState;
     }
     
+    public boolean repOK(){
+    	boolean owneredAndUnImproved = (currentState!=state.unImproved&&owner!=null);
+    	
+    	boolean structureIfMajority = true;
+    	if(currentState!=state.unImproved || currentState!=state.mortgage) 
+    		structureIfMajority = majorityOwnership();
+    	
+    	boolean skyIfHotel = true;
+    	boolean hotelIf4House = true;
+        for (int i = 0; i < Main.Main.gameSquares.length; i++) {
+            GameSquare a = Main.Main.gameSquares[i];
+            if ((a instanceof Land) && (((Land) a).getColor() == this.color)) {
+                if (((Land) a).getState() != state.hotel)
+                	skyIfHotel = false;
+                if (((Land) a).getState() != state.hotel)
+                	hotelIf4House = false;
+            }
+        }
+    	
+    	return super.repOK()&&(price>0)&&(color!=null)&&(currentState!=null)
+    			&&owneredAndUnImproved&&structureIfMajority&&skyIfHotel&&hotelIf4House;
+    }
+    
     @Override
     public String toString() {
         return name;
