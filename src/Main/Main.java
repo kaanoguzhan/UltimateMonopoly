@@ -97,7 +97,7 @@ public class Main {
         System.out.println("Deck initialization is complete...");
     }
     
-    private static void initializeGameSquares() {
+    protected static void initializeGameSquares() {
         gameSquares = new GameSquare[120];
         if (loadPrevious) {
             System.out.println("Game Square initialization is complete...");

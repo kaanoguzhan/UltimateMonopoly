@@ -9,7 +9,7 @@ public abstract class GameSquare implements Serializable {
     protected int             id;
     protected type            cardType;
     protected Player          owner;
-    
+
     protected GameSquare(int id, type type) {
         this.id = id;
         this.cardType = type;
