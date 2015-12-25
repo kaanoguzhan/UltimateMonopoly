@@ -351,8 +351,14 @@ public class Player implements Serializable {
     }
     
     public boolean repOK(){
+    	boolean sqOk = true;
+    	for(int i=0;i<ownedSquares.size();i++){
+    		if(ownedSquares.get(i) instanceof Land) sqOk = false;
+    	}
+    	
     	return (money>=0)&&(120>location)&&(location>=0)&&
-    			(cardInventory!=null)&&(ownedLands!=null)&&(ownedSquares!=null);
+    			(cardInventory!=null)&&(ownedLands!=null)&&(ownedSquares!=null)
+    			&&sqOk&&(doublesRolled>=0)&&(doublesRolled<=3)&&(jailTime>=0)&&(jailTime<=3);
     }
     
     public String toString() {
