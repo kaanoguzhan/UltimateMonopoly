@@ -141,7 +141,7 @@ public class StockExcWindow extends JFrame {
                 lblStock2.setText((Integer.parseInt(lblStock2.getText()) + 1) + "");
             }
         });
-        if (crrtPlayer.getStockAmount(stockType.UnitedRailways) == 0) btnStock2.setEnabled(false);
+        if (crrtPlayer.getStockAmount(stockType.UnitedRailways) >= 6) btnStock2.setEnabled(false);
         if (inheritStock && crrtPlayer.getStockAmount(stockType.UnitedRailways) != 0) btnStock2.setEnabled(false);
         pnlStocks.add(btnStock2);
         
