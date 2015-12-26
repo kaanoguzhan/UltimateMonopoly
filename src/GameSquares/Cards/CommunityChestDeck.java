@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Random;
 import GameSquares.Cards.CommunityChestCards.GeneralRepairs;
 import GameSquares.Cards.CommunityChestCards.InheritStock;
+import GameSquares.Cards.CommunityChestCards.OnlinePricing;
 import GameSquares.Cards.CommunityChestCards.VehicleImpounded;
 
 public class CommunityChestDeck implements Serializable, Deck {
@@ -12,7 +13,8 @@ public class CommunityChestDeck implements Serializable, Deck {
 
 	public CommunityChestDeck() {
 		CommunityChestCard[] cards = { // new BargainBusiness(),
-		// new HouseCondemned(), new OnlinePricing(),
+		 //new HouseCondemned(),
+				new OnlinePricing(),
 		// new RecieveConsultancyFee(), new RenovationSuccess(),
 		// new StreetRepair(),
 				new VehicleImpounded(), new GeneralRepairs(), new InheritStock() };

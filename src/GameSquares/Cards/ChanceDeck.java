@@ -2,8 +2,10 @@ package GameSquares.Cards;
 
 import java.io.Serializable;
 import java.util.Random;
+
 import GameSquares.Cards.ChanceCards.ChangingLanes;
 import GameSquares.Cards.ChanceCards.EntertainmentRocks;
+import GameSquares.Cards.ChanceCards.GetOutOfJail;
 import Main.Player;
 
 public class ChanceDeck implements Serializable, Deck {
@@ -18,7 +20,7 @@ public class ChanceDeck implements Serializable, Deck {
 				// AdvanceToTheNearestUtility(),
 				// new ElectedAsChairPerson(players),
 				// new GeneralRepairs(),
-				// new GetOutOfJail(), new GoToJail(),
+				 new GetOutOfJail(), //new GoToJail(),
 				// new SchoolFees(), new ThreeSpacesBack(),
 				// new Hurricane(), new MargiGras(), new PropertyTaxes(),
 				// new BusTicket(),
