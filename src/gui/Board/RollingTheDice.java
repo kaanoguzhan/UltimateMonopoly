@@ -285,45 +285,11 @@ public class RollingTheDice extends JPanel implements ActionListener {
     
     private void movePlayer(int amount) {
         player.moveBy(amount);
-        
-        int location = player.getLocation();
-        location = (location + amount) % 120;
-        
-        int x, y;
-        switch (player.getID()) {
-            case 0:
-                x = Board.squareHolder.getSquare(location).getX() - 25;
-                y = Board.squareHolder.getSquare(location).getY() - 50;
-                break;
-            case 1:
-                x = Board.squareHolder.getSquare(location).getX() - 65;
-                y = Board.squareHolder.getSquare(location).getY() - 50;
-                break;
-            case 2:
-                x = Board.squareHolder.getSquare(location).getX() - 65;
-                y = Board.squareHolder.getSquare(location).getY() - 10;
-                break;
-            case 3:
-                x = Board.squareHolder.getSquare(location).getX() - 25;
-                y = Board.squareHolder.getSquare(location).getY() - 10;
-                break;
-            default:
-                x = Board.squareHolder.getSquare(location).getX() - (player.getID() * 30);
-                y = Board.squareHolder.getSquare(location).getY();
-                break;
-        }
-        
-        playerName.setBounds(x, y, 50, 40);
         PlayerInfo.refreshData();
     }
     
     public void setCurrentPlayer(Player player) {
         this.player = player;
-        
-        // TODO gereksiz bu kod sanirim ? Main de zaten sira gelmiyor heavenda ise
-        if (-1 == player.getLocation())
-            btnEnd.doClick();
-        // ///////////////////
         
         boolean[] btns = { true, false, false };
         setButtonEnableds(btns);
@@ -333,10 +299,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
     public void loadCurrentPlayer(Player player) {
         this.player = player;
         
-        // TODO gereksiz bu kod sanirim ? Main de zaten sira gelmiyor heavenda ise
-        if (-1 == player.getLocation())
-            btnEnd.doClick();
-        // ///////////////////
         
         setplayerName(player);
     }
