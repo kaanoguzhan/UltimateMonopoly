@@ -270,9 +270,19 @@ public class Player implements Serializable {
     }
     
     public void getOwnership(GameSquare square) {
+    	
+    	if(square instanceof TransitStation){
+    		GameSquare connection = Main.gameSquares[((TransitStation) square).getConnectedTransit()];
+    		
+    		ownedSquares.add((Ownable)connection);
+    		connection.setOwner(this);
+    		
+    		ownedSquares.add((Ownable)square);
+    		square.setOwner(this);
+    	}else{
         ownedSquares.add((Ownable) square);
-        
         square.setOwner(this);
+    	}
     }
     
     public void removeOwnership(GameSquare square) {
@@ -433,8 +443,10 @@ public class Player implements Serializable {
     /** @return Checks the representation invariants */
     public boolean repOK() {
         boolean sqOk = true;
+        
         for (int i = 0; i < ownedSquares.size(); i++) {
-            if (ownedSquares.get(i) instanceof Land) sqOk = false;
+            if (!(ownedSquares.get(i) instanceof Ownable))
+            		sqOk = false;
         }
         
         return (money >= 0) && (120 > location) && (location >= 0) &&
