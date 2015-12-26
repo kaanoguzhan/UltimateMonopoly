@@ -1,17 +1,20 @@
 package gui.Board;
 
+import gui.Options;
 import gui.Debug.Debug;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import GameSquares.GameSquare;
 import Main.Player;
 import Main.Properties;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Board extends JFrame {
     
@@ -68,7 +71,7 @@ public class Board extends JFrame {
         });
         debug.setBounds(1728, 972, 120, 70);
         
-        round.setBounds(1050, 0, 798, 250);
+        round.setBounds(1050, 0, 808, 250);
         informationTable.setBounds(1060, 261, 788, 900);
         lblBoard.setBounds(0, 0, 1050, 1050);
         
@@ -80,9 +83,15 @@ public class Board extends JFrame {
             debug.setBounds(760, 630, 120, 70);
         }
         
-        JButton button = new JButton("Debug Window");
-        button.setBounds(1060, 972, 120, 70);
-        getContentPane().add(button);
+        JButton btnOptions = new JButton("Options");
+        btnOptions.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Options opt = new Options();
+                opt.setVisible(true);
+            }
+        });
+        btnOptions.setBounds(1060, 972, 120, 70);
+        getContentPane().add(btnOptions);
         getContentPane().add(round);
         getContentPane().add(informationTable);
         
