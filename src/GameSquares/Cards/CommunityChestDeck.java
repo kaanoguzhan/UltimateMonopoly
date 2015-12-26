@@ -2,12 +2,8 @@ package GameSquares.Cards;
 
 import java.io.Serializable;
 import java.util.Random;
-
 import GameSquares.Cards.CommunityChestCards.GeneralRepairs;
-import GameSquares.Cards.CommunityChestCards.HouseCondemned;
 import GameSquares.Cards.CommunityChestCards.InheritStock;
-import GameSquares.Cards.CommunityChestCards.OnlinePricing;
-import GameSquares.Cards.CommunityChestCards.StreetRepair;
 import GameSquares.Cards.CommunityChestCards.VehicleImpounded;
 
 public class CommunityChestDeck implements Serializable, Deck {
