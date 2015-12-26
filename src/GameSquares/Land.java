@@ -121,6 +121,7 @@ public class Land extends GameSquare implements Ownable {
     
     /**
      * @param pl
+     * @requires can build structure when owner has majority of the colored lands.
      * @modifies pl, current state
      * @effects The structure state is upgraded to one upper valid state when pl pays for the building cost
      */
@@ -139,8 +140,9 @@ public class Land extends GameSquare implements Ownable {
     /**
      * @param pl
      * @modifies pl, current state
+     * @requires can build structure when owner has majority of the colored lands.
      * @effects The pl pays the building cost and this land now has a skyscraper 
-     * built when owner has majority
+     * 
      */
     public void buildHouse(Player pl) {
         if (pl.getMoney() >= rentAndPriceMap.get(state.buildingCost)) {
@@ -171,9 +173,9 @@ public class Land extends GameSquare implements Ownable {
     
     /**
      * @param pl
+     * @requires built on top of four houses when owner has majority
      * @modifies pl, current state
      * @effects The pl pays the building cost and this land now has a hotel 
-     * built on top of four houses when owner has majority
      */
     public void buildHotel(Player pl) {
         if (pl.getMoney() >= rentAndPriceMap.get(state.buildingCost)) {

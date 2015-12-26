@@ -30,7 +30,7 @@ public abstract class GameSquare implements Serializable {
     /**
      * @param pl Player that have moved
      * @requires pl!=null and player moves to another square
-     * @modifies Attributes of players that have involved in the game
+     * @modifies player pl (all of its fields may be modified).
      * @effects Effects depend according to the specific game square 
      */
     public abstract void onArrive(Player pl);

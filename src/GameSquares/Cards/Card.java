@@ -5,7 +5,7 @@ import Main.Player;
 public interface Card {
     /** @param pl
      * @requires pl != null
-     * @modifies Players playing, lands
+     * @modifies player[] (all of the players along with the current player pl), Lands (Hurricane, housecondemned cards) 
      * @effects Effects decided according to the card type */
     public void onDraw(Player pl);
     public String toString();
