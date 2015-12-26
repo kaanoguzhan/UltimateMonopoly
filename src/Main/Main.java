@@ -56,13 +56,13 @@ public class Main {
     public static boolean            loadProtection = false;
     
     public static void main(String[] args) {
-    	playMusic();
         changeUITheme();
         initializePlayers();
         initializeDecks();
         initializeGameSquares();
         initializePlayerNames();
         initializeBoard();
+        playMusic();
         
         if (loadPrevious)
             continueFromSave();
