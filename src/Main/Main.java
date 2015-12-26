@@ -3,6 +3,11 @@ package Main;
 import gui.AdditionalWindows.MessageDisplayer;
 import gui.AdditionalWindows.InputReaders.GetTextInput;
 import gui.Board.Board;
+
+import java.io.File;
+
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import GameSquares.Auction;
@@ -51,6 +56,7 @@ public class Main {
     public static boolean            loadProtection = false;
     
     public static void main(String[] args) {
+    	playMusic();
         changeUITheme();
         initializePlayers();
         initializeDecks();
@@ -383,6 +389,12 @@ public class Main {
         
     }
     
+    private static void playMusic(){ 
+    	AudioRunner a = new AudioRunner();
+    	Thread t = new Thread(a);
+    	t.start();
+   }
+    
     public static void endRound() {
         roundEnded = true;
     }
@@ -390,4 +402,21 @@ public class Main {
     public static void stopTurnLoop() {
         stopTurnLoop = true;
     }
+    
+}
+
+class AudioRunner implements Runnable{
+
+	public AudioRunner(){}
+	@Override
+	public void run() {
+	   	 try { 
+	   		 File musicFile = new File("hitthatjive.wav");
+	   		 Clip c = AudioSystem.getClip(); 
+	   		 c.open(AudioSystem.getAudioInputStream(musicFile)); 
+	   		 c.start(); 
+	   		 Thread.sleep(c.getMicrosecondLength()); 
+	   		 } catch (Exception e) { System.err.println(e.getMessage()); }
+	}
+	
 }
