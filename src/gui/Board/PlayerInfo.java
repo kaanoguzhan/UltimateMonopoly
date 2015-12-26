@@ -38,6 +38,7 @@ public class PlayerInfo extends JPanel {
         playerCard4.refresh();
         
         refreshPlayerLocations();
+        Board.refreshPoolMoney();
     }
     
     public static void setActivePlayerCard(int id) {
@@ -105,10 +106,63 @@ public class PlayerInfo extends JPanel {
                     y = Board.squareHolder.getSquare(id).getY();
                     break;
             }
+            System.out.print(playerID + "---" + x + "," + y + " / ");  // TODO delete this
             
+            final JLabel Playerr = Player;
+            Runnable moveAnimation = () -> {
+                int startX = Playerr.getBounds().x;
+                int startY = Playerr.getBounds().y;
+                int endX = x;
+                int endY = y;
+                
+                if (startX > endX && startY > endY)
+                    while (startX > endX || startY > endY) {
+                        Playerr.setBounds(startX, startY, 50, 40);
+                        if (startX > endX)
+                            startX--;
+                        if (startY > endY)
+                            startY--;
+                        try {
+                            Thread.sleep(3);
+                        } catch (InterruptedException e) {}
+                    }
+                if (startX > endX && startY < endY)
+                    while (startX > endX || startY < endY) {
+                        Playerr.setBounds(startX, startY, 50, 40);
+                        if (startX > endX)
+                            startX--;
+                        if (startY < endY)
+                            startY++;
+                        try {
+                            Thread.sleep(3);
+                        } catch (InterruptedException e) {}
+                    }
+                if (startX < endX && startY > endY)
+                    while (startX < endX || startY > endY) {
+                        Playerr.setBounds(startX, startY, 50, 40);
+                        if (startX < endX)
+                            startX++;
+                        if (startY > endY)
+                            startY--;
+                        try {
+                            Thread.sleep(3);
+                        } catch (InterruptedException e) {}
+                    }
+                if (startX < endX && startY < endY)
+                    while (startX < endX || startY < endY) {
+                        Playerr.setBounds(startX, startY, 50, 40);
+                        if (startX < endX)
+                            startX++;
+                        if (startY < endY)
+                            startY++;
+                        try {
+                            Thread.sleep(3);
+                        } catch (InterruptedException e) {}
+                    }
+            };
+            new Thread(moveAnimation).start();
             
-            if (Player != null)
-                Player.setBounds(x, y, 50, 40);
         }
+        System.out.println();
     }
 }

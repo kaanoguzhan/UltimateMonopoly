@@ -1,6 +1,5 @@
 package gui.Debug;
 
-import gui.Board.PlayerInfo;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import Main.SaveLoad;
@@ -23,7 +22,6 @@ public class SaveLoadPanel extends JPanel {
         btnLoad.setBounds(316, 5, 299, 109);
         btnLoad.addActionListener(al -> {
             SaveLoad.load();
-            PlayerInfo.refreshData();
             btnLoad.setEnabled(false);
         });
         btnLoad.setEnabled(!Main.Main.loadProtection);
