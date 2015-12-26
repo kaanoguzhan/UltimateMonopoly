@@ -13,11 +13,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import javax.swing.SwingConstants;
 import Main.Admin;
 import Main.Main;
 import Main.Player;
 import Main.Properties;
-import javax.swing.SwingConstants;
 
 public class RollingTheDice extends JPanel implements ActionListener {
     private static final long serialVersionUID = 1L;
@@ -27,6 +29,8 @@ public class RollingTheDice extends JPanel implements ActionListener {
     private boolean           getOutOfJail     = false;
     private Player            player;
     private int               loadProtectionCounter;
+    private static int        turn             = 0;
+    private static JTextPane  txtLog;
     
     public RollingTheDice() {
         setLayout(null);
@@ -73,13 +77,21 @@ public class RollingTheDice extends JPanel implements ActionListener {
         lblLoadProtection.setVisible(false);
         add(lblLoadProtection);
         
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBorder(null);
+        scrollPane.setBounds(475, 10, 296, 240);
+        add(scrollPane);
+        
+        txtLog = new JTextPane();
+        scrollPane.setViewportView(txtLog);
+        
     }
     
     public void actionPerformed(ActionEvent arg0) {
-        boolean noShares=true;
-    	for(int a : player.getStocks()){
-        	if(a!=0)
-        		noShares=false;
+        boolean noShares = true;
+        for (int a : player.getStocks()) {
+            if (a != 0)
+                noShares = false;
         }
         
         btnSell.setEnabled(!(noShares) || !player.getOwnedSquares().isEmpty());
@@ -93,7 +105,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
             if (player.isLoseTurn()) {
                 btnEnd.setEnabled(true);
                 player.LoseTurn(false);
-            }else  if (player.isJailed()) {
+            } else if (player.isJailed()) {
                 if (player.isReleaseTime()) {
                     player.getOutOfJail();
                     System.out.println("Player:" + player.getName() + " is released from jail, next round "
@@ -278,8 +290,9 @@ public class RollingTheDice extends JPanel implements ActionListener {
             whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
                 .getPreferredSize().getHeight()));
             btnRoll.requestFocus();
+            RollingTheDice.logEndTurn();
         } else if (arg0.getSource() == btnSell) {
-            gui.AdditionalWindows.List.createAndShowGUI(player.getOwnedSquares(),player);
+            gui.AdditionalWindows.List.createAndShowGUI(player.getOwnedSquares(), player);
             
             if (player.getDoublesRolled() == 0) {
                 btnRoll.setEnabled(false);
@@ -287,7 +300,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
             } else {
                 btnRoll.setEnabled(true);
             }
-            
         }
         
         PlayerInfo.refreshData();
@@ -324,7 +336,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
                 break;
         }
         PlayerInfo.setActivePlayerCard(player.getID());
-//        PlayerInfo.refreshData();
         Board.informationTable.validate();
     }
     
@@ -356,5 +367,12 @@ public class RollingTheDice extends JPanel implements ActionListener {
             Main.loadProtection = false;
         } else
             lblLoadProtection.setText("<html>Load Protection<br>Turn/s left:" + --loadProtectionCounter + "</html>");
+    }
+    
+    public static void logAdd(String text) {
+        txtLog.setText(txtLog.getText() + "\n" + text);;
+    }
+    public static void logEndTurn() {
+        txtLog.setText(txtLog.getText() + "\n" + "   -   -   -   -   -   -   -   " + "End of turn " + turn++ + "   -   -   -   -   -   -   -   ");
     }
 }

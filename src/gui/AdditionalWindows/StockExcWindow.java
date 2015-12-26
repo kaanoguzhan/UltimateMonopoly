@@ -19,9 +19,16 @@ import java.awt.event.ActionEvent;
 
 public class StockExcWindow extends JFrame {
     private static final long serialVersionUID = 1L;
+    private JLabel            lblCloseTimer, lblCya;
     private JPanel            pnlStocks;
-    JLabel                    lblCloseTimer, lblCya;
+    private boolean           inheritStock;
     
+    public StockExcWindow(Player crrtPlayer, int type)
+    {
+        StockExcWindow stk = new StockExcWindow(crrtPlayer);
+        stk.setVisible(true);
+        inheritStock = true;
+    }
     public StockExcWindow(Player crrtPlayer) {
         this.setDefaultCloseOperation(0);
         this.addWindowListener(new WindowAdapter() {
@@ -113,6 +120,7 @@ public class StockExcWindow extends JFrame {
             }
         });
         if (crrtPlayer.getStockAmount(stockType.AcmeMotors) >= 6) btnStock1.setEnabled(false);
+        if (inheritStock && crrtPlayer.getStockAmount(stockType.AcmeMotors) != 0) btnStock1.setEnabled(false);
         pnlStocks.add(btnStock1);
         
         JButton btnStock2 = new JButton("United Railways");
@@ -133,7 +141,8 @@ public class StockExcWindow extends JFrame {
                 lblStock2.setText((Integer.parseInt(lblStock2.getText()) + 1) + "");
             }
         });
-        if (crrtPlayer.getStockAmount(stockType.UnitedRailways) >= 6) btnStock2.setEnabled(false);
+        if (crrtPlayer.getStockAmount(stockType.UnitedRailways) == 0) btnStock2.setEnabled(false);
+        if (inheritStock && crrtPlayer.getStockAmount(stockType.UnitedRailways) != 0) btnStock2.setEnabled(false);
         pnlStocks.add(btnStock2);
         
         JButton btnStock3 = new JButton("General RadI/O");
@@ -155,6 +164,7 @@ public class StockExcWindow extends JFrame {
             }
         });
         if (crrtPlayer.getStockAmount(stockType.GeneralRadIO) >= 6) btnStock3.setEnabled(false);
+        if (inheritStock && crrtPlayer.getStockAmount(stockType.GeneralRadIO) != 0) btnStock3.setEnabled(false);
         pnlStocks.add(btnStock3);
         
         JButton btnStock4 = new JButton("National Utilities");
@@ -176,6 +186,7 @@ public class StockExcWindow extends JFrame {
             }
         });
         if (crrtPlayer.getStockAmount(stockType.NationalUtilities) >= 6) btnStock4.setEnabled(false);
+        if (inheritStock && crrtPlayer.getStockAmount(stockType.NationalUtilities) != 0) btnStock4.setEnabled(false);
         pnlStocks.add(btnStock4);
         
         JButton btnStock5 = new JButton("Allied Steamships");
@@ -197,6 +208,7 @@ public class StockExcWindow extends JFrame {
             }
         });
         if (crrtPlayer.getStockAmount(stockType.AlliedSteamships) >= 6) btnStock5.setEnabled(false);
+        if (inheritStock && crrtPlayer.getStockAmount(stockType.AlliedSteamships) != 0) btnStock5.setEnabled(false);
         pnlStocks.add(btnStock5);
         
         JButton btnStock6 = new JButton("Motion Pictures");
@@ -218,6 +230,7 @@ public class StockExcWindow extends JFrame {
             }
         });
         if (crrtPlayer.getStockAmount(stockType.MotionPictures) >= 6) btnStock6.setEnabled(false);
+        if (inheritStock && crrtPlayer.getStockAmount(stockType.MotionPictures) != 0) btnStock6.setEnabled(false);
         pnlStocks.add(btnStock6);
         
         JButton btnDontBuy = new JButton("I dont want to buy");

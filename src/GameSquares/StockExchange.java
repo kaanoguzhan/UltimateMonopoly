@@ -1,6 +1,8 @@
 package GameSquares;
 
 import gui.AdditionalWindows.StockExcWindow;
+import gui.Board.RollingTheDice;
+import Main.Main;
 import Main.Player;
 
 public class StockExchange extends GameSquare {
@@ -11,27 +13,27 @@ public class StockExchange extends GameSquare {
     }
     
     public enum stockType {
-        AcmeMotors(0, 100,"AcmeMotors Stock Share"),
-        UnitedRailways(1, 110,"UnitedRailways Stock Share"),
-        GeneralRadIO(2, 120,"GeneralRadIO Stock Share"),
-        NationalUtilities(3, 130,"NationalUtilities Stock Share"),
-        AlliedSteamships(4, 140,"AlliedSteamships Stock Share"),
-        MotionPictures(5, 150,"MotionPictures Stock Share");
+        AcmeMotors(0, 100, "AcmeMotors Stock Share"),
+        UnitedRailways(1, 110, "UnitedRailways Stock Share"),
+        GeneralRadIO(2, 120, "GeneralRadIO Stock Share"),
+        NationalUtilities(3, 130, "NationalUtilities Stock Share"),
+        AlliedSteamships(4, 140, "AlliedSteamships Stock Share"),
+        MotionPictures(5, 150, "MotionPictures Stock Share");
         
-        private int order;
-        private int price;
+        private int    order;
+        private int    price;
         private String value;
         
-        stockType(int order, int price,String value) {
+        stockType(int order, int price, String value) {
             this.order = order;
             this.price = price;
             this.value = value;
         }
-        public static stockType getStock(int i){
-        	for(stockType st:stockType.values())
-        		if(st.order==i)
-        			return st;
-        	return null;
+        public static stockType getStock(int i) {
+            for (stockType st : stockType.values())
+                if (st.order == i)
+                    return st;
+            return null;
         }
         public int getOrder() {
             return order;
@@ -39,13 +41,13 @@ public class StockExchange extends GameSquare {
         public int getPrice() {
             return price;
         }
-        public String getValue(){
-        	return value;
+        public String getValue() {
+            return value;
         }
         
         @Override
-        public String toString(){
-        	return value;
+        public String toString() {
+            return value;
         }
         
     }
@@ -54,10 +56,44 @@ public class StockExchange extends GameSquare {
     public void onArrive(Player pl) {
         StockExcWindow ste = new StockExcWindow(pl);
         ste.setVisible(true);
+        
+        String div = "";
+        for (Player player : Main.players) {
+            int divident = (int) (((stockType.AcmeMotors.getPrice() / 10) * (Math.pow(2.5, player.getStockAmount(stockType.AcmeMotors)) - 1))) +
+                (int) (((stockType.AlliedSteamships.getPrice() / 10) * (Math.pow(2.5, player.getStockAmount(stockType.AlliedSteamships)) - 1))) +
+                (int) (((stockType.GeneralRadIO.getPrice() / 10) * (Math.pow(2.5, player.getStockAmount(stockType.GeneralRadIO)) - 1))) +
+                (int) (((stockType.MotionPictures.getPrice() / 10) * (Math.pow(2.5, player.getStockAmount(stockType.MotionPictures)) - 1))) +
+                (int) (((stockType.NationalUtilities.getPrice() / 10) * (Math.pow(2.5, player.getStockAmount(stockType.NationalUtilities)) - 1))) +
+                (int) (((stockType.UnitedRailways.getPrice() / 10) * (Math.pow(2.5, player.getStockAmount(stockType.UnitedRailways)) - 1)));
+            
+            player.addMoney(divident);
+            div += " " + divident + "    ";
+        }
+        RollingTheDice.logAdd("Dividents paid: " + div);
     }
-    
     @Override
     public String toString() {
         return "Stock Exchange Square";
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
