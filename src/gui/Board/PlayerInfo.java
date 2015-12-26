@@ -38,6 +38,7 @@ public class PlayerInfo extends JPanel {
         playerCard4.refresh();
         
         refreshPlayerLocations();
+        Board.refreshPoolMoney();
     }
     
     public static void setActivePlayerCard(int id) {

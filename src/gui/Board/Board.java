@@ -104,6 +104,10 @@ public class Board extends JFrame {
     public void reduceLoadProtection() {
         round.reduceLoadProtection();
     }
+    
+    public static void refreshPoolMoney() {
+        lblPool.setText("Pool:" + Main.Main.pool);
+    }
 }
 
 
