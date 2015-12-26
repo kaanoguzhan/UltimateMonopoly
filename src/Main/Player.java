@@ -20,7 +20,7 @@ public class Player implements Serializable {
     private int                 jailID           = Properties.JAIL_ID;
     private String              name;
     private GameSquare[]        gameSquares;
-    private boolean             jailed           = false, bonusPassAvailable;
+    private boolean             jailed           = false, bonusPassAvailable, loseTurn;
     private ArrayList<CardType> cardInventory    = new ArrayList<CardType>();
     private ArrayList<Ownable>  ownedSquares     = new ArrayList<Ownable>();
     private int[]               Stocks           = new int[6];
@@ -270,19 +270,19 @@ public class Player implements Serializable {
     }
     
     public void getOwnership(GameSquare square) {
-    	
-    	if(square instanceof TransitStation){
-    		GameSquare connection = Main.gameSquares[((TransitStation) square).getConnectedTransit()];
-    		
-    		ownedSquares.add((Ownable)connection);
-    		connection.setOwner(this);
-    		
-    		ownedSquares.add((Ownable)square);
-    		square.setOwner(this);
-    	}else{
-        ownedSquares.add((Ownable) square);
-        square.setOwner(this);
-    	}
+        
+        if (square instanceof TransitStation) {
+            GameSquare connection = Main.gameSquares[((TransitStation) square).getConnectedTransit()];
+            
+            ownedSquares.add((Ownable) connection);
+            connection.setOwner(this);
+            
+            ownedSquares.add((Ownable) square);
+            square.setOwner(this);
+        } else {
+            ownedSquares.add((Ownable) square);
+            square.setOwner(this);
+        }
     }
     
     public void removeOwnership(GameSquare square) {
@@ -446,7 +446,7 @@ public class Player implements Serializable {
         
         for (int i = 0; i < ownedSquares.size(); i++) {
             if (!(ownedSquares.get(i) instanceof Ownable))
-            		sqOk = false;
+                sqOk = false;
         }
         
         return (money >= 0) && (120 > location) && (location >= 0) &&
@@ -454,5 +454,11 @@ public class Player implements Serializable {
             && sqOk && (doublesRolled >= 0) && (doublesRolled <= 3) && (jailTime >= 0) && (jailTime <= 3);
     }
     
+    public boolean isLoseTurn() {
+        return loseTurn;
+    }
     
+    public void LoseTurn(boolean loseTurn) {
+        this.loseTurn = loseTurn;
+    }
 }

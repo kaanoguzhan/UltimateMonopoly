@@ -83,7 +83,10 @@ public class RollingTheDice extends JPanel implements ActionListener {
         
         btnRoll.setEnabled(false);
         if (arg0.getSource() == btnRoll) {
-            if (player.isJailed()) {
+            if (player.isLoseTurn()) {
+                btnEnd.setEnabled(true);
+                player.LoseTurn(false);
+            }else  if (player.isJailed()) {
                 if (player.isReleaseTime()) {
                     player.getOutOfJail();
                     System.out.println("Player:" + player.getName() + " is released from jail, next round "

@@ -3,12 +3,10 @@ package GameSquares.Cards;
 import Main.Player;
 
 public interface Card {
-	/**
-	 * @param pl
-	 * @requires pl != null
-	 * @modifies Players playing, lands
-	 * @effects Effects decided according to the card type
-	 */
+    /** @param pl
+     * @requires pl != null
+     * @modifies Players playing, lands
+     * @effects Effects decided according to the card type */
     public void onDraw(Player pl);
     public String toString();
     public String getName();
@@ -21,6 +19,8 @@ public interface Card {
         RecieveConsultancyFee(CardFamily.CommunityChestCard),
         RenovationSuccess(CardFamily.CommunityChestCard),
         StreetRepair(CardFamily.CommunityChestCard),
+        VehicleImpounded(CardFamily.CommunityChestCard),
+        InheritStock(CardFamily.CommunityChestCard),
         
         // Chance Cards
         AdvanceToSqueezePlay(CardFamily.ChanceCard),
@@ -28,6 +28,7 @@ public interface Card {
         AdvanceToStCharlesPlace(CardFamily.ChanceCard),
         AdvanceToTheNearestRailroad(CardFamily.ChanceCard),
         AdvanceToTheNearestUtility(CardFamily.ChanceCard),
+        BusTicket(CardFamily.ChanceCard),
         ElectedAsChairPerson(CardFamily.ChanceCard),
         GeneralRepairs(CardFamily.ChanceCard),
         GetOutOfJail(CardFamily.ChanceCard),
@@ -36,7 +37,9 @@ public interface Card {
         MargiGras(CardFamily.ChanceCard),
         PropertyTaxes(CardFamily.ChanceCard),
         SchoolFees(CardFamily.ChanceCard),
-        ThreeSpacesBack(CardFamily.ChanceCard);
+        ThreeSpacesBack(CardFamily.ChanceCard),
+        ChangingLanes(CardFamily.ChanceCard),
+        EntertainmentRocks(CardFamily.ChanceCard);
         
         
         public enum CardFamily {
