@@ -4,6 +4,8 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,6 +14,8 @@ import javax.swing.SwingConstants;
 import GameSquares.StockExchange.stockType;
 import Main.Player;
 import Main.Properties;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class StockExcWindow extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -19,9 +23,15 @@ public class StockExcWindow extends JFrame {
     JLabel                    lblCloseTimer, lblCya;
     
     public StockExcWindow(Player crrtPlayer) {
+        this.setDefaultCloseOperation(0);
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent evt) {
+                disableBuying(0);
+            }
+        });
         setResizable(false);
         getContentPane().setLayout(null);
-        setBounds(480, 238, 364, 289);
+        setBounds(480, 238, 364, 347);
         
         JLabel lblPlayerGreeting = new JLabel("Welcome " + crrtPlayer.getName() + " to the StockExchange Office.");
         lblPlayerGreeting.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -31,7 +41,7 @@ public class StockExcWindow extends JFrame {
         getContentPane().add(lblPlayerGreeting);
         
         lblCya = new JLabel("Thank you for your purchease");
-        lblCya.setBounds(10, 36, 338, 14);
+        lblCya.setBounds(10, 34, 338, 18);
         lblCya.setFont(new Font("Tahoma", Font.ITALIC, 13));
         lblCya.setHorizontalAlignment(SwingConstants.CENTER);
         lblCya.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -203,14 +213,33 @@ public class StockExcWindow extends JFrame {
             }
         });
         pnlStocks.add(btnStock6);
+        
+        JButton btnDontBuy = new JButton("I dont want to buy");
+        btnDontBuy.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                disableBuying(0);
+            }
+        });
+        btnDontBuy.setBounds(10, 271, 338, 36);
+        getContentPane().add(btnDontBuy);
     }
     
     private void disableBuying(String stockName) {
+        lblCya.setText(stockName + "Thanks you for your purchease.");
+        disableBuying();
+    }
+    private void disableBuying(int i) {
+        if (i == 0) { // Close without buying
+            // TODO Auction baslarrr!.
+            lblCya.setText("We are sad to see you go.");
+        }
+        disableBuying();
+    }
+    private void disableBuying() {
         pnlStocks.setVisible(false);
         lblCloseTimer.setVisible(true);
         lblCya.setVisible(true);
-        lblCya.setText(stockName + "Thanks you for your purchease.");
-        
+        this.setEnabled(false);
         Runnable windowSrink = () -> {
             for (int i = 260; i > 106; i--) {
                 this.setBounds(this.getBounds().x, this.getBounds().y, this.getBounds().width, i);
@@ -231,4 +260,6 @@ public class StockExcWindow extends JFrame {
         new Thread(windowCloseTimer).start();
         new Thread(windowSrink).start();
     }
+    
+    
 }

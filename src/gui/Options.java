@@ -19,6 +19,7 @@ public class Options extends JFrame {
     private JPanel            contentPane;
     private JLabel            lblSound;
     private JButton           btnSound;
+    public int                autoCloseDelay   = 3;
     
     public Options() {
         contentPane = new JPanel();
