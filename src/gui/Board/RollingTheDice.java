@@ -76,7 +76,14 @@ public class RollingTheDice extends JPanel implements ActionListener {
     }
     
     public void actionPerformed(ActionEvent arg0) {
-        btnSell.setEnabled(!player.getOwnedSquares().isEmpty());
+        boolean noShares=true;
+    	for(int a : player.getStocks()){
+        	if(a!=0)
+        		noShares=false;
+        }
+        
+        btnSell.setEnabled(!(noShares) || !player.getOwnedSquares().isEmpty());
+        
         whichPlayer.setText((player.getName() + " is playing"));
         whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
             .getPreferredSize().getHeight()));
@@ -272,7 +279,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
                 .getPreferredSize().getHeight()));
             btnRoll.requestFocus();
         } else if (arg0.getSource() == btnSell) {
-            gui.AdditionalWindows.List.createAndShowGUI(player.getOwnedSquares());
+            gui.AdditionalWindows.List.createAndShowGUI(player.getOwnedSquares(),player);
             
             if (player.getDoublesRolled() == 0) {
                 btnRoll.setEnabled(false);
