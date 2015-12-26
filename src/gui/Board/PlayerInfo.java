@@ -105,7 +105,7 @@ public class PlayerInfo extends JPanel {
                     y = Board.squareHolder.getSquare(id).getY();
                     break;
             }
-            System.out.print(playerID + "---" + x + "," + y + " / ");
+            System.out.print(playerID + "---" + x + "," + y + " / ");  // TODO delete this
             
             final JLabel Playerr = Player;
             Runnable moveAnimation = () -> {
@@ -160,9 +160,7 @@ public class PlayerInfo extends JPanel {
                     }
             };
             new Thread(moveAnimation).start();
-//            
-//            if (Player != null)
-//                Player.setBounds(x, y, 50, 40);
+            
         }
         System.out.println();
     }

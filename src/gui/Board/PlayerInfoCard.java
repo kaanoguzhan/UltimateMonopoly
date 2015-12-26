@@ -21,17 +21,11 @@ public class PlayerInfoCard extends JPanel {
     private JSeparator        separator1, separator2;
     private JPanel            pnlPlayer;
     private JTextField        txtLands;
-    private int               id;                                                           // TODO change id to actual
-                                                                                             // player
+    private int               id;                                                         
                                                                                              
     PlayerInfoCard(int id) {
         this.id = id;
         setLayout(null);
-        
-        // String name = "";
-        // if (Main.Main.players.length > 0 && Main.Main.players.length < id) {
-        // name = Main.Main.players[id - 1].getName();
-        // }
         
         pnlPlayer = new JPanel();
         pnlPlayer.setBorder(new LineBorder(new Color(51, 204, 0), 2, true));

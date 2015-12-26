@@ -9,6 +9,9 @@ import javax.swing.JLabel;
 import GameSquares.GameSquare;
 import Main.Player;
 import Main.Properties;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import java.awt.Color;
 
 public class Board extends JFrame {
     
@@ -19,7 +22,7 @@ public class Board extends JFrame {
     static SquareHolder       squareHolder     = new SquareHolder();
     public static PlayerInfo  informationTable = new PlayerInfo(Properties.DEFAULT_PLAYER_NUMBER);
     private static JLabel     lblBoard;
-    static JLabel             zero, one, two, three;
+    static JLabel             zero, one, two, three, lblPool;
     
     // private int boardlength;
     
@@ -29,28 +32,33 @@ public class Board extends JFrame {
         setSize(1640, 1090);
         setVisible(true);
         getContentPane().setLayout(null);
-        // setUndecorated(true);
         Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         double height = screenSize.getHeight();
         
         this.players = players;
         this.gameSquares = gameSquares;
         
-        zero = new playerIcon("playerIcon1.gif", 650, 660, 50, 40);
+        zero = new playerIcon("playerIcon1.gif", 480, 475, 50, 40);
         getContentPane().add(zero);
         
-        one = new playerIcon("playerIcon2.gif", 625, 660, 50, 40);
+        one = new playerIcon("playerIcon2.gif", 520, 475, 50, 40);
         getContentPane().add(one);
         
-        two = new playerIcon("playerIcon3.gif", 600, 660, 50, 40);
+        two = new playerIcon("playerIcon3.gif", 480, 525, 50, 40);
         getContentPane().add(two);
         
-        three = new playerIcon("playerIcon4.gif", 575, 660, 50, 40);
+        three = new playerIcon("playerIcon4.gif", 520, 525, 50, 40);
         getContentPane().add(three);
         
-        Board.lblBoard = new JLabel(new ImageIcon("board1050.jpg"));
-        getContentPane().add(getLblBoard());
+        lblPool = new JLabel("Pool: 0");
+        lblPool.setForeground(new Color(128, 0, 128));
+        lblPool.setHorizontalAlignment(SwingConstants.CENTER);
+        lblPool.setFont(new Font("Tahoma", Font.PLAIN, 23));
+        lblPool.setBounds(450, 345, 159, 89);
+        getContentPane().add(lblPool);
         
+        lblBoard = new JLabel(new ImageIcon("board1050.jpg"));
+        getContentPane().add(lblBoard);
         
         JButton debug = new JButton("Debug Window");
         getContentPane().add(debug);
@@ -62,17 +70,8 @@ public class Board extends JFrame {
         
         round.setBounds(1050, 0, 798, 250);
         informationTable.setBounds(1060, 261, 788, 900);
-        @SuppressWarnings("unused")
-        Runnable infoTableDelayedResize = () -> {
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {}
-            informationTable.setBounds(1060, 261, 788, 1000);
-            informationTable.validate();
-        };
-        // new Thread(infoTableDelayedResize).start(); //TODO RERUN THREAD
-        
         lblBoard.setBounds(0, 0, 1050, 1050);
+        
         if (height < 1000) {
             // boardlength = 700-;
             lblBoard.setBounds(0, 0, 700, 700);
@@ -80,18 +79,18 @@ public class Board extends JFrame {
             informationTable.setBounds(760, 272, 550, 350);
             debug.setBounds(760, 630, 120, 70);
         }
+        
+        JButton button = new JButton("Debug Window");
+        button.setBounds(1060, 972, 120, 70);
+        getContentPane().add(button);
         getContentPane().add(round);
         getContentPane().add(informationTable);
+        
+        // Full Screnn
         setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
     public void setCurrentPlayer(Player player) {
         round.setCurrentPlayer(player);
-    }
-    public static JLabel getLblBoard() {
-        return lblBoard;
-    }
-    public static void setLblBoard(JLabel lblBoard) {
-        Board.lblBoard = lblBoard;
     }
     
     public void setPlayerTurnLabel(String string) {

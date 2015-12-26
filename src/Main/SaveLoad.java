@@ -46,7 +46,7 @@ public class SaveLoad {
             if (Main.players == null || Main.gameSquares == null)
                 System.out.println("!!! Error on loading objects !!!");
             
-            // Recreate some UI Objects
+            // Save Protection
             PlayerInfo.refreshData();
             Main.board.initiateLoadProtection();
             

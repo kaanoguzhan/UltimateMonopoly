@@ -21,7 +21,7 @@ import javax.swing.SwingConstants;
 
 public class RollingTheDice extends JPanel implements ActionListener {
     private static final long serialVersionUID = 1L;
-    private JLabel            playerName, result, dice, lblLoadProtection;
+    private JLabel            result, dice, lblLoadProtection;
     public JLabel             whichPlayer;
     public JButton            btnRoll, btnEnd, btnSell;
     private boolean           getOutOfJail     = false;
@@ -260,13 +260,14 @@ public class RollingTheDice extends JPanel implements ActionListener {
                     btnEnd.setEnabled(true);
                 }
             }
+            btnEnd.requestFocus();
         } else if (arg0.getSource() == btnEnd) {
             Main.endRound();
             whichPlayer.setText(player.getName() + " has ended his/her turn. Now its "
                 + Admin.getNextPlayerName(player.getID()) + "'s turn.");
             whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
                 .getPreferredSize().getHeight()));
-            btnSell.setEnabled(false);
+            btnRoll.requestFocus();
         } else if (arg0.getSource() == btnSell) {
             gui.AdditionalWindows.List.createAndShowGUI(player.getOwnedSquares());
             
@@ -285,7 +286,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
     
     private void movePlayer(int amount) {
         player.moveBy(amount);
-        PlayerInfo.refreshData();
     }
     
     public void setCurrentPlayer(Player player) {
@@ -305,20 +305,16 @@ public class RollingTheDice extends JPanel implements ActionListener {
     private void setplayerName(Player player) {
         switch (player.getID()) {
             case 0:
-                this.playerName = Board.zero;
                 break;
             case 1:
-                this.playerName = Board.one;
                 break;
             case 2:
-                this.playerName = Board.two;
                 break;
             case 3:
-                this.playerName = Board.three;
                 break;
         }
         PlayerInfo.setActivePlayerCard(player.getID());
-        PlayerInfo.refreshData();
+//        PlayerInfo.refreshData();
         Board.informationTable.validate();
     }
     
