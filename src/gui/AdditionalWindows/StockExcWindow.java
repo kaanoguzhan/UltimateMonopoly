@@ -226,6 +226,7 @@ public class StockExcWindow extends JFrame {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {}
             }
+            this.dispose();
         };
         new Thread(windowCloseTimer).start();
         new Thread(windowSrink).start();

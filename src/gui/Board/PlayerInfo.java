@@ -1,95 +1,66 @@
 package gui.Board;
 
-import java.awt.BorderLayout;
-import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import GameSquares.Ownable;
-import GameSquares.Cards.Card.CardType;
 import Main.Main;
 import Main.Player;
 
 public class PlayerInfo extends JPanel {
     
     private static final long serialVersionUID = 1L;
-    static JTable             table;
-    JScrollPane               pane;
     static String[][]         data;
+    static PlayerInfoCard     playerCard1, playerCard2, playerCard3, playerCard4;
     
     public PlayerInfo(int size) {
-        setLayout(new BorderLayout());
+        setLayout(null);
         
-        String[] column = { "Player Name", "Location", "Money", "Properties", "Cards", "Stocks" };
-        data = new String[Main.players.length][6];
+        playerCard1 = new PlayerInfoCard(0);
+        playerCard1.setBounds(0, 0, 377, 227);
+        add(playerCard1);
         
-        table = new JTable(data, column);
-        refreshData();
-        resizeTable();
-        // resizeColumnWidth(table);
+        playerCard2 = new PlayerInfoCard(1);
+        playerCard2.setBounds(387, 0, 377, 227);
+        add(playerCard2);
         
-        pane = new JScrollPane(table);
-        add(pane, BorderLayout.CENTER);
+        playerCard3 = new PlayerInfoCard(2);
+        playerCard3.setBounds(0, 236, 377, 227);
+        add(playerCard3);
+        
+        playerCard4 = new PlayerInfoCard(3);
+        playerCard4.setBounds(387, 236, 377, 227);
+        add(playerCard4);
     }
     
-    // public void resizeColumnWidth(JTable table) {
-    // final TableColumnModel columnModel = table.getColumnModel();
-    // for (int x = 0; x < table.getColumnCount(); x++) {
-    // int width = 50;
-    // for (int row = 0; row < table.getRowCount(); row++) {
-    // TableCellRenderer renderer = table.getCellRenderer(row, x);
-    // Component comp = table.prepareRenderer(renderer, row, x);
-    // width = Math.max(comp.getPreferredSize().width + 1, width);
-    // }
-    // columnModel.getColumn(x).setPreferredWidth(width);
-    // }
-    // }
-    
     public static void refreshData() {
-        for (int i = 0; i < Main.players.length; i++) {
-            String lands = "", cards = "", stocks = "";
-            Player crrtPlayer = Main.players[i];
-            
-            ArrayList<Ownable> arry = crrtPlayer.getOwnedSquares();
-            for (int j = 0; j < arry.size(); j++)
-                if (j > 0)
-                    lands += " - " + arry.get(j).getID();
-                else
-                    lands += arry.get(j).getID();
-            
-            ArrayList<CardType> arrys = crrtPlayer.getCardsInventory();
-            int goj = 0, op = 0;
-            for (CardType crdty : arrys) {
-                switch (crdty) {
-                    case GetOutOfJail:
-                        goj++;
-                        break;
-                    case OnlinePricing:
-                        op++;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            cards = "Jail:" + goj + " - Online:" + op;
-            
-            int[] stocksArry = crrtPlayer.getStocks();
-            stocks = stocksArry[0] + " - " + stocksArry[1] + " - " + stocksArry[2] + " - "
-                + stocksArry[3] + " - " + stocksArry[4] + " - " + stocksArry[5];
-            
-            data[i][0] = ("" + crrtPlayer.getName());
-            data[i][1] = ("" + crrtPlayer.getLocation());
-            data[i][2] = ("" + crrtPlayer.getMoney());
-            data[i][3] = (lands);
-            data[i][4] = (cards);
-            data[i][5] = (stocks);
-        }
-        refreshTable();
+        playerCard1.refresh();
+        playerCard2.refresh();
+        playerCard3.refresh();
+        playerCard4.refresh();
+        
         refreshPlayerLocations();
     }
     
+    public static void setActivePlayerCard(int id) {
+        playerCard1.disable();
+        playerCard2.disable();
+        playerCard3.disable();
+        playerCard4.disable();
+        switch (id)
+        {
+            case 0:
+                playerCard1.enable();
+                break;
+            case 1:
+                playerCard2.enable();
+                break;
+            case 2:
+                playerCard3.enable();
+                break;
+            case 3:
+                playerCard4.enable();
+                break;
+        }
+    }
     private static void refreshPlayerLocations() {
         for (int i = 0; i < Main.players.length; i++) {
             Player current = Main.players[i];
@@ -139,35 +110,5 @@ public class PlayerInfo extends JPanel {
             if (Player != null)
                 Player.setBounds(x, y, 50, 40);
         }
-    }
-    
-    private void resizeTable() {
-        table.getColumnModel().getColumn(0).setMaxWidth(100);
-        table.getColumnModel().getColumn(1).setMaxWidth(50);
-        table.getColumnModel().getColumn(2).setMaxWidth(50);
-        table.getColumnModel().getColumn(3).setMaxWidth(400);
-        table.getColumnModel().getColumn(4).setMaxWidth(100);
-        table.getColumnModel().getColumn(5).setMaxWidth(100);
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
-    }
-    
-    private static void refreshTable() {
-        for (int i = 0; i < table.getRowCount(); i++) {
-            for (int j = 0; j < table.getColumnCount(); j++)
-                table.setValueAt(data[i][j], i, j);
-        }
-    }
-    
-    public void recreateTable() {
-        String[] column = { "Player Name", "Location", "Money", "Properties", "Cards", "Stocks" };
-        data = new String[Main.players.length][6];
-        
-        DefaultTableModel dataModel = new DefaultTableModel(data, column);
-        
-        table.removeAll();
-        table.setModel(dataModel);
-        resizeTable();
-        
-        refreshData();
     }
 }

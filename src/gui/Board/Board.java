@@ -61,15 +61,16 @@ public class Board extends JFrame {
         debug.setBounds(1728, 972, 120, 70);
         
         round.setBounds(1050, 0, 798, 250);
-        informationTable.setBounds(1060, 261, 788, 200);
+        informationTable.setBounds(1060, 261, 788, 900);
+        @SuppressWarnings("unused")
         Runnable infoTableDelayedResize = () -> {
             try {
                 Thread.sleep(200);
             } catch (InterruptedException e) {}
-            informationTable.setBounds(1060, 261, 788, PlayerInfo.table.getSize().height+27);
+            informationTable.setBounds(1060, 261, 788, 1000);
             informationTable.validate();
         };
-        new Thread(infoTableDelayedResize).start();
+        // new Thread(infoTableDelayedResize).start(); //TODO RERUN THREAD
         
         lblBoard.setBounds(0, 0, 1050, 1050);
         if (height < 1000) {

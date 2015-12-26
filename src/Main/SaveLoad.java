@@ -1,6 +1,6 @@
 package Main;
 
-import gui.Board.Board;
+import gui.Board.PlayerInfo;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -47,7 +47,7 @@ public class SaveLoad {
                 System.out.println("!!! Error on loading objects !!!");
             
             // Recreate some UI Objects
-            Board.informationTable.recreateTable();
+            PlayerInfo.refreshData();
             Main.board.initiateLoadProtection();
             
             // Close InputStreams

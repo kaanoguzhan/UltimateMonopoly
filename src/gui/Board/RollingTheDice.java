@@ -355,7 +355,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
                 this.playerName = Board.three;
                 break;
         }
-        
+        PlayerInfo.setActivePlayerCard(player.getID());
         PlayerInfo.refreshData();
         Board.informationTable.validate();
     }

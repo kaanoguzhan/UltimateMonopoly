@@ -1,5 +1,6 @@
 package gui.Debug;
 
+import gui.Board.PlayerInfo;
 import java.awt.Choice;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -117,6 +118,7 @@ public class DicePanel extends JPanel {
             for (CommunityChestCard ccc : Main.communityDeck.getDeck())
                 if (ccc.getName().equals(chcCards.getSelectedItem()))
                     pl.addToCardInventory(ccc.getType());
+            PlayerInfo.refreshData();
         });
         btnGive.setBounds(504, 118, 110, 28);
         add(btnGive);
