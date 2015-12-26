@@ -11,19 +11,27 @@ public class StockExchange extends GameSquare {
     }
     
     public enum stockType {
-        AcmeMotors(0, 100),
-        UnitedRailways(1, 110),
-        GeneralRadIO(2, 120),
-        NationalUtilities(3, 130),
-        AlliedSteamships(4, 140),
-        MotionPictures(5, 150);
+        AcmeMotors(0, 100,"AcmeMotors Stock Share"),
+        UnitedRailways(1, 110,"UnitedRailways Stock Share"),
+        GeneralRadIO(2, 120,"GeneralRadIO Stock Share"),
+        NationalUtilities(3, 130,"NationalUtilities Stock Share"),
+        AlliedSteamships(4, 140,"AlliedSteamships Stock Share"),
+        MotionPictures(5, 150,"MotionPictures Stock Share");
         
         private int order;
         private int price;
+        private String value;
         
-        stockType(int order, int price) {
+        stockType(int order, int price,String value) {
             this.order = order;
             this.price = price;
+            this.value = value;
+        }
+        public static stockType getStock(int i){
+        	for(stockType st:stockType.values())
+        		if(st.order==i)
+        			return st;
+        	return null;
         }
         public int getOrder() {
             return order;
@@ -31,6 +39,15 @@ public class StockExchange extends GameSquare {
         public int getPrice() {
             return price;
         }
+        public String getValue(){
+        	return value;
+        }
+        
+        @Override
+        public String toString(){
+        	return value;
+        }
+        
     }
     
     @Override

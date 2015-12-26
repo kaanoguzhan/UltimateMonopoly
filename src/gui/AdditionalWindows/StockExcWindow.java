@@ -198,7 +198,7 @@ public class StockExcWindow extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 disableBuying("Motion Pictures");
-                crrtPlayer.buyStock(stockType.AlliedSteamships);
+                crrtPlayer.buyStock(stockType.MotionPictures);
                 lblStock6.setText((Integer.parseInt(lblStock6.getText()) + 1) + "");
             }
         });
