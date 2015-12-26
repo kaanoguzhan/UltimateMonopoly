@@ -4,10 +4,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
-import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import GameSquares.Ownable;
@@ -20,9 +22,9 @@ public class PlayerInfoCard extends JPanel {
     private JLabel            lblName, lblMoney, lblCards, lblLands, lblLocation, lblStocks;
     private JSeparator        separator1, separator2;
     private JPanel            pnlPlayer;
-    private JTextField        txtLands;
-    private int               id;                                                         
-                                                                                             
+    private JTextPane         txtLands;
+    private int               id;
+    
     PlayerInfoCard(int id) {
         this.id = id;
         setLayout(null);
@@ -48,13 +50,6 @@ public class PlayerInfoCard extends JPanel {
         lblLocation.setBounds(160, 40, 100, 14);
         pnlPlayer.add(lblLocation);
         
-        txtLands = new JTextField();
-        txtLands.setHorizontalAlignment(SwingConstants.CENTER);
-        txtLands.setBounds(10, 88, 357, 129);
-        txtLands.setColumns(10);
-        txtLands.setEnabled(false);
-        pnlPlayer.add(txtLands);
-        
         lblCards = new JLabel("<html>Jail:0<br>Online:0</html>");
         lblCards.setBounds(291, 26, 86, 42);
         pnlPlayer.add(lblCards);
@@ -77,6 +72,12 @@ public class PlayerInfoCard extends JPanel {
         separator2.setToolTipText("fgdfgdfg");
         separator2.setBounds(2, 24, 373, 2);
         pnlPlayer.add(separator2);
+        
+        txtLands = new JTextPane();
+        txtLands.setEnabled(false);
+        txtLands.setEditable(false);
+        txtLands.setBounds(10, 89, 357, 127);
+        pnlPlayer.add(txtLands);
         
     }
     public void refresh() {
@@ -118,6 +119,7 @@ public class PlayerInfoCard extends JPanel {
         
         // Refresh Lands
         ArrayList<Ownable> arry = crrtPlayer.getOwnedSquares();
+        Collections.sort(arry, (Ownable o1, Ownable o2) -> o1.getID() - o2.getID());
         String lands = "";
         for (int j = 0; j < arry.size(); j++)
             if (j > 0)
