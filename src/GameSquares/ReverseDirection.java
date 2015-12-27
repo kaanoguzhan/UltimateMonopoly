@@ -7,7 +7,6 @@ public class ReverseDirection extends GameSquare {
     
     public ReverseDirection(int id) {
         super(id, type.ReverseDirection);
-        // TODO Auto-generated constructor stub
     }
     
     @Override
@@ -18,7 +17,6 @@ public class ReverseDirection extends GameSquare {
     
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
         return "Reverse Direction";
     }
     

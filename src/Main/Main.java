@@ -3,9 +3,7 @@ package Main;
 import gui.AdditionalWindows.MessageDisplayer;
 import gui.AdditionalWindows.InputReaders.GetTextInput;
 import gui.Board.Board;
-
 import java.io.File;
-
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.UIManager;
@@ -51,9 +49,10 @@ public class Main {
     private volatile static Boolean  stopTurnLoop   = false;
     private static GetTextInput      temp;
     static Board                     board;
-    public static int                pool           = 0;
+    public static int                pool           = 0, musicID = 2;
     private static boolean           loadPrevious;
     public static boolean            loadProtection = false;
+    private static AudioRunner       musicPlayer;
     
     public static void main(String[] args) {
         changeUITheme();
@@ -62,7 +61,7 @@ public class Main {
         initializeGameSquares();
         initializePlayerNames();
         initializeBoard();
-        playMusic();
+        startMusic();
         
         if (loadPrevious)
             continueFromSave();
@@ -384,39 +383,84 @@ public class Main {
             }
         }
         new MessageDisplayer("Congratulations you have finished the game !");
-        
-        
-        
     }
-    
-    private static void playMusic(){ 
-    	AudioRunner a = new AudioRunner();
-    	Thread t = new Thread(a);
-    	t.start();
-   }
-    
     public static void endRound() {
         roundEnded = true;
     }
-    
     public static void stopTurnLoop() {
         stopTurnLoop = true;
     }
     
+    
+    
+    public static void startMusic() {
+        musicPlayer = new AudioRunner(musicID);
+        musicPlayer.start();
+    }
+    public static void stopMusic() {
+        musicPlayer.stopp();
+    }
+    public static void changeMusic(int i) {
+        musicPlayer.stopp();
+        musicID = i;
+        musicPlayer = new AudioRunner(musicID);
+        musicPlayer.start();
+    }
 }
 
-class AudioRunner implements Runnable{
 
-	public AudioRunner(){}
-	@Override
-	public void run() {
-	   	 try { 
-	   		 File musicFile = new File("hitthatjive.wav");
-	   		 Clip c = AudioSystem.getClip(); 
-	   		 c.open(AudioSystem.getAudioInputStream(musicFile)); 
-	   		 c.start(); 
-	   		 Thread.sleep(c.getMicrosecondLength()); 
-	   		 } catch (Exception e) { System.err.println(e.getMessage()); }
-	}
-	
+class AudioRunner extends Thread {
+    String music1 = "hitthatjive.wav";
+    String music2 = "darude.wav";
+    String playingMusic;
+    Clip   c;
+    
+    public AudioRunner(int i) {
+        switch (i) {
+            case 1:
+                playingMusic = music1;
+                break;
+            case 2:
+                playingMusic = music2;
+                break;
+        }
+    }
+    
+    public void stopp() {
+        this.interrupt();
+        c.close();
+    }
+    
+    @Override
+    public void run() {
+        try {
+            while (!Thread.currentThread().isInterrupted()) {
+                c = AudioSystem.getClip();
+                c.open(AudioSystem.getAudioInputStream(new File(playingMusic)));
+                c.start();
+                Thread.sleep(c.getMicrosecondLength() / (1000));
+            }
+        } catch (Exception e) {}
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//

@@ -7,7 +7,6 @@ public class Auction extends GameSquare {
     
     public Auction(int id) {
         super(id, type.Auction);
-        // TODO Auto-generated constructor stub
     }
     
     @Override
@@ -18,7 +17,6 @@ public class Auction extends GameSquare {
     
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
         return "Auction";
     }
     

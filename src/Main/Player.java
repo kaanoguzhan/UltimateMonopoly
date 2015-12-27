@@ -209,7 +209,6 @@ public class Player implements Serializable {
         return cardInventory.contains(cardType);
     }
     
-    // TODO buraya bir bak eklenicek var mi
     public void buyStock(stockType stt) {
         Stocks[stt.getOrder()]++;
         reduceMoney(stt.getPrice());
