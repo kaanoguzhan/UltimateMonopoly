@@ -15,10 +15,12 @@ import javax.swing.SwingConstants;
 
 public class Options extends JFrame {
     private static final long serialVersionUID = 1L;
+    private ImageIcon         iconSoundEnable  = new ImageIcon("SoundEnable.PNG");
+    private ImageIcon         iconSoundMute    = new ImageIcon("SoundMute.PNG");
     private boolean           soundEnabled     = true;
     private JPanel            contentPane;
     private JLabel            lblSound;
-    private JButton           btnSound;
+    private JButton           btnSound, btnMusic1, btnMusic2;
     public int                autoCloseDelay   = 3;
     
     public Options() {
@@ -70,23 +72,19 @@ public class Options extends JFrame {
         
         // Sound
         
-        ImageIcon iconSoundEnable = new ImageIcon("SoundEnable.PNG");
-        ImageIcon iconSoundMute = new ImageIcon("SoundMute.PNG");
         btnSound = new JButton(iconSoundEnable);
         btnSound.setBounds(25, 111, 60, 70);
         contentPane.add(btnSound);
         btnSound.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Sounds silenced."); // TODO disable sound
+                System.out.println("Sounds silenced.");
                 if (soundEnabled) {
-                    soundEnabled = false;
-                    lblSound.setText("Muted");
-                    btnSound.setIcon(iconSoundMute);
+                    Main.Main.stopMusic();
+                    muteMode();
                 }
                 else {
-                    soundEnabled = true;
-                    lblSound.setText("Music playing. Enjoy :)");
-                    btnSound.setIcon(iconSoundEnable);
+                    Main.Main.startMusic();
+                    playMode();
                 }
             }
         });
@@ -100,6 +98,41 @@ public class Options extends JFrame {
         lblSound.setBounds(105, 111, 137, 70);
         contentPane.add(lblSound);
         
+        btnMusic1 = new JButton("Music 1");
+        btnMusic1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Main.Main.changeMusic(1);
+                playMode();
+            }
+        });
+        btnMusic1.setBounds(272, 111, 89, 33);
+        btnMusic1.setVisible(false);
+        contentPane.add(btnMusic1);
         
+        btnMusic2 = new JButton("Music 2");
+        btnMusic2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                Main.Main.changeMusic(2);
+                playMode();
+            }
+        });
+        btnMusic2.setBounds(272, 148, 89, 33);
+        btnMusic2.setVisible(false);
+        contentPane.add(btnMusic2);
+    }
+    public void playMode() {
+        soundEnabled = true;
+        lblSound.setText("Music playing. Enjoy :)");
+        btnSound.setIcon(iconSoundEnable);
+        btnMusic1.setVisible(false);
+        btnMusic2.setVisible(false);
+    }
+    
+    public void muteMode() {
+        soundEnabled = false;
+        lblSound.setText("Muted");
+        btnSound.setIcon(iconSoundMute);
+        btnMusic1.setVisible(true);
+        btnMusic2.setVisible(true);
     }
 }

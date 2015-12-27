@@ -7,7 +7,6 @@ public class BusTicketSquare extends GameSquare {
     
     public BusTicketSquare(int id) {
         super(id, type.BusTicket);
-        // TODO Auto-generated constructor stub
     }
     
     @Override
@@ -18,8 +17,7 @@ public class BusTicketSquare extends GameSquare {
     
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
-        return null;
+        return "Bus Ticket";
     }
     
 }
