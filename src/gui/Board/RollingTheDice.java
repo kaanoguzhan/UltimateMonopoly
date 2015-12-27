@@ -83,6 +83,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
         add(scrollPane);
         
         txtLog = new JTextPane();
+        txtLog.setEditable(false);
         scrollPane.setViewportView(txtLog);
         
     }
