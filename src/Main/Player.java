@@ -3,6 +3,7 @@ package Main;
 import gui.AdditionalWindows.InputReaders.GetTextInput;
 import gui.Board.Board;
 import gui.Board.PlayerInfo;
+import gui.Board.RollingTheDice;
 import java.io.Serializable;
 import java.util.ArrayList;
 import GameSquares.GameSquare;
@@ -81,6 +82,7 @@ public class Player implements Serializable {
                     passed = false;
                 if (passed)
                     System.out.println(name + " passed transit station");
+                RollingTheDice.logAdd(name + " passed transit station");
             }
             
             if (nextLocation == 40)
@@ -93,19 +95,24 @@ public class Player implements Serializable {
             if (nextLocation == 0) { // start square
                 System.out.println(name + " passed Start Square.");
                 addMoney(Properties.START_PASSING_MONEY);
+                RollingTheDice.logAdd(name + " passed Start Square and got " + Properties.START_PASSING_MONEY);
             }
             
             if (nextLocation == 68) { // payday
                 System.out.println(name + " passed Pay Day Square.");
+                RollingTheDice.logAdd(name + " passed Pay Day Square and got " + Properties.PAYDAY_EVEN);
                 if (amount % 2 != 0) {
                     addMoney(Properties.PAYDAY_ODD);
+                    RollingTheDice.logAdd(name + " passed Pay Day Square and got " + Properties.PAYDAY_ODD);
                 } else {
                     addMoney(Properties.PAYDAY_EVEN);
+                    RollingTheDice.logAdd(name + " passed Pay Day Square and got " + Properties.PAYDAY_EVEN);
                 }
             }
             if (nextLocation == 103 && bonusPassAvailable) { // bonus
                 System.out.println(name + " passed Bonus Square.");
                 addMoney(Properties.BONUS_PASSING_MONEY);
+                RollingTheDice.logAdd(name + " passed Bonus Square and got " + Properties.BONUS_PASSING_MONEY);
             }
             nextLocation++; // update location
             
@@ -157,7 +164,7 @@ public class Player implements Serializable {
             money -= amount;
             System.out.println(name + "'s money decreased by " + amount + " to " + money);
         } else if (ownedSquares.size() > 0) {
-            gui.AdditionalWindows.List.createAndShowGUI(ownedSquares,this);
+            gui.AdditionalWindows.List.createAndShowGUI(ownedSquares, this);
             reduceMoney(amount);
         } else {
             location = Properties.HEAVEN_ID;
@@ -174,6 +181,7 @@ public class Player implements Serializable {
         reduceMoney(amount);
         Main.pool += amount;
         System.out.println("pool has " + Main.pool);
+        RollingTheDice.logAdd("pool has now " + Main.pool);
     }
     
     /** @modifies this, Main
@@ -182,6 +190,8 @@ public class Player implements Serializable {
         addMoney(Main.pool * Properties.TAX_REFUND_PERCENT / 100);
         Main.pool = Main.pool * (100 - Properties.TAX_REFUND_PERCENT) / 100;
         System.out.println("pool has " + Main.pool);
+        RollingTheDice.logAdd(name + " got " + (Main.pool * Properties.TAX_REFUND_PERCENT / 100) + ". Pool has now "
+            + Main.pool);
     }
     
     /** @param player
@@ -193,6 +203,7 @@ public class Player implements Serializable {
         System.out.println(name + " paid to " + player.getName());
         this.reduceMoney(amount);
         player.addMoney(amount);
+        RollingTheDice.logAdd(name + " paid to " + player.getName());
     }
     
     /** @param cardType

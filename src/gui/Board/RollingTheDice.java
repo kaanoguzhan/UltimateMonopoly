@@ -105,10 +105,13 @@ public class RollingTheDice extends JPanel implements ActionListener {
             if (player.isLoseTurn()) {
                 btnEnd.setEnabled(true);
                 player.LoseTurn(false);
+                RollingTheDice.logAdd(player.getName() + " lost this one turn.");
             } else if (player.isJailed()) {
                 if (player.isReleaseTime()) {
                     player.getOutOfJail();
                     System.out.println("Player:" + player.getName() + " is released from jail, next round "
+                        + player.getName() + " will play.");
+                    RollingTheDice.logAdd("Player:" + player.getName() + " is released from jail, next round "
                         + player.getName() + " will play.");
                     btnEnd.setEnabled(true);
                 } else {
@@ -133,10 +136,14 @@ public class RollingTheDice extends JPanel implements ActionListener {
                         }
                         if (getOutOfJail) {
                             player.getOutOfJail();
+                            RollingTheDice.logAdd("Player:" + player.getName() + " is released from jail, next round "
+                                + player.getName() + " will play.");
                             btnEnd.setEnabled(true);
                         } else {
                             player.reduceJailTime();
                             System.out.println("Player:" + player.getName() + " will be in jail for "
+                                + player.getJailTime() + " rounds.");
+                            RollingTheDice.logAdd("Player:" + player.getName() + " will be in jail for "
                                 + player.getJailTime() + " rounds.");
                             btnEnd.setEnabled(true);
                         }
@@ -185,11 +192,14 @@ public class RollingTheDice extends JPanel implements ActionListener {
                         movePlayer(roll1 + roll2);
                         new gui.AdditionalWindows.MessageDisplayer(" You rolled MonopolyGuy !");
                         
-                        if (Admin.allLandsOwned())
+                        if (Admin.allLandsOwned()) {
                             Admin.movePlayerToNextLand(player.getID(), even);
-                        else
+                            RollingTheDice.logAdd("All lands are owned.");
+                        }
+                        else {
                             Admin.movePlayerToNextNeutralLand(player.getID(), even);
-                        
+                            RollingTheDice.logAdd("There are neutral lands.");
+                        }
                         if (roll1 != roll2) {
                             player.resetDoublesRolled();
                             btnEnd.setEnabled(true);
@@ -200,13 +210,18 @@ public class RollingTheDice extends JPanel implements ActionListener {
                         int option = new GetOneOption(roll1, roll2, roll1 + roll2,
                             "How many squares would you like to move?").getResponse();
                         
-                        if (option == 0)
+                        if (option == 0) {
                             movePlayer(roll1);
-                        if (option == 1)
+                            RollingTheDice.logAdd(player.getName() + " moved " + roll1 + " squares.");
+                        }
+                        if (option == 1) {
                             movePlayer(roll2);
-                        if (option == 2)
+                            RollingTheDice.logAdd(player.getName() + " moved " + roll2 + " squares.");
+                        }
+                        if (option == 2) {
                             movePlayer(roll1 + roll2);
-                        
+                            RollingTheDice.logAdd(player.getName() + " moved " + (roll1 + roll2) + " squares.");
+                        }
                         if (roll1 != roll2) {
                             btnEnd.setEnabled(true);
                             player.resetDoublesRolled();
@@ -226,9 +241,9 @@ public class RollingTheDice extends JPanel implements ActionListener {
                             moveTo = new GetTextInput(
                                 "Enter the square you want to go, should be between 0 (GO) and 119(Lobard Street)")
                                 .getInt();
-                        
                         int current = player.getLocation();
                         Admin.movePlayerBy(player.getID(), ((moveTo - current) % 20));
+                        RollingTheDice.logAdd(player.getName() + " chose Square " + moveTo);
                         
                         player.resetDoublesRolled();
                         btnEnd.setEnabled(true);
@@ -239,6 +254,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
                             new gui.AdditionalWindows.MessageDisplayer(
                                 "This is your third doubles, now you will go to jail !");
                             player.goToJail();
+                            RollingTheDice.logAdd(player.getName() + " moved to jail.");
                             btnRoll.setEnabled(false);
                             btnEnd.setEnabled(true);
                         } else {
@@ -250,10 +266,15 @@ public class RollingTheDice extends JPanel implements ActionListener {
                                 if ((roll1 + roll2) % 2 == 0)
                                     even = true;
                                 
-                                if (Admin.allLandsOwned())
+                                if (Admin.allLandsOwned()) {
                                     Admin.movePlayerToNextLand(player.getID(), even);
+                                    RollingTheDice.logAdd("All lands are owned.");
+                                }
                                 else
+                                {
                                     Admin.movePlayerToNextNeutralLand(player.getID(), even);
+                                    RollingTheDice.logAdd("There are neutral lands.");
+                                }
                                 new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
                                 btnRoll.setEnabled(true);
                             } else if (Dice.isBus()) {
@@ -262,12 +283,18 @@ public class RollingTheDice extends JPanel implements ActionListener {
                                 int option = new GetOneOption(roll1, roll2, roll1 + roll2,
                                     "How many squares would you like to move?").getResponse();
                                 
-                                if (option == 0)
+                                if (option == 0) {
                                     movePlayer(roll1);
-                                if (option == 1)
+                                    RollingTheDice.logAdd(player.getName() + " moved " + roll1 + " squares.");
+                                }
+                                if (option == 1) {
                                     movePlayer(roll2);
-                                if (option == 2)
+                                    RollingTheDice.logAdd(player.getName() + " moved " + roll2 + " squares.");
+                                }
+                                if (option == 2) {
                                     movePlayer(roll1 + roll2);
+                                    RollingTheDice.logAdd(player.getName() + " moved " + (roll1 + roll2) + " squares.");
+                                }
                                 new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
                                 btnRoll.setEnabled(true);
                             } else {
@@ -373,6 +400,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
         txtLog.setText(txtLog.getText() + "\n" + text);;
     }
     public static void logEndTurn() {
-        txtLog.setText(txtLog.getText() + "\n" + "   -   -   -   -   -   -   -   " + "End of turn " + turn++ + "   -   -   -   -   -   -   -   ");
+        txtLog.setText(txtLog.getText() + "\n" + "   -   -   -   -   -   -   -   " + "End of turn " + turn++
+            + "   -   -   -   -   -   -   -   ");
     }
 }
