@@ -83,6 +83,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
         add(scrollPane);
         
         txtLog = new JTextPane();
+        txtLog.setText("*      *      *     Welcome to Ultimate Monopoly      *      *      *");
         txtLog.setEditable(false);
         scrollPane.setViewportView(txtLog);
         
