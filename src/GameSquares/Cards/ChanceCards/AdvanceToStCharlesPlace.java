@@ -14,13 +14,13 @@ public class AdvanceToStCharlesPlace extends ChanceCard implements Serializable 
     
     @Override
     public void onDraw(Player pl) {
-        new MessageDisplayer(toString());
+        new MessageDisplayer( "You picked AdvanceToStCharlesPlace Card.");
         pl.moveTo(6);
     }
     
     @Override
     public String toString() {
-        return "You picked AdvanceToStCharlesPlace Card.";
+        return "Advance to StCharlesPlace";
     }
     
     @Override

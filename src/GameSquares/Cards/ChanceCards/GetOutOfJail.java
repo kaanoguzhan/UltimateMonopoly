@@ -14,13 +14,13 @@ public class GetOutOfJail extends ChanceCard implements Serializable {
     
     @Override
     public void onDraw(Player pl) {
-        new MessageDisplayer(toString());
+        new MessageDisplayer("You picked GetOutOfJail Card.");
         pl.addToCardInventory(CardType.GetOutOfJail);
     }
     
     @Override
     public String toString() {
-        return "You picked GetOutOfJail Card.";
+        return "Get out of Jail";
     }
     
     @Override

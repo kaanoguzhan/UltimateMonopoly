@@ -14,13 +14,13 @@ public class OnlinePricing extends CommunityChestCard implements Serializable {
     
     @Override
     public void onDraw(Player pl) {
-        new MessageDisplayer(toString());
+        new MessageDisplayer("You picked Special Online Pricing Card. Next time you land on anyone else's railroad only pay 1/2 the rent.");
         pl.addToCardInventory(CardType.OnlinePricing);
     }
     
     @Override
     public String toString() {
-        return "You picked Special Online Pricing Card. Next time you land on anyone else's railroad only pay 1/2 the rent.";
+        return "Online Pricing";
     }
     
     @Override

@@ -14,13 +14,13 @@ public class AdvanceToTheNearestRailroad extends ChanceCard implements Serializa
     
     @Override
     public void onDraw(Player pl) {
-        new MessageDisplayer(toString());
+        new MessageDisplayer("You picked AdvanceToTheNearestRailRoad Card.");
         // moveTo nearest RailRoad
     }
     
     @Override
     public String toString() {
-        return "You picked AdvanceToTheNearestRailRoad Card.";
+        return "Advance to the nearest Railroad";
     }
     
     @Override

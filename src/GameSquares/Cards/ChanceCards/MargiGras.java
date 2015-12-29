@@ -15,7 +15,7 @@ public class MargiGras extends ChanceCard implements Serializable {
     
     @Override
     public void onDraw(Player pl) {
-        new MessageDisplayer(toString());
+        new MessageDisplayer("You picked Margi Gras card. Every player advance to Canal Street.");
         Player[] players = Main.Main.players;
         for (int i = 0; i < players.length; i++) {
             if ((players[i].getLocation() != Properties.HEAVEN_ID)
@@ -26,7 +26,7 @@ public class MargiGras extends ChanceCard implements Serializable {
     
     @Override
     public String toString() {
-        return "You picked Margi Gras card. Every player advance to Canal Street.";
+        return "Margi Gras";
     }
     
     @Override

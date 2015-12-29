@@ -18,7 +18,7 @@ public class Hurricane extends ChanceCard implements Serializable {
     public void onDraw(Player pl) {
     	
     	if(!testing){
-    		new MessageDisplayer(toString());
+    		new MessageDisplayer("You picked hurricane chance card, a players color grouping is downgraded");
 
     		for (int p = 0; p < Main.Main.players.length; p++) {
     			Player temp = Main.Main.players[p];
@@ -48,7 +48,7 @@ public class Hurricane extends ChanceCard implements Serializable {
     
     @Override
     public String toString() {
-        return "You picked hurricane chance card, a players color grouping is downgraded";
+        return "Hurricane";
     }
     
     @Override

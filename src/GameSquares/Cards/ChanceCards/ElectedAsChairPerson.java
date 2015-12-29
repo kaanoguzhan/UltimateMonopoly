@@ -16,7 +16,7 @@ public class ElectedAsChairPerson extends ChanceCard implements Serializable {
     }
     @Override
     public void onDraw(Player pl) {
-        new MessageDisplayer(toString());
+        new MessageDisplayer("You picked ElectedAsChairPerson Card. Now you will pay everyone.");
         for (int i = 0; i < players.length; i++) {
             if (pl != players[i])
                 pl.pay(players[i], 50);
@@ -25,7 +25,7 @@ public class ElectedAsChairPerson extends ChanceCard implements Serializable {
     
     @Override
     public String toString() {
-        return "You picked ElectedAsChairPerson Card. Now you will pay everyone.";
+        return "Elected as Chair Person";
     }
     
     @Override

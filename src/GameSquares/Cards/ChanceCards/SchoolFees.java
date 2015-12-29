@@ -14,13 +14,13 @@ public class SchoolFees extends ChanceCard implements Serializable {
     
     @Override
     public void onDraw(Player pl) {
-        new MessageDisplayer(toString());
+        new MessageDisplayer("You picked SchoolFees Card.");
         // Pay the pool $150
     }
     
     @Override
     public String toString() {
-        return "You picked SchoolFees Card.";
+        return "School Fees";
     }
     
     @Override

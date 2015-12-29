@@ -14,13 +14,13 @@ public class AdvanceToSqueezePlay extends ChanceCard implements Serializable {
     
     @Override
     public void onDraw(Player pl) {
-        new MessageDisplayer(toString());
+        new MessageDisplayer("You picked AdvanceToSqueezePlay Card.");
         pl.moveTo(96);
     }
     
     @Override
     public String toString() {
-        return "You picked AdvanceToSqueezePlay Card.";
+        return "Advance to SqueezePlay";
     }
     
     @Override

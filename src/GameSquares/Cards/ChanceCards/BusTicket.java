@@ -17,7 +17,7 @@ public class BusTicket extends ChanceCard implements Serializable {
     
     @Override
     public void onDraw(Player pl) {
-        new MessageDisplayer(toString());
+        new MessageDisplayer("You picked BusTicket Card.");
         for (CardType c : pl.getCardsInventory()) {
             if (c.isChanceCard())
                 pl.getCardsInventory().remove(c);
@@ -67,7 +67,7 @@ public class BusTicket extends ChanceCard implements Serializable {
     }
     
     public String toString() {
-        return "You picked BusTicket Card.";
+        return "Bus Ticket";
     }
     
     @Override

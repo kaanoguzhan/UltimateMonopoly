@@ -23,7 +23,7 @@ public class GeneralRepairs extends CommunityChestCard implements Serializable {
 
 	@Override
 	public void onDraw(Player pl) {
-		new MessageDisplayer(toString());
+		new MessageDisplayer( "You picked General Repairs Card. Now you will pay $25 per cab-transit station, $25 per house, $100 per hotel and $100 per skyscraper you own.");
 		ArrayList<Land> lands = pl.getOwnedLands();
 		ArrayList<Ownable> cabTransits = pl.getOwnedSquares();
 		int cabTransit = 0;
@@ -56,7 +56,7 @@ public class GeneralRepairs extends CommunityChestCard implements Serializable {
 	}
 
 	public String toString() {
-		return "You picked General Repairs Card. Now you will pay $25 per cab-transit station, $25 per house, $100 per hotel and $100 per skyscraper you own.";
+		return "General Repairs";
 	}
 
 	@Override

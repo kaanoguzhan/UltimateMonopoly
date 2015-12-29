@@ -14,13 +14,13 @@ public class AdvanceToTheNearestUtility extends ChanceCard implements Serializab
     
     @Override
     public void onDraw(Player pl) {
-        new MessageDisplayer(toString());
+        new MessageDisplayer("You picked AdvanceToTheNearestUtility Card.");
         // moveTo nearest Utility
     }
     
     @Override
     public String toString() {
-        return "You picked AdvanceToTheNearestUtility Card.";
+        return "Advance to the nearest Utility";
     }
     
     @Override

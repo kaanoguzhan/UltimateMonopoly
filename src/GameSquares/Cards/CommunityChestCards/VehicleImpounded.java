@@ -16,14 +16,14 @@ public class VehicleImpounded extends CommunityChestCard implements Serializable
 
 	@Override
 	public void onDraw(Player pl) {
-		new MessageDisplayer(toString());
+		new MessageDisplayer("You picked VehicleImpounded Card.");
 		pl.payToPool(50);
 		pl.moveTo(20);
 		pl.LoseTurn(true);
 	}
 
 	public String toString() {
-		return "You picked VehicleImpounded Card.";
+		return "Vehicle Impounded";
 	}
 
 	@Override
