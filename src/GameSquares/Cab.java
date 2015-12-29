@@ -143,6 +143,13 @@ public class Cab extends GameSquare implements Ownable {
             return false;
     }
     
+    public void setStanded(boolean val){
+    	cabStand = val;
+    }
+    
+    public void setMortgage(boolean val){
+    	mortgaged = val;
+    }
     @Override
     public String toString() {
         return name + "Cab Co";

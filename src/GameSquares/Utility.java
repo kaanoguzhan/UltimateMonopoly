@@ -13,6 +13,7 @@ public class Utility extends GameSquare implements Ownable {
     public Utility(int id, String name, type type) {
         super(id, type);
         this.name = name;
+        mortgaged = false;
     }
     
     public void onArrive(Player pl, int amount) {
@@ -126,6 +127,10 @@ public class Utility extends GameSquare implements Ownable {
     @Override
     public String toString() {
         return name;
+    }
+    
+    public void setMortgage(boolean val){
+    	mortgaged = val;
     }
     
 }

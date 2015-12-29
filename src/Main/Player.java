@@ -47,6 +47,16 @@ public class Player implements Serializable {
         this.name = ".";
         this.gameSquares = gameSquares;
     }
+    
+    // Constructor for load
+    public Player(int id, String name, int money,int location,GameSquare[] gameSquares) {
+        this.id = id;
+        this.location = location;
+        this.money = money;
+        this.name = name;
+        this.gameSquares = gameSquares;
+        System.out.println("Player " + name + " with " + money + " added.");
+    }
     /** @param amount
      * @requires amount is greater than 0
      * @modifies this
@@ -239,7 +249,29 @@ public class Player implements Serializable {
         return location;
     }
     
-    /** @param land
+    
+    
+    public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setJailTime(int jailTime) {
+		this.jailTime = jailTime;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setJailed(boolean jailed) {
+		this.jailed = jailed;
+	}
+
+	/** @param land
      * @modifies this
      * @effects this player pays for the land and owns it */
     public void buySquare(GameSquare land) {

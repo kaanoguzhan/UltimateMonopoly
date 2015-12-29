@@ -94,8 +94,16 @@ public class TransitStation extends GameSquare implements Ownable {
             return false;
     }
     
+    public int getDepotCount() {
+    	return depotCount;
+    }
+    
     @Override
     public String toString() {
         return "Transit station from " + id + " to " + connectedTransit;
+    }
+    
+    public void setDepotCount(int i){
+    	depotCount = i;
     }
 }
