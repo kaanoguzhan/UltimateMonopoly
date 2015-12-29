@@ -72,6 +72,7 @@ public class Board extends JFrame {
         debug.setBounds(1728, 972, 120, 70);
         
         round.setBounds(1050, 0, 808, 250);
+        getContentPane().add(round);
         informationTable.setBounds(1060, 261, 788, 900);
         lblBoard.setBounds(0, 0, 1050, 1050);
         
