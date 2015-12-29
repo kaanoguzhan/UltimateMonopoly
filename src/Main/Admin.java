@@ -34,10 +34,10 @@ public class Admin extends Main {
         refreshUI();
     }
     // Move PLAYER to given LOCATION but WONT CALL location's onArrive()
-    public static <T> void movePlayerToForced(T player, int location) {
+    public static <T> void movePlayerToForced(T player, T location) {
         System.out.println("ADMIN -> Player:" + findPlayer(player).getName()
             + "'s Location is set to location with id " + location);
-        findPlayer(player).setLocation(location);
+        findPlayer(player).setLocation(findGameSquare(location));
         refreshUI();
     }
     
@@ -291,7 +291,10 @@ public class Admin extends Main {
             gsq = Main.gameSquares[(int) gameSquare];
         else if (gameSquare instanceof String) {
             for (GameSquare tempgsq : Main.gameSquares)
-                if (tempgsq instanceof Ownable && ((Ownable) tempgsq).getName().equals(gameSquare)) { return (GameSquare) tempgsq; }
+                if (tempgsq instanceof Ownable && ((Ownable) tempgsq).getName().equals(gameSquare))
+                    return (GameSquare) tempgsq;
+                else if (tempgsq.getType().equals(gameSquare))
+                    return tempgsq;
         }
         return gsq;
     }
@@ -304,12 +307,10 @@ public class Admin extends Main {
             ownbl = (Ownable) Main.gameSquares[(int) ownable];
         else if (ownable instanceof String) {
             for (GameSquare gameSquare : Main.gameSquares)
-                if (gameSquare instanceof Ownable && ((Ownable) gameSquare).getName().equals(ownable)) { return (Ownable) gameSquare; }
+                if (gameSquare instanceof Ownable && ((Ownable) gameSquare).getName().equals(ownable)) return (Ownable) gameSquare;
         }
         return ownbl;
     }
-    
-    
     public static int getPlayerCount() {
         return Main.players.length;
     }

@@ -89,7 +89,7 @@ public class PlayerPanel extends JPanel {
         JButton btnSetLoc1 = new JButton("Set");
         btnSetLoc1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                Admin.movePlayerToForced(playerID, choiceLoc1.getSelectedIndex());
+                Admin.movePlayerToForced(playerID, choiceLoc1.getSelectedItem());
             }
         });
         btnSetLoc1.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -98,7 +98,7 @@ public class PlayerPanel extends JPanel {
         
         JButton btnMove1 = new JButton("Move");
         btnMove1.addActionListener(al -> {
-            Admin.movePlayerTo(playerID, choiceLoc1.getSelectedIndex());
+            Admin.movePlayerTo(playerID, choiceLoc1.getSelectedItem());
         });
         btnMove1.setAlignmentX(0.5f);
         btnMove1.setBounds(237, 77, 70, 41);
@@ -163,12 +163,17 @@ public class PlayerPanel extends JPanel {
     }
     
     private void fillAllSquares(Choice choice) {
+        ArrayList<String> sqNames = new ArrayList<String>();
         if (Main.gameSquares != null)
             for (GameSquare gsq : Main.gameSquares) {
-                choice.add(gsq instanceof Land ? ((Land) gsq).getName() : gsq.getType() + "");
+                sqNames.add(gsq instanceof Land ? ((Land) gsq).getName() : gsq.getType() + "");
             }
         else
             choice.add("...");
+        Collections.sort(sqNames);
+        for (String nextName : sqNames) {
+            choice.add(nextName);
+        }
     }
     private void fillNeuLands(Choice choice, int playerID) {
         ArrayList<String> gsqNames = new ArrayList<String>();

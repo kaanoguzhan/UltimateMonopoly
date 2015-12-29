@@ -336,8 +336,8 @@ public class Player implements Serializable {
     
     // ////////// DO NOT USE THESE METHODS - THESE ARE JUST FOR DEBUGGING
     // ////////// //
-    public void setLocation(int id) {
-        this.location = id;
+    public void setLocation(GameSquare gameSquare) {
+        this.location = gameSquare.getID();
     }
     
     public void setMoney(int amount) {
