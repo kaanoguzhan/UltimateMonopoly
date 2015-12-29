@@ -64,12 +64,13 @@ public class Main {
         initializeBoard();
         startMusic();
         
+        startMusic();
+        
         if (loadPrevious)
             continueFromSave();
         else
             runGame();
     }
-    
     private static void changeUITheme() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
