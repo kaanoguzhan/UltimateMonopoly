@@ -51,7 +51,7 @@ public class Player implements Serializable {
     }
     
     // Constructor for load
-    public Player(int id, String name, int money,int location,GameSquare[] gameSquares) {
+    public Player(int id, String name, int money, int location, GameSquare[] gameSquares) {
         this.id = id;
         this.location = location;
         this.money = money;
@@ -91,9 +91,10 @@ public class Player implements Serializable {
                     nextLocation = 35;
                 else
                     passed = false;
-                if (passed)
+                if (passed) {
                     System.out.println(name + " passed transit station");
-                RollingTheDice.logAdd(name + " passed transit station");
+                    RollingTheDice.logAdd(name + " passed transit station");
+                }
             }
             
             if (nextLocation == 40)
@@ -111,7 +112,6 @@ public class Player implements Serializable {
             
             if (nextLocation == 68) { // payday
                 System.out.println(name + " passed Pay Day Square.");
-                RollingTheDice.logAdd(name + " passed Pay Day Square and got " + Properties.PAYDAY_EVEN);
                 if (amount % 2 != 0) {
                     addMoney(Properties.PAYDAY_ODD);
                     RollingTheDice.logAdd(name + " passed Pay Day Square and got " + Properties.PAYDAY_ODD);
@@ -273,26 +273,26 @@ public class Player implements Serializable {
     
     
     public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public void setJailTime(int jailTime) {
-		this.jailTime = jailTime;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setJailed(boolean jailed) {
-		this.jailed = jailed;
-	}
-
-	/** @param land
+        return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public void setJailTime(int jailTime) {
+        this.jailTime = jailTime;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public void setJailed(boolean jailed) {
+        this.jailed = jailed;
+    }
+    
+    /** @param land
      * @modifies this
      * @effects this player pays for the land and owns it */
     public void buySquare(GameSquare land) {

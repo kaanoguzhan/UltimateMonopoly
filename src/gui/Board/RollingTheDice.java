@@ -104,6 +104,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
         btnRoll.setEnabled(false);
         if (arg0.getSource() == btnRoll) {
             if (player.isLoseTurn()) {
+                RollingTheDice.logAdd("Player:" + player.getName() + " will lose next turn.");
                 btnEnd.setEnabled(true);
                 player.LoseTurn(false);
                 RollingTheDice.logAdd(player.getName() + " lost this one turn.");
@@ -254,11 +255,14 @@ public class RollingTheDice extends JPanel implements ActionListener {
                             player.resetDoublesRolled();
                             new gui.AdditionalWindows.MessageDisplayer(
                                 "This is your third doubles, now you will go to jail !");
+                            RollingTheDice.logAdd("Player:" + player.getName() + " goes to Jail.");
                             player.goToJail();
                             RollingTheDice.logAdd(player.getName() + " moved to jail.");
                             btnRoll.setEnabled(false);
                             btnEnd.setEnabled(true);
                         } else {
+                            RollingTheDice
+                                .logAdd("Player:" + player.getName() + " rolled Doubles and will roll again.");
                             if (Dice.isMonopolyGuy()) {
                                 movePlayer(roll1 + roll2);
                                 new gui.AdditionalWindows.MessageDisplayer(" You rolled MonopolyGuy !");
