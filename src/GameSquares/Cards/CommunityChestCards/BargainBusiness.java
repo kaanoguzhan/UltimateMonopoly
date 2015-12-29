@@ -14,13 +14,13 @@ public class BargainBusiness extends CommunityChestCard implements Serializable 
     
     @Override
     public void onDraw(Player pl) {
-        new MessageDisplayer(toString());
+        new MessageDisplayer("You picked BargainBusiness Card.");
         pl.addToCardInventory(CardType.BargainBusiness);
     }
     
     @Override
     public String toString() {
-        return "You picked BargainBusiness Card.";
+        return  "Bargain Business";
     }
     
     @Override

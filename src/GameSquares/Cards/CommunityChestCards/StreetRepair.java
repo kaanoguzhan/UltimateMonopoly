@@ -21,7 +21,7 @@ public class StreetRepair extends CommunityChestCard implements Serializable {
     
     @Override
     public void onDraw(Player pl) {
-        new MessageDisplayer(toString());
+        new MessageDisplayer("You picked Assessed for Street Repairs Card. Now you will pay $25 per cab-transit station, $40 per house $115 per hotel and $100 per skyscraper you own.");
         ArrayList<Land> lands = pl.getOwnedLands();
         ArrayList<Ownable> cabTransits = pl.getOwnedSquares();
         int cabTransit = 0;
@@ -55,7 +55,7 @@ public class StreetRepair extends CommunityChestCard implements Serializable {
     
     @Override
     public String toString() {
-        return "You picked Assessed for Street Repairs Card. Now you will pay $25 per cab-transit station, $40 per house $115 per hotel and $100 per skyscraper you own.";
+        return  "Street Repair";
     }
     
     @Override

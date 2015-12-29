@@ -6,6 +6,8 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -169,18 +171,28 @@ public class PlayerPanel extends JPanel {
             choice.add("...");
     }
     private void fillNeuLands(Choice choice, int playerID) {
+        ArrayList<String> gsqNames = new ArrayList<String>();
         if (Main.players != null && Main.players.length - 1 >= playerID) {
             for (GameSquare gsq : Main.gameSquares)
                 if (gsq instanceof Ownable && ((Ownable) gsq).getOwner() == null)
-                    choice.add(((Ownable) gsq).getName());
+                    gsqNames.add(((Ownable) gsq).getName());
         }
+        Collections.sort(gsqNames);
+        for (String nextName : gsqNames) {
+            choice.add(nextName);
+        }
+        
     }
-    
     private void fillOwnLands(Choice choice, int playerID) {
+        ArrayList<String> gsqNames = new ArrayList<String>();
         if (Main.players != null && Main.players.length - 1 >= playerID) {
             for (Ownable ownable : Main.players[playerID].getOwnedSquares()) {
-                choice.add(ownable.getName());
+                gsqNames.add(((Ownable) ownable).getName());
             }
+        }
+        Collections.sort(gsqNames);
+        for (String nextName : gsqNames) {
+            choice.add(nextName);
         }
     }
     

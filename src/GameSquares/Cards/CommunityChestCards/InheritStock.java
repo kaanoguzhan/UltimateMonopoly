@@ -15,13 +15,13 @@ public class InheritStock extends CommunityChestCard implements Serializable {
     
     @Override
     public void onDraw(Player pl) {
-        new MessageDisplayer(toString());
+        new MessageDisplayer( "You picked InheritStock Card.");
         StockExcWindow ste = new StockExcWindow(pl, 1);
         ste.setVisible(true);
     }
     
     public String toString() {
-        return "You picked InheritStock Card.";
+        return "Inherit Stock";
     }
     
     @Override

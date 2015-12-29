@@ -19,7 +19,7 @@ public class PropertyTaxes extends ChanceCard implements Serializable {
     
     @Override
     public void onDraw(Player pl) {
-        new MessageDisplayer(toString());
+        new MessageDisplayer("You picked property taxes. Pay 5$ to the pool for each unmortgaged property you own. ");
         
         ArrayList<Land> lands = pl.getOwnedLands();
         int taxSum = 0;
@@ -33,12 +33,11 @@ public class PropertyTaxes extends ChanceCard implements Serializable {
     
     @Override
     public String toString() {
-        return "You picked property taxes. Pay 5$ to the pool for each unmortgaged property you own. ";
+        return "Property Tax";
     }
     
     @Override
     public String getName() {
         return "Property Taxes";
     }
-    
 }

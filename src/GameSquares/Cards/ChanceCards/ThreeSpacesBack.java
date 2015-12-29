@@ -14,13 +14,13 @@ public class ThreeSpacesBack extends ChanceCard implements Serializable {
     
     @Override
     public void onDraw(Player pl) {
-        new MessageDisplayer(toString());
+        new MessageDisplayer("You picked ThreeSpacesBack Card.");
         pl.moveBy(-3);
     }
     
     @Override
     public String toString() {
-        return "You picked ThreeSpacesBack Card.";
+        return "Three spaces back";
     }
     
     @Override

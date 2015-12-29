@@ -18,7 +18,7 @@ public class HouseCondemned extends CommunityChestCard implements Serializable {
     @Override
     public void onDraw(Player pl) {
     	if(!testing)
-        new MessageDisplayer(toString());
+        new MessageDisplayer("You picked House Condemned Card. Sell a house 1/2 price you paid for it. (Do nothing if you have no houses)");
         ArrayList<Land> lands = pl.getOwnedLands();
         ArrayList<Land> housed = new ArrayList<Land>();
         for (int i = 0; i < lands.size(); i++) {
@@ -36,7 +36,7 @@ public class HouseCondemned extends CommunityChestCard implements Serializable {
     
     @Override
     public String toString() {
-        return "You picked House Condemned Card. Sell a house 1/2 price you paid for it. (Do nothing if you have no houses)";
+        return "House Condemned";
     }
     
     @Override

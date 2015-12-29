@@ -14,13 +14,13 @@ public class RecieveConsultancyFee extends CommunityChestCard implements Seriali
     
     @Override
     public void onDraw(Player pl) {
-        new MessageDisplayer(toString());
+        new MessageDisplayer("You picked RecieveConsultancyFee Card.");
         pl.addMoney(25);
     }
     
     @Override
     public String toString() {
-        return "You picked RecieveConsultancyFee Card.";
+        return "Recieve Consultancy Fee";
     }
     
     @Override

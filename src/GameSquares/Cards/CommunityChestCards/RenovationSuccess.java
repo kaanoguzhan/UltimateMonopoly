@@ -14,13 +14,13 @@ public class RenovationSuccess extends CommunityChestCard implements Serializabl
     
     @Override
     public void onDraw(Player pl) {
-        new MessageDisplayer(toString());
+        new MessageDisplayer("You picked RenovationSuccess Card.");
         pl.addToCardInventory(CardType.RenovationSuccess);
     }
     
     @Override
     public String toString() {
-        return "You picked RenovationSuccess Card.";
+        return "Renovation Success";
     }
     
     @Override
