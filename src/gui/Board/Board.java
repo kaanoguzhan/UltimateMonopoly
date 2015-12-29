@@ -15,6 +15,7 @@ import Main.Player;
 import Main.Properties;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.net.URL;
 
 public class Board extends JFrame {
     
@@ -40,17 +41,16 @@ public class Board extends JFrame {
         
         this.players = players;
         this.gameSquares = gameSquares;
-        
-        zero = new playerIcon("playerIcon1.gif", 480, 475, 50, 40);
+        zero = new playerIcon(getClass().getResource("/Resources/Images/playerIcon1.gif"), 480, 475, 50, 40);
         getContentPane().add(zero);
         
-        one = new playerIcon("playerIcon2.gif", 520, 475, 50, 40);
+        one = new playerIcon(getClass().getResource("/Resources/Images/playerIcon2.gif"), 520, 475, 50, 40);
         getContentPane().add(one);
         
-        two = new playerIcon("playerIcon3.gif", 480, 525, 50, 40);
+        two = new playerIcon(getClass().getResource("/Resources/Images/playerIcon3.gif"), 480, 525, 50, 40);
         getContentPane().add(two);
         
-        three = new playerIcon("playerIcon4.gif", 520, 525, 50, 40);
+        three = new playerIcon(getClass().getResource("/Resources/Images/playerIcon4.gif"), 520, 525, 50, 40);
         getContentPane().add(three);
         
         lblPool = new JLabel("Pool: 0");
@@ -60,7 +60,7 @@ public class Board extends JFrame {
         lblPool.setBounds(450, 345, 159, 89);
         getContentPane().add(lblPool);
         
-        lblBoard = new JLabel(new ImageIcon("board1050.jpg"));
+        lblBoard = new JLabel(new ImageIcon(getClass().getResource("/Resources/Images/board1050.jpg")));
         getContentPane().add(lblBoard);
         
         JButton debug = new JButton("Debug Window");
@@ -95,7 +95,7 @@ public class Board extends JFrame {
         getContentPane().add(round);
         getContentPane().add(informationTable);
         
-        // Full Screnn
+        // Full Screen
         setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
     public void setCurrentPlayer(Player player) {
@@ -123,8 +123,8 @@ public class Board extends JFrame {
 class playerIcon extends JLabel {
     private static final long serialVersionUID = 1L;
     
-    playerIcon(String imageName, int x, int y, int height, int width) {
-        super(new ImageIcon(imageName));
+    playerIcon(URL url, int x, int y, int height, int width) {
+        super(new ImageIcon(url));
         super.setBounds(x, y, height, width);
     }
 }

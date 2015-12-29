@@ -4,6 +4,7 @@ import gui.AdditionalWindows.MessageDisplayer;
 import gui.AdditionalWindows.InputReaders.GetTextInput;
 import gui.Board.Board;
 import java.io.File;
+import java.net.URL;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.UIManager;
@@ -410,10 +411,10 @@ public class Main {
 
 
 class AudioRunner extends Thread {
-    String music1 = "hitthatjive.wav";
-    String music2 = "darude.wav";
-    String playingMusic;
-    Clip   c;
+    URL  music1 = getClass().getResource("/Resources/Music/hitthatjive.wav");
+    URL  music2 = getClass().getResource("/Resources/Music/darude.wav");
+    URL  playingMusic;
+    Clip c;
     
     public AudioRunner(int i) {
         switch (i) {
@@ -436,7 +437,7 @@ class AudioRunner extends Thread {
         try {
             while (!Thread.currentThread().isInterrupted()) {
                 c = AudioSystem.getClip();
-                c.open(AudioSystem.getAudioInputStream(new File(playingMusic)));
+                c.open(AudioSystem.getAudioInputStream(new File(playingMusic.toURI())));
                 c.start();
                 Thread.sleep(c.getMicrosecondLength() / (1000));
             }

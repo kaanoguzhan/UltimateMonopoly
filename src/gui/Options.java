@@ -15,8 +15,8 @@ import javax.swing.SwingConstants;
 
 public class Options extends JFrame {
     private static final long serialVersionUID = 1L;
-    private ImageIcon         iconSoundEnable  = new ImageIcon("SoundEnable.PNG");
-    private ImageIcon         iconSoundMute    = new ImageIcon("SoundMute.PNG");
+    private ImageIcon         iconSoundEnable  = new ImageIcon(getClass().getResource("/Resources/Images/SoundEnable.PNG"));
+    private ImageIcon         iconSoundMute    = new ImageIcon(getClass().getResource("/Resources/Images/SoundMute.PNG"));
     private boolean           soundEnabled     = true;
     private JPanel            contentPane;
     private JLabel            lblSound;

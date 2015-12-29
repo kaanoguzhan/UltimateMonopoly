@@ -39,7 +39,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
         dice = new JLabel();
         result = new JLabel();
         
-        Image boardImage = new ImageIcon("dice.png").getImage();
+        Image boardImage = new ImageIcon(getClass().getResource("/Resources/Images/dice.png")).getImage();
         dice = new JLabel(new ImageIcon(boardImage));
         dice.setBounds(7, 10, ((int) dice.getPreferredSize().getWidth()), ((int) dice.getPreferredSize().getHeight()));
         add(dice);
@@ -88,7 +88,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
         scrollPane.setViewportView(txtLog);
         
     }
-    
     public void actionPerformed(ActionEvent arg0) {
         boolean noShares = true;
         for (int a : player.getStocks()) {
