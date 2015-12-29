@@ -17,17 +17,19 @@ public class Auction extends GameSquare {
 	public void onArrive(Player pl) {
 		GameSquare sq = null;
 		int id = 0;
-		while(sq == null || !(sq.getOwner() == null && (sq instanceof Ownable))){
-			id = new GetTextInput("Enter a square Number (0-119) to enter the auction for that property ").getInt();
-			sq = Main.Main.gameSquares[id];	
-		}
+		if(unOwnedPropertyLeft()){
+			while(sq == null || !(sq.getOwner() == null && (sq instanceof Ownable))){
+				id = new GetTextInput("Enter a square Number (0-119) to enter the auction for that property ").getInt();
+				sq = Main.Main.gameSquares[id];	
+			}
 
-		Player winner = Auction.auctionProcess(((Ownable) sq).getPrice());				
-		if(winner != null)
-			winner.buySquare(sq);
+			Player winner = Auction.auctionProcess(((Ownable) sq).getPrice());				
+			if(winner != null)
+				winner.buySquare(sq);
 
-		for(int k =0;k<4;k++){
-			Main.Main.players[k].inAuction = false;
+			for(int k =0;k<4;k++){
+				Main.Main.players[k].inAuction = false;
+			}
 		}
 	}
 
@@ -146,6 +148,15 @@ public class Auction extends GameSquare {
 
 	}
 
+	public boolean unOwnedPropertyLeft(){
+
+		for(int i = 0;i<120;i++){
+			if(Main.Main.gameSquares[i] instanceof Ownable)
+				if(Main.Main.gameSquares[i].getOwner() == null)
+					return true;
+		}
+		return false;
+	}
 
 	@Override
 	public String toString() {
