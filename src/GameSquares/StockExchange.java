@@ -75,6 +75,20 @@ public class StockExchange extends GameSquare {
     public String toString() {
         return "Stock Exchange Square";
     }
+    public static stockType getTheFirstAvailableStock(){
+    	Player[] temp = Main.players;
+    	for(int i = 0;i<5;i++){
+    		if(temp[0].getStockAmount(stockType.getStock(i)) != 6 && temp[1].getStockAmount(stockType.getStock(i)) != 6
+    				&& temp[2].getStockAmount(stockType.getStock(i)) != 6 &&
+    				temp[3].getStockAmount(stockType.getStock(i)) != 6) {
+    			return stockType.getStock(i);
+    		}
+    	}
+    	System.out.println("sorry there is no available stock to buy for all players");
+		return null;
+    	
+    }
+    
 }
 
 
