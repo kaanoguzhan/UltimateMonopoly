@@ -94,9 +94,9 @@ public class DicePanel extends JPanel {
         lblOwnedPropertied.setBounds(142, 58, 90, 21);
         add(lblOwnedPropertied);
         
-        JLabel lblGiveCard = new JLabel("Give Card:");
-        lblGiveCard.setBounds(181, 121, 51, 21);
-        add(lblGiveCard);
+        JLabel lblCard = new JLabel("Card:");
+        lblCard.setBounds(205, 121, 27, 21);
+        add(lblCard);
         
         Choice chcCards = new Choice();
         chcCards.setBounds(237, 121, 261, 20);
@@ -108,8 +108,8 @@ public class DicePanel extends JPanel {
                 chcCards.add(ccc.getName());
         add(chcCards);
         
-        JButton btnGive = new JButton("Give");
-        btnGive.addActionListener(al -> {
+        JButton btnGiveCard = new JButton("Give");
+        btnGiveCard.addActionListener(al -> {
             Player pl = Main.players[chcPlayers.getSelectedIndex()];
             for (ChanceCard cc : Main.chanceDeck.getDeck())
                 if (cc.getName().equals(chcCards.getSelectedItem())) {
@@ -120,8 +120,38 @@ public class DicePanel extends JPanel {
                     pl.addToCardInventory(ccc.getType());
             PlayerInfo.refreshData();
         });
-        btnGive.setBounds(504, 118, 110, 28);
-        add(btnGive);
+        btnGiveCard.setBounds(504, 118, 110, 28);
+        add(btnGiveCard);
+        
+        JLabel lblNewLabel = new JLabel("Stock:");
+        lblNewLabel.setBounds(202, 184, 30, 14);
+        add(lblNewLabel);
+        
+        Choice chcStocks = new Choice();
+        chcStocks.setBounds(237, 178, 261, 20);
+        chcStocks.add("AcmeMotors Stock Share");
+        chcStocks.add("UnitedRailways Stock Share");
+        chcStocks.add("GeneralRadIO Stock Share");
+        chcStocks.add("NationalUtilities Stock Share");
+        chcStocks.add("AlliedSteamships Stock Share");
+        chcStocks.add("MotionPictures Stock Share");
+        add(chcStocks);
+        
+        JButton btnGiveStock = new JButton("Give");
+        btnGiveStock.addActionListener(al -> {
+            Main.players[chcPlayers.getSelectedIndex()].giveStock(chcStocks.getSelectedIndex());
+            PlayerInfo.refreshData();
+        });
+        btnGiveStock.setBounds(504, 177, 110, 28);
+        add(btnGiveStock);
+        
+        JButton btnRemoveStock = new JButton("Remove");
+        btnRemoveStock.addActionListener(al -> {
+            Main.players[chcPlayers.getSelectedIndex()].removeStock(chcStocks.getSelectedIndex());
+            PlayerInfo.refreshData();
+        });
+        btnRemoveStock.setBounds(504, 205, 110, 28);
+        add(btnRemoveStock);
     }
     private void fillCombo(int playerID) {
         chcOwnables.removeAll();
