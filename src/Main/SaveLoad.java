@@ -86,8 +86,8 @@ public class SaveLoad {
         	Main.players = gamePlayers;
         	
         	boolean[] buttons =  {enabledButtons.getBoolean("rollButton"), 
-        			enabledButtons.getBoolean("rollButton"),
-        			enabledButtons.getBoolean("rollButton")};
+        			enabledButtons.getBoolean("endButton"),
+        			enabledButtons.getBoolean("sellButton")};
         	Main.board.round.setButtonEnableds(buttons);
         	
             PlayerInfo.refreshData();
