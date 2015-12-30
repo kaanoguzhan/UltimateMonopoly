@@ -92,7 +92,6 @@ public class Land extends GameSquare implements Ownable {
                 Player winner = Auction.auctionProcess(this.price);
                 if (winner != null)
                     winner.buySquare(this);
-                RollingTheDice.logAdd(winner.getName() + " won Auction and got " + this.name);
                 for (int k = 0; k < 4; k++) {
                     Main.Main.players[k].inAuction = false;
                 }
