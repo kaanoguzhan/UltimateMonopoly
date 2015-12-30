@@ -22,11 +22,11 @@ import Main.Admin;
 import Main.Main;
 import Main.Player;
 import Main.Properties;
+import javax.swing.ScrollPaneConstants;
 
 public class RollingTheDice extends JPanel implements ActionListener {
     private static final long serialVersionUID = 1L;
     private JLabel            result, dice, lblLoadProtection;
-    public JLabel             whichPlayer;
     public JButton            btnRoll, btnEnd, btnSell;
     private boolean           getOutOfJail     = false;
     private Player            player;
@@ -45,12 +45,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
         dice = new JLabel(new ImageIcon(boardImage));
         dice.setBounds(7, 10, ((int) dice.getPreferredSize().getWidth()), ((int) dice.getPreferredSize().getHeight()));
         add(dice);
-        
-        whichPlayer = new JLabel("                                                                                  ");
-        whichPlayer.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
-            .getPreferredSize().getHeight()));
-        add(whichPlayer);
         
         result.setText("<html>Dice:<br>SpeedDie:</html>");
         result.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -81,11 +75,11 @@ public class RollingTheDice extends JPanel implements ActionListener {
         
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBorder(null);
-        scrollPane.setBounds(475, 10, 296, 240);
+        scrollPane.setBounds(297, 10, 474, 240);
         add(scrollPane);
         
         txtLog = new JTextPane();
-        txtLog.setText("*      *      *     Welcome to Ultimate Monopoly      *      *      *");
+        txtLog.setText("*      *      *      *      *       *       Welcome to Ultimate Monopoly       *       *      *      *      *      *");
         txtLog.setEditable(false);
         scrollPane.setViewportView(txtLog);
         
@@ -94,14 +88,10 @@ public class RollingTheDice extends JPanel implements ActionListener {
         boolean noShares = true;
         for (int a : player.getStocks()) {
             if (a != 0) noShares = false;
-        }
+        }        
         
         btnSell.setEnabled(!(noShares) || !player.getOwnedSquares().isEmpty());
-        
-        whichPlayer.setText((player.getName() + " is playing"));
-        whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
-            .getPreferredSize().getHeight()));
-        
+          
         btnRoll.setEnabled(false);
         if (arg0.getSource() == btnRoll) {
             if (player.isLoseTurn()) {
@@ -296,8 +286,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
             Main.endRound();
             RollingTheDice.logAdd(player.getName() + " has ended his/her turn. Now its "
                 + Admin.getNextPlayerName(player.getID()) + "'s turn.");
-            whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
-                .getPreferredSize().getHeight()));
             btnRoll.requestFocus();
             RollingTheDice.logEndTurn();
         } else if (arg0.getSource() == btnSell) {
@@ -353,10 +341,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
         }
         PlayerInfo.setActivePlayerCard(player.getID());
         Board.informationTable.validate();
-    }
-    
-    public void setPlayerTurnLabel(String string) {
-        whichPlayer.setText(string);
     }
     
     public boolean[] getButtonEnableds() {

@@ -315,7 +315,8 @@ public class Main {
     }
     
     public static void continueFromSave() {
-        board.setPlayerTurnLabel("Loaded from save! It's " + CurrentPlayer.getName() + "'s turn.");
+        // TODO Loga ekle
+        // ("Loaded from save! It's " + CurrentPlayer.getName() + "'s turn.");
         board.round.loadCurrentPlayer(CurrentPlayer);
         int startID = CurrentPlayer.getID();
         for (int i = CurrentPlayer.getID(); i < Main.players.length; i++) {
@@ -340,10 +341,7 @@ public class Main {
     }
     
     
-    private static void runGame() {
-        if (!loadPrevious)
-            board.setPlayerTurnLabel("A new game has begun!");
-        
+    private static void runGame() {        
         Player lastPlayer = new Player(gameSquares);
         game:
         for (;;) {
