@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
+import GameSquares.GameSquare;
+import GameSquares.Land;
 import Main.Admin;
 import Main.Main;
 import Main.Player;
@@ -336,10 +338,15 @@ public class RollingTheDice extends JPanel implements ActionListener {
     
     private void movePlayer(int amount) {
         player.moveBy(amount);
-        RollingTheDice.logAdd(player.getName() + " moved " + amount + " squares and now at Square "
-            + player.getLocation());
+        
+        GameSquare crrtSquare = Main.gameSquares[player.getLocation()];
+        if (crrtSquare instanceof Land)
+            RollingTheDice.logAdd(player.getName() + " moved " + amount + " squares and now at "
+                + ((Land) crrtSquare).getName());
+        else
+            RollingTheDice.logAdd(player.getName() + " moved " + amount + " squares and now at "
+                + crrtSquare.getType());
     }
-    
     public void setCurrentPlayer(Player player) {
         this.player = player;
         
