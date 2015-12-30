@@ -107,10 +107,6 @@ public class Board extends JFrame {
 		round.setCurrentPlayer(player);
 	}
 
-	public void setPlayerTurnLabel(String string) {
-		round.setPlayerTurnLabel(string);
-	}
-
 	public void initiateLoadProtection() {
 		round.initiateLoadProtection();
 	}

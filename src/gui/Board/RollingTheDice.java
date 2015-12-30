@@ -26,13 +26,13 @@ import Main.Properties;
 public class RollingTheDice extends JPanel implements ActionListener {
     private static final long serialVersionUID = 1L;
     private JLabel            result, dice, lblLoadProtection;
-    public JLabel             whichPlayer;
     public JButton            btnRoll, btnEnd, btnSell;
     private boolean           getOutOfJail     = false;
     private Player            player;
     private int               loadProtectionCounter;
     private static int        turn             = 0;
     private static JTextPane  txtLog;
+    private static JLabel     lblPlayerIcon;
     
     public RollingTheDice() {
         setLayout(null);
@@ -45,12 +45,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
         dice = new JLabel(new ImageIcon(boardImage));
         dice.setBounds(7, 10, ((int) dice.getPreferredSize().getWidth()), ((int) dice.getPreferredSize().getHeight()));
         add(dice);
-        
-        whichPlayer = new JLabel("                                                                                  ");
-        whichPlayer.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
-            .getPreferredSize().getHeight()));
-        add(whichPlayer);
         
         result.setText("<html>Dice:<br>SpeedDie:</html>");
         result.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -81,13 +75,17 @@ public class RollingTheDice extends JPanel implements ActionListener {
         
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBorder(null);
-        scrollPane.setBounds(475, 10, 296, 240);
+        scrollPane.setBounds(297, 10, 474, 240);
         add(scrollPane);
         
         txtLog = new JTextPane();
-        txtLog.setText("*      *      *     Welcome to Ultimate Monopoly      *      *      *");
+        txtLog.setText("*      *      *      *      *       *       Welcome to Ultimate Monopoly       *       *      *      *      *      *");
         txtLog.setEditable(false);
         scrollPane.setViewportView(txtLog);
+        
+        lblPlayerIcon = new JLabel(" is playing");
+        lblPlayerIcon.setBounds(140, 10, 147, 64);
+        add(lblPlayerIcon);
         
     }
     public void actionPerformed(ActionEvent arg0) {
@@ -97,10 +95,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
         }
         
         btnSell.setEnabled(!(noShares) || !player.getOwnedSquares().isEmpty());
-        
-        whichPlayer.setText((player.getName() + " is playing"));
-        whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
-            .getPreferredSize().getHeight()));
         
         btnRoll.setEnabled(false);
         if (arg0.getSource() == btnRoll) {
@@ -296,8 +290,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
             Main.endRound();
             RollingTheDice.logAdd(player.getName() + " has ended his/her turn. Now its "
                 + Admin.getNextPlayerName(player.getID()) + "'s turn.");
-            whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
-                .getPreferredSize().getHeight()));
             btnRoll.requestFocus();
             RollingTheDice.logEndTurn();
         } else if (arg0.getSource() == btnSell) {
@@ -337,28 +329,26 @@ public class RollingTheDice extends JPanel implements ActionListener {
     public void loadCurrentPlayer(Player player) {
         this.player = player;
         
-        
         setplayerName(player);
     }
     private void setplayerName(Player player) {
         switch (player.getID()) {
             case 0:
+                lblPlayerIcon.setIcon(Board.zero.getIcon());
                 break;
             case 1:
+                lblPlayerIcon.setIcon(Board.one.getIcon());
                 break;
             case 2:
+                lblPlayerIcon.setIcon(Board.two.getIcon());
                 break;
             case 3:
+                lblPlayerIcon.setIcon(Board.three.getIcon());
                 break;
         }
         PlayerInfo.setActivePlayerCard(player.getID());
         Board.informationTable.validate();
     }
-    
-    public void setPlayerTurnLabel(String string) {
-        whichPlayer.setText(string);
-    }
-    
     public boolean[] getButtonEnableds() {
         boolean[] output = { btnRoll.isEnabled(), btnEnd.isEnabled(), btnSell.isEnabled() };
         return output;
