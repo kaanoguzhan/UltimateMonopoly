@@ -342,9 +342,19 @@ public class Player implements Serializable {
     }
     
     public void removeOwnership(GameSquare square) {
-        ownedSquares.remove((Ownable) square);
-        
-        square.setOwner(null);
+        if (square instanceof TransitStation) {
+            GameSquare connection = Main.gameSquares[((TransitStation) square).getConnectedTransit()];
+            
+            ownedSquares.remove((Ownable) connection);
+            connection.setOwner(null);
+            
+            ownedSquares.remove((Ownable) square);
+            square.setOwner(null);
+        } else {
+            ownedSquares.remove((Ownable) square);
+            
+            square.setOwner(null);
+        }
     }
     
     public int getID() {
