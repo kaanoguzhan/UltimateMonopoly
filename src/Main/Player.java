@@ -210,7 +210,7 @@ public class Player implements Serializable {
      * @modifies this, player
      * @effects reduces this players money by amount and adds it to player */
     public void pay(Player player, int amount) {
-        System.out.println(name + " paid to " + player.getName());
+        System.out.println(name + " paid " + amount + " to " + player.getName());
         this.reduceMoney(amount);
         player.addMoney(amount);
         RollingTheDice.logAdd(name + " paid to " + player.getName());

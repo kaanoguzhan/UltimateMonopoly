@@ -16,8 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
-import GameSquares.GameSquare;
-import GameSquares.Land;
 import Main.Admin;
 import Main.Main;
 import Main.Player;
@@ -79,8 +77,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
         add(scrollPane);
         
         txtLog = new JTextPane();
-        txtLog
-            .setText("*      *      *      *      *       *       Welcome to Ultimate Monopoly       *       *      *      *      *      *");
+        txtLog.setText("*      *      *      *      *       *       Welcome to Ultimate Monopoly       *       *      *      *      *      *");
         txtLog.setEditable(false);
         scrollPane.setViewportView(txtLog);
         
@@ -148,7 +145,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
                     }
                 }
             } else {
-                
                 int[] roll = new Dice().rollWithSpeedDie();
                 
                 int roll1 = roll[0];
