@@ -51,15 +51,15 @@ public class Main {
     private static GetTextInput      temp;
     static Board                     board;
     public static int                pool           = 0, musicID = 2;
-    private static boolean           loadPrevious;
+    private static boolean           loadPrevious = false;
     public static boolean            loadProtection = false;
     private static AudioRunner       musicPlayer;
     
     public static void main(String[] args) {
         changeUITheme();
+        initializeGameSquares();
         initializePlayers();
         initializeDecks();
-        initializeGameSquares();
         initializePlayerNames();
         initializeBoard();
         
