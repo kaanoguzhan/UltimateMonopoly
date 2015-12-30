@@ -264,7 +264,9 @@ public class SaveLoad {
                 String[] currentSquareInfo = squares.getString(i).split(" ");
                 String type = currentSquareInfo[0];
                 int id = Integer.parseInt(currentSquareInfo[1]);
-                p.getOwnership(Main.gameSquares[id]);
+                
+                if(Main.gameSquares[id].getOwner()!= p)
+                	p.getOwnership(Main.gameSquares[id]);
                 
                 switch (type) {
                     case "land":
