@@ -31,6 +31,13 @@ public class TransitStation extends GameSquare implements Ownable {
                 }
                 else
                     System.out.println("You don't have enough money!");
+            }else{
+				Player winner = Auction.auctionProcess(this.price);
+				if(winner !=null)
+					winner.buySquare(this);
+				for(int k =0;k<4;k++){
+					Main.Main.players[k].inAuction = false;
+				}
             }
         } else if (this.owner != pl) {
             if (pl.hasOnlinePricing()) {
