@@ -57,9 +57,9 @@ public class Main {
     
     public static void main(String[] args) {
         changeUITheme();
+        initializeDecks();
         initializeGameSquares();
         initializePlayers();
-        initializeDecks();
         initializePlayerNames();
         initializeBoard();
         
