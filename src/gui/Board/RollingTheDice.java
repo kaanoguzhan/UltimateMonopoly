@@ -22,7 +22,6 @@ import Main.Admin;
 import Main.Main;
 import Main.Player;
 import Main.Properties;
-import javax.swing.ScrollPaneConstants;
 
 public class RollingTheDice extends JPanel implements ActionListener {
     private static final long serialVersionUID = 1L;
@@ -33,6 +32,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
     private int               loadProtectionCounter;
     private static int        turn             = 0;
     private static JTextPane  txtLog;
+    private static JLabel     lblPlayerIcon;
     
     public RollingTheDice() {
         setLayout(null);
@@ -83,15 +83,19 @@ public class RollingTheDice extends JPanel implements ActionListener {
         txtLog.setEditable(false);
         scrollPane.setViewportView(txtLog);
         
+        lblPlayerIcon = new JLabel(" is playing");
+        lblPlayerIcon.setBounds(140, 10, 147, 64);
+        add(lblPlayerIcon);
+        
     }
     public void actionPerformed(ActionEvent arg0) {
         boolean noShares = true;
         for (int a : player.getStocks()) {
             if (a != 0) noShares = false;
-        }        
+        }
         
         btnSell.setEnabled(!(noShares) || !player.getOwnedSquares().isEmpty());
-          
+        
         btnRoll.setEnabled(false);
         if (arg0.getSource() == btnRoll) {
             if (player.isLoseTurn()) {
@@ -325,24 +329,26 @@ public class RollingTheDice extends JPanel implements ActionListener {
     public void loadCurrentPlayer(Player player) {
         this.player = player;
         
-        
         setplayerName(player);
     }
     private void setplayerName(Player player) {
         switch (player.getID()) {
             case 0:
+                lblPlayerIcon.setIcon(Board.zero.getIcon());
                 break;
             case 1:
+                lblPlayerIcon.setIcon(Board.one.getIcon());
                 break;
             case 2:
+                lblPlayerIcon.setIcon(Board.two.getIcon());
                 break;
             case 3:
+                lblPlayerIcon.setIcon(Board.three.getIcon());
                 break;
         }
         PlayerInfo.setActivePlayerCard(player.getID());
         Board.informationTable.validate();
     }
-    
     public boolean[] getButtonEnableds() {
         boolean[] output = { btnRoll.isEnabled(), btnEnd.isEnabled(), btnSell.isEnabled() };
         return output;
