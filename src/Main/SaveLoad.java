@@ -252,6 +252,12 @@ public class SaveLoad {
                 p.addToCardInventory(stringToType(cards.getString(i)));
             }
             
+            JSONArray stocks = o.getJSONArray("stocks");
+            for(int i=0; i<stocks.length();i++){
+            	int stockCount = stocks.getInt(i);
+            	for(int j=0; j<stockCount;i++) p.giveStock(i);
+            }
+            
             
             JSONArray squares = o.getJSONArray("ownedSquares");
             for (int i = 0; i < squares.length(); i++) {
