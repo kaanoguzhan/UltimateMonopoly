@@ -27,7 +27,14 @@ public class Utility extends GameSquare implements Ownable {
                     pl.buySquare(this);
                 } else
                     System.out.println("You don't have enough money!");
-            }
+			} else{
+				Player winner = Auction.auctionProcess(Properties.UTILITY_PRICE);
+				if(winner != null)
+					winner.buySquare(this);
+				for(int k =0;k<4;k++){
+					Main.Main.players[k].inAuction = false;
+				}
+			}
         } else {
             if (this.owner != pl) {
                 int totalRent = amount;
