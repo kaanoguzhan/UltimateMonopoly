@@ -1,6 +1,7 @@
 package GameSquares.Cards.CommunityChestCards;
 
 import gui.AdditionalWindows.MessageDisplayer;
+import gui.Board.RollingTheDice;
 import java.io.Serializable;
 import GameSquares.Cards.CommunityChestCard;
 import Main.Player;
@@ -14,7 +15,9 @@ public class OnlinePricing extends CommunityChestCard implements Serializable {
     
     @Override
     public void onDraw(Player pl) {
-        new MessageDisplayer("You picked Special Online Pricing Card. Next time you land on anyone else's railroad only pay 1/2 the rent.");
+        new MessageDisplayer(
+            "You picked Special Online Pricing Card. Next time you land on anyone else's railroad only pay 1/2 the rent.");
+        RollingTheDice.logContinue("OnlinePricing Card.");
         pl.addToCardInventory(CardType.OnlinePricing);
     }
     

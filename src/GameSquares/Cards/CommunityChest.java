@@ -1,5 +1,6 @@
 package GameSquares.Cards;
 
+import gui.Board.RollingTheDice;
 import GameSquares.GameSquare;
 import Main.Player;
 
@@ -16,6 +17,7 @@ public class CommunityChest extends GameSquare {
     @Override
     public void onArrive(Player pl) {
         CommunityChestCard card = CommunityDeck.draw();
+        RollingTheDice.logAdd(pl.getName() + " moved to CommunityChest Square and picked ");
         card.onDraw(pl);
     }
     

@@ -1,5 +1,6 @@
 package GameSquares.Cards;
 
+import gui.Board.RollingTheDice;
 import GameSquares.GameSquare;
 import Main.Player;
 
@@ -16,6 +17,7 @@ public class Chance extends GameSquare {
     @Override
     public void onArrive(Player pl) {
         ChanceCard card = ChanceDeck.draw();
+        RollingTheDice.logAdd(pl.getName() + " moved to Chance Square and picked ");
         card.onDraw(pl);
     }
     

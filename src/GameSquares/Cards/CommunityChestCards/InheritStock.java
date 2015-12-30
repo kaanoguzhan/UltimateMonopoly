@@ -2,6 +2,7 @@ package GameSquares.Cards.CommunityChestCards;
 
 import gui.AdditionalWindows.MessageDisplayer;
 import gui.AdditionalWindows.StockExcWindow;
+import gui.Board.RollingTheDice;
 import java.io.Serializable;
 import GameSquares.Cards.CommunityChestCard;
 import Main.Player;
@@ -15,7 +16,8 @@ public class InheritStock extends CommunityChestCard implements Serializable {
     
     @Override
     public void onDraw(Player pl) {
-        new MessageDisplayer( "You picked InheritStock Card.");
+        new MessageDisplayer("You picked InheritStock Card.");
+        RollingTheDice.logContinue("InheritStock Card.");
         StockExcWindow ste = new StockExcWindow(pl, 1);
         ste.setVisible(true);
     }

@@ -1,6 +1,7 @@
 package GameSquares.Cards.ChanceCards;
 
 import gui.AdditionalWindows.MessageDisplayer;
+import gui.Board.RollingTheDice;
 import java.io.Serializable;
 import GameSquares.Cards.ChanceCard;
 import Main.Player;
@@ -15,6 +16,7 @@ public class GetOutOfJail extends ChanceCard implements Serializable {
     @Override
     public void onDraw(Player pl) {
         new MessageDisplayer("You picked GetOutOfJail Card.");
+        RollingTheDice.logContinue("GetOutOfJail Card.");
         pl.addToCardInventory(CardType.GetOutOfJail);
     }
     

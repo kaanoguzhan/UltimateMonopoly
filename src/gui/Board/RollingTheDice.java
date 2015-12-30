@@ -104,7 +104,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
         btnRoll.setEnabled(false);
         if (arg0.getSource() == btnRoll) {
             if (player.isLoseTurn()) {
-                RollingTheDice.logAdd("Player:" + player.getName() + " will lose next turn.");
                 btnEnd.setEnabled(true);
                 player.LoseTurn(false);
                 RollingTheDice.logAdd(player.getName() + " lost this one turn.");
@@ -125,6 +124,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
                     if (rollJail1 == rollJail2) {
                         player.getOutOfJail();
                         btnEnd.setEnabled(true);
+                        RollingTheDice.logAdd(player.getName() + " rolled Doubles and got out of Jail.");
                     } else {
                         if (player.hasGetOutOfJail()) {
                             getOutOfJail = new GetYesNoInput("You can use GetOutOfJail Card", "Do you want to use it ?")
@@ -192,6 +192,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
                             even = true;
                         
                         movePlayer(roll1 + roll2);
+                        RollingTheDice.logAdd(player.getName() + " rolled MonopolyGuy.");
                         new gui.AdditionalWindows.MessageDisplayer(" You rolled MonopolyGuy !");
                         
                         if (Admin.allLandsOwned()) {
@@ -207,6 +208,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
                             btnEnd.setEnabled(true);
                         }
                     } else if (Dice.isBus()) {
+                        RollingTheDice.logAdd(player.getName() + " rolled Bus.");
                         new gui.AdditionalWindows.MessageDisplayer(" You rolled Bus !");
                         
                         int option = new GetOneOption(roll1, roll2, roll1 + roll2,
@@ -214,15 +216,12 @@ public class RollingTheDice extends JPanel implements ActionListener {
                         
                         if (option == 0) {
                             movePlayer(roll1);
-                            RollingTheDice.logAdd(player.getName() + " moved " + roll1 + " squares.");
                         }
                         if (option == 1) {
                             movePlayer(roll2);
-                            RollingTheDice.logAdd(player.getName() + " moved " + roll2 + " squares.");
                         }
                         if (option == 2) {
                             movePlayer(roll1 + roll2);
-                            RollingTheDice.logAdd(player.getName() + " moved " + (roll1 + roll2) + " squares.");
                         }
                         if (roll1 != roll2) {
                             btnEnd.setEnabled(true);
@@ -237,7 +236,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
                 if (roll1 == roll2) {
                     if (roll1 == rollSpeed) {
                         new gui.AdditionalWindows.MessageDisplayer("You rolled triples, you can go everywhere you can!");
-                        
                         int moveTo = Integer.MAX_VALUE;
                         while (!((0 <= moveTo) && (moveTo < Main.gameSquares.length)))
                             moveTo = new GetTextInput(
@@ -246,7 +244,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
                         int current = player.getLocation();
                         Admin.movePlayerBy(player.getID(), ((moveTo - current) % 20));
                         RollingTheDice.logAdd(player.getName() + " chose Square " + moveTo);
-                        
                         player.resetDoublesRolled();
                         btnEnd.setEnabled(true);
                     } else {
@@ -255,7 +252,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
                             player.resetDoublesRolled();
                             new gui.AdditionalWindows.MessageDisplayer(
                                 "This is your third doubles, now you will go to jail !");
-                            RollingTheDice.logAdd("Player:" + player.getName() + " goes to Jail.");
                             player.goToJail();
                             RollingTheDice.logAdd(player.getName() + " moved to jail.");
                             btnRoll.setEnabled(false);
@@ -265,6 +261,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
                                 .logAdd("Player:" + player.getName() + " rolled Doubles and will roll again.");
                             if (Dice.isMonopolyGuy()) {
                                 movePlayer(roll1 + roll2);
+                                RollingTheDice.logAdd(player.getName() + " rolled MonopolyGuy.");
                                 new gui.AdditionalWindows.MessageDisplayer(" You rolled MonopolyGuy !");
                                 
                                 boolean even = false;
@@ -283,6 +280,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
                                 new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
                                 btnRoll.setEnabled(true);
                             } else if (Dice.isBus()) {
+                                RollingTheDice.logAdd(player.getName() + " rolled Bus.");
                                 new gui.AdditionalWindows.MessageDisplayer(" You rolled Bus !");
                                 
                                 int option = new GetOneOption(roll1, roll2, roll1 + roll2,
@@ -290,15 +288,13 @@ public class RollingTheDice extends JPanel implements ActionListener {
                                 
                                 if (option == 0) {
                                     movePlayer(roll1);
-                                    RollingTheDice.logAdd(player.getName() + " moved " + roll1 + " squares.");
                                 }
                                 if (option == 1) {
                                     movePlayer(roll2);
-                                    RollingTheDice.logAdd(player.getName() + " moved " + roll2 + " squares.");
+                                    
                                 }
                                 if (option == 2) {
                                     movePlayer(roll1 + roll2);
-                                    RollingTheDice.logAdd(player.getName() + " moved " + (roll1 + roll2) + " squares.");
                                 }
                                 new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
                                 btnRoll.setEnabled(true);
@@ -317,7 +313,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
             btnEnd.requestFocus();
         } else if (arg0.getSource() == btnEnd) {
             Main.endRound();
-            whichPlayer.setText(player.getName() + " has ended his/her turn. Now its "
+            RollingTheDice.logAdd(player.getName() + " has ended his/her turn. Now its "
                 + Admin.getNextPlayerName(player.getID()) + "'s turn.");
             whichPlayer.setBounds(140, 35, ((int) whichPlayer.getPreferredSize().getWidth()), ((int) whichPlayer
                 .getPreferredSize().getHeight()));
@@ -340,6 +336,8 @@ public class RollingTheDice extends JPanel implements ActionListener {
     
     private void movePlayer(int amount) {
         player.moveBy(amount);
+        RollingTheDice.logAdd(player.getName() + " moved " + amount + " squares and now at Square "
+            + player.getLocation());
     }
     
     public void setCurrentPlayer(Player player) {
@@ -403,6 +401,9 @@ public class RollingTheDice extends JPanel implements ActionListener {
     
     public static void logAdd(String text) {
         txtLog.setText(txtLog.getText() + "\n" + text);;
+    }
+    public static void logContinue(String text) {
+        txtLog.setText(txtLog.getText() + text);;
     }
     public static void logEndTurn() {
         txtLog.setText(txtLog.getText() + "\n" + "   -   -   -   -   -   -   -   " + "End of turn " + turn++

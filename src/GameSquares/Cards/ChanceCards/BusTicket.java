@@ -2,6 +2,7 @@ package GameSquares.Cards.ChanceCards;
 
 import gui.AdditionalWindows.MessageDisplayer;
 import gui.AdditionalWindows.InputReaders.GetTextInput;
+import gui.Board.RollingTheDice;
 import java.io.Serializable;
 import GameSquares.Cards.ChanceCard;
 import Main.Player;
@@ -18,6 +19,7 @@ public class BusTicket extends ChanceCard implements Serializable {
     @Override
     public void onDraw(Player pl) {
         new MessageDisplayer("You picked BusTicket Card.");
+        RollingTheDice.logContinue("Bus Ticket.");
         for (CardType c : pl.getCardsInventory()) {
             if (c.isChanceCard())
                 pl.getCardsInventory().remove(c);

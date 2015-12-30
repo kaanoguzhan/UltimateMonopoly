@@ -6,6 +6,7 @@ import GameSquares.Cards.ChanceCards.BusTicket;
 import GameSquares.Cards.ChanceCards.ChangingLanes;
 import GameSquares.Cards.ChanceCards.EntertainmentRocks;
 import GameSquares.Cards.ChanceCards.GetOutOfJail;
+import GameSquares.Cards.ChanceCards.GoToJail;
 import Main.Player;
 
 public class ChanceDeck implements Serializable, Deck {
@@ -21,7 +22,7 @@ public class ChanceDeck implements Serializable, Deck {
                 // new ElectedAsChairPerson(players),
                 // new GeneralRepairs(),
                 new GetOutOfJail(),
-                // new GoToJail(),
+                new GoToJail(),
                 // new SchoolFees(), new ThreeSpacesBack(),
                 // new Hurricane(), new MargiGras(), new PropertyTaxes(),
                 new BusTicket(),

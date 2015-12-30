@@ -18,6 +18,7 @@ public class EntertainmentRocks extends ChanceCard implements Serializable {
     @Override
     public void onDraw(Player pl) {
         new MessageDisplayer("You picked EntertainmentRocks Card.");
+        RollingTheDice.logContinue("EntertainmentRocks Card.");
         String div = "";
         for (Player player : Main.players) {
             int divident = (int) (((stockType.GeneralRadIO.getPrice() / 10) * (Math.pow(2.5,
