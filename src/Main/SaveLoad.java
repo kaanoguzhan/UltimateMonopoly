@@ -41,51 +41,41 @@ public class SaveLoad {
             loadByte();
     }
     
-    private static Player setPlayerAttr(int playerID, JSONObject o) {
-        Player p = null;
-        try {
-            p = new Player(playerID, o.getString("name"), o.getInt("money"), o.getInt("location"), Main.gameSquares);
-            p.setId(o.getInt("id"));
-            p.setJailTime(o.getInt("jailTime"));
-            p.setJailed(o.getBoolean("jailed"));
-            
-            JSONArray cards = o.getJSONArray("cardInventory");
-            for (int i = 0; i < cards.length(); i++) {
-                p.addToCardInventory(stringToType(cards.getString(i)));
-            }
-            
-            
-            JSONArray squares = o.getJSONArray("ownedSquares");
-            for (int i = 0; i < squares.length(); i++) {
-                String[] currentSquareInfo = squares.getString(i).split(" ");
-                String type = currentSquareInfo[0];
-                int id = Integer.parseInt(currentSquareInfo[1]);
-                p.getOwnership(Main.gameSquares[id]);
-                
-                switch (type) {
-                    case "land":
-                        ((Land) Main.gameSquares[id]).setState(stringToState(currentSquareInfo[2]));
-                        break;
-                    case "transtation":
-                        ((TransitStation) Main.gameSquares[id]).setDepotCount(Integer.parseInt(currentSquareInfo[2]));
-                        break;
-                    case "utility":
-                        if (currentSquareInfo[2].equals("morgaged"))
-                            ((Utility) Main.gameSquares[id]).setMortgage(true);
-                        break;
-                    case "cab":
-                        ((Cab) Main.gameSquares[id]).setStanded(Boolean.getBoolean(currentSquareInfo[2]));
-                        ((Cab) Main.gameSquares[id]).setMortgage(Boolean.getBoolean(currentSquareInfo[3]));
-                        break;
-                }
-                
-            }
-            
-            o.getJSONArray("stocks");
-        } catch (JSONException e) {
-            e.printStackTrace();
+    private static String squareInfo(Ownable current) {
+        String condition = "-----";
+        if (current instanceof Land) {
+            condition = "land " + current.getID() + " " + ((Land) current).getState().toString();
         }
-        return p;
+        if (current instanceof TransitStation) {
+            condition = "transitstation " + current.getID() + " " +
+                ((TransitStation) current).getDepotCount();
+        }
+        if (current instanceof Utility) {
+            if (((Utility) current).isMortgaged())
+                condition = "mortgaged";
+            else
+                condition = "unmortgaged";
+            condition = "utility " + current.getID() + " " + condition;
+        }
+        if (current instanceof Cab) {
+            condition = "cab " + current.getID() + " " + ((Cab) current).isMortgaged()
+                + " " + ((Cab) current).standed();
+        }
+        return condition;
+    }
+    
+    private static CardType stringToType(String s) {
+        for (int i = 0; i < CardType.values().length; i++) {
+            if (s.equals(CardType.values()[i].toString())) return CardType.values()[i];
+        }
+        return null;
+    }
+    
+    private static state stringToState(String s) {
+        for (int i = 0; i < state.values().length; i++) {
+            if (s.equals(state.values()[i].toString())) return state.values()[i];
+        }
+        return null;
     }
     
     private static JSONObject createPlayerJSON(Player player) {
@@ -124,45 +114,6 @@ public class SaveLoad {
         
         return jp;
     }
-    
-    private static String squareInfo(Ownable current) {
-        String condition = "-----";
-        if (current instanceof Land) {
-            condition = "land " + current.getID() + " " + ((Land) current).getState().toString();
-        }
-        if (current instanceof TransitStation) {
-            condition = "transitstation " + current.getID() + " " +
-                ((TransitStation) current).getDepotCount();
-        }
-        if (current instanceof Utility) {
-            if (((Utility) current).isMortgaged())
-                condition = "mortgaged";
-            else
-                condition = "unmortgaged";
-            condition = "utility " + current.getID() + " " + condition;
-        }
-        if (current instanceof Cab) {
-            condition = "cab " + current.getID() + " " + ((Cab) current).isMortgaged()
-                + " " + ((Cab) current).standed();
-        }
-        return condition;
-    }
-    
-    private static CardType stringToType(String s) {
-        for (int i = 0; i < CardType.values().length; i++) {
-            if (s.equals(CardType.values()[i].toString())) return CardType.values()[i];
-        }
-        return null;
-    }
-    
-    private static state stringToState(String s) {
-        for (int i = 0; i < state.values().length; i++) {
-            if (s.equals(state.values()[i].toString())) return state.values()[i];
-        }
-        return null;
-    }
-    
-    // / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / //
     
     private static void saveJSON() {
         try {
@@ -239,10 +190,10 @@ public class SaveLoad {
             Main.players = gamePlayers;
             
             boolean[] buttons = { enabledButtons.getBoolean("rollButton"),
-                    enabledButtons.getBoolean("rollButton"),
-                    enabledButtons.getBoolean("rollButton") };
+                    enabledButtons.getBoolean("endButton"),
+                    enabledButtons.getBoolean("sellButton") };
             Main.board.round.setButtonEnableds(buttons);
-            
+
             PlayerInfo.refreshData();
             Main.board.initiateLoadProtection();
             
@@ -285,5 +236,53 @@ public class SaveLoad {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace(System.out);
         }
+    }
+    
+    
+    private static Player setPlayerAttr(int playerID, JSONObject o) {
+        Player p = null;
+        try {
+            p = new Player(playerID, o.getString("name"), o.getInt("money"), o.getInt("location"), Main.gameSquares);
+            p.setId(o.getInt("id"));
+            p.setJailTime(o.getInt("jailTime"));
+            p.setJailed(o.getBoolean("jailed"));
+            
+            JSONArray cards = o.getJSONArray("cardInventory");
+            for (int i = 0; i < cards.length(); i++) {
+                p.addToCardInventory(stringToType(cards.getString(i)));
+            }
+            
+            
+            JSONArray squares = o.getJSONArray("ownedSquares");
+            for (int i = 0; i < squares.length(); i++) {
+                String[] currentSquareInfo = squares.getString(i).split(" ");
+                String type = currentSquareInfo[0];
+                int id = Integer.parseInt(currentSquareInfo[1]);
+                p.getOwnership(Main.gameSquares[id]);
+                
+                switch (type) {
+                    case "land":
+                        ((Land) Main.gameSquares[id]).setState(stringToState(currentSquareInfo[2]));
+                        break;
+                    case "transtation":
+                        ((TransitStation) Main.gameSquares[id]).setDepotCount(Integer.parseInt(currentSquareInfo[2]));
+                        break;
+                    case "utility":
+                        if (currentSquareInfo[2].equals("morgaged"))
+                            ((Utility) Main.gameSquares[id]).setMortgage(true);
+                        break;
+                    case "cab":
+                        ((Cab) Main.gameSquares[id]).setStanded(Boolean.getBoolean(currentSquareInfo[2]));
+                        ((Cab) Main.gameSquares[id]).setMortgage(Boolean.getBoolean(currentSquareInfo[3]));
+                        break;
+                }
+                
+            }
+            
+            o.getJSONArray("stocks");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return p;
     }
 }
