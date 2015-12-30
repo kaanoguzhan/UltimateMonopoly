@@ -26,10 +26,8 @@ public class TransitStation extends GameSquare implements Ownable {
             boolean buy = new GetYesNoInput("For " + price + " dollars", "Would you like to buy " + name + "Railroad ?")
                 .getValue();
             if (buy) {
-                if (pl.getMoney() >= price) {
-                    
+                if (pl.getMoney() >= price) {                  
                     pl.buySquare(this);
-                    pl.buySquare(Main.Main.gameSquares[connectedTransit]);
                 }
                 else
                     System.out.println("You don't have enough money!");
