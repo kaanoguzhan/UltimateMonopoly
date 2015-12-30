@@ -1,5 +1,6 @@
 package GameSquares.Taxes;
 
+import gui.Board.RollingTheDice;
 import GameSquares.GameSquare;
 import Main.Player;
 import Main.Properties;
@@ -13,6 +14,7 @@ public class LuxuryTax extends GameSquare {
     
     @Override
     public void onArrive(Player pl) {
+        RollingTheDice.logAdd(pl.getName() + " moved to " + toString());
         pl.payToPool(Properties.LUXURYTAX_AMOUNT);
         System.out.println("Player " + pl.getName() + " payed " + Integer.toString(Properties.LUXURYTAX_AMOUNT)
             + " as luxury tax");
