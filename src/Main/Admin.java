@@ -293,12 +293,17 @@ public class Admin extends Main {
             for (GameSquare tempgsq : Main.gameSquares)
                 if (tempgsq instanceof Ownable && ((Ownable) tempgsq).getName().equals(gameSquare))
                     return (GameSquare) tempgsq;
+                else if (((String) gameSquare).length() > 7 && ((String) gameSquare).substring(0, 6).equals("Chance"))
+                    return Main.gameSquares[Integer.parseInt(((String) gameSquare).substring(7, ((String) gameSquare).length()))];
+                else if (((String) gameSquare).length() > 15 && ((String) gameSquare).substring(0, 14).equals("CommunityChest"))
+                    return Main.gameSquares[Integer.parseInt(((String) gameSquare).substring(15, ((String) gameSquare).length()))];
+                else if (((String) gameSquare).length() > 4 && ((String) gameSquare).substring(0, 3).equals("Cab"))
+                    return Main.gameSquares[Integer.parseInt(((String) gameSquare).substring(4, ((String) gameSquare).length()))];
                 else if (tempgsq.getType().equals(gameSquare))
                     return tempgsq;
         }
         return gsq;
     }
-    
     private static <T> Ownable findOwnable(T ownable) {
         Ownable ownbl = null;
         if (ownable instanceof Ownable)

@@ -15,9 +15,13 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
+import GameSquares.Cab;
 import GameSquares.GameSquare;
 import GameSquares.Land;
 import GameSquares.Ownable;
+import GameSquares.TransitStation;
+import GameSquares.Cards.Chance;
+import GameSquares.Cards.CommunityChest;
 import Main.Admin;
 import Main.Main;
 
@@ -166,7 +170,12 @@ public class PlayerPanel extends JPanel {
         ArrayList<String> sqNames = new ArrayList<String>();
         if (Main.gameSquares != null)
             for (GameSquare gsq : Main.gameSquares) {
-                sqNames.add(gsq instanceof Land ? ((Land) gsq).getName() : gsq.getType() + "");
+                if (gsq instanceof Land || gsq instanceof TransitStation)
+                    sqNames.add(((Ownable) gsq).getName());
+                else if (gsq instanceof Chance || gsq instanceof CommunityChest || gsq instanceof Cab)
+                    sqNames.add(gsq.getType() + " " + gsq.getID());
+                else
+                    sqNames.add(gsq.getType() + "");
             }
         else
             choice.add("...");
@@ -186,7 +195,6 @@ public class PlayerPanel extends JPanel {
         for (String nextName : gsqNames) {
             choice.add(nextName);
         }
-        
     }
     private void fillOwnLands(Choice choice, int playerID) {
         ArrayList<String> gsqNames = new ArrayList<String>();
