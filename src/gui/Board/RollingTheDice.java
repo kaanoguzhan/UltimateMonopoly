@@ -384,6 +384,9 @@ public class RollingTheDice extends JPanel implements ActionListener {
     public static String getLog(){
     	return txtLog.toString();
     }
+    public static void setLog(String s){
+    	txtLog.setText(s);
+    }
     public static void logAdd(String text) {
         txtLog.setText(txtLog.getText() + "\n" + text);;
     }

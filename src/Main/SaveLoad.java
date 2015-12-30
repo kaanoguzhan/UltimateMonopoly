@@ -221,7 +221,7 @@ public class SaveLoad {
             
             Main.musicID = musicId;
             RollingTheDice.setTurn(turn);
-            RollingTheDice.logAdd(log);
+            RollingTheDice.setLog(log);
 
             PlayerInfo.refreshData();
             Main.board.initiateLoadProtection();
