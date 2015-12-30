@@ -131,7 +131,7 @@ public class Player implements Serializable {
         location = nextLocation - 1;
         System.out.println(name + " moved " + amount + " squares and now is at " + gameSquares[location].toString()
             + "\n You have: " + money);
-        RollingTheDice.logAdd(" and moved " + amount + " squares and now is at " + gameSquares[location].toString());
+        RollingTheDice.logContinue(" and moved " + amount + " squares and now is at " + gameSquares[location].toString());
         if (!testing)
             if (gameSquares[location] instanceof Utility)
                 ((Utility) gameSquares[location]).onArrive(this, amount);
