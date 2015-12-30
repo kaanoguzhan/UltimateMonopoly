@@ -1,6 +1,7 @@
 package GameSquares;
 
 import gui.Dice;
+import gui.Board.RollingTheDice;
 import java.awt.Dialog;
 import javax.swing.JDialog;
 import javax.swing.WindowConstants;
@@ -19,6 +20,7 @@ public class RollOnce extends GameSquare {
     
     @Override
     public void onArrive(Player pl) {
+        RollingTheDice.logAdd(pl.getName() + " moved to " + toString());
         gui.AdditionalWindows.RollOnce a = new gui.AdditionalWindows.RollOnce(pl);
         JDialog r = new JDialog(null, "Roll Once", Dialog.ModalityType.APPLICATION_MODAL);
         a.setBounds(0, 0, 250, 250);

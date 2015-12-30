@@ -1,5 +1,6 @@
 package GameSquares;
 
+import gui.Board.RollingTheDice;
 import Main.Player;
 
 public class ReverseDirection extends GameSquare {
@@ -11,7 +12,7 @@ public class ReverseDirection extends GameSquare {
     
     @Override
     public void onArrive(Player pl) {
-        // TODO Auto-generated method stub
+        RollingTheDice.logAdd(pl.getName() + " moved to " + toString());
         
     }
     

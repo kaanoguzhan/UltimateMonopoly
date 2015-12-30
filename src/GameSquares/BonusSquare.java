@@ -1,5 +1,6 @@
 package GameSquares;
 
+import gui.Board.RollingTheDice;
 import Main.Player;
 
 public class BonusSquare extends GameSquare {
@@ -12,6 +13,7 @@ public class BonusSquare extends GameSquare {
     
     @Override
     public void onArrive(Player pl) {
+        RollingTheDice.logAdd(pl.getName() + " moved to " + toString());
         new gui.AdditionalWindows.MessageDisplayer("You are at Bonus Square. You will collect $300.");
         pl.addMoney(bonusMoney);
     }

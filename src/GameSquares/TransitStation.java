@@ -1,6 +1,7 @@
 package GameSquares;
 
 import gui.AdditionalWindows.InputReaders.GetYesNoInput;
+import gui.Board.RollingTheDice;
 import Main.Player;
 import Main.Properties;
 
@@ -22,6 +23,7 @@ public class TransitStation extends GameSquare implements Ownable {
     
     @Override
     public void onArrive(Player pl) {
+        RollingTheDice.logAdd(pl.getName() + " moved to " + toString());
         if (this.owner == null) {
             boolean buy = new GetYesNoInput("For " + price + " dollars", "Would you like to buy " + name + "Railroad ?")
                 .getValue();

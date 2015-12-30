@@ -1,5 +1,6 @@
 package GameSquares;
 
+import gui.Board.RollingTheDice;
 import Main.Player;
 
 public class StartSquare extends GameSquare {
@@ -12,6 +13,7 @@ public class StartSquare extends GameSquare {
     @Override
     public void onArrive(Player pl) {
         // Start Square does nothing!
+        RollingTheDice.logAdd(pl.getName() + " moved to " + toString());
     }
     
     @Override

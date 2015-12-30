@@ -132,12 +132,12 @@ public class Player implements Serializable {
         System.out.println(name + " moved " + amount + " squares and now is at " + gameSquares[location].toString()
             + "\n You have: " + money);
         if (!testing)
-            if (gameSquares[location] instanceof Utility)
+            if (gameSquares[location] instanceof Utility) {
                 ((Utility) gameSquares[location]).onArrive(this, amount);
+            }
             else
                 gameSquares[location].onArrive(this);
     }
-    
     /** @param id
      * @requires number of game squares is greater than id is greater than or equal to 0
      * @modifies this

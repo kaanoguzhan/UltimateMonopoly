@@ -1,5 +1,6 @@
 package GameSquares;
 
+import gui.Board.RollingTheDice;
 import Main.Player;
 
 public class GoToJail extends GameSquare {
@@ -12,6 +13,7 @@ public class GoToJail extends GameSquare {
     
     @Override
     public void onArrive(Player pl) {
+        RollingTheDice.logAdd(pl.getName() + " moved to " + toString());
         System.out.println("Player:" + pl.getName() + " is now going to jail.");
         pl.goToJail();
     }

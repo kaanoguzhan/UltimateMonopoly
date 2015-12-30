@@ -16,6 +16,7 @@ public class BirthdayGiftSquare extends GameSquare {
     
     @Override
     public void onArrive(Player pl) {
+        RollingTheDice.logAdd(pl.getName() + " moved to " + toString());
         boolean birthdayGiftChoice = new GetYesNoInput("You can get " + giftMoney + "$ or go to the nearest cab",
             "Do you want get the " + giftMoney + "$?").getValue();
         

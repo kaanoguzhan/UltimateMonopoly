@@ -1,6 +1,7 @@
 package GameSquares;
 
 import gui.AdditionalWindows.InputReaders.GetYesNoInput;
+import gui.Board.RollingTheDice;
 import Main.Player;
 
 public class Jail extends GameSquare {
@@ -15,6 +16,7 @@ public class Jail extends GameSquare {
     
     @Override
     public void onArrive(Player pl) {
+        RollingTheDice.logAdd(pl.getName() + " moved to Jail.");
         if (pl.isJailed()) {
             if (pl.hasGetOutOfJail()) {
                 getOutOfJail = new GetYesNoInput("You can use GetOutOfJail Card", "Do you want to use it ?").getValue();

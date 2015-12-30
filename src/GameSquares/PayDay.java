@@ -1,5 +1,6 @@
 package GameSquares;
 
+import gui.Board.RollingTheDice;
 import Main.Player;
 
 public class PayDay extends GameSquare {
@@ -12,6 +13,7 @@ public class PayDay extends GameSquare {
     @Override
     public void onArrive(Player pl) {
         // Nothing to do, you only get money if you pass...
+        RollingTheDice.logAdd(pl.getName() + " moved to " + toString());
     }
     
     @Override

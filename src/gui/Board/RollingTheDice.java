@@ -312,13 +312,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
     }
     
     private void movePlayer(int amount) {
-        GameSquare crrtSquare = Main.gameSquares[player.getLocation() + amount];
-        if (crrtSquare instanceof Land)
-            RollingTheDice.logAdd(player.getName() + " moved " + amount + " squares and now at "
-                + ((Land) crrtSquare).getName());
-        else
-            RollingTheDice.logAdd(player.getName() + " moved " + amount + " squares and now at "
-                + crrtSquare.getType());
         player.moveBy(amount);
         
     }

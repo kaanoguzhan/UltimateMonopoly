@@ -15,6 +15,7 @@ public class Auction extends GameSquare {
     
     @Override
     public void onArrive(Player pl) {
+        RollingTheDice.logAdd(pl.getName() + " moved to " + toString());
         GameSquare sq = null;
         int id = 0;
         if (unOwnedPropertyLeft()) {

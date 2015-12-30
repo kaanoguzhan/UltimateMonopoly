@@ -2,6 +2,7 @@ package GameSquares;
 
 import gui.AdditionalWindows.MessageDisplayer;
 import gui.AdditionalWindows.InputReaders.GetYesNoInput;
+import gui.Board.RollingTheDice;
 import Main.Player;
 import Main.Properties;
 
@@ -17,6 +18,7 @@ public class Utility extends GameSquare implements Ownable {
     }
     
     public void onArrive(Player pl, int amount) {
+        RollingTheDice.logAdd(pl.getName() + " moved to " + toString());
         if (this.owner == null) {
             boolean buy = new GetYesNoInput("For " + Properties.UTILITY_PRICE + " dollars", "Would you like to buy "
                 + name + " ?")

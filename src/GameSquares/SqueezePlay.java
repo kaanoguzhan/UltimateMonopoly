@@ -1,6 +1,7 @@
 package GameSquares;
 
 import gui.Dice;
+import gui.Board.RollingTheDice;
 import java.awt.Dialog;
 import javax.swing.JDialog;
 import javax.swing.WindowConstants;
@@ -19,6 +20,7 @@ public class SqueezePlay extends GameSquare {
     
     @Override
     public void onArrive(Player pl) {
+        RollingTheDice.logAdd(pl.getName() + " moved to " + toString());
         gui.AdditionalWindows.SqueezePlay a = new gui.AdditionalWindows.SqueezePlay(pl);
         JDialog r = new JDialog(null, "Squeeze Play", Dialog.ModalityType.APPLICATION_MODAL);
         r.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);

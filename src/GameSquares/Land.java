@@ -57,6 +57,7 @@ public class Land extends GameSquare implements Ownable {
      * @requires */
     @Override
     public void onArrive(Player pl) {
+        RollingTheDice.logAdd(pl.getName() + " moved to " + toString());
         if (this.owner == null) {
             boolean buy = new GetYesNoInput("For " + price + " dollars", "Would you like to buy " + name + " ?")
                 .getValue();

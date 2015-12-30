@@ -1,5 +1,6 @@
 package GameSquares;
 
+import gui.Board.RollingTheDice;
 import Main.Player;
 
 public class FreePark extends GameSquare {
@@ -12,7 +13,7 @@ public class FreePark extends GameSquare {
     @Override
     public void onArrive(Player pl) {
         // Do nothing, its FreePark and therefore is totally FREE!!!
-        
+        RollingTheDice.logAdd(pl.getName() + " moved to " + toString());
     }
     
     @Override

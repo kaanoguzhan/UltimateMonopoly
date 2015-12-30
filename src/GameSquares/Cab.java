@@ -3,6 +3,7 @@ package GameSquares;
 import gui.AdditionalWindows.MessageDisplayer;
 import gui.AdditionalWindows.InputReaders.GetTextInput;
 import gui.AdditionalWindows.InputReaders.GetYesNoInput;
+import gui.Board.RollingTheDice;
 import Main.Player;
 import Main.Properties;
 
@@ -23,6 +24,7 @@ public class Cab extends GameSquare implements Ownable {
     
     @Override
     public void onArrive(Player pl) {
+        RollingTheDice.logAdd(pl.getName() + " moved to " + toString());
         if (this.owner == null) {
             boolean buy = new GetYesNoInput("For " + price + " dollars", "Would you like to buy " + name + " ?")
                 .getValue();
@@ -31,15 +33,15 @@ public class Cab extends GameSquare implements Ownable {
                     pl.buySquare(this);
                 else
                     System.out.println("You don't have enough money!");
-			} else{
-
-				Player winner = Auction.auctionProcess(this.price);
-				if(winner !=null)
-					winner.buySquare(this);
-				for(int k =0;k<4;k++){
-					Main.Main.players[k].inAuction = false;
-				}
-			}
+            } else {
+                
+                Player winner = Auction.auctionProcess(this.price);
+                if (winner != null)
+                    winner.buySquare(this);
+                for (int k = 0; k < 4; k++) {
+                    Main.Main.players[k].inAuction = false;
+                }
+            }
         } else if (this.owner != pl) {
             if (cabStand)
                 pl.pay(this.getOwner(), 2 * rideCost);
@@ -151,12 +153,12 @@ public class Cab extends GameSquare implements Ownable {
             return false;
     }
     
-    public void setStanded(boolean val){
-    	cabStand = val;
+    public void setStanded(boolean val) {
+        cabStand = val;
     }
     
-    public void setMortgage(boolean val){
-    	mortgaged = val;
+    public void setMortgage(boolean val) {
+        mortgaged = val;
     }
     @Override
     public String toString() {

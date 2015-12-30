@@ -1,5 +1,6 @@
 package GameSquares;
 
+import gui.Board.RollingTheDice;
 import Main.Admin;
 import Main.Player;
 
@@ -14,6 +15,7 @@ public class HollandTunnel extends GameSquare {
     
     @Override
     public void onArrive(Player pl) {
+        RollingTheDice.logAdd(pl.getName() + " moved to " + toString());
         Admin.movePlayerToForced(pl, connectedTunnelID);
     }
     

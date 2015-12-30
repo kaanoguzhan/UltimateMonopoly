@@ -54,6 +54,7 @@ public class StockExchange extends GameSquare {
     
     @Override
     public void onArrive(Player pl) {
+        RollingTheDice.logAdd(pl.getName() + " moved to " + toString());
         StockExcWindow ste = new StockExcWindow(pl);
         ste.setVisible(true);
         
