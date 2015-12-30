@@ -62,7 +62,6 @@ public class Main {
         initializeGameSquares();
         initializePlayerNames();
         initializeBoard();
-        startMusic();
         
         startMusic();
         
