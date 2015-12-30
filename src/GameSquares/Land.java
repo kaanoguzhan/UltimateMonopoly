@@ -75,7 +75,7 @@ public class Land extends GameSquare implements Ownable {
                     pl.buySquare(this);
                     this.price = tempPrice;
                     
-                    RollingTheDice.logAdd("Player bought " + this.name + ". Player has "
+                    RollingTheDice.logAdd(pl.getName() + " bought " + this.name + " and has "
                         + pl.getNumberOfOwnedByColor(this.color) + " of this color");
                     System.out.println("Player bought " + this.name + ". Player has "
                         + pl.getNumberOfOwnedByColor(this.color) + " of this color");
@@ -360,7 +360,7 @@ public class Land extends GameSquare implements Ownable {
      * @modifies owner
      * @effects owner sells the square */
     public void sell() {
-    	RollingTheDice.logAdd(owner.getName() + " sold " + this.name);
+        RollingTheDice.logAdd(owner.getName() + " sold " + this.name);
         this.owner.sellSquare(this);
         
     }

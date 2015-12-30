@@ -192,7 +192,7 @@ public class Player implements Serializable {
         reduceMoney(amount);
         Main.pool += amount;
         System.out.println("pool has " + Main.pool);
-        RollingTheDice.logAdd("pool has now " + Main.pool);
+        RollingTheDice.logAdd(name + " paid " + amount + " to the pool.");
     }
     
     /** @modifies this, Main
@@ -201,8 +201,7 @@ public class Player implements Serializable {
         addMoney(Main.pool * Properties.TAX_REFUND_PERCENT / 100);
         Main.pool = Main.pool * (100 - Properties.TAX_REFUND_PERCENT) / 100;
         System.out.println("pool has " + Main.pool);
-        RollingTheDice.logAdd(name + " got " + (Main.pool * Properties.TAX_REFUND_PERCENT / 100) + ". Pool has now "
-            + Main.pool);
+        RollingTheDice.logAdd(name + " got " + (Main.pool * Properties.TAX_REFUND_PERCENT / 100) + " from the pool.");
     }
     
     /** @param player
