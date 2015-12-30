@@ -93,8 +93,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent arg0) {
         boolean noShares = true;
         for (int a : player.getStocks()) {
-            if (a != 0)
-                noShares = false;
+            if (a != 0) noShares = false;
         }
         
         btnSell.setEnabled(!(noShares) || !player.getOwnedSquares().isEmpty());
@@ -128,16 +127,13 @@ public class RollingTheDice extends JPanel implements ActionListener {
                         btnEnd.setEnabled(true);
                         RollingTheDice.logAdd(player.getName() + " rolled Doubles and got out of Jail.");
                     } else {
-                        if (player.hasGetOutOfJail()) {
-                            getOutOfJail = new GetYesNoInput("You can use GetOutOfJail Card", "Do you want to use it ?")
-                                .getValue();
-                        }
-                        if (getOutOfJail) {
+                        if (player.hasGetOutOfJail()) getOutOfJail = new GetYesNoInput("You can use GetOutOfJail Card", "Do you want to use it ?").getValue();
+                        
+                        if (getOutOfJail)
                             player.removeGetOutOfJailCard();
-                        } else if (getOutOfJail = new GetYesNoInput("By paying $50 fee you can get out of jail",
-                            "Do you want to pay ?").getValue()) {
+                        else if (getOutOfJail = new GetYesNoInput("By paying $50 fee you can get out of jail", "Do you want to pay ?").getValue())
                             player.payToPool(50);
-                        }
+                        
                         if (getOutOfJail) {
                             player.getOutOfJail();
                             RollingTheDice.logAdd("Player:" + player.getName() + " is released from jail, next round "
@@ -190,8 +186,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
                     if (Dice.isMonopolyGuy()) {
                         
                         boolean even = false;
-                        if ((roll1 + roll2) % 2 == 0)
-                            even = true;
+                        if ((roll1 + roll2) % 2 == 0) even = true;
                         
                         movePlayer(roll1 + roll2);
                         RollingTheDice.logAdd(player.getName() + " rolled MonopolyGuy.");
@@ -201,10 +196,9 @@ public class RollingTheDice extends JPanel implements ActionListener {
                             Admin.movePlayerToNextLand(player.getID(), even);
                             RollingTheDice.logAdd("All lands are owned.");
                         }
-                        else {
+                        else
                             Admin.movePlayerToNextNeutralLand(player.getID(), even);
-                            RollingTheDice.logAdd("There are neutral lands.");
-                        }
+                        
                         if (roll1 != roll2) {
                             player.resetDoublesRolled();
                             btnEnd.setEnabled(true);
@@ -216,15 +210,10 @@ public class RollingTheDice extends JPanel implements ActionListener {
                         int option = new GetOneOption(roll1, roll2, roll1 + roll2,
                             "How many squares would you like to move?").getResponse();
                         
-                        if (option == 0) {
-                            movePlayer(roll1);
-                        }
-                        if (option == 1) {
-                            movePlayer(roll2);
-                        }
-                        if (option == 2) {
-                            movePlayer(roll1 + roll2);
-                        }
+                        if (option == 0) movePlayer(roll1);
+                        if (option == 1) movePlayer(roll2);
+                        if (option == 2) movePlayer(roll1 + roll2);
+                        
                         if (roll1 != roll2) {
                             btnEnd.setEnabled(true);
                             player.resetDoublesRolled();
@@ -267,18 +256,14 @@ public class RollingTheDice extends JPanel implements ActionListener {
                                 new gui.AdditionalWindows.MessageDisplayer(" You rolled MonopolyGuy !");
                                 
                                 boolean even = false;
-                                if ((roll1 + roll2) % 2 == 0)
-                                    even = true;
-                                
+                                if ((roll1 + roll2) % 2 == 0) even = true;
                                 if (Admin.allLandsOwned()) {
                                     Admin.movePlayerToNextLand(player.getID(), even);
                                     RollingTheDice.logAdd("All lands are owned.");
                                 }
                                 else
-                                {
                                     Admin.movePlayerToNextNeutralLand(player.getID(), even);
-                                    RollingTheDice.logAdd("There are neutral lands.");
-                                }
+                                
                                 new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
                                 btnRoll.setEnabled(true);
                             } else if (Dice.isBus()) {
@@ -288,16 +273,10 @@ public class RollingTheDice extends JPanel implements ActionListener {
                                 int option = new GetOneOption(roll1, roll2, roll1 + roll2,
                                     "How many squares would you like to move?").getResponse();
                                 
-                                if (option == 0) {
-                                    movePlayer(roll1);
-                                }
-                                if (option == 1) {
-                                    movePlayer(roll2);
-                                    
-                                }
-                                if (option == 2) {
-                                    movePlayer(roll1 + roll2);
-                                }
+                                if (option == 0) movePlayer(roll1);
+                                if (option == 1) movePlayer(roll2);
+                                if (option == 2) movePlayer(roll1 + roll2);
+                                
                                 new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
                                 btnRoll.setEnabled(true);
                             } else {
