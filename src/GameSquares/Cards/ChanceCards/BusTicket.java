@@ -53,17 +53,15 @@ public class BusTicket extends ChanceCard implements Serializable {
             sideEnd = 114;
         }
         if (trackStart == null) {
-            new gui.AdditionalWindows.MessageDisplayer("You are at Square " + pl.getLocation()
-                + ". You can go to Square " + sideStart + "-" + sideEnd);
             moveTo = -1;
             while (!(moveTo >= sideStart && moveTo <= sideEnd))
-                moveTo = new GetTextInput("Enter the square you want to go!").getInt();
+                moveTo = new GetTextInput("You are at Square " + pl.getLocation()
+                + ". You can go to Square " + sideStart + "-" + sideEnd).getInt();
         } else {
-            new gui.AdditionalWindows.MessageDisplayer("You are at Square " + pl.getLocation()
-                + ". You can go to Square " + sideStart + "-" + sideEnd + " and " + trackStart);
             moveTo = -1;
             while (!(moveTo >= sideStart && moveTo <= sideEnd) || moveTo != trackStart)
-                moveTo = new GetTextInput("Enter the square you want to go!").getInt();
+                moveTo = new GetTextInput("You are at Square " + pl.getLocation()
+                + ". You can go to Square " + sideStart + "-" + sideEnd).getInt();
         }
         pl.moveTo(moveTo);
     }
