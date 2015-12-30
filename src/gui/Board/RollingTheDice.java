@@ -79,7 +79,8 @@ public class RollingTheDice extends JPanel implements ActionListener {
         add(scrollPane);
         
         txtLog = new JTextPane();
-        txtLog.setText("*      *      *      *      *       *       Welcome to Ultimate Monopoly       *       *      *      *      *      *");
+        txtLog
+            .setText("*      *      *      *      *       *       Welcome to Ultimate Monopoly       *       *      *      *      *      *");
         txtLog.setEditable(false);
         scrollPane.setViewportView(txtLog);
         
@@ -121,11 +122,14 @@ public class RollingTheDice extends JPanel implements ActionListener {
                         btnEnd.setEnabled(true);
                         RollingTheDice.logAdd(player.getName() + " rolled Doubles and got out of Jail.");
                     } else {
-                        if (player.hasGetOutOfJail()) getOutOfJail = new GetYesNoInput("You can use GetOutOfJail Card", "Do you want to use it ?").getValue();
+                        if (player.hasGetOutOfJail())
+                            getOutOfJail = new GetYesNoInput("You can use GetOutOfJail Card", "Do you want to use it ?")
+                                .getValue();
                         
                         if (getOutOfJail)
                             player.removeGetOutOfJailCard();
-                        else if (getOutOfJail = new GetYesNoInput("By paying $50 fee you can get out of jail", "Do you want to pay ?").getValue())
+                        else if (getOutOfJail = new GetYesNoInput("By paying $50 fee you can get out of jail",
+                            "Do you want to pay ?").getValue())
                             player.payToPool(50);
                         
                         if (getOutOfJail) {
@@ -308,15 +312,15 @@ public class RollingTheDice extends JPanel implements ActionListener {
     }
     
     private void movePlayer(int amount) {
-        player.moveBy(amount);
-        
-        GameSquare crrtSquare = Main.gameSquares[player.getLocation()];
+        GameSquare crrtSquare = Main.gameSquares[player.getLocation() + amount];
         if (crrtSquare instanceof Land)
             RollingTheDice.logAdd(player.getName() + " moved " + amount + " squares and now at "
                 + ((Land) crrtSquare).getName());
         else
             RollingTheDice.logAdd(player.getName() + " moved " + amount + " squares and now at "
                 + crrtSquare.getType());
+        player.moveBy(amount);
+        
     }
     public void setCurrentPlayer(Player player) {
         this.player = player;
