@@ -79,12 +79,14 @@ public class Land extends GameSquare implements Ownable {
                         + pl.getNumberOfOwnedByColor(this.color) + " of this color");
                     System.out.println("Player bought " + this.name + ". Player has "
                         + pl.getNumberOfOwnedByColor(this.color) + " of this color");
-                    if (owner.getNumberOfOwnedByColor(color) > landsOfThisColor() - 1)
+                    if (owner.getNumberOfOwnedByColor(color) > landsOfThisColor() - 1) {
                         System.out.println("Now player will get double rents!!!");
-                    RollingTheDice.logAdd("Now player will get double rents!!!");
-                } else
+                        RollingTheDice.logAdd("Now player will get double rents!!!");
+                    }
+                } else {
                     System.out.println("You don't have enough money!");
-                RollingTheDice.logAdd(pl.getName() + " doesn't have enough money.");
+                    RollingTheDice.logAdd(pl.getName() + " doesn't have enough money.");
+                }
             } else {
                 
                 Player winner = Auction.auctionProcess(this.price);
