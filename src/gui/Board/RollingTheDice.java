@@ -105,9 +105,9 @@ public class RollingTheDice extends JPanel implements ActionListener {
             } else if (player.isJailed()) {
                 if (player.isReleaseTime()) {
                     player.getOutOfJail();
-                    System.out.println("Player:" + player.getName() + " is released from jail, next round "
+                    System.out.println("Player " + player.getName() + " is released from jail, next round "
                         + player.getName() + " will play.");
-                    RollingTheDice.logAdd("Player:" + player.getName() + " is released from jail, next round "
+                    RollingTheDice.logAdd("Player " + player.getName() + " is released from jail, next round "
                         + player.getName() + " will play.");
                     btnEnd.setEnabled(true);
                 } else {
@@ -130,14 +130,14 @@ public class RollingTheDice extends JPanel implements ActionListener {
                         
                         if (getOutOfJail) {
                             player.getOutOfJail();
-                            RollingTheDice.logAdd("Player:" + player.getName() + " is released from jail, next round "
+                            RollingTheDice.logAdd("Player " + player.getName() + " is released from jail, next round "
                                 + player.getName() + " will play.");
                             btnEnd.setEnabled(true);
                         } else {
                             player.reduceJailTime();
-                            System.out.println("Player:" + player.getName() + " will be in jail for "
+                            System.out.println("Player " + player.getName() + " will be in jail for "
                                 + player.getJailTime() + " rounds.");
-                            RollingTheDice.logAdd("Player:" + player.getName() + " will be in jail for "
+                            RollingTheDice.logAdd("Player " + player.getName() + " will be in jail for "
                                 + player.getJailTime() + " rounds.");
                             btnEnd.setEnabled(true);
                         }
@@ -243,7 +243,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
                             btnEnd.setEnabled(true);
                         } else {
                             RollingTheDice
-                                .logAdd("Player:" + player.getName() + " rolled Doubles and will roll again.");
+                                .logAdd("Player " + player.getName() + " rolled Doubles and will roll again.");
                             if (Dice.isMonopolyGuy()) {
                                 movePlayer(roll1 + roll2);
                                 RollingTheDice.logAdd(player.getName() + " rolled MonopolyGuy.");
