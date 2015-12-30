@@ -1,6 +1,7 @@
 package GameSquares.Taxes;
 
 import gui.AdditionalWindows.InputReaders.GetYesNoInput;
+import gui.Board.RollingTheDice;
 import GameSquares.GameSquare;
 import GameSquares.Land;
 import Main.Player;
@@ -15,6 +16,7 @@ public class IncomeTax extends GameSquare {
     
     @Override
     public void onArrive(Player pl) {
+        RollingTheDice.logAdd(pl.getName() + " moved to " + toString());
         int assetTax = pl.getMoney();
         for (Land lnd : pl.getOwnedLands())
             assetTax += lnd.getPrice();

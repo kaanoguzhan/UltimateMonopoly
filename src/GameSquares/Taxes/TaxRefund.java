@@ -1,5 +1,6 @@
 package GameSquares.Taxes;
 
+import gui.Board.RollingTheDice;
 import GameSquares.GameSquare;
 import Main.Main;
 import Main.Player;
@@ -14,6 +15,7 @@ public class TaxRefund extends GameSquare {
     
     @Override
     public void onArrive(Player pl) {
+        RollingTheDice.logAdd(pl.getName() + " moved to " + toString());
         System.out.println("Player " + pl.getName() + " recieved "
             + Integer.toString(Main.pool * Properties.TAX_REFUND_PERCENT / 100) + " from the pool as tax refund");
         pl.obtainPool();
