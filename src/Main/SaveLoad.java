@@ -252,13 +252,21 @@ public class SaveLoad {
                 p.addToCardInventory(stringToType(cards.getString(i)));
             }
             
+            JSONArray stocks = o.getJSONArray("stocks");
+            for(int i=0; i<stocks.length();i++){
+            	int stockCount = stocks.getInt(i);
+            	for(int j=0; j<stockCount;i++) p.giveStock(i);
+            }
+            
             
             JSONArray squares = o.getJSONArray("ownedSquares");
             for (int i = 0; i < squares.length(); i++) {
                 String[] currentSquareInfo = squares.getString(i).split(" ");
                 String type = currentSquareInfo[0];
                 int id = Integer.parseInt(currentSquareInfo[1]);
-                p.getOwnership(Main.gameSquares[id]);
+                
+                if(Main.gameSquares[id].getOwner()!= p)
+                	p.getOwnership(Main.gameSquares[id]);
                 
                 switch (type) {
                     case "land":
