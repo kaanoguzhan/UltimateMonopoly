@@ -30,7 +30,7 @@ public class RollingTheDice extends JPanel implements ActionListener {
     private boolean           getOutOfJail     = false;
     private Player            player;
     private int               loadProtectionCounter;
-    private static int        turn             = 0;
+    private static int        turn             = 1;
     private static JTextPane  txtLog;
     private static JLabel     lblPlayerIcon;
     
@@ -375,6 +375,15 @@ public class RollingTheDice extends JPanel implements ActionListener {
             lblLoadProtection.setText("<html>Load Protection<br>Turn/s left:" + --loadProtectionCounter + "</html>");
     }
     
+    public static int getTurn(){
+    	return turn;
+    }
+    public static void setTurn(int t){
+    	turn = t;
+    }
+    public static String getLog(){
+    	return txtLog.toString();
+    }
     public static void logAdd(String text) {
         txtLog.setText(txtLog.getText() + "\n" + text);;
     }

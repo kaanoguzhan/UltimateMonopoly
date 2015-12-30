@@ -1,6 +1,9 @@
 package Main;
 
+import gui.Options;
 import gui.Board.PlayerInfo;
+import gui.Board.RollingTheDice;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -26,19 +29,26 @@ public class SaveLoad {
     // 1 -> JSON
     // 2 -> Byte
     private static int saveType = 1;
-    
+    private static final String fileOne = "savegame.txt";
+    private static final String fileTwo = "savegame2.txt";
+    private static final String fileThree = "savegame3.txt";
+    private static final String fileFour = "savegame4.txt";
     
     public static void save() {
         if (saveType == 1)
             saveJSON();
         else
             saveByte();
+        
+        RollingTheDice.logAdd("Game Saved");
     }
     public static void load() {
         if (saveType == 1)
             loadJSON();
         else
             loadByte();
+        
+        RollingTheDice.logAdd("Game Loaded");
     }
     
     private static String squareInfo(Ownable current) {
@@ -127,6 +137,15 @@ public class SaveLoad {
             JSONObject currentPlayer = new JSONObject();
             currentPlayer.put("currentPlayer", Main.CurrentPlayer.getName());
             
+            JSONObject music = new JSONObject();
+            music.put("musicId", Main.musicID);
+            
+            JSONObject turn = new JSONObject();
+            turn.put("turn", RollingTheDice.getTurn());
+            
+            JSONObject log = new JSONObject();
+            log.put("log", RollingTheDice.getLog());
+            
             JSONObject enabledButtons = new JSONObject();
             boolean[] buttonStata = Main.board.round.getButtonEnableds();
             enabledButtons.put("rollButton", buttonStata[0]);
@@ -136,10 +155,13 @@ public class SaveLoad {
             j.put(players);
             j.put(currentPlayer);
             j.put(enabledButtons);
+            j.put(music);
+            j.put(turn);
+            j.put(log);
             
             System.out.println(j);
             
-            FileWriter fw = new FileWriter("savegame.txt");
+            FileWriter fw = new FileWriter(selectFile());
             fw.write(j.toString());
             fw.close();
             
@@ -170,13 +192,16 @@ public class SaveLoad {
     
     private static void loadJSON() {
         try {
-            BufferedReader b_in = new BufferedReader(new FileReader("savegame.txt"));
+            BufferedReader b_in = new BufferedReader(new FileReader(selectFile()));
             String jsonString = b_in.readLine();
             JSONArray j = new JSONArray(jsonString);
             
             JSONArray players = j.getJSONArray(0);
             String currentPlayerName = j.getJSONObject(1).getString("currentPlayer");
             JSONObject enabledButtons = j.getJSONObject(2);
+            int musicId = j.getJSONObject(3).getInt("musicId");
+            int turn = j.getJSONObject(4).getInt("turn");
+            String log = j.getJSONObject(5).getString("log");
             
             Main.stopTurnLoop();
             
@@ -193,6 +218,10 @@ public class SaveLoad {
                     enabledButtons.getBoolean("endButton"),
                     enabledButtons.getBoolean("sellButton") };
             Main.board.round.setButtonEnableds(buttons);
+            
+            Main.musicID = musicId;
+            RollingTheDice.setTurn(turn);
+            RollingTheDice.logAdd(log);
 
             PlayerInfo.refreshData();
             Main.board.initiateLoadProtection();
@@ -292,5 +321,21 @@ public class SaveLoad {
             e.printStackTrace();
         }
         return p;
+    }
+    
+    private static String selectFile(){
+    	int fileSelection = Options.getFile();
+    	switch(fileSelection){
+    	case 0:
+    		return fileOne;
+    	case 1:
+    		return fileTwo;
+    	case 2:
+    		return fileThree;
+    	case 3:
+    		return fileFour;
+    	default:
+    		return fileOne;
+    	}
     }
 }

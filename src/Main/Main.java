@@ -3,6 +3,8 @@ package Main;
 import gui.AdditionalWindows.MessageDisplayer;
 import gui.AdditionalWindows.InputReaders.GetTextInput;
 import gui.Board.Board;
+import gui.Board.RollingTheDice;
+
 import java.io.File;
 import java.net.URL;
 import javax.sound.sampled.AudioSystem;
@@ -50,7 +52,7 @@ public class Main {
     private volatile static Boolean  stopTurnLoop   = false;
     private static GetTextInput      temp;
     static Board                     board;
-    public static int                pool           = 0, musicID = 2;
+    public static int                pool           = 0, musicID = 1;
     private static boolean           loadPrevious = false;
     public static boolean            loadProtection = false;
     private static AudioRunner       musicPlayer;
@@ -315,8 +317,7 @@ public class Main {
     }
     
     public static void continueFromSave() {
-        // TODO Loga ekle
-        // ("Loaded from save! It's " + CurrentPlayer.getName() + "'s turn.");
+    	RollingTheDice.logAdd("Continuing from save! It's " + CurrentPlayer.getName() + "'s turn.");
         board.round.loadCurrentPlayer(CurrentPlayer);
         int startID = CurrentPlayer.getID();
         for (int i = CurrentPlayer.getID(); i < Main.players.length; i++) {
@@ -347,6 +348,7 @@ public class Main {
         for (;;) {
             run:
             {
+        		RollingTheDice.logAdd("Turn: "+RollingTheDice.getTurn());
                 for (Player currentPlayer : players) {
                     turn:
                     {
@@ -418,9 +420,11 @@ class AudioRunner extends Thread {
         switch (i) {
             case 1:
                 playingMusic = music1;
+                RollingTheDice.logAdd("Music: hit that jive");
                 break;
             case 2:
                 playingMusic = music2;
+                RollingTheDice.logAdd("Music: darude");
                 break;
         }
     }
@@ -442,24 +446,3 @@ class AudioRunner extends Thread {
         } catch (Exception e) {}
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
