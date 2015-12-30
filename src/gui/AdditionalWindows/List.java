@@ -99,7 +99,8 @@ public class List extends JPanel implements ListSelectionListener, ActionListene
 
 						}
 					} else {
-						((Ownable) temp).sell();
+						if((((Ownable) temp).getOwner())!=null) 
+							((Ownable) temp).sell();
 						if (index != -1) listModel.remove(index);
 					}
 			}

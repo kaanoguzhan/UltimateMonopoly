@@ -360,8 +360,9 @@ public class Land extends GameSquare implements Ownable {
      * @modifies owner
      * @effects owner sells the square */
     public void sell() {
+    	RollingTheDice.logAdd(owner.getName() + " sold " + this.name);
         this.owner.sellSquare(this);
-        RollingTheDice.logAdd(owner.getName() + " sold " + this.name);
+        
     }
     
     public color getColor() {
