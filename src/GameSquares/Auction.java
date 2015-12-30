@@ -113,28 +113,28 @@ public class Auction extends GameSquare {
 				System.out.println("potential winner is : "+ potentialWinner);
 				int winner = 0;
 
-				if(input1 == highestbid && input1>limit) {
+				if(input1 == highestbid && input1>=limit) {
 					if(winner == potentialWinner) {
 						System.out.println(players[0].getName() + " is the winner");
 						return players[0];
 					}
 					winner++;
 				}
-				if(input2 == highestbid && input2>limit) {
+				if(input2 == highestbid && input2>=limit) {
 					if(winner == potentialWinner) {
 						System.out.println(players[1].getName() + " is the winner");
 						return players[1];
 					}
 					winner++;
 				}
-				if(input3 == highestbid && input3>limit) {
+				if(input3 == highestbid && input3>=limit) {
 					if(winner == potentialWinner) {
 						System.out.println(players[2].getName() + " is the winner");
 						return players[2];
 					}
 					winner++;
 				}
-				if(input4 == highestbid && input4>limit) {
+				if(input4 == highestbid && input4>=limit) {
 					if(winner == potentialWinner){
 						System.out.println(players[3].getName() + " is the winner");
 						return players[3];
