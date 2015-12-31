@@ -13,6 +13,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
+
+import javax.swing.JButton;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -126,6 +130,9 @@ public class SaveLoad {
     }
     
     private static void saveJSON() {
+    	Date d = new Date();
+		String time = d.toString().substring(11, 20);
+		
         try {
             JSONArray j = new JSONArray();
             JSONArray players = new JSONArray();
@@ -161,7 +168,11 @@ public class SaveLoad {
             
             System.out.println(j);
             
-            FileWriter fw = new FileWriter(selectFile());
+            String fileName = selectFile();
+            JButton button = selectButton();
+            
+            FileWriter fw = new FileWriter(fileName);
+            button.setText(time);
             fw.write(j.toString());
             fw.close();
             
@@ -336,6 +347,22 @@ public class SaveLoad {
     		return fileFour;
     	default:
     		return fileOne;
+    	}
+    }
+    
+    private static JButton selectButton(){
+    	int fileSelection = Options.getFile();
+     	switch(fileSelection){
+    	case 0:
+    		return Options.fileOne;
+    	case 1:
+    		return Options.fileTwo;
+    	case 2:
+    		return Options.fileThree;
+    	case 3:
+    		return Options.fileFour;
+    	default:
+    		return Options.fileOne;
     	}
     }
 }
