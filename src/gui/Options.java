@@ -23,7 +23,7 @@ public class Options extends JFrame {
     private JButton           btnSound, btnMusic1, btnMusic2;
     public int                autoCloseDelay   = 3;
     private static int		  selectedFile = 0;
-    
+    public static JButton fileOne,fileTwo,fileThree,fileFour;
     public Options() {
         contentPane = new JPanel();
         setContentPane(contentPane);
@@ -132,26 +132,26 @@ public class Options extends JFrame {
         filePanel.setLayout(null);
         
         
-        JButton fileOne = new JButton("File 1");
-        fileOne.setBounds(10, 16, 70, 30);
+        fileOne = new JButton("File 1");
+        fileOne.setBounds(10, 16, 170, 30);
         fileOne.addActionListener(al -> {
             selectedFile = 0;
         });
         
-        JButton fileTwo = new JButton("File 2");
-        fileTwo.setBounds(10, 56, 70, 30);
+        fileTwo = new JButton("File 2");
+        fileTwo.setBounds(10, 56, 170, 30);
         fileTwo.addActionListener(al -> {
             selectedFile = 1;
         });
         
-        JButton fileThree = new JButton("File 3");
-        fileThree.setBounds(10, 96, 70, 30);
+        fileThree = new JButton("File 3");
+        fileThree.setBounds(10, 96, 170, 30);
         fileThree.addActionListener(al -> {
             selectedFile = 2;
         });
         
-        JButton fileFour = new JButton("File 4");
-        fileFour.setBounds(10, 136, 70, 30);
+        fileFour = new JButton("File 4");
+        fileFour.setBounds(10, 136, 170, 30);
         fileFour.addActionListener(al -> {
             selectedFile = 3;
         });
