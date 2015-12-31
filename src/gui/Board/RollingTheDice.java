@@ -205,20 +205,21 @@ public class RollingTheDice extends JPanel implements ActionListener {
                                     + " is released from jail, next round "
                                     + player.getName() + " will play.");
                                 btnEnd.setEnabled(true);
-                            } else {
-                                if (Admin.allLandsOwned()) {
-                                    Admin.movePlayerToNextLand(player.getID(), even);
-                                    RollingTheDice.logAdd("All lands are owned.");
-                                }
-                                else
-                                    Admin.movePlayerToNextNeutralLand(player.getID(), even);
-                                
-                                if (roll1 != roll2) {
-                                    player.resetDoublesRolled();
-                                    btnEnd.setEnabled(true);
-                                }
+                            }
+                        } else {
+                            if (Admin.allLandsOwned()) {
+                                Admin.movePlayerToNextLand(player.getID(), even);
+                                RollingTheDice.logAdd("All lands are owned.");
+                            }
+                            else
+                                Admin.movePlayerToNextNeutralLand(player.getID(), even);
+                            
+                            if (roll1 != roll2) {
+                                player.resetDoublesRolled();
+                                btnEnd.setEnabled(true);
                             }
                         }
+                        
                     } else if (Dice.isBus()) {
                         RollingTheDice.logAdd(player.getName() + " rolled Bus.");
                         new gui.AdditionalWindows.MessageDisplayer(" You rolled Bus !");
@@ -292,18 +293,19 @@ public class RollingTheDice extends JPanel implements ActionListener {
                                             + " is released from jail, next round "
                                             + player.getName() + " will play.");
                                         btnEnd.setEnabled(true);
-                                    } else {
-                                        if (Admin.allLandsOwned()) {
-                                            Admin.movePlayerToNextLand(player.getID(), even);
-                                            RollingTheDice.logAdd("All lands are owned.");
-                                        }
-                                        else
-                                            Admin.movePlayerToNextNeutralLand(player.getID(), even);
-                                        
-                                        new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
-                                        btnRoll.setEnabled(true);
                                     }
+                                } else {
+                                    if (Admin.allLandsOwned()) {
+                                        Admin.movePlayerToNextLand(player.getID(), even);
+                                        RollingTheDice.logAdd("All lands are owned.");
+                                    }
+                                    else
+                                        Admin.movePlayerToNextNeutralLand(player.getID(), even);
+                                    
+                                    new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
+                                    btnRoll.setEnabled(true);
                                 }
+                                
                             } else if (Dice.isBus()) {
                                 RollingTheDice.logAdd(player.getName() + " rolled Bus.");
                                 new gui.AdditionalWindows.MessageDisplayer(" You rolled Bus !");
