@@ -22,6 +22,7 @@ public class Options extends JFrame {
     private JLabel            lblSound;
     private JButton           btnSound, btnMusic1, btnMusic2;
     public int                autoCloseDelay   = 3;
+    private static int		  selectedFile = 0;
     
     public Options() {
         contentPane = new JPanel();
@@ -119,7 +120,53 @@ public class Options extends JFrame {
         btnMusic2.setBounds(272, 148, 89, 33);
         btnMusic2.setVisible(false);
         contentPane.add(btnMusic2);
+        
+        
+        
+        // file select
+        JPanel filePanel = new JPanel();
+        filePanel
+            .setBorder(new TitledBorder(null, "Select file to load", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        filePanel.setBounds(10, 230, 300, 180);
+        contentPane.add(filePanel);
+        filePanel.setLayout(null);
+        
+        
+        JButton fileOne = new JButton("File 1");
+        fileOne.setBounds(10, 16, 70, 30);
+        fileOne.addActionListener(al -> {
+            selectedFile = 0;
+        });
+        
+        JButton fileTwo = new JButton("File 2");
+        fileTwo.setBounds(10, 56, 70, 30);
+        fileTwo.addActionListener(al -> {
+            selectedFile = 1;
+        });
+        
+        JButton fileThree = new JButton("File 3");
+        fileThree.setBounds(10, 96, 70, 30);
+        fileThree.addActionListener(al -> {
+            selectedFile = 2;
+        });
+        
+        JButton fileFour = new JButton("File 4");
+        fileFour.setBounds(10, 136, 70, 30);
+        fileFour.addActionListener(al -> {
+            selectedFile = 3;
+        });
+        
+        filePanel.add(fileOne);
+        filePanel.add(fileTwo);
+        filePanel.add(fileThree);
+        filePanel.add(fileFour);
+        
     }
+    
+    public static int getFile(){
+    	return selectedFile;
+    }
+    
     public void playMode() {
         soundEnabled = true;
         lblSound.setText("Music playing. Enjoy :)");
