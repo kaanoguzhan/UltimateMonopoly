@@ -3,8 +3,8 @@ package Main;
 import gui.AdditionalWindows.MessageDisplayer;
 import gui.AdditionalWindows.InputReaders.GetTextInput;
 import gui.Board.Board;
+import gui.Board.PlayerInfo;
 import gui.Board.RollingTheDice;
-
 import java.io.File;
 import java.net.URL;
 import javax.sound.sampled.AudioSystem;
@@ -53,7 +53,7 @@ public class Main {
     private static GetTextInput      temp;
     static Board                     board;
     public static int                pool           = 0, musicID = 1;
-    private static boolean           loadPrevious = false;
+    private static boolean           loadPrevious   = false;
     public static boolean            loadProtection = false;
     private static AudioRunner       musicPlayer;
     
@@ -314,10 +314,12 @@ public class Main {
         board = new Board(players, gameSquares);
         if (loadPrevious)
             SaveLoad.load();
+        
+        PlayerInfo.refreshData();
     }
     
     public static void continueFromSave() {
-    	RollingTheDice.logAdd("Continuing from save! It's " + CurrentPlayer.getName() + "'s turn.");
+        RollingTheDice.logAdd("Continuing from save! It's " + CurrentPlayer.getName() + "'s turn.");
         board.round.loadCurrentPlayer(CurrentPlayer);
         int startID = CurrentPlayer.getID();
         for (int i = CurrentPlayer.getID(); i < Main.players.length; i++) {
@@ -342,13 +344,13 @@ public class Main {
     }
     
     
-    private static void runGame() {        
+    private static void runGame() {
         Player lastPlayer = new Player(gameSquares);
         game:
         for (;;) {
             run:
             {
-        		RollingTheDice.logAdd("Turn: "+RollingTheDice.getTurn());
+                RollingTheDice.logAdd("Turn: " + RollingTheDice.getTurn());
                 for (Player currentPlayer : players) {
                     turn:
                     {

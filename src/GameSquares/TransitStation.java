@@ -28,18 +28,19 @@ public class TransitStation extends GameSquare implements Ownable {
             boolean buy = new GetYesNoInput("For " + price + " dollars", "Would you like to buy " + name + "Railroad ?")
                 .getValue();
             if (buy) {
-                if (pl.getMoney() >= price) {                  
+                if (pl.getMoney() >= price) {
                     pl.buySquare(this);
+                    RollingTheDice.logContinue(" and bought it.");
                 }
                 else
                     System.out.println("You don't have enough money!");
-            }else{
-				Player winner = Auction.auctionProcess(this.price);
-				if(winner !=null)
-					winner.buySquare(this);
-				for(int k =0;k<4;k++){
-					Main.Main.players[k].inAuction = false;
-				}
+            } else {
+                Player winner = Auction.auctionProcess(this.price);
+                if (winner != null)
+                    winner.buySquare(this);
+                for (int k = 0; k < 4; k++) {
+                    Main.Main.players[k].inAuction = false;
+                }
             }
         } else if (this.owner != pl) {
             if (pl.hasOnlinePricing()) {
@@ -102,7 +103,7 @@ public class TransitStation extends GameSquare implements Ownable {
     }
     
     public int getDepotCount() {
-    	return depotCount;
+        return depotCount;
     }
     
     @Override
@@ -110,7 +111,7 @@ public class TransitStation extends GameSquare implements Ownable {
         return "Transit station from " + id + " to " + connectedTransit;
     }
     
-    public void setDepotCount(int i){
-    	depotCount = i;
+    public void setDepotCount(int i) {
+        depotCount = i;
     }
 }

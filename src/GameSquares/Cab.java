@@ -29,8 +29,10 @@ public class Cab extends GameSquare implements Ownable {
             boolean buy = new GetYesNoInput("For " + price + " dollars", "Would you like to buy " + name + " ?")
                 .getValue();
             if (buy) {
-                if (pl.getMoney() >= price)
+                if (pl.getMoney() >= price) {
                     pl.buySquare(this);
+                    RollingTheDice.logContinue(" and bought it.");
+                }
                 else
                     System.out.println("You don't have enough money!");
             } else {

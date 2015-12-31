@@ -16,7 +16,7 @@ public class Jail extends GameSquare {
     
     @Override
     public void onArrive(Player pl) {
-        RollingTheDice.logAdd(pl.getName() + " moved to Jail.");
+        RollingTheDice.logAdd(pl.getName() + " moved to Jail");
         if (pl.isJailed()) {
             if (pl.hasGetOutOfJail()) {
                 getOutOfJail = new GetYesNoInput("You can use GetOutOfJail Card", "Do you want to use it ?").getValue();

@@ -13,14 +13,14 @@ public class BonusSquare extends GameSquare {
     
     @Override
     public void onArrive(Player pl) {
-        RollingTheDice.logAdd(pl.getName() + " moved to " + toString());
+        RollingTheDice.logAdd(pl.getName() + " moved to Bonus Square and collected $300");
         new gui.AdditionalWindows.MessageDisplayer("You are at Bonus Square. You will collect $300.");
         pl.addMoney(bonusMoney);
     }
     
     @Override
     public String toString() {
-        return "Bonus Square. Location: " + id;
+        return "Bonus Square";
     }
     
 }

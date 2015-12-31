@@ -192,7 +192,7 @@ public class Player implements Serializable {
         reduceMoney(amount);
         Main.pool += amount;
         System.out.println("pool has " + Main.pool);
-        RollingTheDice.logAdd(name + " paid " + amount + " to the pool.");
+        RollingTheDice.logContinue(" and  paid " + amount + " to the pool.");
     }
     
     /** @modifies this, Main

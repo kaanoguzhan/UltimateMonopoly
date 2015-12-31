@@ -21,12 +21,12 @@ public class BirthdayGiftSquare extends GameSquare {
             "Do you want get the " + giftMoney + "$?").getValue();
         
         if (birthdayGiftChoice) {
+            RollingTheDice.logContinue(" and got gift money.");
             pl.addMoney(giftMoney);
-            RollingTheDice.logAdd(pl.getName() + " got gift money.");
         }
         else {
+            RollingTheDice.logContinue(" and went to the nearest Cab");
             pl.moveTo(nearestCabId);
-            RollingTheDice.logAdd(pl.getName() + " went to the nearest Cab");
         }
     }
     @Override
