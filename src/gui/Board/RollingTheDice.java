@@ -77,7 +77,8 @@ public class RollingTheDice extends JPanel implements ActionListener {
         add(scrollPane);
         
         txtLog = new JTextPane();
-        txtLog.setText("*      *      *      *      *       *       Welcome to Ultimate Monopoly       *       *      *      *      *      *");
+        txtLog
+            .setText("*      *      *      *      *       *       Welcome to Ultimate Monopoly       *       *      *      *      *      *");
         txtLog.setEditable(false);
         scrollPane.setViewportView(txtLog);
         
@@ -186,16 +187,37 @@ public class RollingTheDice extends JPanel implements ActionListener {
                         RollingTheDice.logAdd(player.getName() + " rolled MonopolyGuy.");
                         new gui.AdditionalWindows.MessageDisplayer(" You rolled MonopolyGuy !");
                         
-                        if (Admin.allLandsOwned()) {
-                            Admin.movePlayerToNextLand(player.getID(), even);
-                            RollingTheDice.logAdd("All lands are owned.");
-                        }
-                        else
-                            Admin.movePlayerToNextNeutralLand(player.getID(), even);
-                        
-                        if (roll1 != roll2) {
-                            player.resetDoublesRolled();
-                            btnEnd.setEnabled(true);
+                        if (player.isJailed()) {
+                            if (player.hasGetOutOfJail())
+                                getOutOfJail = new GetYesNoInput("You can use GetOutOfJail Card",
+                                    "Do you want to use it ?")
+                                    .getValue();
+                            
+                            if (getOutOfJail)
+                                player.removeGetOutOfJailCard();
+                            else if (getOutOfJail = new GetYesNoInput("By paying $50 fee you can get out of jail",
+                                "Do you want to pay ?").getValue())
+                                player.payToPool(50);
+                            
+                            if (getOutOfJail) {
+                                player.getOutOfJail();
+                                RollingTheDice.logAdd("Player " + player.getName()
+                                    + " is released from jail, next round "
+                                    + player.getName() + " will play.");
+                                btnEnd.setEnabled(true);
+                            } else {
+                                if (Admin.allLandsOwned()) {
+                                    Admin.movePlayerToNextLand(player.getID(), even);
+                                    RollingTheDice.logAdd("All lands are owned.");
+                                }
+                                else
+                                    Admin.movePlayerToNextNeutralLand(player.getID(), even);
+                                
+                                if (roll1 != roll2) {
+                                    player.resetDoublesRolled();
+                                    btnEnd.setEnabled(true);
+                                }
+                            }
                         }
                     } else if (Dice.isBus()) {
                         RollingTheDice.logAdd(player.getName() + " rolled Bus.");
@@ -251,15 +273,37 @@ public class RollingTheDice extends JPanel implements ActionListener {
                                 
                                 boolean even = false;
                                 if ((roll1 + roll2) % 2 == 0) even = true;
-                                if (Admin.allLandsOwned()) {
-                                    Admin.movePlayerToNextLand(player.getID(), even);
-                                    RollingTheDice.logAdd("All lands are owned.");
+                                if (player.isJailed()) {
+                                    if (player.hasGetOutOfJail())
+                                        getOutOfJail = new GetYesNoInput("You can use GetOutOfJail Card",
+                                            "Do you want to use it ?")
+                                            .getValue();
+                                    
+                                    if (getOutOfJail)
+                                        player.removeGetOutOfJailCard();
+                                    else if (getOutOfJail = new GetYesNoInput(
+                                        "By paying $50 fee you can get out of jail",
+                                        "Do you want to pay ?").getValue())
+                                        player.payToPool(50);
+                                    
+                                    if (getOutOfJail) {
+                                        player.getOutOfJail();
+                                        RollingTheDice.logAdd("Player " + player.getName()
+                                            + " is released from jail, next round "
+                                            + player.getName() + " will play.");
+                                        btnEnd.setEnabled(true);
+                                    } else {
+                                        if (Admin.allLandsOwned()) {
+                                            Admin.movePlayerToNextLand(player.getID(), even);
+                                            RollingTheDice.logAdd("All lands are owned.");
+                                        }
+                                        else
+                                            Admin.movePlayerToNextNeutralLand(player.getID(), even);
+                                        
+                                        new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
+                                        btnRoll.setEnabled(true);
+                                    }
                                 }
-                                else
-                                    Admin.movePlayerToNextNeutralLand(player.getID(), even);
-                                
-                                new gui.AdditionalWindows.MessageDisplayer("You rolled doubles, roll again !");
-                                btnRoll.setEnabled(true);
                             } else if (Dice.isBus()) {
                                 RollingTheDice.logAdd(player.getName() + " rolled Bus.");
                                 new gui.AdditionalWindows.MessageDisplayer(" You rolled Bus !");
@@ -306,7 +350,6 @@ public class RollingTheDice extends JPanel implements ActionListener {
         PlayerInfo.refreshData();
         Board.informationTable.validate();
     }
-    
     private void movePlayer(int amount) {
         player.moveBy(amount);
         
@@ -368,17 +411,17 @@ public class RollingTheDice extends JPanel implements ActionListener {
             lblLoadProtection.setText("<html>Load Protection<br>Turn/s left:" + --loadProtectionCounter + "</html>");
     }
     
-    public static int getTurn(){
-    	return turn;
+    public static int getTurn() {
+        return turn;
     }
-    public static void setTurn(int t){
-    	turn = t;
+    public static void setTurn(int t) {
+        turn = t;
     }
-    public static String getLog(){
-    	return txtLog.toString();
+    public static String getLog() {
+        return txtLog.toString();
     }
-    public static void setLog(String s){
-    	txtLog.setText(s);
+    public static void setLog(String s) {
+        txtLog.setText(s);
     }
     public static void logAdd(String text) {
         txtLog.setText(txtLog.getText() + "\n" + text);;
