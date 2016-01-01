@@ -43,7 +43,7 @@ public class PlayerPanel extends JPanel {
         add(lblPlayerName1);
         
         JLabel lblLocation1 = new JLabel("Location: ");
-        lblLocation1.setBounds(167, 35, 56, 16);
+        lblLocation1.setBounds(167, 35, 76, 16);
         add(lblLocation1);
         
         JLabel lblMoney1 = new JLabel("Money: " + Admin.getPlayerMoney(this.playerID));

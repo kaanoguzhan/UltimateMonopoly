@@ -43,7 +43,7 @@ public class DicePanel extends JPanel {
         txtSpeedDie.setText(SpeedDie + "");
         
         JCheckBox chckbxSetDice = new JCheckBox("Fix Dice");
-        chckbxSetDice.setBounds(392, 9, 69, 25);
+        chckbxSetDice.setBounds(392, 9, 99, 25);
         chckbxSetDice.addActionListener(al -> {
             if (chcbxTicked)
                 chcbxTicked = false;
@@ -91,11 +91,11 @@ public class DicePanel extends JPanel {
         add(chcPlayers);
         
         JLabel lblOwnedPropertied = new JLabel("Owned Properties:");
-        lblOwnedPropertied.setBounds(142, 58, 90, 21);
+        lblOwnedPropertied.setBounds(129, 58, 110, 21);
         add(lblOwnedPropertied);
         
         JLabel lblCard = new JLabel("Card:");
-        lblCard.setBounds(205, 121, 27, 21);
+        lblCard.setBounds(165, 121, 60, 21);
         add(lblCard);
         
         Choice chcCards = new Choice();
@@ -124,7 +124,7 @@ public class DicePanel extends JPanel {
         add(btnGiveCard);
         
         JLabel lblNewLabel = new JLabel("Stock:");
-        lblNewLabel.setBounds(202, 184, 30, 14);
+        lblNewLabel.setBounds(165, 184, 60, 14);
         add(lblNewLabel);
         
         Choice chcStocks = new Choice();

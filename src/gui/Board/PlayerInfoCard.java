@@ -58,7 +58,7 @@ public class PlayerInfoCard extends JPanel {
         pnlPlayer.add(lblLands);
         
         lblStocks = new JLabel("Stocks: 0 - 0 - 0 - 0 - 0 - 0");
-        lblStocks.setBounds(130, 74, 139, 14);
+        lblStocks.setBounds(120, 74, 199, 14);
         pnlPlayer.add(lblStocks);
         
         separator1 = new JSeparator();
@@ -96,7 +96,7 @@ public class PlayerInfoCard extends JPanel {
         
         // Refresh Stocks
         int[] stocksArry = crrtPlayer.getStocks();
-        lblStocks.setText("Stockd:" + stocksArry[0] + " - " + stocksArry[1] + " - " + stocksArry[2] + " - "
+        lblStocks.setText("Stocks:" + stocksArry[0] + " - " + stocksArry[1] + " - " + stocksArry[2] + " - "
             + stocksArry[3] + " - " + stocksArry[4] + " - " + stocksArry[5]);
         
         // Refresh Jail - Online

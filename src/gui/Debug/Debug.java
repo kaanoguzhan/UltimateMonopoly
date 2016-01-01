@@ -36,7 +36,7 @@ public class Debug extends JFrame {
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
         tabbedPane.setFont(new Font("Consolas", Font.PLAIN, 15));
         tabbedPane.setBorder(null);
-        tabbedPane.setBounds(0, 0, 625, 739);
+        tabbedPane.setBounds(0, 0, 665, 739);
         contentPane.add(tabbedPane);
         
         JPanel PlayersTab = new JPanel();
