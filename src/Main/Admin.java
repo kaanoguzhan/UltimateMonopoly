@@ -297,7 +297,7 @@ public class Admin extends Main {
                     return Main.gameSquares[Integer.parseInt(((String) gameSquare).substring(7, ((String) gameSquare).length()))];
                 else if (((String) gameSquare).length() > 15 && ((String) gameSquare).substring(0, 14).equals("CommunityChest"))
                     return Main.gameSquares[Integer.parseInt(((String) gameSquare).substring(15, ((String) gameSquare).length()))];
-                else if (((String) gameSquare).length() > 4 && ((String) gameSquare).substring(0, 3).equals("Cab"))
+                else if (((String) gameSquare).length() < 9 && ((String) gameSquare).substring(0, 3).equals("Cab"))
                     return Main.gameSquares[Integer.parseInt(((String) gameSquare).substring(4, ((String) gameSquare).length()))];
                 else if (tempgsq.getType().equals(gameSquare))
                     return tempgsq;
