@@ -14,7 +14,8 @@ import Main.Player;
 
 public class GeneralRepairs extends CommunityChestCard implements Serializable {
     private static final long serialVersionUID = 1L;
-    private int               cabTransitRepair = 25, houseRepair = 25, hotelRepair = 100, skyscraperRepair = 100;
+    private int               cabRepair        = 25, transitRepair = 25, houseRepair = 25, hotelRepair = 100,
+                                               skyscraperRepair = 100;
     
     public GeneralRepairs() {
         super(CardType.GeneralRepairs, false);
@@ -27,15 +28,16 @@ public class GeneralRepairs extends CommunityChestCard implements Serializable {
         RollingTheDice.logContinue("GeneralRepairs Card.");
         ArrayList<Land> lands = pl.getOwnedLands();
         ArrayList<Ownable> cabTransits = pl.getOwnedSquares();
-        int cabTransit = 0;
+        int cab = 0;
+        int transit = 0;
         int houses = 0;
         int hotels = 0;
         int skyscrapers = 0;
         for (int i = 0; i < cabTransits.size(); i++) {
             if ((cabTransits.get(i) instanceof Cab) && (((Cab) cabTransits.get(i)).standed())) {
-                cabTransit++;
+                cab++;
             } else if (cabTransits.get(i) instanceof TransitStation) {
-                cabTransit += cabTransit / 2;
+                transit++;
             }
         }
         for (int i = 0; i < lands.size(); i++) {
@@ -52,7 +54,8 @@ public class GeneralRepairs extends CommunityChestCard implements Serializable {
             else if (lands.get(i).getState() == state.skyscraper)
                 skyscrapers += 1;
         }
-        pl.reduceMoney(cabTransitRepair * cabTransit + houseRepair * houses + hotelRepair * hotels + skyscraperRepair
+        pl.reduceMoney(cabRepair * cab + ((transitRepair * transit) / 2) + houseRepair * houses + hotelRepair * hotels
+            + skyscraperRepair
             * skyscrapers);
     }
     
