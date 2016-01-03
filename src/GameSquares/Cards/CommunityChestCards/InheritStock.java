@@ -19,7 +19,6 @@ public class InheritStock extends CommunityChestCard implements Serializable {
         new MessageDisplayer("You picked InheritStock Card.");
         RollingTheDice.logContinue("InheritStock Card.");
         StockExcWindow ste = new StockExcWindow(pl, 1);
-        ste.setVisible(true);
     }
     
     public String toString() {
