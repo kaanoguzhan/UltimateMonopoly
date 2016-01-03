@@ -108,7 +108,7 @@ public class List extends JPanel implements ListSelectionListener, ActionListene
 				stocks[st.getOrder()]--;
 				System.out.println(player.getName()+ " sold " + st.getValue());
 				player.addMoney(st.getPrice()/2);
-				if (index != -1) listModel.remove(index);
+				if (index != -1 && stocks[st.getOrder()] == 0) listModel.remove(index);
 			}
 
 			int size = listModel.getSize();
