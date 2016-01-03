@@ -133,25 +133,25 @@ public class Options extends JFrame {
         
         
         fileOne = new JButton("File 1");
-        fileOne.setBounds(10, 16, 85, 30);
+        fileOne.setBounds(10, 16, 100, 30);
         fileOne.addActionListener(al -> {
             selectedFile = 0;
         });
         
         fileTwo = new JButton("File 2");
-        fileTwo.setBounds(10, 56, 85, 30);
+        fileTwo.setBounds(10, 56, 100, 30);
         fileTwo.addActionListener(al -> {
             selectedFile = 1;
         });
         
         fileThree = new JButton("File 3");
-        fileThree.setBounds(10, 96, 85, 30);
+        fileThree.setBounds(10, 96, 100, 30);
         fileThree.addActionListener(al -> {
             selectedFile = 2;
         });
         
         fileFour = new JButton("File 4");
-        fileFour.setBounds(10, 136, 85, 30);
+        fileFour.setBounds(10, 136, 100, 30);
         fileFour.addActionListener(al -> {
             selectedFile = 3;
         });
