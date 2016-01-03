@@ -72,7 +72,7 @@ public class Board extends JFrame {
 			Debug frame = new Debug();
 			frame.setVisible(true);
 		});
-		debug.setBounds(1728, 972, 120, 70);
+		debug.setBounds(1690, 972, 120, 70);
 
 		round.setBounds(1050, 0, 808, 250);
 		getContentPane().add(round);

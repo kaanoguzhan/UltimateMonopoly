@@ -413,20 +413,20 @@ public class Main {
 
 
 class AudioRunner extends Thread {
-    URL  music1 = getClass().getResource("/Resources/Music/hitthatjive.wav");
-    URL  music2 = getClass().getResource("/Resources/Music/darude.wav");
+    URL  music1 = getClass().getResource("/Resources/Music/darude.wav");
+    URL  music2 = getClass().getResource("/Resources/Music/hitthatjive.wav");
     URL  playingMusic;
     Clip c;
-    
+
     public AudioRunner(int i) {
         switch (i) {
             case 1:
                 playingMusic = music1;
-                RollingTheDice.logAdd("Music: hit that jive");
+                RollingTheDice.logAdd("Music: Darude Sandstorm !!");
                 break;
             case 2:
                 playingMusic = music2;
-                RollingTheDice.logAdd("Music: darude");
+                RollingTheDice.logAdd("Music: hit that jive");
                 break;
         }
     }

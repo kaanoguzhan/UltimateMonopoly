@@ -17,8 +17,8 @@ public class Admin extends Main {
 
 
 	/**************************/
-	/** Player admin methods **/
-	/**************************/
+	/** Player admin methods **/ 
+	/**************************/ 
 	// Move PLAYER by AMOUNT and CALL onArrive()
 	public static <T> void movePlayerBy(T player, int amount) {
 		System.out.println("ADMIN -> Player:" + findPlayer(player).getName()
@@ -233,8 +233,8 @@ public class Admin extends Main {
 	}
 
 	/************************/
-	/** Land admin methods **/
-	/************************/
+	/** Land admin methods **/ 
+	/************************/ 
 	// Change LAND's name to NAME
 	public void setName(GameSquare land, String name) {
 		System.out.println("ADMIN -> LAND:" + ((Land) land).getName()
