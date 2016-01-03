@@ -21,8 +21,8 @@ public class BusTicket extends ChanceCard implements Serializable {
         new MessageDisplayer("You picked BusTicket Card.");
         RollingTheDice.logContinue("Bus Ticket.");
         
-        for (int i =0;i<pl.getCardsInventory().size();i++) {
-            if (pl.getCardsInventory().get(i).equals(CardType.GetOutOfJail)){     
+        for (int i = 0; i < pl.getCardsInventory().size(); i++) {
+            if (pl.getCardsInventory().get(i).equals(CardType.GetOutOfJail)) {
                 pl.getCardsInventory().remove(i);
                 i--;
             }
@@ -59,12 +59,12 @@ public class BusTicket extends ChanceCard implements Serializable {
             moveTo = -1;
             while (!(moveTo >= sideStart && moveTo <= sideEnd))
                 moveTo = new GetTextInput("You are at Square " + pl.getLocation()
-                + ". You can go to Square " + sideStart + "-" + sideEnd).getInt();
+                    + ". You can go to Square " + sideStart + "-" + sideEnd).getInt();
         } else {
             moveTo = -1;
             while (!(moveTo >= sideStart && moveTo <= sideEnd) && moveTo != trackStart)
                 moveTo = new GetTextInput("You are at Square " + pl.getLocation()
-                + ". You can go to Square " + sideStart + "-" + sideEnd).getInt();
+                    + ". You can go to Square " + sideStart + "-" + sideEnd + " and " + trackStart).getInt();
         }
         pl.moveTo(moveTo);
     }
